@@ -4,8 +4,6 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-	string name;
-	printf("Hi. What's your name?\n=>");
-	scanf("%s", &name);
+	cout << "Programm running" << endl;
 	return 0;
 }
