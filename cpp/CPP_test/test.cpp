@@ -4,6 +4,6 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-	cout << "Programm running" << endl;
+	cout << (0 < -9?"true":"false") << endl;
 	return 0;
 }
