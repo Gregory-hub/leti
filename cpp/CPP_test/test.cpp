@@ -4,6 +4,9 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-	cout << (0 < -9?"true":"false") << endl;
+	int coords[2] = {1, 9};
+	int x = coords[0];
+	x = 10000;
+	cout << coords[0] << endl;
 	return 0;
 }
