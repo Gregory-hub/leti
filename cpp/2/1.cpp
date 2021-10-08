@@ -53,7 +53,7 @@ int main(int argc, char const *argv[])
         cin >> coords[1];
 
         // output
-        coords[0] = fmod(coords[0], 4 * a);
+        coords[0] = abs(fmod(coords[0], 4 * a));
         cout << belongs_base_area(coords, a) << endl;
     };
 
