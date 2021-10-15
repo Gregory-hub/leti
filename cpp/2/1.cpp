@@ -1,3 +1,9 @@
+// Автор: Новиков Г.В.
+// Группа: 1302
+// Дата начала: 7.10.2021
+// Дата окончания: 
+// Версия: 2.1.01
+
 #include <iostream>
 #include <cmath>
 
@@ -35,26 +41,45 @@ bool belongs_base_area(double coords[2], double a) {
 };
 
 
+bool belongs_area(double coords[2], double a) {
+    // get rid of period
+    double t = abs(4 * a);
+    double x = fmod(coords[0], t);
+    double y = fmod(coords[1], t);
+    if (a < 0) {
+        x = -x;
+        y = -y;
+        a = -a;
+    };
+    if (x < 0) {
+        x += t;
+    };
+    coords[0] = x;
+    coords[1] = y;
+    // if belongs area on [0; 4]
+    return belongs_base_area(coords, a);
+};
+
+
 int main(int argc, char const *argv[])
 {
+	cout << "Автор: Новиков Г.В.\n"
+	"Группа: 1302\n"
+	"Дата начала: 7.10.2021 \n"
+	"Версия: 2.1.01" << endl;
     while (true) {
         // input
         double coords[2];
         double a;
         cout << "Enter a: ";
         cin >> a;
-        if (a <= 0) {
-            cout << "ERROR: a must be > 0" << endl;
-            break;
-        };
         cout << "Enter x: ";
         cin >> coords[0];
         cout << "Enter y: ";
         cin >> coords[1];
 
         // output
-        coords[0] = abs(fmod(coords[0], 4 * a));
-        cout << belongs_base_area(coords, a) << endl;
+        cout << belongs_area(coords, a) << endl;
     };
 
     return 0;
