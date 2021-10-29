@@ -41,8 +41,8 @@ double absolute(double num) {
 
 double sqrt(double num) {
     double res = num / 2;
-    for (int i = 0; i < 25; i++) {
-        res = (res + num / res);
+    for (int i = 0; i < 1000; i++) {
+        res = (res + num / res) / 2;
     };
     return res;
 }
@@ -108,12 +108,13 @@ int main(int argc, char const *argv[])
 
     file.close();
 
-    double PI = 3.14159265358;
+    double PI = 3.141592653589793;
     bool success = false;
     int final_n;
     int n = 0;
-    double u = 1 / sqrt(2 * PI);
+    double u = -x * x / 6;    // u(0)
     double sum = u;
+    print_line(n, u, sum);
 
     for (int n = 1; n <= 1000; n++) {
         u = next_u(u, n, x);
@@ -125,6 +126,7 @@ int main(int argc, char const *argv[])
             break;
         }
     }
+
     file.open("out.txt", ios::app);
     if (success) {
         cout << "First EPS-locality occurence is attained at n = " << final_n << endl;
