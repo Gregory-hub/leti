@@ -14,9 +14,17 @@ using namespace std;
 vector<int> read_array(string arrayname) {
     fstream file;
     file.open("arrays/" + arrayname + ".txt", ios::in);
+    if (file.fail()) {
+        cerr << "Error opening file('arrays/" << arrayname << ".txt')" << endl;
+        exit(1);
+    }
 
     int array_size;
     file >> array_size;
+    if (array_size < 0) {
+        cerr << "Array " + arrayname + ": invalid array size('" << array_size << "')" << endl;
+        exit(1);
+    }
 
     if (array_size < 0) {
         array_size = 0;
@@ -59,6 +67,10 @@ vector<int> concatenate_vecs(vector<int> F, vector<int> G, vector<int> H) {
 void out(vector<int> F, vector<int> G, vector<int> H, vector<int> Q) {
     fstream file;
     file.open("out.txt", ios::out);
+    if (file.fail()) {
+        cerr << "Error opening file('out.txt')" << endl;
+        exit(1);
+    }
 
     file << "F:" << endl;
     for(int x: F) {
@@ -86,9 +98,10 @@ void out(vector<int> F, vector<int> G, vector<int> H, vector<int> Q) {
 
 int main(int argc, char const *argv[])
 {
-    vector<int> F = read_array("F");
-    vector<int> G = read_array("G");
-    vector<int> H = read_array("H");
+    string test_version = "1";
+    vector<int> F = read_array("F" + test_version);
+    vector<int> G = read_array("G" + test_version);
+    vector<int> H = read_array("H" + test_version);
 
     vector<int> Q = concatenate_vecs(F, G, H);
     out(F, G, H, Q);

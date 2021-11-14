@@ -11,9 +11,21 @@
 using namespace std;
 
 
+bool isnumber(string str) {
+    for (char c: str) {
+        if (!isdigit(c) and c != '-') return false;
+    }
+    return true;
+}
+
+
 int count_els(string arrayname) {
     fstream file;
     file.open("arrays/" + arrayname + ".txt", ios::in);
+    if (file.fail()) {
+        cerr << "Error opening file('arrays/" << arrayname << ".txt')" << endl;
+        exit(1);
+    }
 
     string line;
     int array_size = 0;
@@ -31,7 +43,7 @@ int* read_array(string arrayname, int array_size) {
     fstream file;
     file.open("arrays/" + arrayname + ".txt", ios::in);
     if (file.fail()) {
-        cerr << "Error opening file" << endl;
+        cerr << "Error opening file('arrays/" << arrayname << ".txt')" << endl;
         exit(1);
     }
 
@@ -41,9 +53,14 @@ int* read_array(string arrayname, int array_size) {
     for (int i = 0; i < array_size; i++) {
         if (!file.eof()) {
             getline(file, el);
-            *(array + i) = atoi(el.c_str());
+            if (isnumber(el)) {
+                *(array + i) = atoi(el.c_str());
+            } else {
+                cerr << "Array " + arrayname + ": file contains non-digit character" << endl;
+                exit(1);
+            }
         } else {
-            cerr << "Error: wrong size of array(" << arrayname << " - " << to_string(array_size) << ")" << endl;
+            cerr << "Array " + arrayname + ": wrong size of array(" << to_string(array_size) << ")" << endl;
             exit(1);
         }
     }
@@ -64,6 +81,7 @@ void out(int* array, string arrayname, int arraysize, bool clear_file = false) {
         }
     } else {
         file.open("out.txt", ios::app);
+        file << endl;
         if (file.fail()) {
             cerr << "Error opening file" << endl;
             exit(1);
@@ -74,7 +92,6 @@ void out(int* array, string arrayname, int arraysize, bool clear_file = false) {
     for(int i = 0; i < arraysize; i++) {
         file << *(array + i) << endl;
     }
-    file << endl;
 
     file.close();
 }
@@ -82,12 +99,13 @@ void out(int* array, string arrayname, int arraysize, bool clear_file = false) {
 
 int main(int argc, char const *argv[])
 {
-    int F_count = count_els("F");
-    int G_count = count_els("G");
-    int H_count = count_els("H");
-    int* F = read_array("F", F_count);
-    int* G = read_array("G", G_count);
-    int* H = read_array("H", H_count);
+    string test_version = "1";
+    int F_count = count_els("F" + test_version);
+    int G_count = count_els("G" + test_version);
+    int H_count = count_els("H" + test_version);
+    int* F = read_array("F" + test_version, F_count);
+    int* G = read_array("G" + test_version, G_count);
+    int* H = read_array("H" + test_version, H_count);
 
     int Q_count = F_count + G_count + H_count;
     int* Q = new int[Q_count];
