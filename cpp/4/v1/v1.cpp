@@ -33,7 +33,7 @@ vector<int> read_array(string arrayname) {
 
     bool sizes_are_equal = array.size() == array_size;
     if (!sizes_are_equal) {
-        cout << "Array " + arrayname + ": invalid data(first line and number of elements do not match)" << endl;
+        cerr << "Array " + arrayname + ": invalid data(first line and number of elements do not match)" << endl;
         exit(1);
     }
 

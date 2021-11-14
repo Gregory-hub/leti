@@ -30,15 +30,22 @@ int count_els(string arrayname) {
 int* read_array(string arrayname, int array_size) {
     fstream file;
     file.open("arrays/" + arrayname + ".txt", ios::in);
+    if (file.fail()) {
+        cerr << "Error opening file" << endl;
+        exit(1);
+    }
 
     int* array = new int[array_size];
 
-    int el;
-    int i = 0;
-    while (!file.eof()) {
-        file >> el;
-        array[i] = el;
-        i++;
+    string el;
+    for (int i = 0; i < array_size; i++) {
+        if (!file.eof()) {
+            getline(file, el);
+            array[i] = atoi(el.c_str());
+        } else {
+            cerr << "Error: wrong size of array(" << arrayname << " - " << to_string(array_size) << ")" << endl;
+            exit(1);
+        }
     }
 
     file.close();
@@ -47,44 +54,27 @@ int* read_array(string arrayname, int array_size) {
 }
 
 
-vector<int> concatenate_vecs(vector<int> F, vector<int> G, vector<int> H) {
-    vector<int> Q = F;
-    
-    for(int i = 0; i < G.size(); i++) {
-        Q.push_back(G[i]);
-    }
-
-    for(int i = 0; i < H.size(); i++) {
-        Q.push_back(H[i]);
-    }
-
-    return Q;
-}
-
-
-void out(vector<int> F, vector<int> G, vector<int> H, vector<int> Q) {
+void out(int* array, string arrayname, int arraysize, bool clear_file = false) {
     fstream file;
-    file.open("out.txt", ios::out);
-
-    file << "F:" << endl;
-    for(int i = 0; i < F.size(); i++) {
-        file << F[i] << endl;
-    }
-    
-    file << endl << "G:" << endl;
-    for(int i = 0; i < G.size(); i++) {
-        file << G[i] << endl;
-    }
-
-    file << endl << "H:" << endl;
-    for(int i = 0; i < H.size(); i++) {
-        file << H[i] << endl;
+    if (clear_file) {
+        file.open("out.txt", ios::out);
+        if (file.fail()) {
+            cerr << "Error opening file" << endl;
+            exit(1);
+        }
+    } else {
+        file.open("out.txt", ios::app);
+        if (file.fail()) {
+            cerr << "Error opening file" << endl;
+            exit(1);
+        }
     }
 
-    file << endl << "Q:" << endl;
-    for(int i = 0; i < Q.size(); i++) {
-        file << Q[i] << endl;
+    file << arrayname << ":" << endl;
+    for(int i = 0; i < arraysize; i++) {
+        file << array[i] << endl;
     }
+    file << endl;
 
     file.close();
 }
@@ -95,14 +85,29 @@ int main(int argc, char const *argv[])
     int F_count = count_els("F");
     int G_count = count_els("G");
     int H_count = count_els("H");
-    // vector<int> F = read_array("F");
-    // vector<int> G = read_array("G");
-    // vector<int> H = read_array("H");
+    int* F = read_array("F", F_count);
+    int* G = read_array("G", G_count);
+    int* H = read_array("H", H_count);
 
-    // vector<int> Q = concatenate_vecs(F, G, H);
-    // out(F, G, H, Q);
+    int Q_count = F_count + G_count + H_count;
+    int* Q = new int[Q_count];
 
-    cout << F_count << endl;
+    for(int i = 0; i < F_count; i++) {
+        Q[i] = F[i];
+    }
+
+    for(int i = 0; i < G_count; i++) {
+        Q[F_count + i] = G[i];
+    }
+
+    for(int i = 0; i < H_count; i++) {
+        Q[F_count + G_count + i] = H[i];
+    }
+
+    out(F, "F", F_count, true);
+    out(G, "G", G_count);
+    out(H, "H", H_count);
+    out(Q, "Q", Q_count);
 
     return 0;
 }
