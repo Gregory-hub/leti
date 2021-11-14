@@ -41,7 +41,7 @@ int* read_array(string arrayname, int array_size) {
     for (int i = 0; i < array_size; i++) {
         if (!file.eof()) {
             getline(file, el);
-            array[i] = atoi(el.c_str());
+            *(array + i) = atoi(el.c_str());
         } else {
             cerr << "Error: wrong size of array(" << arrayname << " - " << to_string(array_size) << ")" << endl;
             exit(1);
@@ -72,7 +72,7 @@ void out(int* array, string arrayname, int arraysize, bool clear_file = false) {
 
     file << arrayname << ":" << endl;
     for(int i = 0; i < arraysize; i++) {
-        file << array[i] << endl;
+        file << *(array + i) << endl;
     }
     file << endl;
 
@@ -93,21 +93,23 @@ int main(int argc, char const *argv[])
     int* Q = new int[Q_count];
 
     for(int i = 0; i < F_count; i++) {
-        Q[i] = F[i];
+        *(Q + i) = F[i];
     }
 
     for(int i = 0; i < G_count; i++) {
-        Q[F_count + i] = G[i];
+        *(Q + F_count + i) = G[i];
     }
 
     for(int i = 0; i < H_count; i++) {
-        Q[F_count + G_count + i] = H[i];
+        *(Q + F_count + G_count + i) = H[i];
     }
 
     out(F, "F", F_count, true);
     out(G, "G", G_count);
     out(H, "H", H_count);
     out(Q, "Q", Q_count);
+
+    delete[] F, G, H, Q;
 
     return 0;
 }

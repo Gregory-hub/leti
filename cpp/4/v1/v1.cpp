@@ -44,12 +44,12 @@ vector<int> read_array(string arrayname) {
 vector<int> concatenate_vecs(vector<int> F, vector<int> G, vector<int> H) {
     vector<int> Q = F;
     
-    for(int i = 0; i < G.size(); i++) {
-        Q.push_back(G[i]);
+    for(int x: G) {
+        Q.push_back(x);
     }
 
-    for(int i = 0; i < H.size(); i++) {
-        Q.push_back(H[i]);
+    for(int x: H) {
+        Q.push_back(x);
     }
 
     return Q;
@@ -61,23 +61,23 @@ void out(vector<int> F, vector<int> G, vector<int> H, vector<int> Q) {
     file.open("out.txt", ios::out);
 
     file << "F:" << endl;
-    for(int i = 0; i < F.size(); i++) {
-        file << F[i] << endl;
+    for(int x: F) {
+        file << x << endl;
     }
     
     file << endl << "G:" << endl;
-    for(int i = 0; i < G.size(); i++) {
-        file << G[i] << endl;
+    for(int x: G) {
+        file << x << endl;
     }
 
     file << endl << "H:" << endl;
-    for(int i = 0; i < H.size(); i++) {
-        file << H[i] << endl;
+    for(int x: H) {
+        file << x << endl;
     }
 
     file << endl << "Q:" << endl;
-    for(int i = 0; i < Q.size(); i++) {
-        file << Q[i] << endl;
+    for(int x: Q) {
+        file << x << endl;
     }
 
     file.close();
