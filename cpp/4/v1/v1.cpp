@@ -11,16 +11,29 @@
 using namespace std;
 
 
+bool isnumber(string str) {
+    for (char c: str) {
+        if (!isdigit(c) and c != '-') return false;
+    }
+    return true;
+}
+
+
 vector<int> read_array(string arrayname) {
     fstream file;
     file.open("arrays/" + arrayname + ".txt", ios::in);
-    if (file.fail()) {
+    if (!file.is_open()) {
         cerr << "Error opening file('arrays/" << arrayname << ".txt')" << endl;
         exit(1);
     }
 
-    int array_size;
-    file >> array_size;
+    string line;
+    getline(file, line);
+    if (!isnumber(line)) {
+        cerr << "Array " + arrayname + ": file contains non-digit character" << endl;
+        exit(1);
+    }
+    int array_size = atoi(line.c_str());
     if (array_size < 0) {
         cerr << "Array " + arrayname + ": invalid array size('" << array_size << "')" << endl;
         exit(1);
@@ -32,9 +45,12 @@ vector<int> read_array(string arrayname) {
 
     vector<int> array;
 
-    int el;
-    while (file >> el) {
-        array.push_back(el);
+    while (getline(file, line)) {
+        if (!isnumber(line)) {
+            cerr << "Array " + arrayname + ": file contains non-digit character" << endl;
+            exit(1);
+        }
+        array.push_back(atoi(line.c_str()));
     }
 
     file.close();
@@ -67,7 +83,7 @@ vector<int> concatenate_vecs(vector<int> F, vector<int> G, vector<int> H) {
 void out(vector<int> F, vector<int> G, vector<int> H, vector<int> Q) {
     fstream file;
     file.open("out.txt", ios::out);
-    if (file.fail()) {
+    if (!file.is_open()) {
         cerr << "Error opening file('out.txt')" << endl;
         exit(1);
     }
@@ -98,7 +114,13 @@ void out(vector<int> F, vector<int> G, vector<int> H, vector<int> Q) {
 
 int main(int argc, char const *argv[])
 {
-    string test_version = "1";
+	cout << "Author: Novikov G. \n"
+	"Group: 1302 \n"
+	"Start date: 11.11.2021 \n"
+	"End date: 12.11.2021 \n"
+	"Version: 4.1.01 \n" << endl;
+
+    string test_version = "4";
     vector<int> F = read_array("F" + test_version);
     vector<int> G = read_array("G" + test_version);
     vector<int> H = read_array("H" + test_version);

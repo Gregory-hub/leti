@@ -22,15 +22,14 @@ bool isnumber(string str) {
 int count_els(string arrayname) {
     fstream file;
     file.open("arrays/" + arrayname + ".txt", ios::in);
-    if (file.fail()) {
+    if (!file.is_open()) {
         cerr << "Error opening file('arrays/" << arrayname << ".txt')" << endl;
         exit(1);
     }
 
     string line;
     int array_size = 0;
-    while (!file.eof()) {
-        getline(file, line);
+    while (getline(file, line)) {
         if (line.length() != 0) {
             array_size++;
         }
@@ -42,7 +41,7 @@ int count_els(string arrayname) {
 int* read_array(string arrayname, int array_size) {
     fstream file;
     file.open("arrays/" + arrayname + ".txt", ios::in);
-    if (file.fail()) {
+    if (!file.is_open()) {
         cerr << "Error opening file('arrays/" << arrayname << ".txt')" << endl;
         exit(1);
     }
@@ -51,8 +50,7 @@ int* read_array(string arrayname, int array_size) {
 
     string el;
     for (int i = 0; i < array_size; i++) {
-        if (!file.eof()) {
-            getline(file, el);
+        if (getline(file, el)) {
             if (isnumber(el)) {
                 *(array + i) = atoi(el.c_str());
             } else {
@@ -75,14 +73,14 @@ void out(int* array, string arrayname, int arraysize, bool clear_file = false) {
     fstream file;
     if (clear_file) {
         file.open("out.txt", ios::out);
-        if (file.fail()) {
+        if (!file.is_open()) {
             cerr << "Error opening file" << endl;
             exit(1);
         }
     } else {
         file.open("out.txt", ios::app);
         file << endl;
-        if (file.fail()) {
+        if (!file.is_open()) {
             cerr << "Error opening file" << endl;
             exit(1);
         }
@@ -99,6 +97,12 @@ void out(int* array, string arrayname, int arraysize, bool clear_file = false) {
 
 int main(int argc, char const *argv[])
 {
+	cout << "Author: Novikov G. \n"
+	"Group: 1302 \n"
+	"Start date: 12.11.2021 \n"
+	"End date: 13.11.2021 \n"
+	"Version: 4.2.01 \n" << endl;
+
     string test_version = "1";
     int F_count = count_els("F" + test_version);
     int G_count = count_els("G" + test_version);
