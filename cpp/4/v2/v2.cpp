@@ -2,7 +2,7 @@
 // Группа: 1302
 // Дата начала: 11.11.2021
 // Дата окончания: 12.11.2021
-// Версия: 4.1.01
+// Версия: 4.2.01
 
 #include <iostream>
 #include <fstream>
@@ -126,12 +126,40 @@ int main(int argc, char const *argv[])
         *(Q + F_count + G_count + i) = H[i];
     }
 
+    int Q_set_count = 0;
+    int Q_set[Q_count];
+
+    for(int i = 0; i < Q_count; i++) {
+        bool add = true;
+        for(int j = 0; j < Q_set_count; j++) {
+            if (*(Q + i) == *(Q_set + j)) {
+                add = false;
+                break;
+            }
+        }
+
+        if (add) {
+            *(Q_set + Q_set_count) = *(Q + i);
+            Q_set_count++;
+        }
+    }
+
+    int* Q_res = new int[Q_set_count];
+    int Q_res_count = Q_set_count;
+    for (int i = 0; i < Q_set_count; i++) {
+        *(Q_res + i) = *(Q_set + i);
+    }
+
     out(F, "F", F_count, true);
     out(G, "G", G_count);
     out(H, "H", H_count);
-    out(Q, "Q", Q_count);
+    out(Q_res, "Q", Q_res_count);
 
-    delete[] F, G, H, Q;
+    delete[] F;
+    delete[] G;
+    delete[] H;
+    delete[] Q;
+    delete[] Q_res;
 
     return 0;
 }
