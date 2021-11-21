@@ -142,6 +142,7 @@ void print_rect(Rect rect, int rect_number, bool erase = false) {
     if (!file.is_open()) {
         perror("Cannot open file 'out.txt'");
     }
+
     cout << "Rect " << rect_number << ": (" << rect.lt.i << ' ' << rect.lt.j << ") (" << rect.rt.i << ' ' << rect.rt.j << ')' << endl;
     cout << setw(9) << "(" << rect.lb.i << ' ' << rect.lb.j << ") (" << rect.rb.i << ' ' << rect.rb.j << ')' << endl;
 
@@ -193,7 +194,6 @@ int main(int argc, char const *argv[]) {
     ArrSize size = get_arr_size(filename);
     int n = size.n;
     int m = size.m;
-    cout << n << ' ' << m << endl;
     int** rect_map = read_array("in1.txt", n, m);
 
     int rect_count = 0;
