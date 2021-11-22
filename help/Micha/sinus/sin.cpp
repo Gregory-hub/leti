@@ -6,15 +6,6 @@
 using namespace std;
 
 
-int fact(unsigned int n) {
-    int f = 1;
-    for (int i = 1; i <= n; i++) {
-        f *= i;
-    }
-    return f;
-}
-
-
 double sinus(long double x, long double eps) {
     long double sin = 0;
     int n = 0;
