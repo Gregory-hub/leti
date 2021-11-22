@@ -6,11 +6,11 @@
 using namespace std;
 
 
-double sinus(long double x, long double eps) {
+long double sinus(long double x, long double eps) {
     long double sin = 0;
     int n = 0;
     long double a = x;
-    while (fabs(a) > eps) {
+    while (abs(a) > eps) {
         sin += a;
         a *= -x * x / ((2 * n + 2) * (2 * n + 3));
         n++;
