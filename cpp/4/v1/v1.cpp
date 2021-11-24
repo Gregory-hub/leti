@@ -6,7 +6,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <vector>
 
 using namespace std;
 
@@ -227,9 +226,9 @@ int main(int argc, char const *argv[])
         }
     }
 
-    int* Q_res = new int[Q_set_size];
     int Q_res_size = Q_set_size;
-    for (int i = 0; i < Q_set_size; i++) {
+    int* Q_res = new int[Q_res_size];
+    for (int i = 0; i < Q_res_size; i++) {
         Q_res[i] = Q_set[i];
     }
 
