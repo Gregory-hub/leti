@@ -185,10 +185,10 @@ void delete_matrix(int** arr, int size) {
 // 'T'-forms(2 rects)
 int main(int argc, char const *argv[]) {
     cout << "Author: Novikov G. \n"
-	"Group: 1302 \n"
-	"Start date: 21.11.2021 \n"
-	"End date: 22.11.2021 \n"
-	"Version: 5.1.01 \n" << endl;
+    "Group: 1302 \n"
+    "Start date: 21.11.2021 \n"
+    "End date: 22.11.2021 \n"
+    "Version: 5.1.01 \n" << endl;
 
     string filename = "in1.txt";
     ArrSize size = get_arr_size(filename);

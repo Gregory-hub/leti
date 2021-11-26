@@ -6,7 +6,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <vector>
 
 using namespace std;
 
@@ -103,7 +102,7 @@ int main(int argc, char const *argv[])
 	"End date: 13.11.2021 \n"
 	"Version: 4.2.01 \n" << endl;
 
-    string test_version = "1";
+    string test_version = "2";
     int F_count = count_els("F" + test_version);
     int G_count = count_els("G" + test_version);
     int H_count = count_els("H" + test_version);
