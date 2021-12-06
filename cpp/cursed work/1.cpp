@@ -2,6 +2,8 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <math.h>
+
 
 using namespace std;
 
@@ -198,6 +200,8 @@ Intersection* get_intersections(Line* lines, Intersection* intersections, int n)
                 point.x = (lines[j].b - lines[i].b) / (lines[i].a - lines[j].a);
                 point.y = lines[i].a * point.x + lines[i].b;
             }
+            point.x = roundf(point.x * 1000000) / 1000000;
+            point.y = roundf(point.y * 1000000) / 1000000;
 
             intersections[intersections_i] = point;
             intersections_i++;
