@@ -78,7 +78,7 @@ int read_size(string filename) {
         }
 
         if (line_els_count != 2) {
-            cerr << "A point must have 2 coords" << endl;
+            cerr << "All points must have 2 coords" << endl;
             file.close();
             exit(1);
         }
@@ -100,8 +100,8 @@ double read_radius(string filename) {
     double radius;
     string line;
     while (getline(file, line) && !line.empty()) {}
+    while (getline(file, line) && line.empty()) {}
 
-    getline(file, line);
     stringstream ss(line);
     string x;
     int line_els_count = 0;
@@ -353,7 +353,6 @@ int main(int argc, char const *argv[]) {
     const string filename = "in";
     int n = read_size(filename);
     double radius = read_radius(filename);
-    cout << n << endl;
 
     Point* init_points = new Point[n];
     get_points(filename, init_points, n);
@@ -369,13 +368,18 @@ int main(int argc, char const *argv[]) {
     get_intersections(lines, intersections, number_of_lines);
     printarr(intersections, number_of_intersections);
 
-    cout << endl << radius << endl;
+    Point point = read_point(filename);
+    cout << endl;
+    cout << "Points: " << n << endl;
+    cout << "Lines: " << number_of_lines << endl;
+    cout << "Intersections: " << number_of_intersections << endl;
+    cout << endl << "Radius: " << radius << endl;
+    cout << "Point: " << point.x << ' ' << point.y << endl;
 
     Circle circle = find_circle(radius, init_points, n, intersections, number_of_intersections);
-    cout << circle.center.x << ' ' << circle.center.y << endl;
+    cout << "Circle center: " << circle.center.x << ' ' << circle.center.y << endl;
 
-    Point point = read_point(filename);
-    cout << point.x << ' ' << point.y << endl;
+    cout << endl;
     if (circle.belongs(point)) {
         cout << "True: Point belongs the circle" << endl;
     } else {
