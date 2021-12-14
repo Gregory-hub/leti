@@ -27,7 +27,8 @@ struct Circle {
     double radius;
 
 
-    bool belongs(Point point) {
+    bool belongs(Intersection point) {
+        if (!point.exists) return false;
         return (pow(point.x - center.x, 2) + pow(point.y - center.y, 2) <= pow(radius, 2));
     }
 
@@ -36,8 +37,7 @@ struct Circle {
         int count = 0;
 
         for (int i = 0; i < n; i++) {
-            Point point = points[i];
-            if (belongs(point)) count++;
+            if (belongs(points[i])) count++;
         }
 
         return count;
@@ -283,8 +283,9 @@ int get_number_of_max_circles(Circle* circles, int n, Intersection* intersection
 
 Circle* find_max_points_circles(Circle* circles, int n, Intersection* intersections, int intersection_n, int max_point_count) {
     int j = 0;
-    Circle* circles_max = new Circle[n];
     int number_of_max_circles = get_number_of_max_circles(circles, n, intersections, intersection_n);
+    Circle* circles_max = new Circle[number_of_max_circles];
+
     for (int i = 0; i < n; i++) {
         if (circles[i].count_points_inside(intersections, intersection_n) == max_point_count) {
             circles_max[j] = circles[i];
@@ -420,8 +421,8 @@ void printarr(Circle* arr, int n, string pretext = "") {
         file << pretext << endl;
     }
     for (int i = 0; i < n; i++) {
-        cout << "Circle(" << arr[i].center.x << "; " << arr[i].center.x << "), radius = " << arr[i].radius << endl;
-        file << "Circle(" << arr[i].center.x << "; " << arr[i].center.x << "), radius = " << arr[i].radius << endl;
+        cout << "Circle(" << arr[i].center.x << "; " << arr[i].center.y << "), radius = " << arr[i].radius << endl;
+        file << "Circle(" << arr[i].center.x << "; " << arr[i].center.y << "), radius = " << arr[i].radius << endl;
     }
     cout << endl;
     file << endl;
@@ -477,6 +478,10 @@ int main(int argc, char const *argv[]) {
     int max_point_count = get_max_point_count(circles, n, intersections, number_of_intersections);
     Circle* circles_max = find_max_points_circles(circles, n, intersections, number_of_intersections, max_point_count);
     printarr(circles_max, get_number_of_max_circles(circles, n, intersections, number_of_intersections), "Circles with max number of points inside:");
+
+    // for (int i = 0; i < n; i++) {
+    //     cout << circles[i].count_points_inside(intersections, number_of_intersections) << endl;
+    // }
 
     delete[] init_points;
     delete[] lines;
