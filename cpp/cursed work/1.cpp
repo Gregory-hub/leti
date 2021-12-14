@@ -296,50 +296,148 @@ Circle* find_max_points_circles(Circle* circles, int n, Intersection* intersecti
 }
 
 
-void printarr(Point* arr, int n) {
-    for (int i = 0; i < n; i++) {
-        cout << arr[i].x << ' ' << arr[i].y << endl;
+void printinfo(int points_n, int lines_n, int intersections_n, double radius) {
+    fstream file;
+    file.open("out.txt", ios::app);
+    if (!file.is_open()) {
+        perror("Cannot open file");
     }
+
+    cout << endl;
+    cout << "Points: " << points_n << endl;
+    cout << "Lines: " << lines_n << endl;
+    cout << "Intersections: " << intersections_n << endl;
+    cout << endl << "Radius: " << radius << endl << endl;
+
+    file << endl;
+    file << "Points: " << points_n << endl;
+    file << "Lines: " << lines_n << endl;
+    file << "Intersections: " << intersections_n << endl;
+    file << endl << "Radius: " << radius << endl << endl;
+
+    file.close();
 }
 
 
-void printarr(Line* arr, int n) {
+void printarr(Point* arr, int n, string pretext = "") {
+    fstream file;
+    file.open("out.txt", ios::app);
+    if (!file.is_open()) {
+        perror("Cannot open file");
+    }
+
+    if (!pretext.empty()) {
+        cout << pretext << endl;
+        file << pretext << endl;
+    }
+    for (int i = 0; i < n; i++) {
+        cout << arr[i].x << ' ' << arr[i].y << endl;
+        file << arr[i].x << ' ' << arr[i].y << endl;
+    }
+    cout << endl;
+    file << endl;
+
+    file.close();
+}
+
+
+void printarr(Line* arr, int n, string pretext = "") {
+    fstream file;
+    file.open("out.txt", ios::app);
+    if (!file.is_open()) {
+        perror("Cannot open file");
+    }
+
+    if (!pretext.empty()) {
+        cout << pretext << endl;
+        file << pretext << endl;
+    }
     for (int i = 0; i < n; i++) {
         if (!arr[i].exists) {
             cout << "Line does not exist" << endl;
+            file << "Line does not exist" << endl;
         } else if (arr[i].is_vertical) {
             cout << setprecision(4) << "x = " << arr[i].b << endl;
+            file << setprecision(4) << "x = " << arr[i].b << endl;
         } else {
             cout << setprecision(4) << "y = " << arr[i].a << "x + " << arr[i].b << endl;
+            file << setprecision(4) << "y = " << arr[i].a << "x + " << arr[i].b << endl;
         }
     }
+    cout << endl;
+    file << endl;
+
+    file.close();
 }
 
 
-void printarr(Intersection* arr, int n) {
+void printarr(Intersection* arr, int n, string pretext = "") {
+    fstream file;
+    file.open("out.txt", ios::app);
+    if (!file.is_open()) {
+        perror("Cannot open file");
+    }
+
+    if (!pretext.empty()) {
+        cout << pretext << endl;
+        file << pretext << endl;
+    }
     for (int i = 0; i < n; i++) {
         if (!arr[i].exists) {
             cout << "Point does not exist" << endl;
+            file << "Point does not exist" << endl;
         } else if (arr[i].whole_line) {
             if (arr[i].whole_x) {
                 cout << "y = " << arr[i].y << " x = (-inf, +inf)" << endl;
+                file << "y = " << arr[i].y << " x = (-inf, +inf)" << endl;
             } else if (arr[i].whole_y) {
                 cout << "y = (-inf, +inf) x = " << arr[i].x << endl;
+                file << "y = (-inf, +inf) x = " << arr[i].x << endl;
             } else {
                 cout << "y = (-inf, +inf) x = (-inf, +inf)" << endl;
+                file << "y = (-inf, +inf) x = (-inf, +inf)" << endl;
             }
 
         } else {
             cout << setprecision(4) << arr[i].x << ' ' << arr[i].y << endl;
+            file << setprecision(4) << arr[i].x << ' ' << arr[i].y << endl;
         }
     }
+
+    file.close();
 }
 
 
-void printarr(Circle* arr, int n) {
+void printarr(Circle* arr, int n, string pretext = "") {
+    fstream file;
+    file.open("out.txt", ios::app);
+    if (!file.is_open()) {
+        perror("Cannot open file");
+    }
+
+    if (!pretext.empty()) {
+        cout << pretext << endl;
+        file << pretext << endl;
+    }
     for (int i = 0; i < n; i++) {
         cout << "Circle(" << arr[i].center.x << "; " << arr[i].center.x << "), radius = " << arr[i].radius << endl;
+        file << "Circle(" << arr[i].center.x << "; " << arr[i].center.x << "), radius = " << arr[i].radius << endl;
     }
+    cout << endl;
+    file << endl;
+
+    file.close();
+}
+
+
+void clearfile(string filename) {
+    fstream file;
+    file.open(filename, ios::out);
+    if (!file.is_open()) {
+        perror("Cannot open file");
+    }
+
+    file.close();
 }
 
 
@@ -354,33 +452,31 @@ int main(int argc, char const *argv[]) {
     int n = read_size(filename);
     double radius = read_radius(filename);
 
+    clearfile("out.txt");
+
     Point* init_points = new Point[n];
     get_points(filename, init_points, n);
-    printarr(init_points, n);
+    printarr(init_points, n, "Input points:");
 
     int number_of_lines = n * (n - 1) / 2;
     Line* lines = new Line[number_of_lines];
     get_lines(init_points, lines, n);
-    printarr(lines, number_of_lines);
+    printarr(lines, number_of_lines, "Lines:");
 
     int number_of_intersections = number_of_lines * (number_of_lines - 1) / 2;
     Intersection* intersections = new Intersection[number_of_intersections];
     get_intersections(lines, intersections, number_of_lines);
-    printarr(intersections, number_of_intersections);
+    printarr(intersections, number_of_intersections, "Intersection points:");
+
+    printinfo(n, number_of_lines, number_of_intersections, radius);
 
     Circle* circles = new Circle[n];
     get_circles(init_points, n, radius, circles);
-    printarr(circles, n);
-
-    cout << endl;
-    cout << "Points: " << n << endl;
-    cout << "Lines: " << number_of_lines << endl;
-    cout << "Intersections: " << number_of_intersections << endl;
-    cout << endl << "Radius: " << radius << endl;
+    printarr(circles, n, "All circles:");
 
     int max_point_count = get_max_point_count(circles, n, intersections, number_of_intersections);
     Circle* circles_max = find_max_points_circles(circles, n, intersections, number_of_intersections, max_point_count);
-    printarr(circles_max, get_number_of_max_circles(circles, n, intersections, number_of_intersections));
+    printarr(circles_max, get_number_of_max_circles(circles, n, intersections, number_of_intersections), "Circles with max number of points inside:");
 
     delete[] init_points;
     delete[] lines;
