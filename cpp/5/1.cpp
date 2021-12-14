@@ -35,17 +35,21 @@ ArrSize get_arr_size(string filename) {
     ArrSize size;
     size.n = 0;
     size.m = 0;
-
     string line;
-    while (getline(file, line)) {
-        size.m++;
-    }
+    getline(file, line);
 
+    for (char x: line) {
+        size.n++;
+    }
     file.clear();
     file.seekg(0);
 
-    getline(file, line);
-    for (char x: line) size.n++;
+    while (getline(file, line)) {
+        size.m++;
+        int n = 0;
+        for (char x: line) n++;
+        if (n < size.n) size.n = n;        
+    }
 
     file.close();
 
@@ -100,7 +104,7 @@ Rect get_rect(int** rect_map, int n, int m, Index_2d index) {
     Rect rect;
     rect.lt = index;
 
-    int min_h = n + 1;
+    int min_h = m + 1;
     int i = index.i;
     int j = index.j;
     while (j < n && rect_map[i][j] == 1) {
@@ -195,6 +199,12 @@ int main(int argc, char const *argv[]) {
     int n = size.n;
     int m = size.m;
     int** rect_map = read_array("in1.txt", n, m);
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << rect_map[i][j];
+        }
+        cout << endl;
+    }
 
     int rect_count = 0;
 
