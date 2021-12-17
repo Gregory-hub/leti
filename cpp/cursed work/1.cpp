@@ -42,6 +42,20 @@ struct Circle {
 
         return count;
     }
+
+    Intersection* get_points_inside(Intersection* points, int n) {
+        int points_number = count_points_inside(points, n);
+        Intersection* points_inside = new Intersection[points_number];
+        int j = 0;
+        for (int i = 0; i < n; i++) {
+            if (belongs(points[i])) {
+                points_inside[j] = points[i];
+                j++;
+            }
+        }
+
+        return points_inside;
+    }
 };
 
 
@@ -409,7 +423,7 @@ void printarr(Intersection* arr, int n, string pretext = "") {
 }
 
 
-void printarr(Circle* arr, int n, string pretext = "") {
+void printarr(Circle* arr, int n, Intersection* intersections, int intersections_n, string pretext = "") {
     fstream file;
     file.open("out.txt", ios::app);
     if (!file.is_open()) {
@@ -421,11 +435,26 @@ void printarr(Circle* arr, int n, string pretext = "") {
         file << pretext << endl;
     }
     for (int i = 0; i < n; i++) {
-        cout << "Circle(" << arr[i].center.x << "; " << arr[i].center.y << "), radius = " << arr[i].radius << endl;
-        file << "Circle(" << arr[i].center.x << "; " << arr[i].center.y << "), radius = " << arr[i].radius << endl;
+        int point_count = arr[i].count_points_inside(intersections, intersections_n);
+        Intersection* points_inside = arr[i].get_points_inside(intersections, intersections_n);
+
+        cout << "Circle(" << arr[i].center.x << "; " << arr[i].center.y << "), radius = " << arr[i].radius << ", points count: " << point_count << endl;
+        file << "Circle(" << arr[i].center.x << "; " << arr[i].center.y << "), radius = " << arr[i].radius << ", points count: " << point_count << endl;
+
+        cout << "Points inside: ";
+        file << "Points inside: ";
+        for (int j = 0; j < point_count; j++) {
+            cout << "Point(" << points_inside[j].x << ", " << points_inside[j].y << ")";
+            file << "Point(" << points_inside[j].x << ", " << points_inside[j].y << ")";
+            if (j != point_count - 1) {
+                cout << ", ";
+                file << ", ";
+            } else {
+                cout << "\n" << endl;
+                file << "\n" << endl;
+            }
+        }
     }
-    cout << endl;
-    file << endl;
 
     file.close();
 }
@@ -457,31 +486,27 @@ int main(int argc, char const *argv[]) {
 
     Point* init_points = new Point[n];
     get_points(filename, init_points, n);
-    printarr(init_points, n, "Input points:");
+    printarr(init_points, n, "INPUT POINTS:");
 
     int number_of_lines = n * (n - 1) / 2;
     Line* lines = new Line[number_of_lines];
     get_lines(init_points, lines, n);
-    printarr(lines, number_of_lines, "Lines:");
+    printarr(lines, number_of_lines, "LINES:");
 
     int number_of_intersections = number_of_lines * (number_of_lines - 1) / 2;
     Intersection* intersections = new Intersection[number_of_intersections];
     get_intersections(lines, intersections, number_of_lines);
-    printarr(intersections, number_of_intersections, "Intersection points:");
+    printarr(intersections, number_of_intersections, "INTERSECTION POINTS:");
 
     printinfo(n, number_of_lines, number_of_intersections, radius);
 
     Circle* circles = new Circle[n];
     get_circles(init_points, n, radius, circles);
-    printarr(circles, n, "All circles:");
+    printarr(circles, n, intersections, number_of_intersections, "ALL CIRCLES:");
 
     int max_point_count = get_max_point_count(circles, n, intersections, number_of_intersections);
     Circle* circles_max = find_max_points_circles(circles, n, intersections, number_of_intersections, max_point_count);
-    printarr(circles_max, get_number_of_max_circles(circles, n, intersections, number_of_intersections), "Circles with max number of points inside:");
-
-    // for (int i = 0; i < n; i++) {
-    //     cout << circles[i].count_points_inside(intersections, number_of_intersections) << endl;
-    // }
+    printarr(circles_max, get_number_of_max_circles(circles, n, intersections, number_of_intersections), intersections, number_of_intersections, "\nCIRCLES WITH MAX NUMBER OF POINTS INSIDE:");
 
     delete[] init_points;
     delete[] lines;
