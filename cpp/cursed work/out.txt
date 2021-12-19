@@ -1,0 +1,64 @@
+INPUT POINTS:
+0 0
+2 2
+0 2
+2 0
+
+LINES:
+y = 1x + 0
+x = 0
+y = -0x + 0
+y = 0x + 2
+x = 2
+y = -1x + 2
+
+INTERSECTION POINTS:
+0 0
+0 0
+2 2
+2 2
+1 1
+0 0
+0 2
+Point does not exist
+0 2
+Point does not exist
+2 0
+2 0
+2 2
+0 2
+2 0
+
+Points: 4
+Lines: 6
+Intersections: 15
+
+Radius: 2.5
+
+ALL CIRCLES:
+Circle(0; 0), radius = 2.5, points count: 10
+Points inside: Point(0, 0), Point(0, 0), Point(1, 1), Point(0, 0), Point(0, 2), Point(0, 2), Point(2, 0), Point(2, 0), Point(0, 2), Point(2, 0)
+
+Circle(2; 2), radius = 2.5, points count: 10
+Points inside: Point(2, 2), Point(2, 2), Point(1, 1), Point(0, 2), Point(0, 2), Point(2, 0), Point(2, 0), Point(2, 2), Point(0, 2), Point(2, 0)
+
+Circle(0; 2), radius = 2.5, points count: 10
+Points inside: Point(0, 0), Point(0, 0), Point(2, 2), Point(2, 2), Point(1, 1), Point(0, 0), Point(0, 2), Point(0, 2), Point(2, 2), Point(0, 2)
+
+Circle(2; 0), radius = 2.5, points count: 10
+Points inside: Point(0, 0), Point(0, 0), Point(2, 2), Point(2, 2), Point(1, 1), Point(0, 0), Point(2, 0), Point(2, 0), Point(2, 2), Point(2, 0)
+
+
+CIRCLES WITH MAX NUMBER OF POINTS INSIDE:
+Circle(0; 0), radius = 2.5, points count: 10
+Points inside: Point(0, 0), Point(0, 0), Point(1, 1), Point(0, 0), Point(0, 2), Point(0, 2), Point(2, 0), Point(2, 0), Point(0, 2), Point(2, 0)
+
+Circle(2; 2), radius = 2.5, points count: 10
+Points inside: Point(2, 2), Point(2, 2), Point(1, 1), Point(0, 2), Point(0, 2), Point(2, 0), Point(2, 0), Point(2, 2), Point(0, 2), Point(2, 0)
+
+Circle(0; 2), radius = 2.5, points count: 10
+Points inside: Point(0, 0), Point(0, 0), Point(2, 2), Point(2, 2), Point(1, 1), Point(0, 0), Point(0, 2), Point(0, 2), Point(2, 2), Point(0, 2)
+
+Circle(2; 0), radius = 2.5, points count: 10
+Points inside: Point(0, 0), Point(0, 0), Point(2, 2), Point(2, 2), Point(1, 1), Point(0, 0), Point(2, 0), Point(2, 0), Point(2, 2), Point(2, 0)
+
