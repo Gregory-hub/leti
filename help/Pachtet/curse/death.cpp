@@ -156,7 +156,7 @@ bool check(double* arrx, double* arry) {
     
     
     if (((arrx[0] - arrx[2]) * (arry[1] - arry[2]) - (arrx[1] - arrx[2]) * (arry[0] - arry[2]) == 0) &&\
-        ((arrx[1] - arrx[3]) * (arry[2] - arry[3]) - (arrx[2] - arrx[3]) * (arry[1] - arry[3]) == 0)) {
+        ((arrx[1] - arrx[3]) * (arry[2] - arry[3]) - (arrx[2] - arrx[3]) * (arry[1] - arry[3])) == 0) {
         TrueCounter=true;
          
            
@@ -184,52 +184,88 @@ bool check(double* arrx, double* arry) {
 
 bool peremoga(double** mas, int n, int m, int i) {
     double* arrx = new double[4];
-    
     double* arry = new double[4];
     int j = 0;
-    
-    arrx[0]=mas[i][j];
-    arrx[1]=mas[i+1][j];
-    arrx[2]=mas[i+2][j];
-    arrx[3]=mas[i+3][j];
-        arry[0]=mas[i][j+1];
-        arry[1]=mas[i+1][j+1];
-        arry[2]=mas[i+2][j+1];
-        arry[3]=mas[i+3][j+1];
+    for (int k=i+1; k<n-2; k++){
+        cout << "k" << k << endl;
+        for (int l=i+2; l<n-1; l++){
+            
+        cout << "l" << l << endl;
+            for (int g=3+i; g<n; g++){
+                
+                cout << "gg" << g<< endl;
+        
+                arrx[0]=mas[i][j];
+                arrx[1]=mas[k][j];
+                arrx[2]=mas[l][j];
+                arrx[3]=mas[g][j];
 
-      
-        if (check(arrx, arry)) {
-            return true;
+                arry[0]=mas[i][j+1];
+                arry[1]=mas[k][j+1];
+                arry[2]=mas[l][j+1];
+                arry[3]=mas[g][j+1];
+
+                if (check(arrx, arry)) {
+                    return true;
+                }
+            }
         }
-    
+    }
+   
     return false;
 }
 
            
 double* peremogax(double** mas, int n, int m, int i) {
     double* arrx = new double[4];
+    double* arry = new double[4];
     int j = 0;
     bool ex = false;
-         arrx[0]=mas[i][j];
-        arrx[1]=mas[i+1][j];
-        arrx[2]=mas[i+2][j];
-        arrx[3]=mas[i+3][j];
-        
-
-    
+    for (int k=1+i; k<n-2; k++){
+        for (int l=2+i; l<n-1; l++){
+            for (int g=3+i; g<n; g++){
+            arrx[0]=mas[i][j];
+            arrx[1]=mas[k][j];
+            arrx[2]=mas[l][j];
+            arrx[3]=mas[g][j];
+            arry[0]=mas[i][j+1];
+            arry[1]=mas[k][j+1];
+            arry[2]=mas[l][j+1];
+            arry[3]=mas[g][j+1];
+            if (check(arrx, arry)) {
+                return arrx;
+                }
+            }
+        }
+    }    
     return arrx;
+    
 }
 
 
 double* peremogay(double **mas, int n, int m, int i) {
     double* arry = new double[4];
+    double* arrx = new double[4];
     bool ex = false;
-    int j = 0; 
-        arry[0]=mas[i][j+1];
-        arry[1]=mas[i+1][j+1];
-        arry[2]=mas[i+2][j+1];
-        arry[3]=mas[i+3][j+1];
-    
+    int j = 0;
+    for (int k=1+i; k<n-2; k++){
+        for (int l=2+i; l<n-1; l++){
+            for (int g=3+i; g<n; g++){
+            arrx[0]=mas[i][j];
+            arrx[1]=mas[k][j];
+            arrx[2]=mas[l][j];
+            arrx[3]=mas[g][j];
+            arry[0]=mas[i][j+1];
+            arry[1]=mas[k][j+1];
+            arry[2]=mas[l][j+1];
+            arry[3]=mas[g][j+1];
+            if (check(arrx, arry)) {
+                return arry;
+                }
+            }
+        }
+    }
+            
     return arry;
 }
 
@@ -414,7 +450,8 @@ int main() {
     file.open("out.txt", ios::out);
     for (int i = 0; i < n-3; i++) {
         //  cout << peremoga(mas, n, m, i);
-        int k = 0;
+        cout << "i" << i << endl;
+        int k=0;
         //cout << i << endl;
         if (peremoga(mas, n, m, i) == true) {
             raduga1++;
@@ -495,6 +532,8 @@ int main() {
                     file << "| " << mas[k][0] << " | " << mas[k][1] << " |" << endl;
 
                 }
+                // desintegrate(arrx, n);
+                // desintegrate(arry, n);
             }
         }
     }
