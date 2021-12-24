@@ -52,7 +52,6 @@ int sizen(string arrayname) {
     string line;
     int n = 0;
 
-    getline(file, line);
     while (getline(file, line)) {
         if (line.length() != 0) {
             n++;
@@ -73,7 +72,6 @@ int sizem(string arrayname, int n) {
     }
     string line;
     int m = 0;
-    getline(file, line);
 
     string x;
     int m1 = 2147483647;
@@ -107,7 +105,6 @@ double ** chitka(string filename, int n, int m) {
     double** mas = new double* [n];
     int i = 0;
     string line;
-    getline(file, line);
     while (getline(file, line)) {
         double* stroka = new double[m];
         stringstream ss(line);
@@ -160,7 +157,7 @@ bool check(double* arrx, double* arry) {
     
     if (((arrx[0] - arrx[2]) * (arry[1] - arry[2]) - (arrx[1] - arrx[2]) * (arry[0] - arry[2]) == 0) &&\
         ((arrx[1] - arrx[3]) * (arry[2] - arry[3]) - (arrx[2] - arrx[3]) * (arry[1] - arry[3]) == 0)) {
-         TrueCounter=true;
+        TrueCounter=true;
          
            
     }
@@ -187,107 +184,53 @@ bool check(double* arrx, double* arry) {
 
 bool peremoga(double** mas, int n, int m, int i) {
     double* arrx = new double[4];
+    
     double* arry = new double[4];
     int j = 0;
-    for (i; i < n-3 ; i++) {
-        cout << "i " << i << endl;
-        for (int o = 1 + i; o < n-2; o++) {
-            cout << "o " << o << endl;
+    
+    arrx[0]=mas[i][j];
+    arrx[1]=mas[i+1][j];
+    arrx[2]=mas[i+2][j];
+    arrx[3]=mas[i+3][j];
+        arry[0]=mas[i][j+1];
+        arry[1]=mas[i+1][j+1];
+        arry[2]=mas[i+2][j+1];
+        arry[3]=mas[i+3][j+1];
 
-            for (int p = 2 + i; p < n-1; p++) {
-                cout << "p " << p << endl;
-
-                for (int x = 3+i; x < n; x++) {
-                    cout << "x " << x << endl;
-
-                    if ((mas[p][j] - mas[i][j]) * (mas[o][j + 1] - mas[i][j + 1] - ((mas[o][j] - mas[i][j]) * (mas[p][j + 1] - mas[i][j + 1]))==0\
-                        && (mas[x][j] - mas[i][j]) * (mas[o][j + 1] - mas[i][j + 1]) - ((mas[o][j] - mas[i][j]) * (mas[x][j + 1] - mas[i][j + 1])))==0 && i!=o!=p!=x)
-                    {
-                       // cout << "mas" << mas[o][j + 1];
-                        arrx[0] = mas[i][j];
-                        arrx[1] = mas[o][j];
-                        arrx[2] = mas[p][j];
-                        arrx[3] = mas[x][j];
-                        arry[0] = mas[i][j+1];
-                        arry[1] = mas[o][j+1];
-                        arry[2] = mas[p][j+1];
-                        arry[3] = mas[x][j+1];
-                        break;
-                        //cout << "x1 " << arrx[0] << endl;
-                        //cout << "x2 " << arrx[1] << endl;
-                        //cout << "x3 " << arrx[2] << endl;
-                        //cout << "x4 " << arrx[3] << endl;
-                        //cout << "y1 " << arry[0] << endl;
-                        //cout << "y2 " << arry[1] << endl;
-                        //cout << "y3 " << arry[2] << endl;
-                        //cout << "y4 " << arry[3] << endl;
-                        
-                    }
-                }
-            }
+      
+        if (check(arrx, arry)) {
+            return true;
         }
-    }
-    if (check(arrx, arry)) {
-        return true;
-    }
+    
     return false;
- 
 }
 
            
 double* peremogax(double** mas, int n, int m, int i) {
     double* arrx = new double[4];
     int j = 0;
-    for (i; i < n-3; i++) {
-        for (int o = 1 + i; o < n-2; o++) {
-            for (int p = 2 + i; p < n-1; p++) {
-                for (int x = 3 + i; x < n; x++) {
-                    if ((mas[p][j] - mas[i][j]) * (mas[o][j + 1] - mas[i][j + 1] - ((mas[o][j] - mas[i][j]) * (mas[p][j + 1] - mas[i][j + 1])) == 0\
-                        && (mas[x][j] - mas[i][j]) * (mas[o][j + 1] - mas[i][j + 1]) - ((mas[o][j] - mas[i][j]) * (mas[x][j + 1] - mas[i][j + 1]))) == 0 && i!=o!=p!=x)
-                    {
-                        // cout << "mas" << mas[o][j + 1];
-                        arrx[0] = mas[i][j];
-                        arrx[1] = mas[o][j];
-                        arrx[2] = mas[p][j];
-                        arrx[3] = mas[x][j];
-                        break;
-                    }
-                }
-            }
-        }
-    }
+    bool ex = false;
+         arrx[0]=mas[i][j];
+        arrx[1]=mas[i+1][j];
+        arrx[2]=mas[i+2][j];
+        arrx[3]=mas[i+3][j];
+        
+
     
     return arrx;
-    desintegrate(arrx, 4);
 }
-
 
 
 double* peremogay(double **mas, int n, int m, int i) {
     double* arry = new double[4];
-    for (i; i < n-3; i++) {
-        int j = 0;
-        for (int o = 1 + i; o < n-2; o++) {
-            for (int p = 2 + i; p < n-1; p++) {
-                for (int x = 3 + i; x < n; x++) {
-
-                    if ((mas[p][j] - mas[i][j]) * (mas[o][j + 1] - mas[i][j + 1] - ((mas[o][j] - mas[i][j]) * (mas[p][j + 1] - mas[i][j + 1])) == 0\
-                        && (mas[x][j] - mas[i][j]) * (mas[o][j + 1] - mas[i][j + 1]) - ((mas[o][j] - mas[i][j]) * (mas[x][j + 1] - mas[i][j + 1]))) == 0 && i!=o!=p!=x)
-                    {
-                       // cout << "mas" << mas[o][j + 1];
-                        arry[0] = mas[i][j + 1];
-                        arry[1] = mas[o][j + 1];
-                        arry[2] = mas[p][j + 1];
-                        arry[3] = mas[x][j + 1];
-                        break;
-                    }
-                }
-            }
-        }
+    bool ex = false;
+    int j = 0; 
+        arry[0]=mas[i][j+1];
+        arry[1]=mas[i+1][j+1];
+        arry[2]=mas[i+2][j+1];
+        arry[3]=mas[i+3][j+1];
     
-    }
     return arry;
-    desintegrate(arry, 4);
 }
 
 
@@ -458,18 +401,18 @@ int main() {
     double* arry1 = new double[4];
     bool up = false;
 
-    // cout << n << endl;
-    // cout << m << endl << endl;
-    // for (int i = 0; i < n; i++) {
-    //     for (int j = 0; j < m; j++) {
-    //         cout << mas[i][j] << ' ';
-    //     }
-    //     cout << endl;
-    // }
+    cout << n << endl;
+    cout << m << endl << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cout << mas[i][j] << ' ';
+        }
+        cout << endl;
+    }
     fstream file;
     
     file.open("out.txt", ios::out);
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n-3; i++) {
         //  cout << peremoga(mas, n, m, i);
         int k = 0;
         //cout << i << endl;
