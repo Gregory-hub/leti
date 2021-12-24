@@ -570,8 +570,8 @@ int main() {
         }
     }
 
-    // desintegrate(arrx, 4);
-    // desintegrate1(mas, n);
-    //desintegrate2(dots, count1);
+    //desintegrate(arrx, 4);
+    //desintegrate1(mas, n);
+    
     //cout << count1;
 }
