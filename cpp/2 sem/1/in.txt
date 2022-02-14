@@ -1,2 +1,2 @@
-*#*wo#rd*
-2332word83jfd2
+4 # word
+*#*word*
