@@ -1,0 +1,13 @@
+INPUT
+Separator: *
+Marker: #
+Word: OO minecraft# OOO
+
+Length: 4
+Marker: #
+Word: word
+
+OUTPUT
+Word: OO ourscraft
+
+Word: warm

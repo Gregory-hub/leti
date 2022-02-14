@@ -61,7 +61,7 @@ int get_number_of_els_in_line(string filename, int line_index = 0) {
 }
 
 
-void read_word_with_len(string filename, Word& word, int line_index = 0) {
+int read_word_with_len(string filename, Word& word, int line_index = 0) {
     int number_of_lines = get_number_of_lines(filename);
     if (line_index >= number_of_lines) {
         cerr << "Error: trying to read non-existing or empty line" << endl;
@@ -89,6 +89,7 @@ void read_word_with_len(string filename, Word& word, int line_index = 0) {
 
     stringstream ss(line);
     string x;
+    // read len
     getline(ss, x, ' ');
     // check if len consists of digits
     for (char d : x) {
@@ -106,6 +107,7 @@ void read_word_with_len(string filename, Word& word, int line_index = 0) {
     }
     int len = stoi(x);
 
+    // read marker
     getline(ss, x, ' ');
     if (x.length() != 1) {
         cerr << "Error: invalid marker" << endl;
@@ -113,11 +115,13 @@ void read_word_with_len(string filename, Word& word, int line_index = 0) {
     }
     word.marker = x.c_str()[0];
 
+    // read word
     getline(ss, x, ' ');
     if (x.length() < len) {
         for (int i = 0; i < x.length(); i++) {
             word.letters[i] = x[i];
         }
+        len = x.length();
     } else {
         for (int i = 0; i < len; i++) {
             word.letters[i] = x[i];
@@ -126,10 +130,11 @@ void read_word_with_len(string filename, Word& word, int line_index = 0) {
     word.letters[len] = word.marker;
 
     file.close();
+    return len;
 }
 
 
-void read_word_with_sep(string filename, Word& word, int line_index = 0) {
+char read_word_with_sep(string filename, Word& word, int line_index = 0) {
     int number_of_lines = get_number_of_lines(filename);
     if (line_index >= number_of_lines) {
         cerr << "Error: trying to read non-existing or empty line" << endl;
@@ -180,26 +185,25 @@ void read_word_with_sep(string filename, Word& word, int line_index = 0) {
     word.letters[i - start - 1] = word.marker;
 
     file.close();
+    return sep;
 }
 
 
 int exchange(Word &word, string removed, string inserted) {
     int len = removed.length();
     if (len != inserted.length()) return 0;
-    cout << endl;
-    cout << "len: " << len << endl;
     char seq[len];
     int exc_count = 0;
+
     int i = 0;
     for (int i = 0; i < len; i++) {
         if (word.letters[i] == word.marker) return 0;
     }
+
     while (word.letters[i + len - 1] != word.marker and i < word.sz - len) {
         for (int j = i; j < i + len; j++) {
             seq[j - i] = word.letters[j];
         }
-        for (int i = 0; i < len; i++) cout << seq[i];
-        cout << endl;
         bool equal = true;
         for (int i = 0; i < len; i++) {
             if (seq[i] != removed[i]) equal = false;
@@ -208,6 +212,7 @@ int exchange(Word &word, string removed, string inserted) {
             for (int j = i; j < i + len; j++) {
                 word.letters[j] = inserted[j - i];
             }
+            i += len - 1;
             exc_count++;
         }
         i++;
@@ -216,27 +221,134 @@ int exchange(Word &word, string removed, string inserted) {
 }
 
 
-int main(int argc, char const *argv[])
-{
-    Word word1, word2;
-    read_word_with_len("in.txt", word2, 0);
-    read_word_with_sep("in.txt", word1, 1);
-    cout << word1.marker << endl;
-    for (char l : word1.letters) {
-        cout << l;
-    }
-    cout << endl;
-    cout << word2.marker << endl;
-    for (char l : word2.letters) {
-        cout << l;
-    }
-    cout << endl;
-
-    exchange(word1, "mine", "ours");
-    cout << word1.marker << endl;
-    for (char l : word1.letters) {
-        cout << l;
+void out_init_sep(string filename, Word word, char sep, bool app = false) {
+    fstream file;
+    if (app) {
+        file.open(filename, ios::app);
+    } else {
+        file.open(filename, ios::out);
     }
     
+    if (!file.is_open()) {
+        perror("Error opening file");
+        exit(1);
+    }
+
+    if (!app) {
+        file << "INPUT" << endl;
+        cout << "INPUT" << endl;
+    } else {
+        file << endl;
+        cout << endl;
+    }
+
+    file << "Separator: " << sep << endl;
+    file << "Marker: " << word.marker << endl;
+    cout << "Separator: " << sep << endl;
+    cout << "Marker: " << word.marker << endl;
+    int last_marker;
+    for (int i = 0; i < word.sz; i++) {
+        if (word.letters[i] == word.marker) {
+            last_marker = i;
+        }
+    }
+    file << "Word: ";
+    cout << "Word: ";
+    for (int i = 0; i < last_marker; i++) {
+        file << word.letters[i];
+        cout << word.letters[i];
+    }
+    file << endl;
+    cout << endl;
+    file.close();
+}
+
+
+void out_init_len(string filename, Word word, int len, bool app = false) {
+    fstream file;
+    if (app) {
+        file.open(filename, ios::app);
+    } else {
+        file.open(filename, ios::out);
+    }
+    if (!file.is_open()) {
+        perror("Error opening file");
+        exit(1);
+    }
+
+    if (!app) {
+        file << "INPUT" << endl;
+        cout << "INPUT" << endl;
+    } else {
+        file << endl;
+        cout << endl;
+    }
+
+    file << "Length: " << len << endl;
+    file << "Marker: " << word.marker << endl;
+    file << "Word: ";
+    cout << "Length: " << len << endl;
+    cout << "Marker: " << word.marker << endl;
+    cout << "Word: ";
+    for (int i = 0; i < len; i++) {
+        file << word.letters[i];
+        cout << word.letters[i];
+    }
+    file << endl;
+    cout << endl;
+    file.close();
+}
+
+
+void out_res(string filename, Word word, bool app_res = false) {
+    fstream file;
+    file.open(filename, ios::app);
+    if (!file.is_open()) {
+        perror("Error opening file");
+        exit(1);
+    }
+
+    if (!app_res) {
+        file << endl << "OUTPUT" << endl;
+        cout << endl << "OUTPUT" << endl;
+    } else {
+        file << endl;
+        cout << endl;
+    }
+
+    file << "Word: ";
+    cout << "Word: ";
+    int i = 0;
+    while (word.letters[i] != word.marker) {
+        file << word.letters[i];
+        cout << word.letters[i];
+        i++;
+    }
+    file << endl;
+    cout << endl;
+    file.close();
+}
+
+
+int main(int argc, char const *argv[])
+{
+    cout << "Author: Novikov G. \n"
+            "Group: 1302 \n"
+            "Start date: 14.02.2022 \n"
+            "End date: 15.02.2022 \n"
+            "Version 1.1.1 \n" << endl;
+
+    Word word1, word2;
+    int len = read_word_with_len("in.txt", word2, 0);
+    char sep = read_word_with_sep("in.txt", word1, 1);
+    out_init_sep("out.txt", word1, sep);
+    out_init_len("out.txt", word2, len, true);
+
+    exchange(word1, "mine", "ours");
+    exchange(word2, "rd", "rm");
+    exchange(word2, "o", "a");
+    out_res("out.txt", word1);
+    out_res("out.txt", word2, true);
+
     return 0;
 }
