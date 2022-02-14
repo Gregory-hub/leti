@@ -219,8 +219,8 @@ int exchange(Word &word, string removed, string inserted) {
 int main(int argc, char const *argv[])
 {
     Word word1, word2;
-    read_word_with_len("in.txt", word1, 0);
-    read_word_with_sep("in.txt", word2, 1);
+    read_word_with_len("in.txt", word2, 0);
+    read_word_with_sep("in.txt", word1, 1);
     cout << word1.marker << endl;
     for (char l : word1.letters) {
         cout << l;
@@ -232,7 +232,7 @@ int main(int argc, char const *argv[])
     }
     cout << endl;
 
-    exchange(word1, "our", "iji");
+    exchange(word1, "mine", "ours");
     cout << word1.marker << endl;
     for (char l : word1.letters) {
         cout << l;
