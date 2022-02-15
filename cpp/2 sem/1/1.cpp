@@ -189,9 +189,7 @@ char read_word_with_sep(string filename, Word& word, int line_index = 0) {
 }
 
 
-int exchange(Word &word, string removed, string inserted) {
-    int len = removed.length();
-    if (len != inserted.length()) return 0;
+int exchange(Word &word, char* removed, char* inserted, int len) {
     char seq[len];
     int exc_count = 0;
 
@@ -344,9 +342,15 @@ int main(int argc, char const *argv[])
     out_init_sep("out.txt", word1, sep);
     out_init_len("out.txt", word2, len, true);
 
-    exchange(word1, "mine", "ours");
-    exchange(word2, "rd", "rm");
-    exchange(word2, "o", "a");
+    char seq1[4] = {'m', 'i', 'n', 'e'};
+    char seq2[4] = {'o', 'u', 'r', 's'};
+    char seq3[2] = {'r', 'd'};
+    char seq4[2] = {'r', 'm'};
+    char seq5[1] = {'o'};
+    char seq6[1] = {'a'};
+    exchange(word1, seq1, seq2, 4);
+    exchange(word2, seq3, seq4, 2);
+    exchange(word2, seq5, seq6, 1);
     out_res("out.txt", word1);
     out_res("out.txt", word2, true);
 
