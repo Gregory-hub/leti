@@ -1,13 +1,7 @@
 INPUT
-Separator: *
-Marker: #
-Word: OO minecraft# OOO
-
-Length: 4
-Marker: #
-Word: word
+Separator: -
+Marker: 0
+Word: Joe Biden Andreevich
 
 OUTPUT
-Word: OO ourscraft
-
-Word: warm
+Word: Joe Mama Andreevich
