@@ -1,16 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <iomanip>
 
 
 using namespace std;
 
 
-const int SIZE = 80;
-
 struct Word {
-    static const int sz = SIZE;
+    static const int sz = 80;
     char letters[sz + 1];
     char marker = 0;
 
@@ -417,11 +414,15 @@ int main(int argc, char const *argv[]) {
 
     Word word;
 
-    char sep = read_word_with_sep("in.txt", word);
-    out_init_sep("out.txt", word, sep);
+    char mode = 's';
 
-    // int len = read_word_with_len("in.txt", word);
-    // out_init_len("out.txt", word, len);
+    if (mode == 's') {
+        char sep = read_word_with_sep("in.txt", word);
+        out_init_sep("out.txt", word, sep);
+    } else if (mode == 'l') {
+        int len = read_word_with_len("in.txt", word);
+        out_init_len("out.txt", word, len);
+    } else exit(1);
 
     int subs_count = count_lines("substrings.txt");
     Word subs[subs_count][2];

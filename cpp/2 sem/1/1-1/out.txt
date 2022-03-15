@@ -1,0 +1,7 @@
+INPUT
+Length: 18
+Marker: *
+Word: abbcaaabbcaaabbcaa
+
+OUTPUT
+Word: abiii123abiii123abiii123

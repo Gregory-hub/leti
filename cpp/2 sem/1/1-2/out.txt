@@ -1,0 +1,7 @@
+INPUT
+Separator: *
+Length: 12
+Word: aurtaauurura
+
+OUTPUT
+Word: annaabbbura
