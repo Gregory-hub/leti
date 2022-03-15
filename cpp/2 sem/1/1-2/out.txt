@@ -1,7 +1,6 @@
 INPUT
-Separator: *
-Length: 12
-Word: aurtaauurura
+Length: 13
+Word: aaaaaaaaaaaaa
 
 OUTPUT
-Word: annaabbbura
+Word: rrrrrrrrrrrrrrrra

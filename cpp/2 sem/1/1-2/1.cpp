@@ -399,7 +399,7 @@ int main(int argc, char const *argv[]) {
     Word word;
 
     // s or l
-    char mode = 's';
+    char mode = 'l';
 
     if (mode == 's') {
         char sep = word.read_word_with_sep("in.txt", word);
