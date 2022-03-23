@@ -1,0 +1,7 @@
+INPUT
+Separator: -
+Marker: 0
+Word: Joe Biden Andreevich
+
+OUTPUT
+Word: Joe Mama Andreevich
