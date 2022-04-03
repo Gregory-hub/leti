@@ -10,12 +10,21 @@ char Word::getLetter(int index){
     return letters[index];
 };
 
-bool Word::setLetter(int index, char letter){
+void Word::setLetter(int index, char letter){
     letters[index] = letter;
-    return true;
 };
 
-bool Word::setMarker(char mark){
+void Word::setMarker(char mark){
     marker = mark;
-    return true;
 };
+
+bool Word::equals(Word word) {
+    int i = 0;
+    while (getLetter(i) != getMarker()) {
+        if (getLetter(i) != word.getLetter(i)) return false;
+        i++;
+    }
+    if (word.getLetter(i) == word.getMarker()) return true;
+    return false;
+}
+

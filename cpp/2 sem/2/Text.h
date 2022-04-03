@@ -7,13 +7,14 @@ using namespace std;
 class Text {
     public:
         Word getWord(int index);
-        bool setWord(int index, Word word);
+        void setWord(int index, Word word);
         int getLen();
-        bool setLen(int l);
-        bool readFromFile(string filename);
+        void setLen(int length);
+        void readFromFile(string filename);
+        void printWord(int index);
         
     private:
-        Word* words = new Word;
+        Word words[100];
         int len = 0;
         bool is_sep_symbol(char sym);
 };

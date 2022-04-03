@@ -8,10 +8,12 @@ class Word {
     public:
         char getLetter(int index);
         char getMarker();
-        bool setLetter(int index, char letter);
-        bool setMarker(char mark);
+        void setLetter(int index, char letter);
+        void setMarker(char mark);
+        bool equals(Word word);
+        bool replaced = false;
 
     private:
-        char* letters = new char;
+        char letters[1000];
         char marker;
 };

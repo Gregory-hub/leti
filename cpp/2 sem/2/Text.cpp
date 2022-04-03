@@ -5,27 +5,45 @@ using namespace std;
 Word Text::getWord(int index) {
     if (index >= len) {
         cerr << "Index is bigger than length of text" << endl;
-        exit(0);
+        exit(1);
     }
     return words[index];
 }
 
-bool Text::setWord(int index, Word word) {
-    if (index > len) return false;
+void Text::setWord(int index, Word word) {
+    if (index > len) {
+        cerr << "Index is bigger than len" << endl;
+        exit(1);
+    }
 
-    words[index] = word;
+    int i = 0;
+    while (word.getLetter(i) != word.getMarker()) {
+		words[index].setLetter(i, word.getLetter(i));
+        i++;
+    }
+    words[index].setMarker(word.getMarker());
+    words[index].setLetter(i, word.getMarker());
+    words[index].replaced = word.replaced;
     if (index == len) len++;
-
-    return true;
 }
 
-bool Text::setLen(int l) {
-    len = l;
-    return true;
+void Text::setLen(int length) {
+    len = length;
 }
 
 int Text::getLen(){
     return len;
+}
+
+void Text::printWord(int index) {
+    Word word = getWord(index);
+    int i = 0;
+    cout << index << ' ';
+    while (word.getLetter(i) != word.getMarker()) {
+        cout << word.getLetter(i);
+        i++;
+    }
+    cout << endl;
 }
 
 bool Text::is_sep_symbol(char sym) {
@@ -44,41 +62,40 @@ bool Text::is_sep_symbol(char sym) {
     return false;
 }
 
-bool Text::readFromFile(string filename) {
+void Text::readFromFile(string filename) {
     fstream file;
     file.open(filename, ios::in);
     if (!file.is_open()) {
         perror("Error opening file");
-        return false;
+        exit(1);
     }
 
     len = 0;
     string line;
     while (getline(file, line)) {
+        //cout << line.length() << endl;
         int st = 0;
-        while (line[st] && is_sep_symbol(line[st])) st++;
+        while (st < line.length() && is_sep_symbol(line[st])) st++;
         int end = st + 1;
+        while (end < line.length() && !is_sep_symbol(line[end])) end++;
 
-        while(line[st]) {
-            while (line[st] && is_sep_symbol(line[st])) st++;
-            end = st + 1;
-            while (line[end] && !is_sep_symbol(line[end])) end++;
-            if (line[end]) {
-                Word word;
-                word.setMarker('#');
-                for (int j = st; j < end; j++) {
-                    word.setLetter(j - st, line[j]);
-                }
-                word.setLetter(end, word.getMarker());
-                words[len] = word;
-                len++;
-                cout << st << ' ' << end << ' ' << len << ' ' << getWord(len - 1).getLetter(0) << getWord(len - 1).getLetter(1) << endl;
+        while (st < line.length()) {
+            Word word;
+            word.setMarker('#');
+
+            for (int i = st; i < end; i++) {
+                word.setLetter(i - st, line[i]);
             }
-            st = end + 1;
-            end += 2;
+            word.setLetter(end - st, word.getMarker());
+            setWord(len, word);
+
+            st = end;
+			while (st < line.length() && is_sep_symbol(line[st])) st++;
+			end = st + 1;
+			while (end < line.length() && !is_sep_symbol(line[end])) end++;
         }
     }
 
     file.close();
-    return true;
 }
+
