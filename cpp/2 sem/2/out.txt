@@ -1,0 +1,32 @@
+INPUT
+0 biba
+1 biba
+2 biba
+3 biba
+4 boba
+5 bob
+6 abob
+7 abobi
+8 bibibi
+9 bibib
+10 bibibi
+11 abdfosdfb
+12 abobi
+13 abob
+
+OUTPUT
+0 biba
+1 b(0)
+2 b(0)
+3 b(0)
+4 boba
+5 bob
+6 abob
+7 abobi
+8 bibibi
+9 bibib
+10 b(8)
+11 abdfosdfb
+12 a(7)
+13 a(6)
+

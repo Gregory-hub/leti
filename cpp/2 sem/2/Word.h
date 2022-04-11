@@ -14,6 +14,6 @@ class Word {
         bool replaced = false;
 
     private:
-        char letters[1000];
+        char letters[100];
         char marker;
 };

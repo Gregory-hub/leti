@@ -30,27 +30,25 @@ Word generate_new_word(Text text, char first_letter, int i, int j) {
 	new_word.setMarker(text.getWord(j).getMarker());
 	new_word.setLetter(0, first_letter);
 	new_word.setLetter(1, '(');
-	int k = 0;
+	int num_len = 0;
 	if (i <= 9) {
 		new_word.setLetter(2, 48 + i);
-		k = 3;
+		num_len = 1;
 	}
 	else {
 		int u = i;
-		char i_digits[20];
-		for (int k = 0; k < 20; k++) i_digits[k] = '.';
+		int i_digits[20];
 		while (u % 10 != 0) {
-			i_digits[k] = u % 10;
+			i_digits[num_len] = u % 10;
 			u = (int)u / 10;
-			k++;
+			num_len++;
 		}
-		for (int h = 1; h <= k; h++) {
-			//cout << i_digits[h - 1];
-			new_word.setLetter(h, i_digits[k - h]);
+		for (int h = 0; h < num_len; h++) {
+			new_word.setLetter(2 + h, '0' + i_digits[num_len - h - 1]);
 		}
 	}
-	new_word.setLetter(k, ')');
-	new_word.setLetter(k + 1, new_word.getMarker());
+	new_word.setLetter(num_len + 2, ')');
+	new_word.setLetter(num_len + 3, new_word.getMarker());
 	new_word.replaced = true;
 	return new_word;
 }

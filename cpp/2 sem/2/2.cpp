@@ -5,20 +5,20 @@ using namespace std;
 
 
 int main(int argc, char const *argv[]) {
+    cout << "Author: Novikov G. \n"
+            "Group: 1302 \n"
+            "Start date: 1.04.2022 \n"
+            "End date: 17.04.2022 \n"
+            "Version 2.1.1\n" << endl;
+
     Text text;
     text.readFromFile("../in.txt");
 
-    for (int i = 0; i < text.getLen(); i++) {
-        text.printWord(i);
-    }
-    cout << endl;
+    text.out("../out.txt", "INPUT\n");
 
     replace_words(text);
 
-    for (int i = 0; i < text.getLen(); i++) {
-        text.printWord(i);
-    }
-    cout << endl;
+    text.out("../out.txt", "OUTPUT\n", true);
 
     return 0;
 }

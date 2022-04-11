@@ -11,10 +11,12 @@ class Text {
         int getLen();
         void setLen(int length);
         void readFromFile(string filename);
-        void printWord(int index);
-        
+        void out(string filename, string message, bool append = false);
+        void printWord(int index, fstream &file);
+
     private:
-        Word words[100];
+        Word words[1000];
         int len = 0;
         bool is_sep_symbol(char sym);
 };
+

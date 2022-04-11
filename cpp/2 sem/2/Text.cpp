@@ -35,15 +35,43 @@ int Text::getLen(){
     return len;
 }
 
-void Text::printWord(int index) {
+void Text::printWord(int index, fstream &file) {
     Word word = getWord(index);
     int i = 0;
     cout << index << ' ';
+    file << index << ' ';
     while (word.getLetter(i) != word.getMarker()) {
         cout << word.getLetter(i);
+        file << word.getLetter(i);
         i++;
     }
     cout << endl;
+    file << endl;
+}
+
+void Text::out(string filename, string message, bool append) {
+    fstream file;
+    if (append) {
+		file.open(filename, ios::app);
+    }
+    else {
+		file.open(filename, ios::out);
+    }
+    if (!file.is_open()) {
+        perror("Error opening file");
+        exit(1);
+    }
+
+    cout << message;
+    file << message;
+
+    for (int i = 0; i < getLen(); i++) {
+        printWord(i, file);
+    }
+    cout << endl;
+    file << endl;
+
+    file.close();
 }
 
 bool Text::is_sep_symbol(char sym) {
