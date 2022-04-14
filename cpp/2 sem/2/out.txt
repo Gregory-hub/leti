@@ -1,32 +1,98 @@
 INPUT
-0 biba
-1 biba
-2 biba
-3 biba
-4 boba
-5 bob
-6 abob
-7 abobi
-8 bibibi
-9 bibib
-10 bibibi
-11 abdfosdfb
-12 abobi
-13 abob
+biba 
+biba 
+biba 
+fire
+biba 
+boba 
+fire 
+bob 
+abob
+abobi 
+bibibi 
+bibib 
+biba 
+abib
+biba 
+biba 
+biba 
+fire
+biba 
+biba 
+biba 
+fire
+biba 
+biba 
+biba 
+fire
+biba 
+boba 
+fire 
+bob 
+abob
+abobi 
+bibibi 
+abobi 
+bibib 
+biba 
+abib
+biba 
+boba 
+fire 
+bob 
+abob
+abobi 
+bibibi 
+bibib 
+biba 
+abib
 
 OUTPUT
-0 biba
-1 b(0)
-2 b(0)
-3 b(0)
-4 boba
-5 bob
-6 abob
-7 abobi
-8 bibibi
-9 bibib
-10 b(8)
-11 abdfosdfb
-12 a(7)
-13 a(6)
+biba 
+b(1) 
+b(1) 
+fire
+b(1) 
+boba 
+f(4) 
+bob 
+abob
+abobi 
+bibibi 
+bibib 
+b(1) 
+abib
+b(1) 
+b(1) 
+b(1) 
+f(4)
+b(1) 
+b(1) 
+b(1) 
+f(4)
+b(1) 
+b(1) 
+b(1) 
+f(4)
+b(1) 
+b(6) 
+f(4) 
+b(8) 
+a(9)
+a(10) 
+b(11) 
+a(10) 
+b(12) 
+b(1) 
+a(14)
+b(1) 
+b(6) 
+f(4) 
+b(8) 
+a(9)
+a(10) 
+b(11) 
+b(12) 
+b(1) 
+a(14)
 

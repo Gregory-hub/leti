@@ -19,8 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\2.cpp" />
     <ClCompile Include="..\functions.cpp" />
+    <ClCompile Include="..\Line.cpp" />
+    <ClCompile Include="..\main.cpp" />
     <ClCompile Include="..\Text.cpp" />
     <ClCompile Include="..\Word.cpp" />
   </ItemGroup>
@@ -29,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\functions.h" />
+    <ClInclude Include="..\Line.h" />
     <ClInclude Include="..\Text.h" />
     <ClInclude Include="..\Word.h" />
   </ItemGroup>

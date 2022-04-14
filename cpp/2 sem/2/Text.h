@@ -1,22 +1,19 @@
-#include "Word.h"
-
-
-using namespace std;
+#include "Line.h"
 
 
 class Text {
     public:
-        Word getWord(int index);
-        void setWord(int index, Word word);
+        Line getLine(int index);
+        void setLine(int index, Line line);
         int getLen();
         void setLen(int length);
+		void out(string filename, string message, bool append = 0);
+        void printLine(int index, fstream& file);
         void readFromFile(string filename);
-        void out(string filename, string message, bool append = false);
-        void printWord(int index, fstream &file);
+        bool is_sep_symbol(char sym);
 
     private:
-        Word words[1000];
+        Line lines[100];
         int len = 0;
-        bool is_sep_symbol(char sym);
 };
 

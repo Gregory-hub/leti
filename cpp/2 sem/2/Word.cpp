@@ -1,6 +1,8 @@
 #include "Word.h"
 
+
 using namespace std;
+
 
 char Word::getMarker(){
     return marker;
@@ -18,6 +20,14 @@ void Word::setMarker(char mark){
     marker = mark;
 };
 
+int Word::getNumber() {
+    return number;
+};
+
+void Word::setNumber(int num) {
+    number = num;
+};
+
 bool Word::equals(Word word) {
     int i = 0;
     while (getLetter(i) != getMarker()) {
@@ -26,5 +36,5 @@ bool Word::equals(Word word) {
     }
     if (word.getLetter(i) == word.getMarker()) return true;
     return false;
-}
+};
 

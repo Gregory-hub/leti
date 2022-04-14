@@ -1,61 +1,57 @@
 #include "Text.h"
 
+
 using namespace std;
 
-Word Text::getWord(int index) {
+
+Line Text::getLine(int index) {
     if (index >= len) {
-        cerr << "Index is bigger than length of text" << endl;
+        cerr << "Text getLine: Index is bigger than length of text" << endl;
         exit(1);
     }
-    return words[index];
-}
+    return lines[index];
+};
 
-void Text::setWord(int index, Word word) {
+void Text::setLine(int index, Line line) {
     if (index > len) {
-        cerr << "Index is bigger than len" << endl;
+        cerr << "Text setLine: Index is bigger than len" << endl;
         exit(1);
     }
 
-    int i = 0;
-    while (word.getLetter(i) != word.getMarker()) {
-		words[index].setLetter(i, word.getLetter(i));
-        i++;
+    for (int i = 0; i < line.getLen(); i++) {
+        lines[index].setWord(i, line.getWord(i));
     }
-    words[index].setMarker(word.getMarker());
-    words[index].setLetter(i, word.getMarker());
-    words[index].replaced = word.replaced;
     if (index == len) len++;
-}
+};
 
 void Text::setLen(int length) {
     len = length;
-}
+};
 
-int Text::getLen(){
+int Text::getLen() {
     return len;
-}
+};
 
-void Text::printWord(int index, fstream &file) {
-    Word word = getWord(index);
-    int i = 0;
-    cout << index << ' ';
-    file << index << ' ';
-    while (word.getLetter(i) != word.getMarker()) {
-        cout << word.getLetter(i);
-        file << word.getLetter(i);
-        i++;
+void Text::printLine(int index, fstream& file) {
+    Line line = getLine(index);
+    for (int i = 0; i < line.getLen(); i++) {
+        line.printWord(i, file);
+        if (i != line.getLen() - 1) {
+            cout << ' ';
+            file << ' ' << endl;
+        }
     }
-    cout << endl;
-    file << endl;
-}
+	cout << endl;
+	file << endl;
+};
 
 void Text::out(string filename, string message, bool append) {
     fstream file;
     if (append) {
-		file.open(filename, ios::app);
+        file.open(filename, ios::app);
     }
     else {
-		file.open(filename, ios::out);
+        file.open(filename, ios::out);
     }
     if (!file.is_open()) {
         perror("Error opening file");
@@ -66,13 +62,56 @@ void Text::out(string filename, string message, bool append) {
     file << message;
 
     for (int i = 0; i < getLen(); i++) {
-        printWord(i, file);
+        printLine(i, file);
     }
     cout << endl;
     file << endl;
 
     file.close();
-}
+};
+
+void Text::readFromFile(string filename) {
+    fstream file;
+    file.open(filename, ios::in);
+    if (!file.is_open()) {
+        perror("Error opening file");
+        exit(1);
+    }
+
+    int word_count = 0;
+    len = 0;
+    string input;
+    while (getline(file, input)) {
+        Line line;
+        int st = 0;
+        while (st < input.length() && is_sep_symbol(input[st])) st++;
+        int end = st + 1;
+        while (end < input.length() && !is_sep_symbol(input[end])) end++;
+
+        int line_len = 0;
+        while (st < input.length()) {
+            word_count++;
+            Word word;
+            word.setMarker('#');
+
+            for (int i = st; i < end; i++) {
+                word.setLetter(i - st, input[i]);
+            }
+            word.setLetter(end - st, word.getMarker());
+            word.setNumber(word_count);
+            line.setWord(line_len, word);
+            line_len++;
+
+            st = end;
+            while (st < input.length() && is_sep_symbol(input[st])) st++;
+            end = st + 1;
+            while (end < input.length() && !is_sep_symbol(input[end])) end++;
+        }
+        setLine(len, line);
+    }
+
+    file.close();
+};
 
 bool Text::is_sep_symbol(char sym) {
     if (sym >= 32 && sym <= 47) {
@@ -88,42 +127,5 @@ bool Text::is_sep_symbol(char sym) {
         return true;
     }
     return false;
-}
-
-void Text::readFromFile(string filename) {
-    fstream file;
-    file.open(filename, ios::in);
-    if (!file.is_open()) {
-        perror("Error opening file");
-        exit(1);
-    }
-
-    len = 0;
-    string line;
-    while (getline(file, line)) {
-        //cout << line.length() << endl;
-        int st = 0;
-        while (st < line.length() && is_sep_symbol(line[st])) st++;
-        int end = st + 1;
-        while (end < line.length() && !is_sep_symbol(line[end])) end++;
-
-        while (st < line.length()) {
-            Word word;
-            word.setMarker('#');
-
-            for (int i = st; i < end; i++) {
-                word.setLetter(i - st, line[i]);
-            }
-            word.setLetter(end - st, word.getMarker());
-            setWord(len, word);
-
-            st = end;
-			while (st < line.length() && is_sep_symbol(line[st])) st++;
-			end = st + 1;
-			while (end < line.length() && !is_sep_symbol(line[end])) end++;
-        }
-    }
-
-    file.close();
-}
+};
 
