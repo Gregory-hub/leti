@@ -1,0 +1,12 @@
+﻿  Change.cpp
+  FunkList.cpp
+  initList.cpp
+  inpList.cpp
+  inpStr.cpp
+  main.cpp
+  obrabotka.cpp
+  outList.cpp
+  outStr.cpp
+  Generating Code...
+F:\leti\cpp\2 sem\3\C-version\3\FunkList.cpp(11): warning C4715: 'DeleteHead': not all control paths return a value
+  3.vcxproj -> F:\leti\cpp\2 sem\3\C-version\3\x64\Debug\3.exe

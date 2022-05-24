@@ -1,0 +1,15 @@
+INPUT
+0. hibibi
+-> 1. habibi
+-> NULL
+
+ELEMENTS TO INSERT
+The list is empty
+
+OUTPUT
+0. hibibi
+-> 1. habibi
+-> NULL
+
+AFTER DELETION
+The list is empty
