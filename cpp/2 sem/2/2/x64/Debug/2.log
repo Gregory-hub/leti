@@ -1,6 +1,7 @@
-﻿  Line.cpp
-  Text.cpp
-  functions.cpp
+﻿  functions.cpp
+  Line.cpp
   main.cpp
+  Text.cpp
+  Word.cpp
   Generating Code...
   2.vcxproj -> F:\leti\cpp\2 sem\2\2\x64\Debug\2.exe

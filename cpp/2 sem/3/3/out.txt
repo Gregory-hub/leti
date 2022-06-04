@@ -1,14 +1,24 @@
 INPUT
-0. hibibi
--> 1. habibi
+0. hamud habibi hamud
 -> NULL
 
 ELEMENTS TO INSERT
-The list is empty
+0. obobi
+-> 1. bubu
+-> 2. bub
+-> 3. buba
+-> 4. bubs
+-> 5. bo
+-> NULL
 
 OUTPUT
-0. hibibi
--> 1. habibi
+0. obobi
+-> 1. bubu
+-> 2. bub
+-> 3. buba
+-> 4. bubs
+-> 5. bo
+-> 6. hamud habibi hamud
 -> NULL
 
 AFTER DELETION

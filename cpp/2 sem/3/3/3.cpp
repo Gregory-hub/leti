@@ -1,12 +1,13 @@
 #include <iostream>
 #include "functions.h"
 
+
 int main()
 {
     cout << "Author: Novikov Gregory\n"
         "Start date: 23.05.2022\n"
         "End date: 24.05.2022\n"
-        "Version: 3.1\n" << endl;
+        "Version: 3.1" << endl << endl;
 
     Elem* first = in("in.txt");
     Elem* first_inserted = in("elements.txt");

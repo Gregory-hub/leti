@@ -1,0 +1,10 @@
+#include "Str.h"
+
+
+int Str::getLen() {
+	return len;
+};
+
+int setLen(unsigned int len);
+char getLetter(int i);
+char setLetter(int i, char letter);

@@ -6,7 +6,7 @@
 using namespace std;
 
 struct Str {
-	char* letters = new char;
+	char letters[100];
 	int len = 0;
 	void del();
 };
