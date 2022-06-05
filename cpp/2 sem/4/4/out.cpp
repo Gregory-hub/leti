@@ -39,8 +39,8 @@ void print_v_el(fstream& file, V_El* v_el, int num) {
 void print_list(fstream& file, FormV* list) {
 	V_El* first_v = list->getHead();
 	if (first_v == nullptr) {
-		file << "The list is empty" << endl;
-		cout << "The list is empty" << endl;
+		file << "The list is empty" << endl << endl;
+		cout << "The list is empty" << endl << endl;
 	}
 	else {
 		int num = 0;
@@ -58,7 +58,7 @@ void print_list(fstream& file, FormV* list) {
 }
 
 
-void out(string filename, All* all, FormV* result, bool app = false) {
+void out(string filename, All* all, FormV* diff, bool result, bool app = false) {
 	fstream file;
 	if (app) {
 		file.open(filename, ios::app);
@@ -79,58 +79,21 @@ void out(string filename, All* all, FormV* result, bool app = false) {
 		print_list(file, list);
     }
 
-	if (result != nullptr) {
+	if (diff != nullptr) {
 		cout << "LIST 1 \\ LIST 2" << endl;
 		file << "LIST 1 \\ LIST 2" << endl;
-		print_list(file, result);
+		print_list(file, diff);
 	}
 
-    file.close();
-}
-
-
-void out(string filename, All* all, bool app = false) {
-    fstream file;
-    if (app) {
-        file.open(filename, ios::app);
-    }
-    else {
-        file.open(filename, ios::out);
-    }
-    if (!file.is_open()) {
-        perror("Error opening file");
-        exit(1);
-    }
-
-    FormV* form_list[3] = {all->list1, all->list2, all->list3};
-    for (int i = 0; i < 3; i++) {
-        cout << "LIST " << i + 1 << endl;
-        file << "LIST " << i + 1 << endl;
-        FormV* list = form_list[i];
-		print_list(file, list);
-    }
-
-    file.close();
-}
-
-
-void out(string filename, FormV* result, bool app = false) {
-    fstream file;
-    if (app) {
-        file.open(filename, ios::app);
-    }
-    else {
-        file.open(filename, ios::out);
-    }
-    if (!file.is_open()) {
-        perror("Error opening file");
-        exit(1);
-    }
-
-	if (result != nullptr) {
-		cout << "LIST 1 \\ LIST 2" << endl;
-		file << "LIST 1 \\ LIST 2" << endl;
-		print_list(file, result);
+	cout << "LIST 3 belongs LIST 1 \\ LIST 2: ";
+	file << "LIST 3 belongs LIST 1 \\ LIST 2: ";
+	if (result) {
+		cout << "true" << endl;
+		file << "true" << endl;
+	}
+	else {
+		cout << "false" << endl;
+		file << "false" << endl;
 	}
 
     file.close();

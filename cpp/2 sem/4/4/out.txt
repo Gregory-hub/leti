@@ -1,5 +1,5 @@
 LIST 1
-0. "first line line line"->" line line line line"->" line line line line"->" line line line line"->" line"->NULL
+0. "first line line line"->" line line line line"->" line line line line"->" line"->NULL
 -> 1. "second line"->NULL
 -> 2. "A line of 20 symbols"->NULL
 -> 3. "A line of 21 symbols"->"E"->NULL
@@ -8,21 +8,20 @@ LIST 1
 -> NULL
 
 LIST 2
-0. " line"->NULL
--> 1. "first line line line"->NULL
--> 2. "E"->NULL
--> 3. ""->NULL
+0. "U"->NULL
 -> NULL
 
 LIST 3
-0. "11111111111111111111"->NULL
--> 1. "44444444444444444455"->NULL
+0. ""->NULL
 -> NULL
 
 LIST 1 \ LIST 2
-0. " line line line line"->" line line line line"->" line line line line"->NULL
+0. "first line line line"->" line line line line"->" line line line line"->" line"->NULL
 -> 1. "second line"->NULL
 -> 2. "A line of 20 symbols"->NULL
--> 3. "A line of 21 symbols"->NULL
+-> 3. "A line of 21 symbols"->"E"->NULL
+-> 4. "E"->NULL
+-> 5. ""->NULL
 -> NULL
 
+LIST 3 belongs LIST 1 \ LIST 2: true

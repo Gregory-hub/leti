@@ -146,9 +146,35 @@ void handle_text(FormV* form_v_1, FormV* form_v_2) {
 }
 
 
-FormV* subtract(FormV* form_v_1, FormV* form_v_2) {
-	FormV* result = copy(form_v_1);
-	handle_text(result, form_v_2);
+FormV* subtract(FormV* divided, FormV* dividor) {
+	FormV* result = copy(divided);
+	handle_text(result, dividor);
 	return result;
+}
+
+	
+bool belongs(FormV* small_set, FormV* large_set) {
+	FormV* diff = subtract(small_set, large_set);
+	if (diff->getHead() == nullptr) {
+		return true;
+	}
+	return false;
+}
+
+
+void desintegrate(FormV* form_v) {
+	while (form_v->getCurr() != nullptr) {
+		V_El* v_el = form_v->getCurr();
+		FormG* form_g = v_el->getForm();
+		while (form_g->getCurr() != nullptr) {
+			delete form_g->getCurr()->getStr();
+			form_g->setCurr(form_g->getCurr()->getNext());
+			delete form_g->getPrev();
+		}
+		form_v->setCurr(form_v->getCurr()->getNext());
+		delete form_v->getPrev();
+	}
+
+	delete form_v;
 }
 
