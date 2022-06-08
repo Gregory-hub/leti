@@ -53,6 +53,7 @@
     <Text Include="in3.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="..\..\cursed\cursed\out.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="G_El.h">

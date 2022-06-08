@@ -1,0 +1,21 @@
+#include "CalcApp.h"
+
+
+void CalcApp::renderUI() {
+    ImGui::Begin("Biba");
+    const int N = 512;
+    static char input[N] = "";
+    ImGui::InputTextWithHint("Enter expression to evaluate", "Use space as separator", input, IM_ARRAYSIZE(input));
+
+    static bool print = 0;
+    if (ImGui::Button("Calculate")) {
+        print = !print;
+    }
+    if (print) {
+        ImGui::Text("Aboba");
+    }
+
+    ImGui::ShowDemoWindow();
+    ImGui::End();
+};
+
