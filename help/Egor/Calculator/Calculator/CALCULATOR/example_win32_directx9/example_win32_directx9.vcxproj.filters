@@ -72,4 +72,7 @@
       <Filter>imgui</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="README.txt" />
+  </ItemGroup>
 </Project>

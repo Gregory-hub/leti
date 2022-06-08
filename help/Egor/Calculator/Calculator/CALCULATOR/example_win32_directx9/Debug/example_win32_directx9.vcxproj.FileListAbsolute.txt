@@ -1,3 +1,4 @@
 F:\leti\help\Egor\Calculator\examples\example_win32_directx9\Debug\example_win32_directx9.exe
 F:\leti\help\Egor\Calculator\Imgui\examples\example_win32_directx9\Debug\example_win32_directx9.exe
 F:\leti\help\Egor\Calculator\Imgui\CALCULATOR\example_win32_directx9\Debug\Calculator.exe
+F:\leti\help\Egor\Calculator\Calculator\CALCULATOR\example_win32_directx9\Debug\Calculator.exe
