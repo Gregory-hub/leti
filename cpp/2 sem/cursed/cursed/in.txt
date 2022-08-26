@@ -1,7 +1,6 @@
-first line line line line line line line line line line line line
+012345678901234567890123456789012345678901234567890123
 second line
 A line of 20 symbols
 A line of 21 symbolsE
 E
 Aboba
-

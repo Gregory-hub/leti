@@ -45,7 +45,8 @@ FormG* create_formG(char* line, unsigned int max_line_len) {
         return form;
     }
 	G_El* head = create_G_El(line, 0, MAX_STR_LEN);
-    G_El* curr = head;
+    G_El* curr = new G_El;
+    curr = head;
     G_El* prev = new G_El;
 
     unsigned int line_len = 0;
@@ -57,7 +58,7 @@ FormG* create_formG(char* line, unsigned int max_line_len) {
             line_len += MAX_STR_LEN;
         }
         prev = curr;
-        curr = create_G_El(line, line_len, max_line_len);
+        curr = create_G_El(line, line_len, max_line_len - line_len);
         if (curr->getStr()->getLen() != 0) {
             prev->setNext(curr);
         }

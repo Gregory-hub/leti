@@ -14,5 +14,6 @@ public:
 	void setCurr(V_El* new_curr);
 	V_El* getPrev();
 	void setPrev(V_El* new_prev);
+	void reset();
 };
 

@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cursed.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FormG.cpp">
@@ -28,9 +28,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="G_El.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="out.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="read.cpp">
@@ -71,6 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="in.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="out.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
