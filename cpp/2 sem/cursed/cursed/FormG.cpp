@@ -30,3 +30,8 @@ void FormG::setPrev(G_El* new_prev) {
 	prev = new_prev;
 };
 
+
+void FormG::reset() {
+	curr = head;
+	prev = nullptr;
+}

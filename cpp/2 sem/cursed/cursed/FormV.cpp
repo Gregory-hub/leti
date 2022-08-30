@@ -34,10 +34,10 @@ void FormV::setPrev(V_El* new_prev) {
 void FormV::reset() {
 	curr = head;
 	while (curr != nullptr) {
-		curr->getForm()->setCurr(curr->getForm()->getHead());
-
+		curr->getForm()->reset();
 		curr = curr->getNext();
 	}
 	curr = head;
+	prev = nullptr;
 }
 

@@ -28,6 +28,9 @@ void Str::setLetter(int i, char new_letter) {
 
 
 bool Str::equals(Str* str) {
+	if (this == nullptr && str == nullptr) return true;
+	if (this == nullptr ^ str == nullptr) return false;
+
 	if (getLen() != str->getLen()) return false;
 	for (int i = 0; i < getLen(); i++) {
 		if (getLetter(i) != str->getLetter(i)) return false;

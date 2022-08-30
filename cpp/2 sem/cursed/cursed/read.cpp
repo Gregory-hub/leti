@@ -61,6 +61,7 @@ FormG* create_formG(char* line, unsigned int max_line_len) {
         curr = create_G_El(line, line_len, max_line_len - line_len);
         if (curr->getStr()->getLen() != 0) {
             prev->setNext(curr);
+            curr->setPrev(prev);
         }
     }
 
