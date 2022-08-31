@@ -405,23 +405,6 @@ void del_line_if_empty(FormV* form_v) {
 }
 
 
-void del_using_context(stringstream& ss, FormV* form_v, bool del_up, int number_of_lines, int line_index, bool del_before) {
-	string rest_of_line = "";
-	getline(ss, rest_of_line);
-
-	char context[1000];
-	int len = read_sequence(rest_of_line, context);
-	if (len == -1) return;
-
-	rest_of_line = rest_of_line.substr(len + 2) + ' ';		// +2 because of quotes
-	ss.clear();
-	ss.str(rest_of_line);
-	int number_of_symbols = read_number_of_symbols(ss);
-
-	if (!rest_of_line_is_empty(ss)) return;
-}
-
-
 int find_in_g_el(FormG* form_g, char* subline, int len) {
 	FormG* form_g_copy = copy_form_g(form_g);
 	Str* str = form_g->getCurr()->getStr();
@@ -459,6 +442,23 @@ int find_in_g_el(FormG* form_g, char* subline, int len) {
 }
 
 
+void del_using_context(stringstream& ss, FormV* form_v, bool del_up, int number_of_lines, int line_index, bool del_before) {
+	string rest_of_line = "";
+	getline(ss, rest_of_line);
+
+	char context[1000];
+	int len = read_sequence(rest_of_line, context);
+	if (len == -1) return;
+
+	rest_of_line = rest_of_line.substr(len + 2) + ' ';		// +2 because of quotes
+	ss.clear();
+	ss.str(rest_of_line);
+	int number_of_symbols = read_number_of_symbols(ss);
+
+	if (!rest_of_line_is_empty(ss)) return;
+}
+
+
 void del_sequence(FormG* form_g, int i, int len) {
 	if (form_g->getCurr() == nullptr) return;
 	Str* str = form_g->getCurr()->getStr();
@@ -468,6 +468,24 @@ void del_sequence(FormG* form_g, int i, int len) {
 			str->setLetter(j, str->getLetter(j + len));
 		}
 		str->setLen(str->getLen() - len);
+		if (str->getLen() == 0) {
+			if (form_g->getPrev() == nullptr && form_g->getCurr()->getNext() == nullptr) {
+				delete form_g->getCurr();
+				form_g->setCurr(nullptr);
+				form_g->setHead(nullptr);
+			}
+			else if (form_g->getPrev() == nullptr) {
+				form_g->setCurr(form_g->getCurr()->getNext());
+				form_g->setHead(form_g->getCurr());
+				delete form_g->getCurr()->getPrev();
+			}
+			else {
+				form_g->getPrev()->setNext(form_g->getCurr()->getNext());
+				delete form_g->getCurr();
+				form_g->setCurr(form_g->getPrev()->getNext());
+			}
+			delete str;
+		}
 		len = 0;
 	}
 	else if (i != 0) {
@@ -481,10 +499,14 @@ void del_sequence(FormG* form_g, int i, int len) {
 	while (len > 0 && form_g->getCurr() != nullptr) {
 		str = form_g->getCurr()->getStr();
 		if (len >= str->getLen()) {
-			len -= str->getLen();
-			delete str;
-			if (form_g->getPrev() == nullptr) {
+			if (form_g->getPrev() == nullptr && form_g->getCurr()->getNext() == nullptr) {
+				delete form_g->getCurr();
+				form_g->setCurr(nullptr);
+				form_g->setHead(nullptr);
+			}
+			else if (form_g->getPrev() == nullptr) {
 				form_g->setCurr(form_g->getCurr()->getNext());
+				form_g->setHead(form_g->getCurr());
 				delete form_g->getCurr()->getPrev();
 			}
 			else {
@@ -492,6 +514,8 @@ void del_sequence(FormG* form_g, int i, int len) {
 				delete form_g->getCurr();
 				form_g->setCurr(form_g->getPrev()->getNext());
 			}
+			len -= str->getLen();
+			delete str;
 		}
 		else {
 			for (int j = 0; j + len < str->getLen(); j++) {
@@ -535,8 +559,12 @@ void del_subline(stringstream& ss, FormV* form_v, bool del_up, int number_of_lin
 		}
 		if (i >= 0) {		// deletion place is identified by form_g->getCurr() for g_el and i for index in g_el
 			del_sequence(form_g, i, len);
+			del_line_if_empty(form_v);
 		}
-		del_line_if_empty(form_v);
+		else {
+			form_v->setPrev(form_v->getCurr());
+			form_v->setCurr(form_v->getCurr()->getNext());
+		}
 	}
 
 	form_v->reset();
