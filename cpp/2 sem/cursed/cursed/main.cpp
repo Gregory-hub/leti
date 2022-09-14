@@ -6,9 +6,11 @@
 // read from file					DONE
 // read from console
 // set current line(index of line)	DONE
+// exit								DONE
+// line								DONE
 // print							DONE
+// delete							DONE
 // insert
-// delete
 // replace
 // apply
 // write to file

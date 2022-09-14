@@ -442,77 +442,6 @@ int find_in_g_el(FormG* form_g, char* subline, int len) {
 }
 
 
-void del_using_context(stringstream& ss, FormV* form_v, bool del_up, int number_of_lines, int line_index, bool del_before) {
-	string rest_of_line = "";
-	getline(ss, rest_of_line);
-
-	char context[1000];
-	int len = read_sequence(rest_of_line, context);
-	if (len == -1) return;
-
-	rest_of_line = rest_of_line.substr(len + 2) + ' ';		// +2 because of quotes
-	ss.clear();
-	ss.str(rest_of_line);
-	int number_of_symbols = read_number_of_symbols(ss);
-
-	cout << "Del using context" << endl;
-	cout << "Context: ";
-	for (int j = 0; j < len; j++) cout << context[j];
-	cout << endl;
-	cout << "Number of symbols: " << number_of_symbols << endl;
-
-	if (!rest_of_line_is_empty(ss)) return;
-
-	int i = 0;
-	for (; form_v->getCurr() != nullptr && i < line_index; i++) {
-		form_v->setPrev(form_v->getCurr());
-		form_v->setCurr(form_v->getCurr()->getNext());
-	}
-
-	for (; form_v->getCurr() != nullptr && i < line_index + number_of_lines; i++) {
-		FormG* form_g = form_v->getCurr()->getForm();
-		int k = -1;
-		while (form_g->getCurr() != nullptr && k < 0) {
-			k = find_in_g_el(form_g, context, len);
-			if (k < 0) {
-				form_g->setPrev(form_g->getCurr());
-				form_g->setCurr(form_g->getCurr()->getNext());
-			}
-		}
-
-		if (k >= 0) {		// deletion place is identified by form_g->getCurr() for g_el and k for index in g_el
-			int del_index = -1;
-			if (!del_before) {
-				del_index = k + len;
-			}
-			else {
-				del_index = k - number_of_symbols;
-				while (del_index < 0 && form_g->getCurr() != form_g->getHead()) {
-					form_g->setCurr(form_g->getPrev());
-					form_g->setPrev(form_g->getCurr()->getPrev());
-					del_index += form_g->getCurr()->getStr()->getLen();
-				}
-				if (del_index < 0 && form_g->getCurr() == form_g->getHead()) {
-					number_of_symbols = k;
-					del_index = 0;
-				}
-			}
-
-			cout << "Del_index: " << del_index << endl;
-			cout << "Number_of_symbols: " << number_of_symbols << endl << endl;
-			del_sequence(form_g, del_index, number_of_symbols);
-			del_line_if_empty(form_v);
-		}
-		else {
-			form_v->setPrev(form_v->getCurr());
-			form_v->setCurr(form_v->getCurr()->getNext());
-		}
-	}
-
-	form_v->reset();
-}
-
-
 void del_sequence(FormG* form_g, int i, int len) {
 	// deletion place is identified by form_g->getCurr() for g_el and i for index in g_el
 
@@ -585,6 +514,88 @@ void del_sequence(FormG* form_g, int i, int len) {
 }
  
 
+void del_using_context(stringstream& ss, FormV* form_v, bool del_up, int number_of_lines, int line_index, bool del_before) {
+	string rest_of_line = "";
+	getline(ss, rest_of_line);
+
+	char context[1000];
+	int len = read_sequence(rest_of_line, context);
+	if (len == -1) return;
+
+	rest_of_line = rest_of_line.substr(len + 2) + ' ';		// +2 because of quotes
+	ss.clear();
+	ss.str(rest_of_line);
+	int number_of_symbols = read_number_of_symbols(ss);
+
+	cout << "Del using context" << endl;
+	cout << "Context: ";
+	for (int j = 0; j < len; j++) cout << context[j];
+	cout << endl;
+	cout << "Number of symbols: " << number_of_symbols << endl;
+
+	if (!rest_of_line_is_empty(ss)) return;
+
+	if (!del_up) {
+		for (int i = 0; form_v->getCurr() != nullptr && i < line_index; i++) {
+			form_v->setPrev(form_v->getCurr());
+			form_v->setCurr(form_v->getCurr()->getNext());
+		}
+	}
+	else if (line_index - number_of_lines + 1 >= 0) {
+		for (int i = 0; form_v->getCurr() != nullptr && i < line_index - number_of_lines + 1; i++) {
+			form_v->setPrev(form_v->getCurr());
+			form_v->setCurr(form_v->getCurr()->getNext());
+		}
+	}
+	else {
+		number_of_lines = line_index + 1;
+		line_index = 0;
+	}
+
+	for (int i = 0; form_v->getCurr() != nullptr && i < line_index + number_of_lines; i++) {
+		FormG* form_g = form_v->getCurr()->getForm();
+		int k = -1;
+		while (form_g->getCurr() != nullptr && k < 0) {
+			k = find_in_g_el(form_g, context, len);
+			if (k < 0) {
+				form_g->setPrev(form_g->getCurr());
+				form_g->setCurr(form_g->getCurr()->getNext());
+			}
+		}
+
+		if (k >= 0) {		// deletion place is identified by form_g->getCurr() for g_el and k for index in g_el
+			int del_index = -1;
+			if (!del_before) {
+				del_index = k + len;
+			}
+			else {
+				del_index = k - number_of_symbols;
+				while (del_index < 0 && form_g->getCurr() != form_g->getHead()) {
+					form_g->setCurr(form_g->getPrev());
+					form_g->setPrev(form_g->getCurr()->getPrev());
+					del_index += form_g->getCurr()->getStr()->getLen();
+				}
+				if (del_index < 0 && form_g->getCurr() == form_g->getHead()) {
+					number_of_symbols = k;
+					del_index = 0;
+				}
+			}
+
+			cout << "Del_index: " << del_index << endl;
+			cout << "Number_of_symbols: " << number_of_symbols << endl << endl;
+			del_sequence(form_g, del_index, number_of_symbols);
+			del_line_if_empty(form_v);
+		}
+		else {
+			form_v->setPrev(form_v->getCurr());
+			form_v->setCurr(form_v->getCurr()->getNext());
+		}
+	}
+
+	form_v->reset();
+}
+
+
 void del_subline(stringstream& ss, FormV* form_v, bool del_up, int number_of_lines, int line_index) {
 	string rest_of_line = "";
 	getline(ss, rest_of_line);
@@ -598,24 +609,35 @@ void del_subline(stringstream& ss, FormV* form_v, bool del_up, int number_of_lin
 	ss.str(rest_of_line);
 	if (!rest_of_line_is_empty(ss)) return;
 
-	int i = 0;
-	for (; form_v->getCurr() != nullptr && i < line_index; i++) {
-		form_v->setPrev(form_v->getCurr());
-		form_v->setCurr(form_v->getCurr()->getNext());
+	if (!del_up) {
+		for (int i = 0; form_v->getCurr() != nullptr && i < line_index; i++) {
+			form_v->setPrev(form_v->getCurr());
+			form_v->setCurr(form_v->getCurr()->getNext());
+		}
+	}
+	else if (line_index - number_of_lines + 1 >= 0) {
+		for (int i = 0; form_v->getCurr() != nullptr && i < line_index - number_of_lines + 1; i++) {
+			form_v->setPrev(form_v->getCurr());
+			form_v->setCurr(form_v->getCurr()->getNext());
+		}
+	}
+	else {
+		number_of_lines = line_index + 1;
+		line_index = 0;
 	}
 
-	for (; form_v->getCurr() != nullptr && i < line_index + number_of_lines; i++) {
+	for (int i = 0; form_v->getCurr() != nullptr && i < line_index + number_of_lines; i++) {
 		FormG* form_g = form_v->getCurr()->getForm();
-		int i = -1;
-		while (form_g->getCurr() != nullptr && i < 0) {
-			i = find_in_g_el(form_g, subline, len);
-			if (i < 0) {
+		int k = -1;
+		while (form_g->getCurr() != nullptr && k < 0) {
+			k = find_in_g_el(form_g, subline, len);
+			if (k < 0) {
 				form_g->setPrev(form_g->getCurr());
 				form_g->setCurr(form_g->getCurr()->getNext());
 			}
 		}
-		if (i >= 0) {		// deletion place is identified by form_g->getCurr() for g_el and i for index in g_el
-			del_sequence(form_g, i, len);
+		if (k >= 0) {		// deletion place is identified by form_g->getCurr() for g_el and i for index in g_el
+			del_sequence(form_g, k, len);
 			del_line_if_empty(form_v);
 		}
 		else {
@@ -683,9 +705,21 @@ void del_somefix(stringstream& ss, FormV* form_v, bool del_up, int number_of_lin
 	int number_of_symbols = read_number_of_symbols(ss);
 	if (!rest_of_line_is_empty(ss)) return;
 
-	for (int i = 0; form_v->getCurr() != nullptr && i < line_index; i++) {
-		form_v->setPrev(form_v->getCurr());
-		form_v->setCurr(form_v->getCurr()->getNext());
+	if (!del_up) {
+		for (int i = 0; form_v->getCurr() != nullptr && i < line_index; i++) {
+			form_v->setPrev(form_v->getCurr());
+			form_v->setCurr(form_v->getCurr()->getNext());
+		}
+	}
+	else if (line_index - number_of_lines + 1 >= 0) {
+		for (int i = 0; form_v->getCurr() != nullptr && i < line_index - number_of_lines + 1; i++) {
+			form_v->setPrev(form_v->getCurr());
+			form_v->setCurr(form_v->getCurr()->getNext());
+		}
+	}
+	else {
+		number_of_lines = line_index + 1;
+		line_index = 0;
 	}
 
 	for (int i = 0; i < number_of_lines && form_v->getCurr() != nullptr; i++) {
