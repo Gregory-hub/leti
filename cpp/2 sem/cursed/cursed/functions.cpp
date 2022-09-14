@@ -455,14 +455,71 @@ void del_using_context(stringstream& ss, FormV* form_v, bool del_up, int number_
 	ss.str(rest_of_line);
 	int number_of_symbols = read_number_of_symbols(ss);
 
+	cout << "Del using context" << endl;
+	cout << "Context: ";
+	for (int j = 0; j < len; j++) cout << context[j];
+	cout << endl;
+	cout << "Number of symbols: " << number_of_symbols << endl;
+
 	if (!rest_of_line_is_empty(ss)) return;
+
+	int i = 0;
+	for (; form_v->getCurr() != nullptr && i < line_index; i++) {
+		form_v->setPrev(form_v->getCurr());
+		form_v->setCurr(form_v->getCurr()->getNext());
+	}
+
+	for (; form_v->getCurr() != nullptr && i < line_index + number_of_lines; i++) {
+		FormG* form_g = form_v->getCurr()->getForm();
+		int k = -1;
+		while (form_g->getCurr() != nullptr && k < 0) {
+			k = find_in_g_el(form_g, context, len);
+			if (k < 0) {
+				form_g->setPrev(form_g->getCurr());
+				form_g->setCurr(form_g->getCurr()->getNext());
+			}
+		}
+
+		if (k >= 0) {		// deletion place is identified by form_g->getCurr() for g_el and k for index in g_el
+			int del_index = -1;
+			if (!del_before) {
+				del_index = k + len;
+			}
+			else {
+				del_index = k - number_of_symbols;
+				while (del_index < 0 && form_g->getCurr() != form_g->getHead()) {
+					form_g->setCurr(form_g->getPrev());
+					form_g->setPrev(form_g->getCurr()->getPrev());
+					del_index += form_g->getCurr()->getStr()->getLen();
+				}
+				if (del_index < 0 && form_g->getCurr() == form_g->getHead()) {
+					number_of_symbols = k;
+					del_index = 0;
+				}
+			}
+
+			cout << "Del_index: " << del_index << endl;
+			cout << "Number_of_symbols: " << number_of_symbols << endl << endl;
+			del_sequence(form_g, del_index, number_of_symbols);
+			del_line_if_empty(form_v);
+		}
+		else {
+			form_v->setPrev(form_v->getCurr());
+			form_v->setCurr(form_v->getCurr()->getNext());
+		}
+	}
+
+	form_v->reset();
 }
 
 
 void del_sequence(FormG* form_g, int i, int len) {
-	if (form_g->getCurr() == nullptr) return;
-	Str* str = form_g->getCurr()->getStr();
+	// deletion place is identified by form_g->getCurr() for g_el and i for index in g_el
 
+	if (form_g->getCurr() == nullptr) return;
+
+	// first el
+	Str* str = form_g->getCurr()->getStr();
 	if (i + len <= str->getLen()) {
 		for (int j = i; j + len < str->getLen(); j++) {
 			str->setLetter(j, str->getLetter(j + len));
