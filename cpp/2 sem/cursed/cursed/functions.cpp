@@ -792,15 +792,172 @@ void del(stringstream& ss, FormV* form_v, int line_index) {
 }
 
 
+void ins_sequence(FormG* form_g, const int i, const char* seq, int len) {
+	// inserts before i
+
+	Str* str = form_g->getCurr()->getStr();
+	if (len <= MAX_STR_LEN - str->getLen()) {
+		str->setLen(str->getLen() + len);
+		for (int j = str->getLen(); j > str->getLen() - len; j--) {
+			str->setLetter(j, str->getLetter(j - len));
+		}
+		for (int j = 0; j < len; j++) {
+			str->setLetter(i + j, seq[j]);
+		}
+	}
+	else {
+		// move letters in current str into new el
+		G_El* new_g_el = new G_El;
+
+		Str* new_str = new Str;
+		unsigned int str_len = 0;
+		for (int k = i; k < str->getLen(); k++) {
+			new_str->setLetter(str_len, str->getLetter(k));
+			str_len++;
+		}
+		new_str->setLen(str_len);
+
+		new_g_el->setStr(new_str);
+		new_g_el->setPrev(form_g->getCurr());
+		new_g_el->setNext(form_g->getCurr()->getNext());
+
+		str->setLen(i);
+		form_g->getCurr()->setNext(new_g_el);
+
+		// copy from seq into current el after what remained from str
+		int j = 0;
+		for (; i + j < MAX_STR_LEN && j < len; j++) {
+			str->setLetter(i + j, seq[j]);
+		}
+		str->setLen(i + j);
+
+		// create g_el and insert it after current, repeat until j == len
+		while (j < len) {
+			G_El* new_g_el = new G_El;
+
+			Str* new_str = new Str;
+			str_len = 0;
+			while (j < len && str_len < MAX_STR_LEN) {
+				new_str->setLetter(str_len, seq[j]);
+				j++;
+				str_len++;
+			}
+			new_str->setLen(str_len);
+
+			new_g_el->setStr(new_str);
+			new_g_el->setPrev(form_g->getCurr());
+			new_g_el->setNext(form_g->getCurr()->getNext());
+
+			form_g->getCurr()->setNext(new_g_el);
+			form_g->setPrev(form_g->getCurr());
+			form_g->setCurr(form_g->getCurr()->getNext());
+		}
+	}
+}
+
+
+void ins_using_context(stringstream& ss, FormV* form_v, bool ins_up, int number_of_lines, int line_index, bool ins_before) {
+	string rest_of_line = "";
+	getline(ss, rest_of_line);
+
+	char context[1000];
+	int cont_len = read_sequence(rest_of_line, context);
+	if (cont_len == -1) return;
+
+	rest_of_line = rest_of_line.substr(cont_len + 2) + ' ';		// +2 because of quotes
+	ss.clear();
+	ss.str(rest_of_line);
+
+	string arg = "";
+	getline(ss, arg, ' ');
+	getline(ss, arg, ' ');
+	if (arg != "subline") {
+		throw_arg_exception(arg);
+		return;
+	}
+
+	getline(ss, rest_of_line);
+	char inserted_seq[1000];
+	int seq_len = read_sequence(rest_of_line, inserted_seq);
+	if (seq_len == -1) return;
+
+	rest_of_line = rest_of_line.substr(seq_len + 2) + ' ';		// +2 because of quotes
+	ss.clear();
+	ss.str(rest_of_line);
+	if (!rest_of_line_is_empty(ss)) return;
+
+	if (!ins_up) {
+		for (int i = 0; form_v->getCurr() != nullptr && i < line_index; i++) {
+			form_v->setPrev(form_v->getCurr());
+			form_v->setCurr(form_v->getCurr()->getNext());
+		}
+	}
+	else if (line_index - number_of_lines + 1 >= 0) {
+		for (int i = 0; form_v->getCurr() != nullptr && i < line_index - number_of_lines + 1; i++) {
+			form_v->setPrev(form_v->getCurr());
+			form_v->setCurr(form_v->getCurr()->getNext());
+		}
+	}
+	else {
+		number_of_lines = line_index + 1;
+		line_index = 0;
+	}
+
+	for (int i = 0; form_v->getCurr() != nullptr && i < number_of_lines; i++) {
+		FormG* form_g = form_v->getCurr()->getForm();
+		int k = -1;
+		while (form_g->getCurr() != nullptr && k < 0) {
+			k = find_in_g_el(form_g, context, cont_len);
+			if (k < 0) {
+				form_g->setPrev(form_g->getCurr());
+				form_g->setCurr(form_g->getCurr()->getNext());
+			}
+		}
+
+		if (k >= 0) {		// insertion place is identified by form_g->getCurr() for g_el and k for index in g_el
+			int ins_index = -1;
+			if (ins_before) {
+				ins_index = k;
+			}
+			else {
+				ins_index = k + cont_len;
+				while (form_g->getCurr()->getNext() != nullptr && ins_index >= form_g->getCurr()->getStr()->getLen()) {
+					ins_index -= form_g->getCurr()->getStr()->getLen();
+					form_g->setPrev(form_g->getCurr());
+					form_g->setCurr(form_g->getCurr()->getNext());
+				}
+				if (form_g->getCurr()->getNext() == nullptr && ins_index >= form_g->getCurr()->getStr()->getLen()) {
+					G_El* new_g_el = new G_El;
+					Str* new_str = new Str;
+					new_str->setLen(0);
+					new_g_el->setStr(new_str);
+					new_g_el->setPrev(form_g->getCurr());
+					form_g->getCurr()->setNext(new_g_el);
+					ins_index = 0;
+					
+					form_g->setPrev(form_g->getCurr());
+					form_g->setCurr(form_g->getCurr()->getNext());
+				}
+			}
+			ins_sequence(form_g, ins_index, inserted_seq, seq_len);		// inserts before ins_index
+		}
+		form_v->setPrev(form_v->getCurr());
+		form_v->setCurr(form_v->getCurr()->getNext());
+	}
+
+	form_v->reset();
+}
+
+
 void ins(stringstream& ss, FormV* form_v, int line_index) {
 	string arg = "";
 	getline(ss, arg, ' ');
-	bool del_up;
+	bool ins_up;
 	if (arg == "up") {
-		del_up = true;
+		ins_up = true;
 	}
 	else if (arg == "down") {
-		del_up = false;
+		ins_up = false;
 	}
 	else if (arg == "") {
 		cerr << "Error: arguments not provided" << endl;
@@ -831,10 +988,10 @@ void ins(stringstream& ss, FormV* form_v, int line_index) {
 	arg = "";
 	getline(ss, arg, ' ');
 	if (arg == "before") {
-
+		ins_using_context(ss, form_v, ins_up, number_of_lines, line_index, true);
 	}
 	else if (arg == "after") {
-		
+		ins_using_context(ss, form_v, ins_up, number_of_lines, line_index, false);
 	}
 	else if (arg == "") {
 		cerr << "Error: arguments not provided" << endl;
@@ -845,5 +1002,4 @@ void ins(stringstream& ss, FormV* form_v, int line_index) {
 		return;
 	}
 }
-
 
