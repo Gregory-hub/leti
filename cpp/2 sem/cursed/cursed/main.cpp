@@ -69,6 +69,12 @@ int main()
 			// del...<int> symbols...	- number of symbols	|<--------------|			3
 			del(ss, form_v, line_index);
 		}
+		else if (command == "ins") {
+			// ins...after <string>...	- after subtext									1
+			// ins...before <string>...	- before subtext								1
+			// ins...subline "<string>"	- subline										2
+			ins(ss, form_v, line_index);
+		}
 		cout << ">>";
 	}
 

@@ -527,12 +527,6 @@ void del_using_context(stringstream& ss, FormV* form_v, bool del_up, int number_
 	ss.str(rest_of_line);
 	int number_of_symbols = read_number_of_symbols(ss);
 
-	cout << "Del using context" << endl;
-	cout << "Context: ";
-	for (int j = 0; j < len; j++) cout << context[j];
-	cout << endl;
-	cout << "Number of symbols: " << number_of_symbols << endl;
-
 	if (!rest_of_line_is_empty(ss)) return;
 
 	if (!del_up) {
@@ -581,8 +575,6 @@ void del_using_context(stringstream& ss, FormV* form_v, bool del_up, int number_
 				}
 			}
 
-			cout << "Del_index: " << del_index << endl;
-			cout << "Number_of_symbols: " << number_of_symbols << endl << endl;
 			del_sequence(form_g, del_index, number_of_symbols);
 			del_line_if_empty(form_v);
 		}
@@ -798,4 +790,60 @@ void del(stringstream& ss, FormV* form_v, int line_index) {
 		return;
 	}
 }
+
+
+void ins(stringstream& ss, FormV* form_v, int line_index) {
+	string arg = "";
+	getline(ss, arg, ' ');
+	bool del_up;
+	if (arg == "up") {
+		del_up = true;
+	}
+	else if (arg == "down") {
+		del_up = false;
+	}
+	else if (arg == "") {
+		cerr << "Error: arguments not provided" << endl;
+		return;
+	}
+	else {
+		throw_arg_exception(arg);
+		return;
+	}
+
+	string num= "";
+	getline(ss, num, ' ');
+	if (num == "") {
+		cerr << "Error: number of lines is not provided" << endl;
+		return;
+	}
+	else if (!is_number(num)) {
+		cerr << "Error: number of lines must be integer" << endl;
+		return;
+	}
+
+	int number_of_lines = stoi(num);
+	if (number_of_lines < 0) {
+		cerr << "Error: number of lines must be 0 or greater" << endl;
+		return;
+	}
+
+	arg = "";
+	getline(ss, arg, ' ');
+	if (arg == "before") {
+
+	}
+	else if (arg == "after") {
+		
+	}
+	else if (arg == "") {
+		cerr << "Error: arguments not provided" << endl;
+		return;
+	}
+	else {
+		throw_arg_exception(arg);
+		return;
+	}
+}
+
 
