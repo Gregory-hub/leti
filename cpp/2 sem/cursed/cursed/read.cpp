@@ -36,6 +36,40 @@ FormV* read(string filename, unsigned int max_line_len) {
 }
 
 
+FormV* read_from_console(int n, unsigned int max_line_len) {
+    if (n <= 0) {
+        return nullptr;
+    }
+    cout << "ENTER LINES" << endl;
+
+	FormV* form_v = new FormV;
+	V_El* first = new V_El;
+
+    string line;
+    cin.ignore();
+	getline(cin, line);
+	FormG* form_g = create_formG((char*)line.c_str(), max_line_len);
+	first->setForm(form_g);
+
+	V_El* prev;
+	V_El* curr = new V_El;
+	curr = first;
+    for (int i = 1; i < n; i++) {
+		prev = curr;
+		curr = new V_El;
+		getline(cin, line);
+		form_g = create_formG((char*)line.c_str(), max_line_len);
+		prev->setNext(curr);
+		curr->setForm(form_g);
+    }
+
+	form_v->setHead(first);
+	form_v->setCurr(first);
+
+	return form_v;
+}
+
+
 FormG* create_formG(char* line, unsigned int max_line_len) {
     FormG* form = new FormG;
     if (max_line_len < MAX_STR_LEN) {

@@ -25,18 +25,40 @@ int main()
 	int LINE_SIZE = 0;
 	cin >> LINE_SIZE;
 	if (LINE_SIZE <= 0) {
-		cout << "INVALID LINE SIZE" << endl;
+		cerr << "Error: invalid line size" << endl;
 		return 0;
 	}
 
-	string filename = "in.txt";
-	FormV* form_v = read(filename, LINE_SIZE);
-	//out("out.txt", form_v, false);
+	cout << "Enter input mode('f' for file, 'c' for console): ";
+	string input_mode = "";
+	cin >> input_mode;
+
+	FormV* form_v;
+	if (input_mode == "f") {
+		string filename = "in.txt";
+		form_v = read(filename, LINE_SIZE);
+	}
+	else if (input_mode == "c") {
+		cout << "Enter number of lines: ";
+		int n = -1;
+		cin >> n;
+		if (n < 0) {
+			cerr << "Error: number of lines cannot be < 0" << endl;
+			return 0;
+		}
+		form_v = read_from_console(n, LINE_SIZE);
+		cout << ">>";
+	}
+	else {
+		cerr << "Error: invalid input mode" << endl;
+		return 0;
+	}
 
 	string command = "";
 	string line = "";
 	int line_index = 0;
 	bool success = true;
+
 	while (true) {
 		success = true;
 		getline(cin, line);
@@ -82,7 +104,7 @@ int main()
 			write(ss, form_v);
 		}
 		else if (command != "") {
-			cout << "Unknown command" << endl;
+			cout << "Unknown command: " << command << endl;
 		}
 		cout << ">>";
 	}

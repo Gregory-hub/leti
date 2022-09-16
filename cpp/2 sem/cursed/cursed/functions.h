@@ -6,7 +6,6 @@
 //bool belongs(FormV* small_set, FormV* large_set);
 //FormV* subtract(FormV* form_v_1, FormV* form_v_2);
 //bool el_is_in(G_El* target_el, FormV* form_v);
-void out(string filename, FormV* form_v, bool app);
 void desintegrate(FormV* form_v);
 void set_line_index(stringstream& ss, int& line_index);
 void print(stringstream& ss, FormV* form_v, int line_index);
