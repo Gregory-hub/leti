@@ -1,0 +1,22 @@
+Max line size: 344
+Input mode: f
+
+INPUT
+0. "01234567890123456789"->" 1234567890123456789"->" 1234567890123in 1"->NULL
+-> 1. "01234567890123456789"->" 1234567890123456789"->" 1234567890123in 2"->NULL
+-> 2. "01234567890123456789"->" 1234567890123456789"->" 1234567890123in 3"->NULL
+-> 3. "second line"->NULL
+-> 4. "A line of 20 symbols"->NULL
+-> 5. "A line of 21 symbols"->"E"->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi bobain"->NULL
+-> 10. "nine ten eleven"->NULL
+-> 11. "A line of 45 symbols"->" a line of 45 symbol"->"s. Ifjdsj hgf, jghjf"->"ghl uer jfu fdjsjgwu"->"wo jd: jfjfdds kda. "->"Ufhdh hosdfn odsfn, "->"hdsfjh jhdsfhfj oruj"->"slp kfj pajf er kfdj"->"."->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+Command 'dsfd'
+Unknown command
+

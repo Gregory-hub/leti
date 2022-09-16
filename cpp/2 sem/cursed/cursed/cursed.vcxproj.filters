@@ -76,5 +76,6 @@
     <Text Include="out.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="protocol.txt" />
   </ItemGroup>
 </Project>

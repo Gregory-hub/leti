@@ -42,6 +42,7 @@
   <ItemGroup>
     <Text Include="in.txt" />
     <Text Include="out.txt" />
+    <Text Include="protocol.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

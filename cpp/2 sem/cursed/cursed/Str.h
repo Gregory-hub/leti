@@ -7,7 +7,7 @@
 
 using namespace std;
 
-
+const string PROTOCOL_FILENAME = "protocol.txt";
 const int MAX_STR_LEN = 20;
 
 class Str {

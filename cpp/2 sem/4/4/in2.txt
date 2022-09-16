@@ -1,0 +1,3 @@
+second file
+second line
+A line of 20 symbols

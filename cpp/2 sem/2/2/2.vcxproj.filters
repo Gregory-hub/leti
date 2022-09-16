@@ -33,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\in.txt" />
+    <Text Include="..\out.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Word.h">

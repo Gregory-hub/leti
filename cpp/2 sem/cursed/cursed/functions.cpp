@@ -223,6 +223,10 @@ void set_line_index(stringstream& ss, int& line_index) {
 	if (success) {
 		line_index = stoi(index) - 1;
 		cout << "Line number has been set to " << index << endl;
+		protocol(nullptr, "Line number has been set to " + index + "\n", true);
+	}
+	else {
+		protocol(nullptr, "Line number has not been set\n", true);
 	}
 }
 
@@ -263,10 +267,12 @@ void print(stringstream& ss, FormV* form_v, int line_index) {
 	if (num.length() != 0) {
 		if (!is_number(num)) {
 			cerr << "Error: number of lines must be an integer" << endl;
+			protocol(nullptr, "0 lines have been printed\n", true);
 			return;
 		}
 		else if (stoi(num) < 0) {
 			cerr << "Error: number of lines must be 0 or greater" << endl;
+			protocol(nullptr, "0 lines have been printed\n", true);
 			return;
 		}
 	}
@@ -275,6 +281,8 @@ void print(stringstream& ss, FormV* form_v, int line_index) {
 	}
 	if (stoi(num) < 0) {
 		cerr << "Error: number of lines must be 0 or greater" << endl;
+		protocol(nullptr, "0 lines have been printed\n", true);
+		return;
 	}
 	V_El* curr = form_v->getCurr();
 	int i = 0;
@@ -289,6 +297,7 @@ void print(stringstream& ss, FormV* form_v, int line_index) {
 		curr = curr->getNext();
 		printed_count++;
 	}
+	protocol(nullptr, "Lines printed: " + to_string(printed_count) + "\n", true);
 }
 
 
@@ -515,19 +524,32 @@ void del_sequence(FormG* form_g, int i, int len) {
  
 
 void del_using_context(stringstream& ss, FormV* form_v, bool del_up, int number_of_lines, int line_index, bool del_before) {
+	protocol(nullptr, "Before context: <bool> " + to_string(del_before), true);
 	string rest_of_line = "";
 	getline(ss, rest_of_line);
 
 	char context[1000];
 	int len = read_sequence(rest_of_line, context);
-	if (len == -1) return;
+	if (len == -1) {
+		protocol(nullptr, "Abort: invalid arguments\n", true);
+		return;
+	}
+
+	string context_str = context;
+	context_str.resize(len);
+	protocol(nullptr, "Context: '" + context_str + "'", true);
 
 	rest_of_line = rest_of_line.substr(len + 2) + ' ';		// +2 because of quotes
 	ss.clear();
 	ss.str(rest_of_line);
 	int number_of_symbols = read_number_of_symbols(ss);
 
-	if (!rest_of_line_is_empty(ss)) return;
+	protocol(nullptr, "Number of deleted symbols: " + to_string(number_of_symbols), true);
+
+	if (!rest_of_line_is_empty(ss)) {
+		protocol(nullptr, "Abort: invalid arguments\n", true);
+		return;
+	}
 
 	if (!del_up) {
 		for (int i = 0; form_v->getCurr() != nullptr && i < line_index; i++) {
@@ -577,6 +599,7 @@ void del_using_context(stringstream& ss, FormV* form_v, bool del_up, int number_
 
 			del_sequence(form_g, del_index, number_of_symbols);
 			del_line_if_empty(form_v);
+			protocol(form_v, "AFTER DELETION del_line index " + to_string(i), false);
 		}
 		else {
 			form_v->setPrev(form_v->getCurr());
@@ -594,12 +617,22 @@ void del_subline(stringstream& ss, FormV* form_v, bool del_up, int number_of_lin
 
 	char subline[1000];
 	int len = read_sequence(rest_of_line, subline);
-	if (len == -1) return;
+	if (len == -1) {
+		protocol(nullptr, "Abort: invalid arguments\n", true);
+		return;
+	}
+
+	string subline_str = subline;
+	subline_str.resize(len);
+	protocol(nullptr, "Context: '" + subline_str + "'", true);
 
 	rest_of_line = rest_of_line.substr(len + 2) + ' ';		// +2 because of quotes
 	ss.clear();
 	ss.str(rest_of_line);
-	if (!rest_of_line_is_empty(ss)) return;
+	if (!rest_of_line_is_empty(ss)) {
+		protocol(nullptr, "Abort: invalid arguments\n", true);
+		return;
+	}
 
 	if (!del_up) {
 		for (int i = 0; form_v->getCurr() != nullptr && i < line_index; i++) {
@@ -631,6 +664,7 @@ void del_subline(stringstream& ss, FormV* form_v, bool del_up, int number_of_lin
 		if (k >= 0) {		// deletion place is identified by form_g->getCurr() for g_el and i for index in g_el
 			del_sequence(form_g, k, len);
 			del_line_if_empty(form_v);
+			protocol(form_v, "AFTER DELETION del_line index " + to_string(i), false);
 		}
 		else {
 			form_v->setPrev(form_v->getCurr());
@@ -694,8 +728,15 @@ void del_postfix(FormG* form_g, int number_of_symbols) {
 
 
 void del_somefix(stringstream& ss, FormV* form_v, bool del_up, int number_of_lines, int line_index, bool is_prefix) {
+	protocol(nullptr, "Is prefix: <bool> " + to_string(del_up), true);
+
 	int number_of_symbols = read_number_of_symbols(ss);
-	if (!rest_of_line_is_empty(ss)) return;
+	protocol(nullptr, "Number of deleted symbols: " + to_string(number_of_symbols), true);
+
+	if (!rest_of_line_is_empty(ss)) {
+		protocol(nullptr, "Abort: invalid arguments\n", true);
+		return;
+	}
 
 	if (!del_up) {
 		for (int i = 0; form_v->getCurr() != nullptr && i < line_index; i++) {
@@ -722,6 +763,7 @@ void del_somefix(stringstream& ss, FormV* form_v, bool del_up, int number_of_lin
 			del_postfix(form_v->getCurr()->getForm(), number_of_symbols);
 		}
 		del_line_if_empty(form_v);
+		protocol(form_v, "AFTER DELETION del_line index " + to_string(i), false);
 	}
 
 	form_v->reset();
@@ -740,6 +782,7 @@ void del(stringstream& ss, FormV* form_v, int line_index) {
 	}
 	else if (arg == "") {
 		cerr << "Error: arguments not provided" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 	else {
@@ -751,19 +794,25 @@ void del(stringstream& ss, FormV* form_v, int line_index) {
 	getline(ss, num, ' ');
 	if (num == "") {
 		cerr << "Error: number of lines is not provided" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 	else if (!is_number(num)) {
 		cerr << "Error: number of lines must be integer" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 
 	int number_of_lines = stoi(num);
 	if (number_of_lines < 0) {
 		cerr << "Error: number of lines must be 0 or greater" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 
+	protocol(nullptr, "Starting with line index: " + to_string(line_index), true);
+	protocol(nullptr, "Number of lines to process: " + to_string(number_of_lines), true);
+	protocol(nullptr, "Moving up: <bool> " + to_string(del_up), true);
 	arg = "";
 	getline(ss, arg, ' ');
 	if (arg == "before") {
@@ -783,10 +832,12 @@ void del(stringstream& ss, FormV* form_v, int line_index) {
 	}
 	else if (arg == "") {
 		cerr << "Error: arguments not provided" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 	else {
 		throw_arg_exception(arg);
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 }
@@ -857,12 +908,21 @@ void ins_sequence(FormG* form_g, const int i, const char* seq, int len) {
 
 
 void ins_using_context(stringstream& ss, FormV* form_v, bool ins_up, int number_of_lines, int line_index, bool ins_before) {
+	protocol(nullptr, "Before context: <bool> " + to_string(ins_before), true);
+
 	string rest_of_line = "";
 	getline(ss, rest_of_line);
 
 	char context[1000];
 	int cont_len = read_sequence(rest_of_line, context);
-	if (cont_len == -1) return;
+	if (cont_len == -1) {
+		protocol(nullptr, "Abort: invalid arguments\n", true);
+		return;
+	}
+
+	string context_str = context;
+	context_str.resize(cont_len);
+	protocol(nullptr, "Context: '" + context_str + "'", true);
 
 	rest_of_line = rest_of_line.substr(cont_len + 2) + ' ';		// +2 because of quotes
 	ss.clear();
@@ -873,18 +933,29 @@ void ins_using_context(stringstream& ss, FormV* form_v, bool ins_up, int number_
 	getline(ss, arg, ' ');
 	if (arg != "subline") {
 		throw_arg_exception(arg);
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 
 	getline(ss, rest_of_line);
 	char inserted_seq[1000];
 	int seq_len = read_sequence(rest_of_line, inserted_seq);
-	if (seq_len == -1) return;
+	if (seq_len == -1) {
+		protocol(nullptr, "Abort: invalid arguments\n", true);
+		return;
+	}
+
+	string inserted_seq_str = inserted_seq;
+	inserted_seq_str.resize(seq_len);
+	protocol(nullptr, "Inserted sequence: '" + inserted_seq_str + "'", true);
 
 	rest_of_line = rest_of_line.substr(seq_len + 2) + ' ';		// +2 because of quotes
 	ss.clear();
 	ss.str(rest_of_line);
-	if (!rest_of_line_is_empty(ss)) return;
+	if (!rest_of_line_is_empty(ss)) {
+		protocol(nullptr, "Abort: invalid arguments\n", true);
+		return;
+	}
 
 	if (!ins_up) {
 		for (int i = 0; form_v->getCurr() != nullptr && i < line_index; i++) {
@@ -940,6 +1011,7 @@ void ins_using_context(stringstream& ss, FormV* form_v, bool ins_up, int number_
 				}
 			}
 			ins_sequence(form_g, ins_index, inserted_seq, seq_len);		// inserts before ins_index
+			protocol(form_v, "AFTER INSERTION ins_line index " + to_string(i), false);
 		}
 		form_v->setPrev(form_v->getCurr());
 		form_v->setCurr(form_v->getCurr()->getNext());
@@ -961,6 +1033,7 @@ void ins(stringstream& ss, FormV* form_v, int line_index) {
 	}
 	else if (arg == "") {
 		cerr << "Error: arguments not provided" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 	else {
@@ -972,19 +1045,25 @@ void ins(stringstream& ss, FormV* form_v, int line_index) {
 	getline(ss, num, ' ');
 	if (num == "") {
 		cerr << "Error: number of lines is not provided" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 	else if (!is_number(num)) {
 		cerr << "Error: number of lines must be integer" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 
 	int number_of_lines = stoi(num);
 	if (number_of_lines < 0) {
 		cerr << "Error: number of lines must be 0 or greater" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 
+	protocol(nullptr, "Starting with line index: " + to_string(line_index), true);
+	protocol(nullptr, "Number of lines to process: " + to_string(number_of_lines), true);
+	protocol(nullptr, "Moving up: <bool> " + to_string(ins_up), true);
 	arg = "";
 	getline(ss, arg, ' ');
 	if (arg == "before") {
@@ -995,10 +1074,12 @@ void ins(stringstream& ss, FormV* form_v, int line_index) {
 	}
 	else if (arg == "") {
 		cerr << "Error: arguments not provided" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 	else {
 		throw_arg_exception(arg);
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 }
@@ -1010,7 +1091,14 @@ void replace_one_with_another(stringstream& ss, FormV* form_v, bool replace_up, 
 
 	char one[1000];
 	int one_len = read_sequence(rest_of_line, one);
-	if (one_len == -1) return;
+	if (one_len == -1) {
+		protocol(nullptr, "Abort: invalid arguments\n", true);
+		return;
+	}
+
+	string one_str = one;
+	one_str.resize(one_len);
+	protocol(nullptr, "One: '" + one_str + "'", true);
 
 	rest_of_line = rest_of_line.substr(one_len + 2) + ' ';		// +2 because of quotes
 	ss.clear();
@@ -1021,18 +1109,29 @@ void replace_one_with_another(stringstream& ss, FormV* form_v, bool replace_up, 
 	getline(ss, arg, ' ');
 	if (arg != "with") {
 		throw_arg_exception(arg);
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 
 	getline(ss, rest_of_line);
 	char another[1000];
 	int another_len = read_sequence(rest_of_line, another);
-	if (another_len == -1) return;
+	if (another_len == -1) {
+		protocol(nullptr, "Abort: invalid arguments\n", true);
+		return;
+	}
+
+	string another_str = another;
+	another_str.resize(another_len);
+	protocol(nullptr, "Another: '" + another_str + "'", true);
 
 	rest_of_line = rest_of_line.substr(another_len + 2) + ' ';		// +2 because of quotes
 	ss.clear();
 	ss.str(rest_of_line);
-	if (!rest_of_line_is_empty(ss)) return;
+	if (!rest_of_line_is_empty(ss)) {
+		protocol(nullptr, "Abort: invalid arguments\n", true);
+		return;
+	}
 
 	if (!replace_up) {
 		for (int i = 0; form_v->getCurr() != nullptr && i < line_index; i++) {
@@ -1074,7 +1173,9 @@ void replace_one_with_another(stringstream& ss, FormV* form_v, bool replace_up, 
 				form_g->setCurr(form_g->getPrev()->getNext());
 				k = 0;
 			}
+			protocol(form_v, "AFTER DELETION replace_line index " + to_string(i), false);
 			ins_sequence(form_g, k, another, another_len);		// inserts before ins_index
+			protocol(form_v, "AFTER INSERTION replace_line index " + to_string(i), false);
 		}
 
 		form_v->setPrev(form_v->getCurr());
@@ -1097,6 +1198,7 @@ void replace(stringstream& ss, FormV* form_v, int line_index) {
 	}
 	else if (arg == "") {
 		cerr << "Error: arguments not provided" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 	else {
@@ -1108,18 +1210,26 @@ void replace(stringstream& ss, FormV* form_v, int line_index) {
 	getline(ss, num, ' ');
 	if (num == "") {
 		cerr << "Error: number of lines is not provided" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 	else if (!is_number(num)) {
 		cerr << "Error: number of lines must be integer" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 
 	int number_of_lines = stoi(num);
 	if (number_of_lines < 0) {
 		cerr << "Error: number of lines must be 0 or greater" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
+
+	protocol(nullptr, "Starting with line index: " + to_string(line_index), true);
+	protocol(nullptr, "Number of lines to process: " + to_string(number_of_lines), true);
+	protocol(nullptr, "Moving up: <bool> " + to_string(replace_up), true);
+
 	replace_one_with_another(ss, form_v, replace_up, number_of_lines, line_index);
 }
 
@@ -1129,6 +1239,7 @@ void write(stringstream& ss, FormV* form_v) {
 	getline(ss, arg, ' ');
 	if (arg != "to") {
 		cerr << "Error: invalid command" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 
@@ -1141,8 +1252,10 @@ void write(stringstream& ss, FormV* form_v) {
 	filename.resize(len);
 	if (filename == "") {
 		cerr << "Error: filename not provided" << endl;
+		protocol(nullptr, "Abort: invalid arguments\n", true);
 		return;
 	}
 	out(filename, form_v);
+	protocol(nullptr, "Wrote to " + filename + "\n", true);
 }
 
