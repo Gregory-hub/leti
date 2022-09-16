@@ -10,9 +10,8 @@
 // line								DONE
 // print							DONE
 // delete							DONE
-// insert
-// replace
-// apply
+// insert							DONE
+// replace							DONE
 // write to file
 
 
@@ -20,7 +19,7 @@ int main()
 {
 	cout << "Author: Novikov G.V.\n"
 		"Start date: 06.06.2022\n"
-		"End date: 06.06.2022\n"
+		"End date: 16.09.2022\n"
 		"Version: cursed.01\n" << endl;
 
 	cout << "Enter max line size: ";
@@ -74,6 +73,13 @@ int main()
 			// ins...before <string>...	- before subtext								1
 			// ins...subline "<string>"	- subline										2
 			ins(ss, form_v, line_index);
+		}
+		else if (command == "replace") {
+			// replace <string> with <string>
+			replace(ss, form_v, line_index);
+		}
+		else if (command != "") {
+			cout << "Unknown command" << endl;
 		}
 		cout << ">>";
 	}

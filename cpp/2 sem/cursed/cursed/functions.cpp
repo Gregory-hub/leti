@@ -797,13 +797,13 @@ void ins_sequence(FormG* form_g, const int i, const char* seq, int len) {
 
 	Str* str = form_g->getCurr()->getStr();
 	if (len <= MAX_STR_LEN - str->getLen()) {
-		str->setLen(str->getLen() + len);
-		for (int j = str->getLen(); j > str->getLen() - len; j--) {
-			str->setLetter(j, str->getLetter(j - len));
+		for (int j = str->getLen() - 1; j >= i; j--) {
+			str->setLetter(j + len, str->getLetter(j));
 		}
 		for (int j = 0; j < len; j++) {
 			str->setLetter(i + j, seq[j]);
 		}
+		str->setLen(str->getLen() + len);
 	}
 	else {
 		// move letters in current str into new el
@@ -1001,5 +1001,125 @@ void ins(stringstream& ss, FormV* form_v, int line_index) {
 		throw_arg_exception(arg);
 		return;
 	}
+}
+
+
+void replace_one_with_another(stringstream& ss, FormV* form_v, bool replace_up, int number_of_lines, int line_index) {
+	string rest_of_line = "";
+	getline(ss, rest_of_line);
+
+	char one[1000];
+	int one_len = read_sequence(rest_of_line, one);
+	if (one_len == -1) return;
+
+	rest_of_line = rest_of_line.substr(one_len + 2) + ' ';		// +2 because of quotes
+	ss.clear();
+	ss.str(rest_of_line);
+
+	string arg = "";
+	getline(ss, arg, ' ');
+	getline(ss, arg, ' ');
+	if (arg != "with") {
+		throw_arg_exception(arg);
+		return;
+	}
+
+	getline(ss, rest_of_line);
+	char another[1000];
+	int another_len = read_sequence(rest_of_line, another);
+	if (another_len == -1) return;
+
+	rest_of_line = rest_of_line.substr(another_len + 2) + ' ';		// +2 because of quotes
+	ss.clear();
+	ss.str(rest_of_line);
+	if (!rest_of_line_is_empty(ss)) return;
+
+	if (!replace_up) {
+		for (int i = 0; form_v->getCurr() != nullptr && i < line_index; i++) {
+			form_v->setPrev(form_v->getCurr());
+			form_v->setCurr(form_v->getCurr()->getNext());
+		}
+	}
+	else if (line_index - number_of_lines + 1 >= 0) {
+		for (int i = 0; form_v->getCurr() != nullptr && i < line_index - number_of_lines + 1; i++) {
+			form_v->setPrev(form_v->getCurr());
+			form_v->setCurr(form_v->getCurr()->getNext());
+		}
+	}
+	else {
+		number_of_lines = line_index + 1;
+		line_index = 0;
+	}
+
+	for (int i = 0; form_v->getCurr() != nullptr && i < number_of_lines; i++) {
+		FormG* form_g = form_v->getCurr()->getForm();
+		int k = -1;
+		while (form_g->getCurr() != nullptr && k < 0) {
+			k = find_in_g_el(form_g, one, one_len);
+			if (k < 0) {
+				form_g->setPrev(form_g->getCurr());
+				form_g->setCurr(form_g->getCurr()->getNext());
+			}
+		}
+		if (k >= 0) {
+			del_sequence(form_g, k, one_len);
+			if (form_g->getCurr() == nullptr) {
+				G_El* new_g_el = new G_El;
+				Str* new_str = new Str;
+				new_str->setLen(0);
+				new_g_el->setStr(new_str);
+				new_g_el->setPrev(form_g->getCurr());
+
+				form_g->getPrev()->setNext(new_g_el);
+				form_g->setCurr(form_g->getPrev()->getNext());
+				k = 0;
+			}
+			ins_sequence(form_g, k, another, another_len);		// inserts before ins_index
+		}
+
+		form_v->setPrev(form_v->getCurr());
+		form_v->setCurr(form_v->getCurr()->getNext());
+	}
+
+	form_v->reset();
+}
+
+
+void replace(stringstream& ss, FormV* form_v, int line_index) {
+	string arg = "";
+	getline(ss, arg, ' ');
+	bool replace_up;
+	if (arg == "up") {
+		replace_up = true;
+	}
+	else if (arg == "down") {
+		replace_up = false;
+	}
+	else if (arg == "") {
+		cerr << "Error: arguments not provided" << endl;
+		return;
+	}
+	else {
+		throw_arg_exception(arg);
+		return;
+	}
+
+	string num= "";
+	getline(ss, num, ' ');
+	if (num == "") {
+		cerr << "Error: number of lines is not provided" << endl;
+		return;
+	}
+	else if (!is_number(num)) {
+		cerr << "Error: number of lines must be integer" << endl;
+		return;
+	}
+
+	int number_of_lines = stoi(num);
+	if (number_of_lines < 0) {
+		cerr << "Error: number of lines must be 0 or greater" << endl;
+		return;
+	}
+	replace_one_with_another(ss, form_v, replace_up, number_of_lines, line_index);
 }
 
