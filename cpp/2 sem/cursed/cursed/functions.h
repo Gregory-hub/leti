@@ -1,5 +1,6 @@
 #pragma once
 #include "FormV.h"
+#include "out.h"
 
 
 //bool belongs(FormV* small_set, FormV* large_set);
@@ -15,4 +16,5 @@ void del_sequence(FormG* form_g, int i, int len);
 void del(stringstream& ss, FormV* form_v, int line_index);
 void ins(stringstream& ss, FormV* form_v, int line_index);
 void replace(stringstream& ss, FormV* form_v, int line_index);
+void write(stringstream& ss, FormV* form_v);
 

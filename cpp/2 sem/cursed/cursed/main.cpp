@@ -1,6 +1,5 @@
 #include "functions.h"
 #include "read.h"
-#include "out.h"
 
 // max_line_len from console		DONE
 // read from file					DONE
@@ -12,7 +11,7 @@
 // delete							DONE
 // insert							DONE
 // replace							DONE
-// write to file
+// write to file					DONE
 
 
 int main()
@@ -77,6 +76,10 @@ int main()
 		else if (command == "replace") {
 			// replace <string> with <string>
 			replace(ss, form_v, line_index);
+		}
+		else if (command == "write") {
+			// write to <filename>
+			write(ss, form_v);
 		}
 		else if (command != "") {
 			cout << "Unknown command" << endl;

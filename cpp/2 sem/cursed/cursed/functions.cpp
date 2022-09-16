@@ -1123,3 +1123,26 @@ void replace(stringstream& ss, FormV* form_v, int line_index) {
 	replace_one_with_another(ss, form_v, replace_up, number_of_lines, line_index);
 }
 
+
+void write(stringstream& ss, FormV* form_v) {
+	string arg = "";
+	getline(ss, arg, ' ');
+	if (arg != "to") {
+		cerr << "Error: invalid command" << endl;
+		return;
+	}
+
+	string rest_of_line = "";
+	getline(ss, rest_of_line);
+	char filename_char[1000];
+	int len = read_sequence(rest_of_line, filename_char);
+	if (len == -1) return;
+	string filename = filename_char;
+	filename.resize(len);
+	if (filename == "") {
+		cerr << "Error: filename not provided" << endl;
+		return;
+	}
+	out(filename, form_v);
+}
+

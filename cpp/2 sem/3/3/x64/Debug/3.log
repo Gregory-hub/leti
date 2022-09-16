@@ -1,2 +1,8 @@
-﻿  in.cpp
+﻿  3.cpp
+  del.cpp
+F:\leti\cpp\2 sem\3\3\del.cpp(7,18): warning C4154: deletion of an array expression; conversion to pointer supplied
+  in.cpp
+  insert.cpp
+  out.cpp
+  Generating Code...
   3.vcxproj -> F:\leti\cpp\2 sem\3\3\x64\Debug\3.exe

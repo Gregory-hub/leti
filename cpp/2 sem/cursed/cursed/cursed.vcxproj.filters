@@ -39,6 +39,9 @@
     <ClCompile Include="V_El.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="out.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FormG.h">

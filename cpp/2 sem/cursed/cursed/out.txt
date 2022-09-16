@@ -1,8 +1,0 @@
-0. "01234567890123456789"->"01234567890123"->NULL
--> 1. "second line"->NULL
--> 2. "A line of 20 symbols"->NULL
--> 3. "A line of 21 symbols"->"E"->NULL
--> 4. "E"->NULL
--> 5. "Aboba"->NULL
--> NULL
-

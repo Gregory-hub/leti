@@ -24,6 +24,7 @@
     <ClCompile Include="FormV.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="G_El.cpp" />
+    <ClCompile Include="out.cpp" />
     <ClCompile Include="read.cpp" />
     <ClCompile Include="Str.cpp" />
     <ClCompile Include="V_El.cpp" />

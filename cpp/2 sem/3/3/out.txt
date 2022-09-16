@@ -1,24 +1,22 @@
 INPUT
 0. hamud habibi hamud
+-> 1. hamud habibi hamud
+-> 2. hamud habibi hamud
 -> NULL
 
 ELEMENTS TO INSERT
 0. obobi
 -> 1. bubu
 -> 2. bub
--> 3. buba
--> 4. bubs
--> 5. bo
 -> NULL
 
 OUTPUT
-0. obobi
--> 1. bubu
--> 2. bub
--> 3. buba
--> 4. bubs
--> 5. bo
--> 6. hamud habibi hamud
+0. hamud habibi hamud
+-> 1. hamud habibi hamud
+-> 2. obobi
+-> 3. bubu
+-> 4. bub
+-> 5. hamud habibi hamud
 -> NULL
 
 AFTER DELETION
