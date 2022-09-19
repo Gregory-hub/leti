@@ -1,22 +1,464 @@
-Max line size: 344
+Max line size: 10
 Input mode: f
 
 INPUT
-0. "01234567890123456789"->" 1234567890123456789"->" 1234567890123in 1"->NULL
--> 1. "01234567890123456789"->" 1234567890123456789"->" 1234567890123in 2"->NULL
--> 2. "01234567890123456789"->" 1234567890123456789"->" 1234567890123in 3"->NULL
--> 3. "second line"->NULL
--> 4. "A line of 20 symbols"->NULL
--> 5. "A line of 21 symbols"->"E"->NULL
+0. "0123456789"->NULL
+-> 1. "0123456789"->NULL
+-> 2. "0123456789"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A line of "->NULL
+-> 5. "A line of "->NULL
 -> 6. "Ein"->NULL
 -> 7. ""->NULL
 -> 8. "Abobain"->NULL
--> 9. "biba abibi bobain"->NULL
--> 10. "nine ten eleven"->NULL
--> 11. "A line of 45 symbols"->" a line of 45 symbol"->"s. Ifjdsj hgf, jghjf"->"ghl uer jfu fdjsjgwu"->"wo jd: jfjfdds kda. "->"Ufhdh hosdfn odsfn, "->"hdsfjh jhdsfhfj oruj"->"slp kfj pajf er kfdj"->"."->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
 -> 12. "Ein"->NULL
 -> NULL
 
-Command 'dsfd'
+Command 'print'
+Lines printed: 13
+
+Command 'line'
+Line number has been set to 4
+
+Command 'print'
+Lines printed: 1
+
+Command 'line'
+Line number has been set to 1
+
+Command 'lien'
 Unknown command
+
+Command 'print'
+Lines printed: 13
+
+Command 'line'
+Line number has been set to 4
+
+Command 'print'
+Lines printed: 10
+
+Command 'del'
+Starting with line index: 3
+Number of lines to process: 3
+Moving up: <bool> 0
+Before context: <bool> 0
+Context: 'line'
+Number of deleted symbols: 2
+AFTER DELETION del_line index 1
+0. "0123456789"->NULL
+-> 1. "0123456789"->NULL
+-> 2. "0123456789"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A linef "->NULL
+-> 5. "A line of "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER DELETION del_line index 2
+0. "0123456789"->NULL
+-> 1. "0123456789"->NULL
+-> 2. "0123456789"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+Command 'print'
+Lines printed: 10
+
+Command 'del'
+Starting with line index: 3
+Number of lines to process: 90
+Moving up: <bool> 1
+Context: '0123'
+AFTER DELETION del_line index 0
+0. "456789"->NULL
+-> 1. "0123456789"->NULL
+-> 2. "0123456789"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER DELETION del_line index 1
+0. "456789"->NULL
+-> 1. "456789"->NULL
+-> 2. "0123456789"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER DELETION del_line index 2
+0. "456789"->NULL
+-> 1. "456789"->NULL
+-> 2. "456789"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+Command 'line'
+Line number has been set to 1
+
+Command 'print'
+Lines printed: 13
+
+Command 'line'
+Line number has not been set
+
+Command 'ins'
+Command 'ins'
+Starting with line index: 0
+Number of lines to process: 6
+Moving up: <bool> 0
+Before context: <bool> 1
+Abort: invalid arguments
+
+Command 'ins'
+Starting with line index: 0
+Number of lines to process: 6
+Moving up: <bool> 0
+Before context: <bool> 1
+Context: '8'
+Inserted sequence: 'AAA'
+AFTER INSERTION ins_line index 0
+0. "4567AAA89"->NULL
+-> 1. "456789"->NULL
+-> 2. "456789"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER INSERTION ins_line index 1
+0. "4567AAA89"->NULL
+-> 1. "4567AAA89"->NULL
+-> 2. "456789"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER INSERTION ins_line index 2
+0. "4567AAA89"->NULL
+-> 1. "4567AAA89"->NULL
+-> 2. "4567AAA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+Command 'line'
+Line number has been set to 24
+
+Command 'line'
+Line number has been set to 1
+
+Command 'print'
+Lines printed: 13
+
+Command 'line'
+Line number has been set to 1
+
+Command 'print'
+Lines printed: 13
+
+Command 'replace'
+Starting with line index: 0
+Number of lines to process: 80
+Moving up: <bool> 0
+One: 'A'
+Another: '!'
+AFTER DELETION replace_line index 0
+0. "4567AA89"->NULL
+-> 1. "4567AAA89"->NULL
+-> 2. "4567AAA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER INSERTION replace_line index 0
+0. "4567!AA89"->NULL
+-> 1. "4567AAA89"->NULL
+-> 2. "4567AAA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER DELETION replace_line index 1
+0. "4567!AA89"->NULL
+-> 1. "4567AA89"->NULL
+-> 2. "4567AAA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER INSERTION replace_line index 1
+0. "4567!AA89"->NULL
+-> 1. "4567!AA89"->NULL
+-> 2. "4567AAA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER DELETION replace_line index 2
+0. "4567!AA89"->NULL
+-> 1. "4567!AA89"->NULL
+-> 2. "4567AA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER INSERTION replace_line index 2
+0. "4567!AA89"->NULL
+-> 1. "4567!AA89"->NULL
+-> 2. "4567!AA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. "A linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER DELETION replace_line index 4
+0. "4567!AA89"->NULL
+-> 1. "4567!AA89"->NULL
+-> 2. "4567!AA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. " linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER INSERTION replace_line index 4
+0. "4567!AA89"->NULL
+-> 1. "4567!AA89"->NULL
+-> 2. "4567!AA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. "! linef "->NULL
+-> 5. "A linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER DELETION replace_line index 5
+0. "4567!AA89"->NULL
+-> 1. "4567!AA89"->NULL
+-> 2. "4567!AA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. "! linef "->NULL
+-> 5. " linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER INSERTION replace_line index 5
+0. "4567!AA89"->NULL
+-> 1. "4567!AA89"->NULL
+-> 2. "4567!AA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. "! linef "->NULL
+-> 5. "! linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "Abobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER DELETION replace_line index 8
+0. "4567!AA89"->NULL
+-> 1. "4567!AA89"->NULL
+-> 2. "4567!AA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. "! linef "->NULL
+-> 5. "! linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "bobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER INSERTION replace_line index 8
+0. "4567!AA89"->NULL
+-> 1. "4567!AA89"->NULL
+-> 2. "4567!AA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. "! linef "->NULL
+-> 5. "! linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "!bobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "A line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER DELETION replace_line index 11
+0. "4567!AA89"->NULL
+-> 1. "4567!AA89"->NULL
+-> 2. "4567!AA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. "! linef "->NULL
+-> 5. "! linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "!bobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. " line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+AFTER INSERTION replace_line index 11
+0. "4567!AA89"->NULL
+-> 1. "4567!AA89"->NULL
+-> 2. "4567!AA89"->NULL
+-> 3. "second lin"->NULL
+-> 4. "! linef "->NULL
+-> 5. "! linef "->NULL
+-> 6. "Ein"->NULL
+-> 7. ""->NULL
+-> 8. "!bobain"->NULL
+-> 9. "biba abibi"->NULL
+-> 10. "nine ten e"->NULL
+-> 11. "! line of "->NULL
+-> 12. "Ein"->NULL
+-> NULL
+
+Command 'line'
+Line number has been set to 1
+
+Command 'print'
+Lines printed: 13
+
+Command 'write'
+Wrote to out.txt
 

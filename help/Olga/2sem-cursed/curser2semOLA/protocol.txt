@@ -1,0 +1,32 @@
+CHANNELS
+   'channel1': NULL
+-> 'channel2': NULL
+-> 'channel3': NULL
+-> 'channel4': NULL
+-> 'channel5': NULL
+-> 'channel6': NULL
+-> 'channel7': NULL
+-> 'channel8': NULL
+-> 'channel9': NULL
+-> 'channel10': NULL
+-> 'channel11': NULL
+-> 'channel12': NULL
+-> 'channel13': NULL
+-> NULL
+
+CHANNELS WITH ADS
+   'channel1': 1:ads1:30s:28 -> NULL
+-> 'channel2': NULL
+-> 'channel3': NULL
+-> 'channel4': NULL
+-> 'channel5': NULL
+-> 'channel6': NULL
+-> 'channel7': NULL
+-> 'channel8': NULL
+-> 'channel9': 2:ads2:45s:27 -> 3:ads3:15s:13 -> 4:ads4:20s:23 -> 5:ads5:36s:5 -> NULL
+-> 'channel10': NULL
+-> 'channel11': NULL
+-> 'channel12': NULL
+-> 'channel13': NULL
+-> NULL
+
