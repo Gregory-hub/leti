@@ -5,7 +5,7 @@ using namespace std;
 Broadcast* print_broadcast(Broadcast* p_begin) {
     Broadcast* p = p_begin; // Запоминаем указатель на первый элемент структуры
     // Печатаем до последнего символа
-    while (p != nullptr) {
+    while (p->next != nullptr) {
         cout << "--------------------------------" << endl;
         cout << "Название канала: " << p->name << endl;
         cout << "--------------------------------" << endl;

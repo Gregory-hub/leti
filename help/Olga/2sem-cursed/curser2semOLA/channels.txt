@@ -3,11 +3,3 @@
 3:channel3
 4:channel4
 5:channel5
-6:channel6
-7:channel7
-8:channel8
-9:channel9
-10:channel10
-11:channel11
-12:channel12
-13:channel13

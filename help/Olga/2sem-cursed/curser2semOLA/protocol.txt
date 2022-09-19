@@ -4,14 +4,6 @@ CHANNELS
 -> 'channel3': NULL
 -> 'channel4': NULL
 -> 'channel5': NULL
--> 'channel6': NULL
--> 'channel7': NULL
--> 'channel8': NULL
--> 'channel9': NULL
--> 'channel10': NULL
--> 'channel11': NULL
--> 'channel12': NULL
--> 'channel13': NULL
 -> NULL
 
 CHANNELS WITH ADS
@@ -20,29 +12,13 @@ CHANNELS WITH ADS
 -> 'channel3': 2:ads2:45s:27 -> NULL
 -> 'channel4': NULL
 -> 'channel5': 2:ads2:45s:27 -> 3:ads3:15s:13 -> NULL
--> 'channel6': 2:ads2:45s:27 -> 6:ads6:36s:5 -> NULL
--> 'channel7': NULL
--> 'channel8': NULL
--> 'channel9': 2:ads2:45s:27 -> 3:ads3:15s:13 -> 4:ads4:20s:23 -> 5:ads5:36s:5 -> NULL
--> 'channel10': 2:ads2:45s:27 -> NULL
--> 'channel11': NULL
--> 'channel12': NULL
--> 'channel13': NULL
 -> NULL
 
 BROADCAST
-   'channel1': ads1:30s:16h:0m -> ads2:45s:16h:1m -> ads1:30s:16h:2m -> ads2:45s:16h:3m -> ads1:30s:16h:4m -> ads2:45s:16h:5m -> ads1:30s:16h:6m -> ads2:45s:16h:7m -> ads1:30s:16h:8m -> ads2:45s:16h:9m -> ads1:30s:16h:10m -> ads2:45s:16h:11m -> ads1:30s:16h:12m -> ads2:45s:16h:13m -> ads1:30s:16h:14m -> ads2:45s:16h:15m -> ads1:30s:16h:16m -> ads2:45s:16h:17m -> ads1:30s:16h:18m -> ads2:45s:16h:19m -> ads1:30s:16h:20m -> ads2:45s:16h:21m -> ads1:30s:16h:22m -> ads2:45s:16h:23m -> ads1:30s:16h:24m -> ads2:45s:16h:25m -> ads1:30s:16h:26m -> ads2:45s:16h:27m -> ads1:30s:16h:28m -> ads2:45s:16h:29m -> ads1:30s:16h:30m -> ads2:45s:16h:31m -> ads1:30s:16h:32m -> ads2:45s:16h:33m -> ads1:30s:16h:34m -> ads2:45s:16h:35m -> ads1:30s:16h:36m -> ads2:45s:16h:37m -> ads1:30s:16h:38m -> ads2:45s:16h:39m -> ads1:30s:16h:40m -> ads2:45s:16h:41m -> ads1:30s:16h:42m -> ads2:45s:16h:43m -> ads1:30s:16h:44m -> ads2:45s:16h:45m -> ads1:30s:16h:46m -> ads2:45s:16h:47m -> ads1:30s:16h:48m -> ads2:45s:16h:49m -> ads1:30s:16h:50m -> ads2:45s:16h:51m -> ads1:30s:16h:52m -> ads2:45s:16h:53m -> ads1:30s:16h:54m -> ads2:45s:16h:55m -> ads1:30s:16h:56m -> ads2:45s:16h:57m -> ads1:30s:16h:58m -> ads2:45s:16h:59m -> NULL
--> 'channel2': ads2:45s:16h:0m -> NULL
--> 'channel3': ads2:45s:16h:0m -> NULL
+   'channel1': ads1:30s:4h:0m -> ads2:45s:4h:1m -> ads1:30s:4h:2m -> ads2:45s:4h:3m -> ads1:30s:4h:4m -> ads2:45s:4h:5m -> ads1:30s:4h:6m -> ads2:45s:4h:7m -> ads1:30s:4h:8m -> ads2:45s:4h:9m -> ads1:30s:4h:10m -> ads2:45s:4h:11m -> ads1:30s:4h:12m -> ads2:45s:4h:13m -> ads1:30s:4h:14m -> ads2:45s:4h:15m -> ads1:30s:4h:16m -> ads2:45s:4h:17m -> ads1:30s:4h:18m -> ads2:45s:4h:19m -> ads1:30s:4h:20m -> ads2:45s:4h:21m -> ads1:30s:4h:22m -> ads2:45s:4h:23m -> ads1:30s:4h:24m -> ads2:45s:4h:25m -> ads1:30s:4h:26m -> ads2:45s:4h:27m -> ads1:30s:4h:28m -> ads2:45s:4h:29m -> ads1:30s:4h:30m -> ads2:45s:4h:31m -> ads1:30s:4h:32m -> ads2:45s:4h:33m -> ads1:30s:4h:34m -> ads2:45s:4h:35m -> ads1:30s:4h:36m -> ads2:45s:4h:37m -> ads1:30s:4h:38m -> ads2:45s:4h:39m -> ads1:30s:4h:40m -> ads2:45s:4h:41m -> ads1:30s:4h:42m -> ads2:45s:4h:43m -> ads1:30s:4h:44m -> ads2:45s:4h:45m -> ads1:30s:4h:46m -> ads2:45s:4h:47m -> ads1:30s:4h:48m -> ads2:45s:4h:49m -> ads1:30s:4h:50m -> ads2:45s:4h:51m -> ads1:30s:4h:52m -> ads2:45s:4h:53m -> ads1:30s:4h:54m -> ads2:45s:4h:55m -> ads1:30s:4h:56m -> ads2:45s:4h:57m -> ads1:30s:4h:58m -> ads2:45s:4h:59m -> NULL
+-> 'channel2': ads2:45s:4h:0m -> NULL
+-> 'channel3': ads2:45s:4h:0m -> NULL
 -> 'channel4': NULL
--> 'channel5': ads2:45s:16h:0m -> ads3:15s:16h:1m -> ads2:45s:16h:2m -> ads3:15s:16h:3m -> ads2:45s:16h:4m -> ads3:15s:16h:5m -> ads2:45s:16h:6m -> ads3:15s:16h:7m -> ads2:45s:16h:8m -> ads3:15s:16h:9m -> ads2:45s:16h:10m -> ads3:15s:16h:11m -> ads2:45s:16h:12m -> ads3:15s:16h:13m -> ads2:45s:16h:14m -> ads3:15s:16h:15m -> ads2:45s:16h:16m -> ads3:15s:16h:17m -> ads2:45s:16h:18m -> ads3:15s:16h:19m -> ads2:45s:16h:20m -> ads3:15s:16h:21m -> ads2:45s:16h:22m -> ads3:15s:16h:23m -> ads2:45s:16h:24m -> ads3:15s:16h:25m -> ads2:45s:16h:26m -> ads3:15s:16h:27m -> ads2:45s:16h:28m -> ads3:15s:16h:29m -> ads2:45s:16h:30m -> ads3:15s:16h:31m -> ads2:45s:16h:32m -> ads3:15s:16h:33m -> ads2:45s:16h:34m -> ads3:15s:16h:35m -> ads2:45s:16h:36m -> ads3:15s:16h:37m -> ads2:45s:16h:38m -> ads3:15s:16h:39m -> ads2:45s:16h:40m -> ads3:15s:16h:41m -> ads2:45s:16h:42m -> ads3:15s:16h:43m -> ads2:45s:16h:44m -> ads3:15s:16h:45m -> ads2:45s:16h:46m -> ads3:15s:16h:47m -> ads2:45s:16h:48m -> ads3:15s:16h:49m -> ads2:45s:16h:50m -> ads3:15s:16h:51m -> ads2:45s:16h:52m -> ads3:15s:16h:53m -> ads2:45s:16h:54m -> ads3:15s:16h:55m -> ads2:45s:16h:56m -> ads3:15s:16h:57m -> ads2:45s:16h:58m -> ads3:15s:16h:59m -> NULL
--> 'channel6': ads2:45s:16h:0m -> ads6:36s:16h:1m -> ads2:45s:16h:2m -> ads6:36s:16h:3m -> ads2:45s:16h:4m -> ads6:36s:16h:5m -> ads2:45s:16h:6m -> ads6:36s:16h:7m -> ads2:45s:16h:8m -> ads6:36s:16h:9m -> ads2:45s:16h:10m -> ads6:36s:16h:11m -> ads2:45s:16h:12m -> ads6:36s:16h:13m -> ads2:45s:16h:14m -> ads6:36s:16h:15m -> ads2:45s:16h:16m -> ads6:36s:16h:17m -> ads2:45s:16h:18m -> ads6:36s:16h:19m -> ads2:45s:16h:20m -> ads6:36s:16h:21m -> ads2:45s:16h:22m -> ads6:36s:16h:23m -> ads2:45s:16h:24m -> ads6:36s:16h:25m -> ads2:45s:16h:26m -> ads6:36s:16h:27m -> ads2:45s:16h:28m -> ads6:36s:16h:29m -> ads2:45s:16h:30m -> ads6:36s:16h:31m -> ads2:45s:16h:32m -> ads6:36s:16h:33m -> ads2:45s:16h:34m -> ads6:36s:16h:35m -> ads2:45s:16h:36m -> ads6:36s:16h:37m -> ads2:45s:16h:38m -> ads6:36s:16h:39m -> ads2:45s:16h:40m -> ads6:36s:16h:41m -> ads2:45s:16h:42m -> ads6:36s:16h:43m -> ads2:45s:16h:44m -> ads6:36s:16h:45m -> ads2:45s:16h:46m -> ads6:36s:16h:47m -> ads2:45s:16h:48m -> ads6:36s:16h:49m -> ads2:45s:16h:50m -> ads6:36s:16h:51m -> ads2:45s:16h:52m -> ads6:36s:16h:53m -> ads2:45s:16h:54m -> ads6:36s:16h:55m -> ads2:45s:16h:56m -> ads6:36s:16h:57m -> ads2:45s:16h:58m -> ads6:36s:16h:59m -> NULL
--> 'channel7': NULL
--> 'channel8': NULL
--> 'channel9': ads2:45s:16h:0m -> ads3:15s:16h:1m -> ads4:20s:16h:2m -> ads5:36s:16h:3m -> ads2:45s:16h:4m -> ads3:15s:16h:5m -> ads4:20s:16h:6m -> ads5:36s:16h:7m -> ads2:45s:16h:8m -> ads3:15s:16h:9m -> ads4:20s:16h:10m -> ads5:36s:16h:11m -> ads2:45s:16h:12m -> ads3:15s:16h:13m -> ads4:20s:16h:14m -> ads5:36s:16h:15m -> ads2:45s:16h:16m -> ads3:15s:16h:17m -> ads4:20s:16h:18m -> ads5:36s:16h:19m -> ads2:45s:16h:20m -> ads3:15s:16h:21m -> ads4:20s:16h:22m -> ads5:36s:16h:23m -> ads2:45s:16h:24m -> ads3:15s:16h:25m -> ads4:20s:16h:26m -> ads5:36s:16h:27m -> ads2:45s:16h:28m -> ads3:15s:16h:29m -> ads4:20s:16h:30m -> ads5:36s:16h:31m -> ads2:45s:16h:32m -> ads3:15s:16h:33m -> ads4:20s:16h:34m -> ads5:36s:16h:35m -> ads2:45s:16h:36m -> ads3:15s:16h:37m -> ads4:20s:16h:38m -> ads5:36s:16h:39m -> ads2:45s:16h:40m -> ads3:15s:16h:41m -> ads4:20s:16h:42m -> ads5:36s:16h:43m -> ads2:45s:16h:44m -> ads3:15s:16h:45m -> ads4:20s:16h:46m -> ads5:36s:16h:47m -> ads2:45s:16h:48m -> ads3:15s:16h:49m -> ads4:20s:16h:50m -> ads5:36s:16h:51m -> ads2:45s:16h:52m -> ads3:15s:16h:53m -> ads4:20s:16h:54m -> ads5:36s:16h:55m -> ads2:45s:16h:56m -> ads3:15s:16h:57m -> ads4:20s:16h:58m -> ads5:36s:16h:59m -> NULL
--> 'channel10': ads2:45s:16h:0m -> NULL
--> 'channel11': NULL
--> 'channel12': NULL
--> 'channel13': NULL
+-> 'channel5': ads2:45s:4h:0m -> ads3:15s:4h:1m -> ads2:45s:4h:2m -> ads3:15s:4h:3m -> ads2:45s:4h:4m -> ads3:15s:4h:5m -> ads2:45s:4h:6m -> ads3:15s:4h:7m -> ads2:45s:4h:8m -> ads3:15s:4h:9m -> ads2:45s:4h:10m -> ads3:15s:4h:11m -> ads2:45s:4h:12m -> ads3:15s:4h:13m -> ads2:45s:4h:14m -> ads3:15s:4h:15m -> ads2:45s:4h:16m -> ads3:15s:4h:17m -> ads2:45s:4h:18m -> ads3:15s:4h:19m -> ads2:45s:4h:20m -> ads3:15s:4h:21m -> ads2:45s:4h:22m -> ads3:15s:4h:23m -> ads2:45s:4h:24m -> ads3:15s:4h:25m -> ads2:45s:4h:26m -> ads3:15s:4h:27m -> ads2:45s:4h:28m -> ads3:15s:4h:29m -> ads2:45s:4h:30m -> ads3:15s:4h:31m -> ads2:45s:4h:32m -> ads3:15s:4h:33m -> ads2:45s:4h:34m -> ads3:15s:4h:35m -> ads2:45s:4h:36m -> ads3:15s:4h:37m -> ads2:45s:4h:38m -> ads3:15s:4h:39m -> ads2:45s:4h:40m -> ads3:15s:4h:41m -> ads2:45s:4h:42m -> ads3:15s:4h:43m -> ads2:45s:4h:44m -> ads3:15s:4h:45m -> ads2:45s:4h:46m -> ads3:15s:4h:47m -> ads2:45s:4h:48m -> ads3:15s:4h:49m -> ads2:45s:4h:50m -> ads3:15s:4h:51m -> ads2:45s:4h:52m -> ads3:15s:4h:53m -> ads2:45s:4h:54m -> ads3:15s:4h:55m -> ads2:45s:4h:56m -> ads3:15s:4h:57m -> ads2:45s:4h:58m -> ads3:15s:4h:59m -> NULL
 -> NULL
 
