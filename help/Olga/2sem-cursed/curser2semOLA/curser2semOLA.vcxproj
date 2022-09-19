@@ -140,6 +140,7 @@
     <ClInclude Include="imports.h" />
     <ClInclude Include="Print_broadcast.h" />
     <ClInclude Include="protocol.h" />
+    <ClInclude Include="del.h" />
     <ClInclude Include="Write_broadcast.h" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +154,7 @@
     <ClCompile Include="Create_broadcast_structure.cpp" />
     <ClCompile Include="Create_channels.cpp" />
     <ClCompile Include="Create_total_structure.cpp" />
+    <ClCompile Include="del.cpp" />
     <ClCompile Include="Gen_add_parameter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Print_broadcast.cpp" />

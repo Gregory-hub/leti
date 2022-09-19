@@ -8,6 +8,7 @@
 #include "Create_broadcast_structure.h" // Функция для создания сетки вещания
 #include "Write_broadcast.h"
 #include "protocol.h"
+#include "del.h"
 
 using namespace std;
 
@@ -46,8 +47,10 @@ int main() {
     write_broadcast(broadcast_struct, TOTAL_LIST);
 
     // Удаляем структуры
-    delete channels_list;
-    delete broadcast_struct;
+	del(channels_list->ads);
+	del(broadcast_struct->broadcast_ads);
+    del(channels_list);
+    del(broadcast_struct);
 
     return 0;
 }
