@@ -20,6 +20,10 @@ class Node:
     def __eq__(self, other: Node):
         return self.value == other.value
 
+    def __repr__(self):
+        next_value = self.next.value if self.next else None
+        return f"<Node(value={self.value}, next=<Node(value={next_value})>)>"
+
 
 class LinkedList:
     def __init__(self, els: list = None):
@@ -35,8 +39,14 @@ class LinkedList:
                 node = node.next
                 self.size += 1
 
+    def __repr__(self):
+        return f"<LinkedList(head={self.head}, size={self.size})>"
+
     def is_empty(self):
         return self.size == 0
+
+    def get_size(self):
+        return self.size
 
     def get(self, index: int):
         if index >= self.size or index < 0:
@@ -82,6 +92,16 @@ class LinkedList:
 
         self.size += 1
 
+    def add_left(self, value: int):
+        self.insert(0, value)
+
+    def add_right(self, value: int):
+        if not isinstance(value, int):
+            print("Error: value must be int")
+            return
+
+        self.insert(self.size, value)
+
     def remove(self, index: int):
         if not 0 <= index < self.size:
             print("Error: invalid index")
@@ -103,24 +123,23 @@ class LinkedList:
 
         self.size -= 1
 
-    def append(self, value: int):
-        if not isinstance(value, int):
-            print("Error: value must be int")
-            return
+    def remove_last(self):
+        self.remove(self.size - 1)
 
-        self.insert(self.size, Node(value))
+    def remove_first(self):
+        self.remove(0)
 
-    def replace(self, index: int):
+    def replace(self, index: int, value: int):
         if not 0 <= index < self.size:
             print("Error: invalid index")
             return
 
         self.remove(index)
-        self.insert(index)
+        self.insert(index, value)
 
     def delete_all(self):
-        for i in range(self.size):
-            self.remove(i)
+        while (self.head is not None):
+            self.remove_first()
 
     def find_last_list_entrance(self, li: LinkedList):
         last_entrance = -1
