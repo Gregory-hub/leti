@@ -153,42 +153,22 @@ class LinkedList:
         while (self.head is not None):
             self.remove_first()
 
-    def find_last_list_entrance(self, li: LinkedList):
-        # O(n)
-        last_entrance = -1
-
-        curr_el = self.head
-        i = 0
-        while i <= self.size - li.size:
-            if curr_el == li.get(0):
-                el1 = curr_el
-                el2 = li.get(0)
-                success = True
-                for j in range(li.size):
-                    if el1 == el2:
-                        el1 = el1.next
-                        el2 = el2.next
-                    else:
-                        success = False
-                        break
-                if success:
-                    last_entrance = i
-            curr_el = curr_el.next
-            i += 1
-
-        return last_entrance
-
     def insert_list(self, index: int, li: LinkedList):
+		# O(n)
         if li.size == 0 or index < 0 or index > self.size:
             print("Error: invalid index")
             return
+
         if index == 0:
+			# O(n)
             head = self.head
             self.head = li.head
             li.get(li.size - 1).next = head
         elif index == self.size:
+			# O(n)
             self.get(self.size - 1).next = li.head
         else:
+			# O(n)
             prev_el = self.get(index - 1)
             next_el = prev_el.next
             prev_el.next = li.head
@@ -205,8 +185,9 @@ def main():
     li.add_right(10)
     li.insert(3, 13)
     li.print()
-    print()
-    print("Index of last entrance:", li.find_last_list_entrance(LinkedList([3, 4])))
+    li.insert_list(4, LinkedList([5, -2, 4, 0]))
+    li.print()
+    print(li.is_empty())
     li.delete_all()
     li.print()
     print(li.is_empty())
