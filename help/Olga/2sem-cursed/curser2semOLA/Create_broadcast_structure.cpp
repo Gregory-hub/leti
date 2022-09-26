@@ -37,7 +37,7 @@ Broadcast* create_broadcast_structure(Channels* p_begin) {
 
         Ad* a = p->ads; // Запоминаем голову списка рекламных роликов
 
-        int ads_arr[90];
+        int ads_arr[30];
 
         // Первый раз обходим список и подсчитываем количество роликов в каждом канале, также находим ролик с максимальным приоритетом
         while (p->ads != nullptr) {
@@ -69,16 +69,16 @@ Broadcast* create_broadcast_structure(Channels* p_begin) {
             int rand_ads = ads_arr[rand() % ads_count];
 
             // Если рандомный ролик из массива равен текущему и его приоритет меньше предыдущего и текущий id ролика не равен предыдущему
-            //if (rand_ads == p->ads->id && priority > p->ads->sequence && current_id != rand_ads) {
+            if (rand_ads == p->ads->id && priority >= p->ads->sequence && current_id != rand_ads) {
                 // Записываем каждый элемент в конец с помощью функции
-			appendBroadcast(&(b->broadcast_ads), p->ads->name, p->ads->duration, position_count, random_hour);
+                appendBroadcast(&(b->broadcast_ads), p->ads->name, p->ads->duration, position_count, random_hour);
 
-			priority = p->ads->sequence;
-			current_id = p->ads->id;
-			broadcasting_count++;
-			position_count++;
-            //}
-
+                priority = p->ads->sequence;
+                current_id = p->ads->id;
+                broadcasting_count++;
+                position_count++;
+            }
+            
             p->ads = p->ads->next;
             if (p->ads == nullptr) {
                 priority = ads_priority;
