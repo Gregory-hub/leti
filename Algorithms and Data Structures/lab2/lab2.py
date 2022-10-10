@@ -2,11 +2,10 @@ from random import randint
 from math import ceil, floor
 
 
-def create_snails(side_size: int):
-    snail_num = randint(2, SIDE_SIZE**2)
+def create_snails(side_size: int, number_of_snails: int):
     snails = []
-    for i in range(snail_num):
-        snails.append([randint(0, SIDE_SIZE), randint(0, SIDE_SIZE)])
+    for i in range(number_of_snails):
+        snails.append([randint(0, side_size), randint(0, side_size)])
     return snails
 
 
@@ -101,12 +100,12 @@ def find_min_dist(snails: list, confused: bool = False):
     return min_dist, snails, confused
 
 
-SIDE_SIZE = 3
-# snails = create_snails(SIDE_SIZE)
-snails = merge_sort([[0, 2], [0, 4], [0, 0], [2, 4]])
+SIDE_SIZE = 100000			# in centimetres
+NUMBER_OF_SNAILS = 20
+snails = create_snails(SIDE_SIZE, NUMBER_OF_SNAILS)
+# snails = merge_sort([[0, 2], [0, 4], [0, 0], [2, 4]])
 
 min_dist, snails, confused = find_min_dist(snails)
-print("Snails:")
-print(*snails, sep='\n')
-print("Time:", str(min_dist) + "s")
+print("Snails:\n", *snails, sep='\n')
+print("Time to find first partner:", str(min_dist) + "s")		# min_dist / speed = min_dist / 1 = min_dist
 print("Snails are confused:", confused)
