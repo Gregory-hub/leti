@@ -101,7 +101,7 @@ def find_min_dist(snails: list, confused: bool = False):
     r_snails = merge_sort(r_snails[:ceil(min_dist)], by_y=True)						# O(nlogn)
 
     # from (snails / 2 - min_dist) to (snails / 2 + min_dist)
-    min_mid = min_in_mid_area(l_snails, r_snails)                                   # O(1) because len(l) + len(r) <= const
+    min_mid = min_in_mid_area(l_snails, r_snails)                                   # O(n) because number of dots from r for every dot in l <= some const
     if min_dist == min_mid:
         confused = True
     elif min_mid < min_dist:
@@ -119,27 +119,8 @@ def test_algorithm(side_size: int, number_of_snails: int):
 	return (end_time - start_time).total_seconds()
 
 
-SIDE_SIZE = 100000			# in centimetres
-NUMBER_OF_SNAILS = 0
-
-x = [i for i in range(250, 50000, 500)]
-y_snails = []
-for number_of_snails in x:
-	y_snails.append(round(test_algorithm(SIDE_SIZE, number_of_snails) * 1000, 2))
-y_n = [i // 10 for i in x]
-y_log = [log2(i) for i in x]
-y_nlog = [i * log2(i) // 100 for i in x]
-
-plt.plot(x, y_snails, color='b', label="snails")
-plt.plot(x, y_n, color='g', label="y(n) = n / 10")
-plt.plot(x, y_log, color='r', label="y(n) = log(n)")
-plt.plot(x, y_nlog, color='y', label="y(n) = nlog(n) / 100")
-
-plt.xlabel("number of snails")
-plt.ylabel("time, ms")
-plt.title("Time complexity")
-plt.legend()
-plt.show()
+SIDE_SIZE = 10			# in centimetres
+NUMBER_OF_SNAILS = 5
 
 # snails = create_snails(SIDE_SIZE, NUMBER_OF_SNAILS)
 # start_time = datetime.now()
@@ -149,4 +130,22 @@ plt.show()
 # print("Snails:\n", *snails, sep='\n')
 # print("Time for first snail to find a partner:", str(round(min_dist, 2)) + "s")		# min_dist / speed = min_dist / 1 = min_dist
 # print("Snails are confused:", confused)
-# print("Runtime:", (end_time - start_time).total_seconds())
+
+x = [i for i in range(1000, 100000, 1000)]
+y_snails = []
+for number_of_snails in x:
+	y_snails.append(round(test_algorithm(SIDE_SIZE, number_of_snails) * 1000, 2))
+y_n = [i // 1000 for i in x]
+y_log = [log2(i) for i in x]
+y_nlog = [i * log2(i) // 10000 for i in x]
+
+plt.plot(x, y_snails, color='b', label="snails")
+plt.plot(x, y_n, color='g', label="y(n) = n / 1000")
+plt.plot(x, y_log, color='r', label="y(n) = log(n)")
+plt.plot(x, y_nlog, color='y', label="y(n) = nlog(n) / 10000")
+
+plt.xlabel("number of snails")
+plt.ylabel("time, ms")
+plt.title("Time complexity")
+plt.legend()
+plt.show()
