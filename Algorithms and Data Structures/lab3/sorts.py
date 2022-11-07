@@ -1,3 +1,8 @@
+from matplotlib import pyplot as plt
+from time import time
+from random import randint
+
+
 def insertion_sort(li: list, n: int) -> list:
 	# Worst: n^2
 	# Average: n^2
@@ -125,6 +130,40 @@ def quick_sort(li: list, n: int) -> list:
 	return li
 
 
+def build_plots(f, f_name = "") -> None:			# f is a function
+	n = range(2, 1*10**4, 1000)
+
+	y_best = []
+	for i in n:
+		li = [x - i // 2 for x in range(i)]
+		start = time()
+		f(li, i)
+		end = time()
+		y_best.append(round((end - start) * 1000, 6))
+	plt.plot(n, y_best, color='y', label=f_name+' best case')
+
+	y_aver = []
+	for i in n:
+		li = [randint(-1000, 1000) for x in range(i)]
+		start = time()
+		f(li, i)
+		end = time()
+		y_aver.append((end - start) * 1000)
+	plt.plot(n, y_aver, color='b', label=f_name+' average case')
+
+	y_worst = []
+	for i in n:
+		li = [x for x in range(i, 0, -1)]
+		start = time()
+		f(li, i)
+		end = time()
+		y_worst.append((end - start) * 1000)
+	plt.plot(n, y_worst, color='r', label=f_name+' worst case')
+
+	plt.legend()
+	plt.show()
+	
+
 li = [8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7]
 print("Insertion:  ", insertion_sort(li, len(li)))
 print("Selection:  ", selection_sort(li, len(li)))
@@ -133,3 +172,11 @@ print("Merge: ", " " * 4, merge_sort(li, len(li)))
 print("Shell: ", " " * 4, shell_sort(li, len(li)))
 print("Quick: ", " " * 4, quick_sort(li, len(li)))
 print("Python sort:", sorted(li))
+# build_plots(insertion_sort, "Inisertion sort")
+# build_plots(selection_sort, "Selection sort")
+# build_plots(bubble_sort, "Bubble sort")
+# build_plots(merge_sort, "Merge sort")
+# build_plots(shell_sort, "Shell sort")
+# build_plots(quick_sort, "Quick sort")
+# build_plots(sorted, "Python sort")
+ 
