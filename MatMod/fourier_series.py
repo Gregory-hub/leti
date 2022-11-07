@@ -48,13 +48,13 @@ def standart_deviation(fun, n: int) -> float:
 	return (fun_norm_sq - part_sum_norm_sq)**(1/2)
 
 
-A = 0.98
-B = 0.74
+A = 0.64
+B = 0.15
 
 fun = get_function(A, B)
 
 grid_horizontal = ([-11, 11], [0, 0])
-grid_vertical = ([0, 0], [-0.25, 3.25])
+grid_vertical = ([0, 0], [-0.25, 1.5])
 plt.plot(*grid_horizontal, color='gray', linestyle='--')
 plt.plot(*grid_vertical, color='gray', linestyle='--')
 
