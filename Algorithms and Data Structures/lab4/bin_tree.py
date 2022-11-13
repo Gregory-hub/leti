@@ -1,3 +1,6 @@
+from queue import Queue
+
+
 class Node:
 	def __init__(self, value: int):
 		self.value = value
@@ -5,7 +8,7 @@ class Node:
 		self.right = None
 
 	def __repr__(self):
-		return f"<Node({self.value})>"
+		return f"<Node({self.value}) at {hex(id(self))}>"
 
 
 class BinSearchTree:
@@ -18,10 +21,10 @@ class BinSearchTree:
 		# O(n)
 		return self.__get_height(self.root)
 
-	def print_tree(self) -> None:
+	def print_tree(self, detail: bool = False) -> None:
 		# O(n)
 		print(f"Tree of height {self.height()}:")
-		self.__print_tree(self.root)
+		self.__print_tree(self.root, detail=detail)
 		print()
 
 	def min(self) -> Node:
@@ -48,18 +51,18 @@ class BinSearchTree:
 		# O(h)
 		return self.__find(self.root, value)
 	
-	def next_el(self, node: Node):
+	def next_el(self, node: Node) -> Node:
 		# O(h)
-		if node is None:
+		if node is None or not self.has_node(node):
 			return None
 		if node.right is not None:
 			return self.__min(node.right)
 
 		return self.__get_next_in_ancestors(self.root, node)
 
-	def prev_el(self, node: Node):
+	def prev_el(self, node: Node) -> Node:
 		# O(h)
-		if node is None:
+		if node is None or not self.has_node(node):
 			return None
 		if node.left is not None:
 			return self.__max(node.left)
@@ -67,13 +70,22 @@ class BinSearchTree:
 		return self.__get_prev_in_ancestors(self.root, node)
 
 	def get_parent(self, node: Node) -> Node:
+		# O(h)
 		if node is None:
 			return None
 		return self.__get_parent(node, self.root)
+	
+	def has_node(self, node: Node) -> bool:
+		# O(h)
+		return self.__has_node(self.root, node)
 
 	def delete(self, node: Node):
+		# O(n)
 		if node is None:
 			return self
+		if not self.has_node(node):
+			return self
+
 		parent = self.get_parent(node)
 		successors = self.__get_nodes_inorder(node.left) + self.__get_nodes_inorder(node.right)
 
@@ -86,11 +98,31 @@ class BinSearchTree:
 
 		return self
 
+	def get_nodes_breadth_first(self) -> list:
+		# O(n)
+		if self.root is None:
+			return []
+
+		nodes = []
+		queue = Queue()
+
+		current = self.root
+		queue.put(current)
+		while not queue.empty():
+			current = queue.get()
+			nodes.append(current)
+			if current.left:
+				queue.put(current.left)
+			if current.right:
+				queue.put(current.right)
+
+		return nodes
+
 	# private:
 	def __get_height(self, root: Node) -> int:
 		# O(n)
 		if root is None:
-			return 0
+			return -1
 		if root.left is None and root.right is None:
 			return 0
 		
@@ -128,25 +160,28 @@ class BinSearchTree:
 		root.right = right
 		return root
 
-	def __print_tree(self, root: Node, level: int = 0, child_letter = '') -> None:
+	def __print_tree(self, root: Node, level: int = 0, child_letter = '', detail: bool = False) -> None:
 		# O(n)
 		if root is None:
 			return
 
 		child_str = child_letter + ':' if child_letter != '' else ''
-		print(". ", ". " * (level - 1), child_str, root.value, sep='')
-		self.__print_tree(root.left, level + 1, 'l')
-		self.__print_tree(root.right, level + 1, 'r')
+		if detail:
+			print(". ", ". " * (level - 1), child_str, root, sep='')
+		else:
+			print(". ", ". " * (level - 1), child_str, root.value, sep='')
+		self.__print_tree(root.left, level + 1, 'l', detail)
+		self.__print_tree(root.right, level + 1, 'r', detail)
 
 	def __min(self, root: Node) -> Node:
 		# O(h)
-		if root.left is None:
+		if root is None or root.left is None:
 			return root
 		return self.__min(root.left)
 
 	def __max(self, root: Node) -> Node:
 		# O(h)
-		if root.right is None:
+		if root is None or root.right is None:
 			return root
 		return self.__max(root.right)
 
@@ -202,7 +237,7 @@ class BinSearchTree:
 			elif root.value < node.value:
 				root = root.right
 		return next_el
-	
+
 	def __get_prev_in_ancestors(self, root: Node, node: Node) -> Node:
 		# O(h)
 		next_el = None
@@ -215,6 +250,7 @@ class BinSearchTree:
 		return next_el
 
 	def __get_parent(self, node: Node, root: Node) -> Node:
+		# O(h)
 		if root == None:
 			return None
 		if root.right == node or root.left == node:
@@ -232,6 +268,20 @@ class BinSearchTree:
 			if right:
 				return right
 
+	def __has_node(self, root: Node, node: Node) -> bool:
+		# O(h)
+		if root is None:
+			return False
+
+		if node.value == root.value:
+			if node == root:
+				return True
+			return self.__has_node(root.left, node)	or self.__has_node(root.right, node)
+		if node.value < root.value:
+			return self.__has_node(root.left, node)
+		if node.value > root.value:
+			return self.__has_node(root.right, node)
+
 		# 		   1
 		# 	     /   \
 		#  	   -1      3
@@ -240,35 +290,37 @@ class BinSearchTree:
 		#   /
 		# -3   
 
+
 if __name__ == "__main__":
-	li = [-1, -2, -3, 0, 1, 2, 3, 4]
+	# li = [1, 2, 3, 4, 5, 6, 7]
+	li = list(range(-10, 10))
 	tree = BinSearchTree(li)
-	value_to_find = 1
-	el = tree.root.right.left
+	value_to_find = -3
+	el = Node(-1)
+	# el = tree.root
 
-	tree.print_tree()
-	print("Min:", tree.min().value)
-	print("Max:", tree.max().value)
-	print("Traversal preorder:", [i.value for i in tree.get_nodes_preorder()])
-	print("Traversal inorder:", [i.value for i in tree.get_nodes_inorder()])
-	print("Traversal postorder:", [i.value for i in tree.get_nodes_postorder()])
-	print(f"Find {value_to_find}:", tree.find(value_to_find))
-	print(f"Next to {el.value}:", tree.next_el(el))
-	print(f"Previous to {el.value}:", tree.prev_el(el))
-	print(f"Parent of {el.value}:", tree.get_parent(el))
+	tree.print_tree(detail=True)
+	
+	print(tree.next_el(Node(-8)))
 
-	print(f"\nDeletion of {el}\n")
-	print("Initial tree:\n")
-	tree.print_tree()
+	# print("Min:", tree.min())
+	# print("Max:", tree.max())
+	# print()
+	# print("Traversal preorder:", [i.value for i in tree.get_nodes_preorder()])
+	# print("Traversal inorder:", [i.value for i in tree.get_nodes_inorder()])
+	# print("Traversal postorder:", [i.value for i in tree.get_nodes_postorder()])
+	# print("Traversal breadth first:", [i.value for i in tree.get_nodes_breadth_first()])
+	# print()
+	# print(f"Find {value_to_find}:", tree.find(value_to_find))
+	# print(f"Next to {el}:", tree.next_el(el))
+	# print(f"Previous to {el}:", tree.prev_el(el))
+	# print(f"Parent of {el}:", tree.get_parent(el))
 
-	tree.delete(el)
+	# print(f"\nDeletion of {el}:\n")
+	# print("Initial tree:")
+	# tree.print_tree(detail=True)
 
-	print("Tree after deletion:\n")
-	tree.print_tree()
+	# tree.delete(el)
 
-	print("Min:", tree.min().value)
-	print("Max:", tree.max().value)
-	print("Traversal preorder:", [i.value for i in tree.get_nodes_preorder()])
-	print("Traversal inorder:", [i.value for i in tree.get_nodes_inorder()])
-	print("Traversal postorder:", [i.value for i in tree.get_nodes_postorder()])
-	print(f"Find {el.value}:", tree.find(el.value))
+	# print("Tree after deletion:")
+	# tree.print_tree(detail=True)
