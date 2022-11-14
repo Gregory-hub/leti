@@ -46,11 +46,31 @@ class BinSearchTree:
 	def get_nodes_postorder(self) -> list:
 		# O(n)
 		return self.__get_nodes_postorder(self.root)
-	
+
+	def get_nodes_breadth_first(self) -> list:
+		# O(n)
+		if self.root is None:
+			return []
+
+		nodes = []
+		queue = Queue()
+
+		current = self.root
+		queue.put(current)
+		while not queue.empty():
+			current = queue.get()
+			nodes.append(current)
+			if current.left:
+				queue.put(current.left)
+			if current.right:
+				queue.put(current.right)
+
+		return nodes
+
 	def find(self, value: int) -> Node:
 		# O(h)
 		return self.__find(self.root, value)
-	
+
 	def next_el(self, node: Node) -> Node:
 		# O(h)
 		if node is None or not self.has_node(node):
@@ -83,40 +103,20 @@ class BinSearchTree:
 		# O(n)
 		if node is None:
 			return self
-		if not self.has_node(node):
+		if not self.has_node(node): # O(h)
 			return self
 
-		parent = self.get_parent(node)
-		successors = self.__get_nodes_inorder(node.left) + self.__get_nodes_inorder(node.right)
+		parent = self.get_parent(node) # O(h)
+		successors = self.__get_nodes_inorder(node.left) + self.__get_nodes_inorder(node.right) # O(n)
 
 		if parent is None:
-			self.root = self.__tree_from_list([el.value for el in successors], len(successors))
+			self.root = self.__tree_from_list([el.value for el in successors], len(successors))	# O(n)
 		elif parent.left and parent.left == node:
-			parent.left = self.__tree_from_list([el.value for el in successors], len(successors))
+			parent.left = self.__tree_from_list([el.value for el in successors], len(successors)) # O(n)
 		elif parent.right and parent.right == node:
-			parent.right = self.__tree_from_list([el.value for el in successors], len(successors))
+			parent.right = self.__tree_from_list([el.value for el in successors], len(successors)) # O(n)
 
 		return self
-
-	def get_nodes_breadth_first(self) -> list:
-		# O(n)
-		if self.root is None:
-			return []
-
-		nodes = []
-		queue = Queue()
-
-		current = self.root
-		queue.put(current)
-		while not queue.empty():
-			current = queue.get()
-			nodes.append(current)
-			if current.left:
-				queue.put(current.left)
-			if current.right:
-				queue.put(current.right)
-
-		return nodes
 
 	# private:
 	def __get_height(self, root: Node) -> int:
