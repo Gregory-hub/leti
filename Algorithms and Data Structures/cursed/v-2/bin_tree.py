@@ -221,20 +221,20 @@ class BinTree:
 
 
 # for prefix and postfix nonation use spaces for number separation
-expression = "- ^ 5 2 / ^ 2 8 4"
+expression = "- ^ 5.5 2 / ^ 2 8 4"
 tree = BinTree(expression)
 print("expression:", expression)
 print("Result:", tree.get_result())
 print()
 
-expression = "4 8 2 ^ / 2 5 ^ -"
+expression = "4 8 2 ^ / 2 5.5 ^ -"
 print("expression:", expression)
 tree = BinTree(expression)
 print("Result:", tree.get_result())
 print()
 
 # for infix notation use brackets for ordering
-expression = "((2 ^ 3) * 4) + 5"
+expression = "((2 ^ 3) * 4) + 5.3"
 print("expression:", expression)
 tree = BinTree(expression)
 print("Result:", tree.get_result())
