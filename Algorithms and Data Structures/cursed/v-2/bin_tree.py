@@ -65,7 +65,6 @@ class BinTree:
 		if not is_number(expr[0]) and not expr[0] in ['(', ')']:
 			raise ValueError(f"Invalid result: {expr}")
 
-		# ( 5 - ( 3 - 1 ) * 2 )
 		if len(expr) == 1 and is_number(expr[0]):
 			root = Node(expr[0])
 
@@ -221,6 +220,7 @@ class BinTree:
 		return i - 1
 
 
+# for prefix and postfix nonation use spaces for number separation
 expression = "- ^ 5 2 / ^ 2 8 4"
 tree = BinTree(expression)
 print("expression:", expression)
@@ -233,8 +233,8 @@ tree = BinTree(expression)
 print("Result:", tree.get_result())
 print()
 
-# for infix notation please use brackets for ordering
-expression = "3 ^ ((2 ^ 3) / 3)"
+# for infix notation use brackets for ordering
+expression = "((2 ^ 3) * 4) + 5"
 print("expression:", expression)
 tree = BinTree(expression)
 print("Result:", tree.get_result())

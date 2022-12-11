@@ -6,4 +6,3 @@ class Node:
 
 	def __repr__(self):
 		return f"<Node({self.value}) at {hex(id(self))}>"
-
