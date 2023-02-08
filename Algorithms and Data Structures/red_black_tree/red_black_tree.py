@@ -1,12 +1,13 @@
 from queue import Queue
 
-from node import Node
+from red_black_node import Node
 
 
-class BinSearchTree:
+class RedBlackTree:
 	def __init__(self, elements: list):
-		elements.sort()
-		self.root = self.__tree_from_list(elements, len(elements))
+		self.root = None
+		for el in elements:
+			self.insert(el)
 
 	# public:
 	def height(self) -> int:
@@ -91,24 +92,198 @@ class BinSearchTree:
 		# O(h)
 		return self.__has_node(self.root, node)
 
-	def delete(self, node: Node):
+	def left_rotate(self, node: Node) -> None:
+		# O(h)
+		if node.right is None:
+			return
+
+		right = node.right
+		node.right = right.left
+		right.left = node
+
+		parent = self.get_parent(node)	# O(h)
+		if parent is None:
+			self.root = right
+		elif parent.left is node:
+			parent.left = right
+		elif parent.right is node:
+			parent.right = right
+
+	def right_rotate(self, node: Node) -> None:
+		# O(h)
+		if node.left is None:
+			return
+
+		left = node.left
+		node.left = left.right
+		left.right = node
+
+		parent = self.get_parent(node)	# O(h)
+		if parent is None:
+			self.root = left
+		elif parent.left is node:
+			parent.left = left
+		elif parent.right is node:
+			parent.right = left
+
+	def insert(self, value) -> None:
+		node = Node(value=value, is_black=False)
+		parent = self.root
+		if parent is None:
+			node.is_black = True
+			self.root = node
+			return
+
+		while True:
+			if parent.value > value:
+				if parent.left is not None:
+					parent = parent.left
+				else:
+					parent.left = node
+					break
+			else:
+				if parent.right is not None:
+					parent = parent.right
+				else:
+					parent.right = node
+					break
+		self.fixup(node)
+
+	def fixup(self, curr: Node):
+		parent = self.get_parent(curr)
+		while parent is not None and not parent.is_black:
+			if parent is None:
+				curr.is_black = True
+				self.root = curr
+				return
+
+			grandparent = self.get_parent(parent)
+			if grandparent is None:
+				parent.is_black = True
+				return
+			if grandparent.left is parent:
+				uncle = grandparent.right
+			if grandparent.right is parent:
+				uncle = grandparent.left
+
+			if uncle is not None and not uncle.is_black:
+				grandparent.is_black = False
+				parent.is_black = True
+				uncle.is_black = True
+				curr = grandparent
+			else:
+				if grandparent.right is parent:
+					if parent.left is curr:
+						self.right_rotate(parent)
+						curr, parent = parent, curr
+					self.left_rotate(grandparent)
+					grandparent.is_black = False
+					parent.is_black = True
+				elif grandparent.left is parent:
+					if parent.right is curr:
+						self.left_rotate(parent)
+						curr, parent = parent, curr
+					self.right_rotate(grandparent)
+					grandparent.is_black = False
+					parent.is_black = True
+
+			parent = self.get_parent(curr)
+		self.root.is_black = True
+
+	def bst_delete(self, node: Node) -> Node:
 		# O(n)
 		if node is None:
-			return self
+			return None
 		if not self.has_node(node): # O(h)
-			return self
+			return None
 
 		parent = self.get_parent(node) # O(h)
-		successors = self.__get_nodes_inorder(node.left) + self.__get_nodes_inorder(node.right) # O(n)
+		if node.right is None or node.left is None:	# node has 0 or 1 child
+			if node.right is None and node.left is None:	# 0 child
+				successor = None
+			elif node.right is None:	# 1 child
+				successor = node.left
+			elif node.left is None:		# 1 child
+				successor = node.right
 
-		if parent is None:
-			self.root = self.__tree_from_list([el.value for el in successors], len(successors))	# O(n)
-		elif parent.left and parent.left == node:
-			parent.left = self.__tree_from_list([el.value for el in successors], len(successors)) # O(n)
-		elif parent.right and parent.right == node:
-			parent.right = self.__tree_from_list([el.value for el in successors], len(successors)) # O(n)
+		else:	# node has 2 children
+			successor = self.__min(node.right)	# O(h)
+			successors_parent = self.get_parent(successor)	# O(h)
+			if successors_parent is not node:
+				successors_parent.left = successor.right
+				successor.right = node.right
+			successor.left = node.left
 
-		return self
+		if parent:
+			if node is parent.left:
+				parent.left = successor
+			elif node is parent.right:
+				parent.right = successor
+		else:
+			self.root = successor
+
+		return successor
+
+	def delete(self, node: Node) -> None:
+		if not self.has_node(node): # O(h)
+			return
+
+		node = self.bst_delete(node)
+
+		if not node.is_black:
+			return
+
+		while node is not self.root and not node.is_black:
+			parent = self.get_parent(node)
+			if node is parent.left:
+				brother = parent.right
+				if brother is not None and not brother.is_black:
+					brother.is_black = True
+					parent.is_black = False
+					self.left_rotate(parent)
+					parent = self.get_parent(node)
+					brother = parent.right
+				if (brother.left is None or brother.left.is_black) and (brother.right is None or brother.right.is_black):
+					brother.is_black = False
+					node = parent
+				elif brother.right is None or brother.right.is_black:
+					brother.left.is_black = True
+					brother.is_black = False
+					self.right_rotate(brother)
+					parent = self.get_parent(node)
+					brother = parent.right
+				else:
+					brother.is_black = parent.is_black
+					parent.is_black = True
+					if brother.right:
+						brother.right.is_black = True
+					self.left_rotate(parent)
+					node = self.root
+			else:
+				brother = parent.left
+				if brother is not None and not brother.is_black:
+					brother.is_black = True
+					parent.is_black = False
+					self.left_rotate(parent)
+					parent = self.get_parent(node)
+					brother = parent.left
+				if (brother.left is None or brother.left.is_black) and (brother.right is None or brother.right.is_black):
+					brother.is_black = False
+					node = parent
+				elif brother.left is None or brother.left.is_black:
+					brother.right.is_black = True
+					brother.is_black = False
+					self.left_rotate(brother)
+					parent = self.get_parent(node)
+					brother = parent.left
+				else:
+					brother.is_black = parent.is_black
+					parent.is_black = True
+					if brother.left:
+						brother.left.is_black = True
+					self.left_rotate(parent)
+					node = self.root
+			node.is_black = True
 
 	# private:
 	def __get_height(self, root: Node) -> int:
@@ -121,21 +296,6 @@ class BinSearchTree:
 		height_l = self.__get_height(root.left)
 		height_r = self.__get_height(root.right)
 		return max(height_l, height_r) + 1
-
-	def __tree_from_list(self, elements: list, n: int) -> Node:
-		# elements must be sorted
-		# O(n)
-		if n == 1:
-			return Node(elements[0])
-		if n == 0:
-			return None
-
-		root = Node(elements[n // 2])
-		left = self.__tree_from_list(elements[:n // 2], n // 2)
-		right = self.__tree_from_list(elements[n // 2 + 1:], n // 2 - 1 + n % 2)
-		root.left = left
-		root.right = right
-		return root
 
 	def __print_tree(self, root: Node, level: int = 0, child_letter = '', detail: bool = False) -> None:
 		# O(n)
@@ -247,7 +407,7 @@ class BinSearchTree:
 
 	def __has_node(self, root: Node, node: Node) -> bool:
 		# O(h)
-		if root is None:
+		if root is None or node is None:
 			return False
 
 		if node.value == root.value:
@@ -262,36 +422,15 @@ class BinSearchTree:
 
 # tests for this are in tests.py in the same directory
 if __name__ == "__main__":
-	li = list(range(-5, 5))
-	tree = BinSearchTree(li)
+	li = list(range(0, 10))
+	tree = RedBlackTree(li)
 
-	value_to_find = -2
-	el = tree.root.left
+	el = tree.find(5)
 
-	tree.print_tree()
-	# print("Height:", tree.height())
-	# print("Min:", tree.min())
-	# print("Max:", tree.max())
-	# print()
-	# print("Traversal preorder:", [i.value for i in tree.get_nodes_preorder()])
-	# print("Traversal inorder:", [i.value for i in tree.get_nodes_inorder()])
-	# print("Traversal postorder:", [i.value for i in tree.get_nodes_postorder()])
-	# print("Traversal breadth first:", [i.value for i in tree.get_nodes_breadth_first()])
-	# print()
-	# print(f"Find {value_to_find}:", tree.find(value_to_find))
-	# print(f"Next to {el}:", tree.next_el(el))
-	# print(f"Previous to {el}:", tree.prev_el(el))
-	# print(f"Parent of {el}:", tree.get_parent(el))
-	# print(f"Tree has node {el}:", tree.has_node(el))
-	# new_el = Node(el.value)
-	# print(f"Tree has node {new_el}:", tree.has_node(new_el))
+	print("\nInitial tree:")
+	tree.print_tree(detail=True)
 
-	# print(f"\nDeletion of {el}:\n")
-	# print("Initial tree:")
-	# tree.print_tree()
-
-	# tree.delete(el)
-
-	# print("Tree after deletion:")
-	# tree.print_tree()
-	# print(f"Tree has node {el}:", tree.has_node(el))
+	print(f"Deletion of {el}:\n")
+	tree.delete(el)
+	print("Tree after deletion:")
+	tree.print_tree(detail=True)
