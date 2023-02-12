@@ -228,12 +228,14 @@ class RedBlackTree:
 		if not self.has_node(node): # O(h)
 			return
 
+		deleted_node = node
+
 		node = self.bst_delete(node)
 
-		if not node.is_black:
+		if not deleted_node.is_black:
 			return
 
-		while node is not self.root and not node.is_black:
+		while node is not None and node is not self.root and not node.is_black:
 			parent = self.get_parent(node)
 			if node is parent.left:
 				brother = parent.right
@@ -420,7 +422,6 @@ class RedBlackTree:
 			return self.__has_node(root.right, node)
 
 
-# tests for this are in tests.py in the same directory
 if __name__ == "__main__":
 	li = list(range(0, 10))
 	tree = RedBlackTree(li)
