@@ -1,6 +1,6 @@
 from queue import Queue
 
-from red_black_node import Node
+from trees.red_black_tree.red_black_node import Node
 
 
 class RedBlackTree:
@@ -223,69 +223,6 @@ class RedBlackTree:
 			self.root = successor
 
 		return successor
-
-	def delete(self, node: Node) -> None:
-		if not self.has_node(node): # O(h)
-			return
-
-		deleted_node = node
-
-		node = self.bst_delete(node)
-
-		if not deleted_node.is_black:
-			return
-
-		while node is not None and node is not self.root and not node.is_black:
-			parent = self.get_parent(node)
-			if node is parent.left:
-				brother = parent.right
-				if brother is not None and not brother.is_black:
-					brother.is_black = True
-					parent.is_black = False
-					self.left_rotate(parent)
-					parent = self.get_parent(node)
-					brother = parent.right
-				if (brother.left is None or brother.left.is_black) and (brother.right is None or brother.right.is_black):
-					brother.is_black = False
-					node = parent
-				elif brother.right is None or brother.right.is_black:
-					brother.left.is_black = True
-					brother.is_black = False
-					self.right_rotate(brother)
-					parent = self.get_parent(node)
-					brother = parent.right
-				else:
-					brother.is_black = parent.is_black
-					parent.is_black = True
-					if brother.right:
-						brother.right.is_black = True
-					self.left_rotate(parent)
-					node = self.root
-			else:
-				brother = parent.left
-				if brother is not None and not brother.is_black:
-					brother.is_black = True
-					parent.is_black = False
-					self.left_rotate(parent)
-					parent = self.get_parent(node)
-					brother = parent.left
-				if (brother.left is None or brother.left.is_black) and (brother.right is None or brother.right.is_black):
-					brother.is_black = False
-					node = parent
-				elif brother.left is None or brother.left.is_black:
-					brother.right.is_black = True
-					brother.is_black = False
-					self.left_rotate(brother)
-					parent = self.get_parent(node)
-					brother = parent.left
-				else:
-					brother.is_black = parent.is_black
-					parent.is_black = True
-					if brother.left:
-						brother.left.is_black = True
-					self.left_rotate(parent)
-					node = self.root
-			node.is_black = True
 
 	# private:
 	def __get_height(self, root: Node) -> int:
