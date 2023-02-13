@@ -5,7 +5,7 @@ from trees.binary_search_tree.bin_search_tree import BinSearchTree
 from random import sample
 
 
-class TreeTester(unittest.TestCase):
+class RBTester(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         self.tree = None
         super().__init__(*args, **kwargs)
@@ -30,15 +30,6 @@ class TreeTester(unittest.TestCase):
         self.assertEqual(l_b_height, r_b_height, f"Black height is not equal in subtrees. Tree height is {self.tree.height()}")
         return l_b_height
 
-    def test_bst_insert(self):
-        self.li = sample(range(-100, 100), 100)
-        self.tree = BinSearchTree([])
-        self.check_tree(self.tree)
-
-        for el in self.li:
-            self.tree.insert(el)
-            self.check_tree(self.tree)
-
     def test_rbt_insert(self):
         self.li = sample(range(-100, 100), 100)
         self.tree = RedBlackTree([])
@@ -47,6 +38,27 @@ class TreeTester(unittest.TestCase):
         for el in self.li:
             self.tree.insert(el)
             self.check_tree(self.tree)
+            self.assertTrue(self.tree.has_node(self.tree.find(el)))
+
+
+class BSTTester(unittest.TestCase):
+    def __init__(self, *args, **kwargs):
+        self.tree = None
+        super().__init__(*args, **kwargs)
+
+    def check_tree(self, root):
+        pass
+
+    def test_bst_insert(self):
+        self.li = sample(range(-100, 100), 100)
+        self.tree = BinSearchTree([])
+        self.check_tree(self.tree.root)
+
+        for el in self.li:
+            self.tree.insert(el)
+            self.check_tree(self.tree.root)
+            self.assertTrue(self.tree.has_node(self.tree.find(el)))
+
 
 if __name__ == "__main__":
     unittest.main()

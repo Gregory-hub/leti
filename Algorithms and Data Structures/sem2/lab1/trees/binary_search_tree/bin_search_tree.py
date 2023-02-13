@@ -81,6 +81,27 @@ class BinSearchTree(BinTree):
 		# O(h)
 		return self.__has_node(self.root, node)
 
+	def insert(self, value: int):
+		node = Node(value=value)
+		parent = self.root
+		if parent is None:
+			self.root = node
+			return
+
+		while True:
+			if parent.value > value:
+				if parent.left is not None:
+					parent = parent.left
+				else:
+					parent.left = node
+					break
+			else:
+				if parent.right is not None:
+					parent = parent.right
+				else:
+					parent.right = node
+					break
+
 	def delete(self, node: Node):
 		# O(n)
 		if node is None:
@@ -239,40 +260,3 @@ class BinSearchTree(BinTree):
 			return self.__has_node(root.left, node)
 		if node.value > root.value:
 			return self.__has_node(root.right, node)
-
-
-# tests for this are in tests.py in the same directory
-if __name__ == "__main__":
-	li = list(range(-5, 5))
-	tree = BinSearchTree(li)
-
-	value_to_find = -2
-	el = tree.root.left
-
-	tree.print_tree()
-	print("Height:", tree.height())
-	print("Min:", tree.min())
-	print("Max:", tree.max())
-	print()
-	print("Traversal preorder:", [i.value for i in tree.get_nodes_preorder()])
-	print("Traversal inorder:", [i.value for i in tree.get_nodes_inorder()])
-	print("Traversal postorder:", [i.value for i in tree.get_nodes_postorder()])
-	print("Traversal breadth first:", [i.value for i in tree.get_nodes_breadth_first()])
-	print()
-	print(f"Find {value_to_find}:", tree.find(value_to_find))
-	print(f"Next to {el}:", tree.next_el(el))
-	print(f"Previous to {el}:", tree.prev_el(el))
-	print(f"Parent of {el}:", tree.get_parent(el))
-	print(f"Tree has node {el}:", tree.has_node(el))
-	new_el = Node(el.value)
-	print(f"Tree has node {new_el}:", tree.has_node(new_el))
-
-	print(f"\nDeletion of {el}:\n")
-	print("Initial tree:")
-	tree.print_tree()
-
-	tree.delete(el)
-
-	print("Tree after deletion:")
-	tree.print_tree()
-	print(f"Tree has node {el}:", tree.has_node(el))
