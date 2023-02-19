@@ -1,6 +1,5 @@
-from queue import Queue
-
-from ..bin_tree import Node, BinTree
+from trees.node import Node
+from trees.bin_tree import BinTree
 
 
 class BinSearchTree(BinTree):
@@ -17,45 +16,13 @@ class BinSearchTree(BinTree):
 		# O(h)
 		return self.__max(self.root)
 
-	def get_nodes_inorder(self) -> list:
-		# O(n)
-		return self.__get_nodes_inorder(self.root)
-
-	def get_nodes_preorder(self) -> list:
-		# O(n)
-		return self.__get_nodes_preorder(self.root)
-
-	def get_nodes_postorder(self) -> list:
-		# O(n)
-		return self.__get_nodes_postorder(self.root)
-
-	def get_nodes_breadth_first(self) -> list:
-		# O(n)
-		if self.root is None:
-			return []
-
-		nodes = []
-		queue = Queue()
-
-		current = self.root
-		queue.put(current)
-		while not queue.empty():
-			current = queue.get()
-			nodes.append(current)
-			if current.left:
-				queue.put(current.left)
-			if current.right:
-				queue.put(current.right)
-
-		return nodes
-
 	def find(self, value: int) -> Node:
 		# O(h)
 		return self.__find(self.root, value)
 
 	def next_el(self, node: Node) -> Node:
 		# O(h)
-		if node is None or not self.has_node(node):
+		if node is None or not self.has_node(self.root, node):
 			return None
 		if node.right is not None:
 			return self.__min(node.right)
@@ -64,29 +31,33 @@ class BinSearchTree(BinTree):
 
 	def prev_el(self, node: Node) -> Node:
 		# O(h)
-		if node is None or not self.has_node(node):
+		if node is None or not self.has_node(self.root, node):
 			return None
 		if node.left is not None:
 			return self.__max(node.left)
 
 		return self.__get_prev_in_ancestors(self.root, node)
 
-	def get_parent(self, node: Node) -> Node:
+	def has_node(self, root: Node, node: Node) -> bool:
 		# O(h)
-		if node is None:
-			return None
-		return self.__get_parent(node, self.root)
-	
-	def has_node(self, node: Node) -> bool:
-		# O(h)
-		return self.__has_node(self.root, node)
+		if root is None:
+			return False
+
+		if node.value == root.value:
+			if node == root:
+				return True
+			return self.has_node(root.left, node) or self.has_node(root.right, node)
+		if node.value < root.value:
+			return self.has_node(root.left, node)
+		if node.value > root.value:
+			return self.has_node(root.right, node)
 
 	def insert(self, value: int):
 		node = Node(value=value)
 		parent = self.root
 		if parent is None:
 			self.root = node
-			return
+			return node
 
 		while True:
 			if parent.value > value:
@@ -101,12 +72,13 @@ class BinSearchTree(BinTree):
 				else:
 					parent.right = node
 					break
+		return node
 
 	def delete(self, node: Node):
 		# O(n)
 		if node is None:
 			return None
-		if not self.has_node(node): # O(h)
+		if not self.has_node(self.root, node): # O(h)
 			return None
 
 		parent = self.get_parent(node) # O(h)
@@ -164,36 +136,6 @@ class BinSearchTree(BinTree):
 			return root
 		return self.__max(root.right)
 
-	def __get_nodes_inorder(self, root: Node) -> list:
-		# O(n)
-		if root is None:
-			return []
-
-		left = self.__get_nodes_inorder(root.left)
-		right = self.__get_nodes_inorder(root.right)
-
-		return left + [root] + right 
-
-	def __get_nodes_preorder(self, root: Node) -> list:
-		# O(n)
-		if root is None:
-			return []
-
-		left = self.__get_nodes_preorder(root.left)
-		right = self.__get_nodes_preorder(root.right)
-
-		return [root] + left + right 
-
-	def __get_nodes_postorder(self, root: Node) -> list:
-		# O(n)
-		if root is None:
-			return []
-		
-		left = self.__get_nodes_postorder(root.left)
-		right = self.__get_nodes_postorder(root.right)
-
-		return left + right + [root]
-
 	def __find(self, root: Node, value: int) -> Node:
 		# O(h)
 		if root is None:
@@ -227,36 +169,3 @@ class BinSearchTree(BinTree):
 			elif root.value > node.value:
 				root = root.left
 		return next_el
-
-	def __get_parent(self, node: Node, root: Node) -> Node:
-		# O(h)
-		if root == None:
-			return None
-		if root.right == node or root.left == node:
-			return root
-
-		if root.value < node.value:
-			return self.__get_parent(node, root.right)
-		elif root.value > node.value:
-			return self.__get_parent(node, root.left)
-		else:
-			left = self.__get_parent(node, root.left)
-			right = self.__get_parent(node, root.right)
-			if left:
-				return left
-			if right:
-				return right
-
-	def __has_node(self, root: Node, node: Node) -> bool:
-		# O(h)
-		if root is None:
-			return False
-
-		if node.value == root.value:
-			if node == root:
-				return True
-			return self.__has_node(root.left, node)	or self.__has_node(root.right, node)
-		if node.value < root.value:
-			return self.__has_node(root.left, node)
-		if node.value > root.value:
-			return self.__has_node(root.right, node)

@@ -1,48 +1,15 @@
 from trees.binary_search_tree.bin_search_tree import BinSearchTree
 from trees.red_black_tree.red_black_node import RedBlackNode
+from trees.rotation_tree import RotationTree
 
 
-class RedBlackTree(BinSearchTree):
+class RedBlackTree(BinSearchTree, RotationTree):
 	def __init__(self, elements: list):
 		self.root = None
 		for el in elements:
 			self.insert(el)
 
 	# public:
-	def left_rotate(self, node: RedBlackNode) -> None:
-		# O(h)
-		if node.right is None:
-			return
-
-		right = node.right
-		node.right = right.left
-		right.left = node
-
-		parent = self.get_parent(node)	# O(h)
-		if parent is None:
-			self.root = right
-		elif parent.left is node:
-			parent.left = right
-		elif parent.right is node:
-			parent.right = right
-
-	def right_rotate(self, node: RedBlackNode) -> None:
-		# O(h)
-		if node.left is None:
-			return
-
-		left = node.left
-		node.left = left.right
-		left.right = node
-
-		parent = self.get_parent(node)	# O(h)
-		if parent is None:
-			self.root = left
-		elif parent.left is node:
-			parent.left = left
-		elif parent.right is node:
-			parent.right = left
-
 	def insert(self, value) -> None:
 		node = RedBlackNode(value=value, is_black=False)
 		parent = self.root
