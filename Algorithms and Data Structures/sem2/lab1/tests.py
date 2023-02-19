@@ -26,9 +26,9 @@ class BSTTester(unittest.TestCase):
         self.check_tree(self.tree.root)
 
         for el in self.li:
-            self.tree.insert(el)
+            node = self.tree.insert(el)
             self.check_tree(self.tree.root)
-            self.assertTrue(self.tree.has_node(self.tree.root, self.tree.find(el)))
+            self.assertTrue(self.tree.has_node(self.tree.root, node))
 
 
 class RBTTester(unittest.TestCase):
@@ -65,9 +65,9 @@ class RBTTester(unittest.TestCase):
         self.check_tree(self.tree)
 
         for el in self.li:
-            self.tree.insert(el)
+            node = self.tree.insert(el)
             self.check_tree(self.tree)
-            self.assertTrue(self.tree.has_node(self.tree.root, self.tree.find(el)))
+            self.assertTrue(self.tree.has_node(self.tree.root, node))
 
 
 class AVLTester(unittest.TestCase):
@@ -94,9 +94,9 @@ class AVLTester(unittest.TestCase):
         self.check_tree(self.tree.root)
 
         for el in self.li:
-            self.tree.insert(el)
+            node = self.tree.insert(el)
             self.check_tree(self.tree.root)
-            self.assertTrue(self.tree.has_node(self.tree.root, self.tree.find(el)))
+            self.assertTrue(self.tree.has_node(self.tree.root, node))
 
 
 if __name__ == "__main__":
