@@ -19,5 +19,17 @@ if __name__ == "__main__":
 	rbt.print_tree(detail=True)
 	print("AVL")
 	avl.print_tree(detail=detail)
-	el = avl.root.right
-	print(f"Balance for {el}: {avl.balance(el)}")
+	
+	value = 2
+	print(f"Insert {value}\n")
+
+	bst.insert(value)
+	rbt.insert(value)
+	avl.insert(value)
+
+	print("BST")
+	bst.print_tree(detail=detail)
+	print("RBT")
+	rbt.print_tree(detail=True)
+	print("AVL")
+	avl.print_tree(detail=detail)

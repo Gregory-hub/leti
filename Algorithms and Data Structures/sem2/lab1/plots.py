@@ -35,8 +35,8 @@ def get_fixup_time_distribution(tree, values: list, sample_frequency: int) -> li
 
 def show_height_plots(n: int):
 	x = list(range(n))
-	# values = [randrange(-1000, 1000) for _ in x]
-	values = x	# worst case - sorted list(all els go to the right)
+	values = [randrange(-1000, 1000) for _ in x]
+	# values = x	# worst case - sorted list(all els go to the right)
 	bst = BinSearchTree([])
 	rbt = RedBlackTree([])
 	avl = AVLTree([])
@@ -50,7 +50,7 @@ def show_height_plots(n: int):
 	plt.plot(x, avl_height_dist, color='g', label="AVL")
 	plt.plot(x, [0] + [log2(i) for i in x[1:]], color='black', label="log(n)")
 
-	plt.title("Height worst case")
+	plt.title("Height")
 	plt.legend()
 	plt.show()
 
@@ -75,5 +75,5 @@ def show_fixup_time_plots(n):
 
 
 if __name__ == "__main__":
-	show_height_plots(200)
+	show_height_plots(5000)
 	# show_fixup_time_plots(5000)

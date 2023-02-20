@@ -74,40 +74,6 @@ class BinSearchTree(BinTree):
 					break
 		return node
 
-	def delete(self, node: Node):
-		# O(n)
-		if node is None:
-			return None
-		if not self.has_node(self.root, node): # O(h)
-			return None
-
-		parent = self.get_parent(node) # O(h)
-		if node.right is None or node.left is None:	# node has 0 or 1 child
-			if node.right is None and node.left is None:	# 0 child
-				successor = None
-			elif node.right is None:	# 1 child
-				successor = node.left
-			elif node.left is None:		# 1 child
-				successor = node.right
-
-		else:	# node has 2 children
-			successor = self.__min(node.right)	# O(h)
-			successors_parent = self.get_parent(successor)	# O(h)
-			if successors_parent is not node:
-				successors_parent.left = successor.right
-				successor.right = node.right
-			successor.left = node.left
-
-		if parent:
-			if node is parent.left:
-				parent.left = successor
-			elif node is parent.right:
-				parent.right = successor
-		else:
-			self.root = successor
-
-		return successor
-
 	# private:
 	def __tree_from_list(self, elements: list, n: int) -> Node:
 		# elements must be sorted

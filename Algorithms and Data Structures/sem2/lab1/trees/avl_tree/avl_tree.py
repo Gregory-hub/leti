@@ -23,7 +23,7 @@ class AVLTree(BinSearchTree, RotationTree):
 		if current is None or current is node:
 			return
 
-		if self.has_node(current.left, node):	# O(n)	~Omega(h)
+		if self.has_node(current.left, node):	# O(n)	~Theta(h)
 			self.fixup(node, current.left)
 		else:
 			self.fixup(node, current.right)

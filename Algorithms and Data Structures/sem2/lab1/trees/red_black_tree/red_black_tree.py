@@ -1,5 +1,3 @@
-from time import time
-
 from trees.binary_search_tree.bin_search_tree import BinSearchTree
 from trees.red_black_tree.red_black_node import RedBlackNode
 from trees.rotation_tree import RotationTree
@@ -12,6 +10,7 @@ class RedBlackTree(BinSearchTree, RotationTree):
 			self.insert(el)
 
 	def insert(self, value) -> None:
+		# O(n)
 		node = RedBlackNode(value=value, is_black=False)
 		parent = self.root
 		if parent is None:
@@ -32,12 +31,13 @@ class RedBlackTree(BinSearchTree, RotationTree):
 				else:
 					parent.right = node
 					break
-		self.fixup(node)
+		self.fixup(node)	# O(n)
 
 		return node
 
 	def fixup(self, curr: RedBlackNode):
-		parent = self.get_parent(curr)	# O(n)	~Omega(h)
+		# O(n)
+		parent = self.get_parent(curr)	# O(n)	~Theta(h)
 		while parent is not None and not parent.is_black:
 			if parent is None:
 				curr.is_black = True
