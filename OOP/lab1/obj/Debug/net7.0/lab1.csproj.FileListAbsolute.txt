@@ -1,0 +1,15 @@
+F:\leti\OOP\lab1\bin\Debug\net7.0\lab1.exe
+F:\leti\OOP\lab1\bin\Debug\net7.0\lab1.deps.json
+F:\leti\OOP\lab1\bin\Debug\net7.0\lab1.runtimeconfig.json
+F:\leti\OOP\lab1\bin\Debug\net7.0\lab1.dll
+F:\leti\OOP\lab1\bin\Debug\net7.0\lab1.pdb
+F:\leti\OOP\lab1\obj\Debug\net7.0\lab1.csproj.AssemblyReference.cache
+F:\leti\OOP\lab1\obj\Debug\net7.0\lab1.GeneratedMSBuildEditorConfig.editorconfig
+F:\leti\OOP\lab1\obj\Debug\net7.0\lab1.AssemblyInfoInputs.cache
+F:\leti\OOP\lab1\obj\Debug\net7.0\lab1.AssemblyInfo.cs
+F:\leti\OOP\lab1\obj\Debug\net7.0\lab1.csproj.CoreCompileInputs.cache
+F:\leti\OOP\lab1\obj\Debug\net7.0\lab1.dll
+F:\leti\OOP\lab1\obj\Debug\net7.0\refint\lab1.dll
+F:\leti\OOP\lab1\obj\Debug\net7.0\lab1.pdb
+F:\leti\OOP\lab1\obj\Debug\net7.0\lab1.genruntimeconfig.cache
+F:\leti\OOP\lab1\obj\Debug\net7.0\ref\lab1.dll
