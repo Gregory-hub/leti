@@ -80,7 +80,7 @@ class BinHeap {
 		}
 	}
 
-	public Node Pop_min() {
+	public Node PopMin() {
 		Node min = Elements[0];
 		Delete(0);
 		return min;

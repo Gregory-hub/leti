@@ -22,11 +22,15 @@ class Node {
 }
 
 class FibNode : Node {
-	private LinkedList<LinkedListNode<FibNode>>? children;
+	private LinkedList<FibNode> children = new LinkedList<FibNode>();
 
-	public LinkedList<LinkedListNode<FibNode>>? Children {
+	public LinkedList<FibNode> Children {
 		get { return children; }
 		set { children = value; }
+	}
+
+	public int Degree {
+		get { return Children.Count; }
 	}
 
 	public FibNode(int id, int value) : base(id, value) {}

@@ -19,7 +19,7 @@ class Dijkstra {
 		BinHeap heap = new BinHeap(start);
 
 		while (heap.Length > 0) {
-			Node current = heap.Pop_min();
+			Node current = heap.PopMin();
 			for (int i = 0; i < graph.GetLength(1); i++) {
 				if (i != current.Id && graph[current.Id,i] is not null) {
 					if (distances[i] is null) {
