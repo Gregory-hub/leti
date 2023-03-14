@@ -24,57 +24,32 @@ class Program {
         //     }
         // }
         // Console.WriteLine();
-        FibNode node1 = new FibNode(0, 1);
-        FibNode node2 = new FibNode(1, 2);
-        FibNode node3 = new FibNode(2, 3);
-        FibNode node4 = new FibNode(3, 4);
-        FibonacciHeap heap = new FibonacciHeap(node1);
+        FibNode node1 = new FibNode(0, 0);
+        FibNode node2 = new FibNode(1, 1);
+        FibNode node3 = new FibNode(2, 2);
+        FibNode node4 = new FibNode(3, 3);
+        FibNode node5 = new FibNode(4, 4);
+        FibNode node6 = new FibNode(5, 5);
+        FibNode node7 = new FibNode(6, 6);
+        FibNode node8 = new FibNode(7, 7);
+        FibNode node9 = new FibNode(8, 8);
 
-        heap.Insert(node2);
+        FibonacciHeap heap = new FibonacciHeap(node2);
         heap.Insert(node3);
+        heap.Insert(node1);
         heap.Insert(node4);
+        heap.Insert(node5);
+        heap.Insert(node6);
+        heap.Insert(node7);
+        heap.Insert(node8);
+        heap.Insert(node9);
 
-        heap.Merge(node1, node2);
-        heap.Merge(node4, node3);
-        heap.Merge(node1, node3);
+        heap.Print();
 
         FibNode? min = heap.ExtractMin();
-        Console.WriteLine($"Min: {(min is not null ? min.Value : null)}");
+        Console.WriteLine($"\nMin Id: {(min is not null ? min.Id : null)}\n");
 
-        LinkedListNode<FibNode>? node = heap.Roots.First;
-        Console.Write("heap: ");
-        for (int i = 0; i < heap.Roots.Count; i++) {
-            Console.Write($"{node.Value.Value} ");
-            node = node.Next;
-        }
-
-        Console.Write("\nnode1: ");
-        node = node1.Children.First;
-        for (int i = 0; i < node1.Children.Count; i++) {
-            Console.Write($"{node.Value.Value} ");
-            node = node.Next;
-        }
-
-        Console.Write("\nnode2: ");
-        node = node2.Children.First;
-        for (int i = 0; i < node2.Children.Count; i++) {
-            Console.Write($"{node.Value.Value} ");
-            node = node.Next;
-        }
-
-        Console.Write("\nnode3: ");
-        node = node3.Children.First;
-        for (int i = 0; i < node3.Children.Count; i++) {
-            Console.Write($"{node.Value.Value} ");
-            node = node.Next;
-        }
-
-        Console.Write("\nnode4: ");
-        node = node4.Children.First;
-        for (int i = 0; i < node4.Children.Count; i++) {
-            Console.Write($"{node.Value.Value} ");
-            node = node.Next;
-        }
+        heap.Print();
 
         Console.ReadLine();
     }
