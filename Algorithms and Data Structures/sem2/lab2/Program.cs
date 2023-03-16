@@ -32,7 +32,7 @@ class Program {
         FibNode node6 = new FibNode(5, 5);
         FibNode node7 = new FibNode(6, 6);
         FibNode node8 = new FibNode(7, 7);
-        FibNode node9 = new FibNode(8, 8);
+        // FibNode node9 = new FibNode(8, 8);
 
         FibonacciHeap heap = new FibonacciHeap(node2);
         heap.Insert(node3);
@@ -41,15 +41,20 @@ class Program {
         heap.Insert(node5);
         heap.Insert(node6);
         heap.Insert(node7);
+        // heap.Insert(node9);
+        heap.Compress();
         heap.Insert(node8);
-        heap.Insert(node9);
+        heap.Compress();
 
         heap.Print();
 
-        FibNode? min = heap.ExtractMin();
-        Console.WriteLine($"\nMin Id: {(min is not null ? min.Id : null)}\n");
-
+        heap.DecreaseKey(5, 1);
+        heap.DecreaseKey(6, 3);
         heap.Print();
+
+        // min = heap.ExtractMin();
+        // Console.WriteLine($"Min Id: {(min is not null ? min.Id : null)}\n");
+        // heap.Print();
 
         Console.ReadLine();
     }
