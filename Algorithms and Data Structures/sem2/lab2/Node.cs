@@ -22,12 +22,20 @@ class Node {
 }
 
 class FibNode : Node {
-	private LinkedList<FibNode> children = new LinkedList<FibNode>();
+	private LinkedList children = new LinkedList();
 	private bool lost_child = false;
-	private LinkedListNode<FibNode>? parent;
+	private FibNode? parent;
+	private FibNode? next;
+	private FibNode? previous;
+	private LinkedList? list;
 
-	public LinkedList<FibNode> Children {
+	public LinkedList Children {
 		get { return children; }
+	}
+
+	public LinkedList? List {
+		get { return list; }
+		set { list = value; }
 	}
 
 	public bool LostChild {
@@ -39,17 +47,23 @@ class FibNode : Node {
 		get { return Children.Count; }
 	}
 
-	public LinkedListNode<FibNode>? Parent {
+	public FibNode? Parent {
 		get { return parent; }
 		set { parent = value; }
 	}
 
-	public void AddChild(FibNode child, LinkedListNode<FibNode>? node) {
-		if (node is not null && !Object.ReferenceEquals(node.Value, this)) {
-			Console.WriteLine($"{this.Id}, {node.Value.Id}, {Object.ReferenceEquals(node.Value, this)}");
-			throw new ArgumentException("node must contain this exact FibNode instance");
-		}
-		child.Parent = node;
+	public FibNode? Next {
+		get { return next; }
+		set { next = value; }
+	}
+
+	public FibNode? Previous {
+		get { return previous; }
+		set { previous = value; }
+	}
+
+	public void AddChild(FibNode child) {
+		child.Parent = this;
 		Children.AddLast(child);
 	}
 

@@ -1,12 +1,12 @@
 namespace lab2;
 
 class FibonacciHeap {
-	private LinkedList<FibNode> roots = new LinkedList<FibNode>();
-	private int count = 0;
+	private LinkedList roots = new LinkedList();
+	private int length = 0;
 	private FibNode? min;
 	private int max_degree = 0;
 
-	public LinkedList<FibNode> Roots {
+	public LinkedList Roots {
 		get { return roots; }
 	}
 	public FibNode? Min {
@@ -16,8 +16,8 @@ class FibonacciHeap {
 	public int MaxDegree {
 		get { return max_degree; }
 	}
-	public int Count {
-		get { return count; }
+	public int Length {
+		get { return length; }
 	}
 
 	public FibonacciHeap(FibNode root) {
@@ -25,13 +25,12 @@ class FibonacciHeap {
 		Min = root;
 	}
 
-	private List<FibNode>? GetNodes(LinkedListNode<FibNode>? root) {
-		if (root is null) return null;
-
+	private List<FibNode> GetNodes(FibNode? root) {
 		List<FibNode>? nodes = new List<FibNode>();
+		if (root is null) return nodes;
 
-		nodes.Add(root.Value);
-		LinkedListNode<FibNode>? child = root.Value.Children.First;
+		nodes.Add(root);
+		FibNode? child = root.Children.First;
 		while (child is not null) {
 			nodes.AddRange(GetNodes(child) ?? new List<FibNode>());
 			child = child.Next;
@@ -39,31 +38,31 @@ class FibonacciHeap {
 		return nodes;
 	}
 
-	public List<FibNode>? GetAllNodes() {
+	public List<FibNode> GetAllNodes() {
 		List<FibNode>? nodes = new List<FibNode>();
 
-        LinkedListNode<FibNode>? root = Roots.First;
+        FibNode? root = Roots.First;
         while (root is not null) {
-			nodes.AddRange(GetNodes(root));
+			nodes.AddRange(GetNodes(root) ?? new List<FibNode>());
             root = root.Next;
         }
 		return nodes;
 	}
 
 	public void Print() {
-        LinkedListNode<FibNode>? root = Roots.First;
+        FibNode? root = Roots.First;
         Console.Write("HEAP ROOTS: ");
         while (root is not null) {
-            Console.Write($"({root.Value.Id}, {root.Value.Value}) ");
+            Console.Write($"({root.Id}, {root.Value}) ");
             root = root.Next;
         }
-		List<FibNode>? nodes = GetAllNodes();
+		List<FibNode> nodes = GetAllNodes();
 		foreach (FibNode node in nodes) {
 			Console.Write($"\nnode ({node.Id}, {node.Value}): ");
 
-			LinkedListNode<FibNode>? child = node.Children.First;
+			FibNode? child = node.Children.First;
 			while (child is not null) {
-				Console.Write($"({child.Value.Id}, {child.Value.Value}) ");
+				Console.Write($"({child.Id}, {child.Value}) ");
 				child = child.Next;
 			}
 		}
@@ -71,71 +70,77 @@ class FibonacciHeap {
 	}
 
 	public void Insert(FibNode node) {
-		roots.AddLast(new LinkedListNode<FibNode>(node));
+		roots.AddLast(node);
 		if (Min is null || node.Value < Min.Value) {
 			Min = node;
 		}
 		if (node.Degree > MaxDegree) {
 			max_degree = node.Degree;
 		}
-		count++;
+		length++;
 	}
 
 	public FibNode? ExtractMin() {
 		FibNode? min = Min;
 		if (min is null) return null;
-		LinkedListNode<FibNode>? child = min.Children.First;
+		FibNode? child = min.Children.First;
 		while (child is not null) {
-			Roots.AddLast(child.Value);
-			child.Value.Parent = null;
+			min.Children.Remove(child);
+			Roots.AddLast(child);
+			child.Parent = null;
 			child = child.Next;
 		}
-		Roots.Remove(min);
-		count--;
-		if (Count == 0) return min;
+		if (Min is not null) Roots.Remove(Min);
+		length--;
+		if (length == 0) {
+			min = Min;
+			Min = null;
+			return min;
+		}
 		Compress();
 
 		return min;
 	}
 
-	public LinkedListNode<FibNode> Merge(LinkedListNode<FibNode> node1, LinkedListNode<FibNode> node2) {
-		if (node2.Value.Value < node1.Value.Value) {
-			LinkedListNode<FibNode> tmp = node1;
+	public FibNode Merge(FibNode node1, FibNode node2) {
+		if (node2.Value < node1.Value) {
+			FibNode tmp = node1;
 			node1 = node2;
 			node2 = tmp;
 		}
 
-		node1.Value.AddChild(node2.Value, node1);
 		Roots.Remove(node2);
-		if (node1.Value.Degree > MaxDegree) {
-			max_degree = node1.Value.Degree;
+		node1.AddChild(node2);
+		if (node1.Degree > MaxDegree) {
+			max_degree = node1.Degree;
 		}
 
 		return node1;
 	}
 
 	public void Compress() {
-		LinkedListNode<FibNode>?[] roots_by_degrees = new LinkedListNode<FibNode>[MaxDegree + Convert.ToInt32(Math.Log(Roots.Count, 2)) + 1];
-		LinkedListNode<FibNode>? node = Roots.First;
-		LinkedListNode<FibNode>? next;
+		if (Roots.Count == 0) return;
+		FibNode?[] roots_by_degrees = new FibNode[MaxDegree + Convert.ToInt32(Math.Log(Roots.Count, 2)) + 1];
+		FibNode? node = Roots.First;
+		FibNode? next;
 		while (node is not null) {
 			next = node.Next;
 
-			while (roots_by_degrees[node.Value.Degree] is not null) {
-				node = Merge(roots_by_degrees[node.Value.Degree], node);
-				roots_by_degrees[node.Value.Degree - 1] = null;
+			while (roots_by_degrees[node.Degree] is not null) {
+				node = Merge(roots_by_degrees[node.Degree], node);
+				roots_by_degrees[node.Degree - 1] = null;
 			}
-			roots_by_degrees[node.Value.Degree] = node;
+			roots_by_degrees[node.Degree] = node;
 
 			node = next;
 		}
 	}
 
-	public LinkedListNode<FibNode>? Search(int id, LinkedList<FibNode> roots) {
-		LinkedListNode<FibNode>? root = roots.First;
+	public FibNode? Search(int id, LinkedList roots) {
+		FibNode? root = roots.First;
 		while (root is not null) {
-			if (root.Value.Id == id) return root;
-			LinkedListNode<FibNode>? node = Search(id, root.Value.Children);
+			if (root.Id == id) return root;
+			FibNode? node = Search(id, root.Children);
 			if (node is not null) return node;
 			root = root.Next;
 		}
@@ -143,26 +148,27 @@ class FibonacciHeap {
 	}
 
 	public void DecreaseKey(int id, int value) {
-		LinkedListNode<FibNode>? node = Search(id, Roots);
+		FibNode? node = Search(id, Roots);
 		if (node is null) return;
-		node.Value.Value = value;
-		LinkedListNode<FibNode>? parent = node.Value.Parent;
-		if (parent is not null && value < parent.Value.Value) {
+		if (node.Value < value) throw new ArgumentException("value is bigger than node.Value");
+		node.Value = value;
+		FibNode? parent = node.Parent;
+		if (parent is not null && value < parent.Value) {
 			CutOut(node);
 		}
-		if (value < Min.Value) Min = node.Value;
+		if (value < Min.Value) Min = node;
 	}
 
-	private void CutOut(LinkedListNode<FibNode> node) {
-		LinkedListNode<FibNode>? parent = node.Value.Parent;
+	private void CutOut(FibNode node) {
+		FibNode? parent = node.Parent;
 		if (parent is not null) {
-			parent.Value.Children.Remove(node);
+			parent.Children.Remove(node);
 			Roots.AddLast(node);
 
-			node.Value.Parent = null;
-			node.Value.LostChild = false;
-			if (!parent.Value.LostChild) {
-				parent.Value.LostChild = true;
+			node.Parent = null;
+			node.LostChild = false;
+			if (!parent.LostChild) {
+				parent.LostChild = true;
 			}
 			else CutOut(parent);
 		}
