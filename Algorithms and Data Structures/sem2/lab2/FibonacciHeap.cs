@@ -90,13 +90,10 @@ class FibonacciHeap {
 			child.Parent = null;
 			child = child.Next;
 		}
-		if (Min is not null) Roots.Remove(Min);
+		Roots.Remove(min);
+		Min = null;
 		length--;
-		if (length == 0) {
-			min = Min;
-			Min = null;
-			return min;
-		}
+
 		Compress();
 
 		return min;
@@ -119,7 +116,10 @@ class FibonacciHeap {
 	}
 
 	public void Compress() {
-		if (Roots.Count == 0) return;
+		if (Roots.Count == 0) {
+			Min = null;
+			return;
+		}
 		FibNode?[] roots_by_degrees = new FibNode[MaxDegree + Convert.ToInt32(Math.Log(Roots.Count, 2)) + 1];
 		FibNode? node = Roots.First;
 		FibNode? next;
@@ -132,6 +132,7 @@ class FibonacciHeap {
 			}
 			roots_by_degrees[node.Degree] = node;
 
+			if (Min is null || node.Value < Min.Value) Min = node;
 			node = next;
 		}
 	}

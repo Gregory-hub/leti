@@ -51,15 +51,27 @@ class Program {
         // heap.DecreaseKey(1, -1);
         heap.Print();
         FibNode? min = heap.ExtractMin();
-        if (min is not null) Console.WriteLine($"({min.Id}, {min.Value})");
+        if (min is not null) Console.WriteLine($"Min: ({min.Id}, {min.Value})");
         else Console.WriteLine("Min is null");
 
         heap.Compress();
         heap.Print();
 
         min = heap.ExtractMin();
-        Console.WriteLine($"Min Id: {(min is not null ? min.Id : null)}\n");
+        if (min is not null) Console.WriteLine($"Min: ({min.Id}, {min.Value})");
+        else Console.WriteLine("Min is null");
+
+        heap.Insert(node6);
         heap.Print();
+
+        min = heap.ExtractMin();
+        if (min is not null) Console.WriteLine($"Min: ({min.Id}, {min.Value})");
+        else Console.WriteLine("Min is null");
+
+        heap.Print();
+        min = heap.ExtractMin();
+        if (min is not null) Console.WriteLine($"Min: ({min.Id}, {min.Value})");
+        else Console.WriteLine("Min is null");
 
         Console.ReadLine();
     }
