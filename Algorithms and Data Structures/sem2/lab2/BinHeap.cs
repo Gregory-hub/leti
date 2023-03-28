@@ -21,7 +21,7 @@ class BinHeap {
 		Console.WriteLine();
 	}
 
-	public int SearchById(int id) {
+	public int Search(int id) {
 		for (int i = 0; i < Length; i++) {
 			if (Elements[i].Id == id) return i;
 		}
@@ -80,7 +80,8 @@ class BinHeap {
 		}
 	}
 
-	public Node PopMin() {
+	public Node? ExtractMin() {
+		if (Length == 0) return null;
 		Node min = Elements[0];
 		Delete(0);
 		return min;
