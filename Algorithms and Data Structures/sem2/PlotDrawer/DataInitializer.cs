@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
-
+using System.Windows.Documents;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 public class DataInitializer
 {
@@ -15,10 +18,22 @@ public class DataInitializer
 	}
 
 	public void Initialize() {
-		double[] data = new double[] { 1, 1.2, 4 };
-		AddPlotData(data);
-		data = new double[] { 4.5, 3.2, 1 };
-		AddPlotData(data);
+		string path = Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\data.txt");
+		StreamReader sr = new StreamReader(path);
+		string line = sr.ReadLine();
+		double[] data;
+
+		while (line != null && line != "") {
+		Regex pattern = new Regex(@"\s+");
+			line = pattern.Replace(line, " ");
+			string[] nums = line.Split(' ');
+			data = Array.ConvertAll(nums, new Converter<string, double>((string s) => Double.Parse(s, new CultureInfo("en-US"))));
+			AddPlotData(data);
+
+			line = sr.ReadLine();
+		}
+
+		sr.Close();
 	}
 
 	private void AddPlotData(double[] data) {
