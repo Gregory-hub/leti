@@ -24,11 +24,11 @@ namespace PlotDrawer
 			cartesianChart1.LegendLocation = LegendLocation.Top;
 			cartesianChart1.AxisX.Add(new Axis
 			{
-				Title = "X",
+				Title = "Number of nodes",
 			});
 			cartesianChart1.AxisY.Add(new Axis
 			{
-				Title = "Y",
+				Title = "Time, s",
 				MinValue = 0,
 				Separator = new Separator
 				{
@@ -40,37 +40,23 @@ namespace PlotDrawer
 			});
 
 			DataInitializer initializer = new DataInitializer();
-			foreach (double[] plot in initializer.Plots)
+			this.Text = initializer.Title;
+
+			foreach (DataInitializer.Plot plot in initializer.Plots)
 			{
 				ChartValues<ObservableValue> values = new ChartValues<ObservableValue>();
-				for (int i = 0; i < plot.Length; i++)
+				for (int i = 0; i < plot.Data.Length; i++)
 				{
-					values.Add(new ObservableValue(plot[i]));
+					values.Add(new ObservableValue(plot.Data[i]));
 				}
 				cartesianChart1.Series.Add(new LineSeries
 				{
-					//Title = "Biba",
+					Title = plot.Name,
 					Values = values,
 					//Stroke = System.Windows.Media.Brushes.Violet,
 					//Fill = System.Windows.Media.Brushes.Transparent,
 				});
 			}
-
-			//cartesianChart1.Series.Add(new LineSeries
-			//{
-			//	Title = "Biba",
-			//	Values = new ChartValues<ObservableValue>
-			//	{
-			//		new ObservableValue(1),
-			//		new ObservableValue(3),
-			//		new ObservableValue(4),
-			//		new ObservableValue(25),
-			//		new ObservableValue(17),
-			//	},
-			//	Stroke = System.Windows.Media.Brushes.Violet,
-			//	Fill = System.Windows.Media.Brushes.Transparent,
-			//});
-
 		}
 	}
 }

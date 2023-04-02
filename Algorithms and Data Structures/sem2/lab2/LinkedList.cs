@@ -54,6 +54,7 @@ class LinkedList {
 			First = null;
 			Last = null;
 		}
+		node.Parent = null;
 		node.Next = null;
 		node.Previous = null;
 		node.List = null;

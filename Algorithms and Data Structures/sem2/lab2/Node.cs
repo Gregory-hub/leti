@@ -3,19 +3,19 @@ namespace lab2;
 
 class Node {
 	private int id;
-	private int value;
+	private double value = Double.PositiveInfinity;
 
 	public int Id {
 		set { id = value; }
 		get { return id; }
 	}
 
-	public int Value {
+	public double Value {
 		set { this.value = value; }
 		get { return value; }
 	}
 
-	public Node(int id, int value) {
+	public Node(int id, double value) {
 		this.id = id;
 		this.Value = value;
 	}
@@ -67,5 +67,5 @@ class FibNode : Node {
 		Children.AddLast(child);
 	}
 
-	public FibNode(int id, int value) : base(id, value) {}
+	public FibNode(int id, double value) : base(id, value) {}
 }

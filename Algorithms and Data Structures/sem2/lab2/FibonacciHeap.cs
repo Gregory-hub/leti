@@ -74,9 +74,7 @@ class FibonacciHeap {
 		if (Min is null || node.Value < Min.Value) {
 			Min = node;
 		}
-		if (node.Degree > MaxDegree) {
-			max_degree = node.Degree;
-		}
+		if (node.Degree > MaxDegree) max_degree = node.Degree;
 		length++;
 	}
 
@@ -84,11 +82,13 @@ class FibonacciHeap {
 		FibNode? min = Min;
 		if (min is null) return null;
 		FibNode? child = min.Children.First;
+		FibNode? next_child;
 		while (child is not null) {
+			next_child = child.Next;
 			min.Children.Remove(child);
 			Roots.AddLast(child);
-			child.Parent = null;
-			child = child.Next;
+			if (child.Degree > MaxDegree) max_degree = child.Degree;
+			child = next_child;
 		}
 		Roots.Remove(min);
 		Min = null;
@@ -132,8 +132,16 @@ class FibonacciHeap {
 			}
 			roots_by_degrees[node.Degree] = node;
 
-			if (Min is null || node.Value < Min.Value) Min = node;
 			node = next;
+		}
+
+		max_degree = 0;
+		node = Roots.First;
+		while (node is not null) {
+			if (node.Degree > max_degree) max_degree = node.Degree;
+			if (Min is null || node.Value < Min.Value) Min = node;
+
+			node = node.Next;
 		}
 	}
 
@@ -148,8 +156,7 @@ class FibonacciHeap {
 		return null;
 	}
 
-	public void DecreaseKey(int id, int value) {
-		FibNode? node = Search(id, Roots);
+	public void DecreaseKey(FibNode node, double value) {
 		if (node is null) return;
 		if (node.Value < value) throw new ArgumentException("value is bigger than node.Value");
 		node.Value = value;
@@ -165,6 +172,7 @@ class FibonacciHeap {
 		if (parent is not null) {
 			parent.Children.Remove(node);
 			Roots.AddLast(node);
+			if (node.Degree > max_degree) max_degree = node.Degree;
 
 			node.Parent = null;
 			node.LostChild = false;

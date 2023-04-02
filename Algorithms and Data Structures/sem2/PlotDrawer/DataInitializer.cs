@@ -5,39 +5,66 @@ using System.Windows.Documents;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-public class DataInitializer
+namespace PlotDrawer
 {
-	private List<double[]> plots = new List<double[]>();
-	public List<double[]> Plots {
-		get { return plots; }
-	}
-
-	public DataInitializer()
+	public class DataInitializer
 	{
-		Initialize();
-	}
+		public struct Plot
+		{
+			public string Name;
+			public double[] Data;
 
-	public void Initialize() {
-		string path = Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\data.txt");
-		StreamReader sr = new StreamReader(path);
-		string line = sr.ReadLine();
-		double[] data;
-
-		while (line != null && line != "") {
-		Regex pattern = new Regex(@"\s+");
-			line = pattern.Replace(line, " ");
-			string[] nums = line.Split(' ');
-			data = Array.ConvertAll(nums, new Converter<string, double>((string s) => Double.Parse(s, new CultureInfo("en-US"))));
-			AddPlotData(data);
-
-			line = sr.ReadLine();
+			public Plot(string name, double[] data)
+			{
+				Name = name;
+				Data = data;
+			}
 		}
 
-		sr.Close();
-	}
+		private List<Plot> plots = new List<Plot>();
+		public List<Plot> Plots
+		{
+			get { return plots; }
+		}
 
-	private void AddPlotData(double[] data) {
-		Plots.Add(data);
+		public string Title;
+
+		public DataInitializer()
+		{
+			Initialize();
+		}
+
+		public void Initialize()
+		{
+			this.Title = Globals.title;
+
+			string path = Directory.GetCurrentDirectory() + "\\data.txt";
+			StreamReader sr = new StreamReader(path);
+			string line = sr.ReadLine();
+			double[] data;
+			string name;
+			string[] nums;
+
+			while (line != null && line != "")
+			{
+				name = line.Split(':')[0];
+				line = line.Split(':')[1];
+				Regex pattern = new Regex(@"\s+");
+				line = pattern.Replace(line, " ");
+				nums = line.Trim().Split(' ');
+				data = Array.ConvertAll(nums, new Converter<string, double>((string s) => Double.Parse(s, new CultureInfo("en-US"))));
+				AddPlotData(name, data);
+
+				line = sr.ReadLine();
+			}
+
+			sr.Close();
+		}
+
+		private void AddPlotData(string name, double[] data)
+		{
+			Plots.Add(new Plot(name, data));
+		}
 	}
 }
 
