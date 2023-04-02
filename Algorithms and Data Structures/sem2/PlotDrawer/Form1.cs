@@ -1,15 +1,18 @@
 ﻿using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
+using LiveCharts.Wpf.Charts.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
 
@@ -28,7 +31,7 @@ namespace PlotDrawer
 			});
 			cartesianChart1.AxisY.Add(new Axis
 			{
-				Title = "Time, s",
+				Title = "Time",
 				MinValue = 0,
 				Separator = new Separator
 				{
@@ -57,6 +60,11 @@ namespace PlotDrawer
 					//Fill = System.Windows.Media.Brushes.Transparent,
 				});
 			}
+
+
+			Bitmap bmp = new Bitmap(cartesianChart1.Width, cartesianChart1.Height);
+			cartesianChart1.DrawToBitmap(bmp, cartesianChart1.RectangleToScreen(new Rectangle(0, 0, cartesianChart1.Width, cartesianChart1.Height)));
+			bmp.Save("chart.png");
 		}
 	}
 }

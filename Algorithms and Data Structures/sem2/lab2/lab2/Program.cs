@@ -31,7 +31,7 @@ class Program {
 
         PlotDataCreator dataCreator = new PlotDataCreator("data.txt");
         Console.WriteLine("Running...");
-        dataCreator.CreatePlotData(100, 500);
+        dataCreator.CreatePlotData(20, 800);
         Console.WriteLine("Success!");
 
         Console.ReadLine();
