@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\leti\\Algorithms and Data Structures\\sem2\\lab2\\lab2.csproj": {}
+    "F:\\leti\\Algorithms and Data Structures\\sem2\\lab2\\lab2\\lab2.csproj": {}
   },
   "projects": {
-    "F:\\leti\\Algorithms and Data Structures\\sem2\\lab2\\lab2.csproj": {
+    "F:\\leti\\Algorithms and Data Structures\\sem2\\lab2\\lab2\\lab2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\leti\\Algorithms and Data Structures\\sem2\\lab2\\lab2.csproj",
+        "projectUniqueName": "F:\\leti\\Algorithms and Data Structures\\sem2\\lab2\\lab2\\lab2.csproj",
         "projectName": "lab2",
-        "projectPath": "F:\\leti\\Algorithms and Data Structures\\sem2\\lab2\\lab2.csproj",
+        "projectPath": "F:\\leti\\Algorithms and Data Structures\\sem2\\lab2\\lab2\\lab2.csproj",
         "packagesPath": "C:\\Users\\greg\\.nuget\\packages\\",
-        "outputPath": "F:\\leti\\Algorithms and Data Structures\\sem2\\lab2\\obj\\",
+        "outputPath": "F:\\leti\\Algorithms and Data Structures\\sem2\\lab2\\lab2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
