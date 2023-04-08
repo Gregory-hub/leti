@@ -1,4 +1,3 @@
-
 function n = pob(N, alph)
 q = 1;
 for n = 2 : N
