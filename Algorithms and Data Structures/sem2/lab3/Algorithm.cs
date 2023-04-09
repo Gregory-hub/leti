@@ -73,7 +73,7 @@ class Algorithm
 		return text_decoded;
 	}
 
-	public string EncodeHaffman(string text, out Dictionary<char, string> codes)
+	public string EncodeHuffman(string text, out Dictionary<char, string> codes)
 	{
 		codes = new Dictionary<char, string>();
 		if (text.Length == 0) return "";
@@ -105,7 +105,7 @@ class Algorithm
 		tree.Root = queue.Dequeue();
 
 		codes = new Dictionary<char, string>();
-		GetHaffmanCodes(tree.Root, ref codes);
+		GetHuffmanCodes(tree.Root, ref codes);
 
 		string text_encoded = "";
 		foreach(char sym in text) text_encoded = text_encoded + codes[sym];
@@ -113,7 +113,7 @@ class Algorithm
 		return text_encoded;
 	}
 
-	private void GetHaffmanCodes(BinTreeNode? root, ref Dictionary<char, string> codes, string code = "")
+	private void GetHuffmanCodes(BinTreeNode? root, ref Dictionary<char, string> codes, string code = "")
 	{
 		if (root is null) return;
 	
@@ -124,7 +124,27 @@ class Algorithm
 			return;
 		}
 
-		GetHaffmanCodes(root.Left, ref codes, code + "0");
-		GetHaffmanCodes(root.Right, ref codes, code + "1");
+		GetHuffmanCodes(root.Left, ref codes, code + "0");
+		GetHuffmanCodes(root.Right, ref codes, code + "1");
+	}
+
+	public string DecodeHuffman(string text, Dictionary<char, string> codes)
+	{
+		Dictionary<string, char> codes_reversed = new Dictionary<string, char>();
+		foreach (var code in codes) codes_reversed[code.Value] = code.Key;
+		string text_decoded = "";
+		int i = 0;
+		string current_code = "";
+		while (i < text.Length)
+		{
+			current_code = current_code + text[i];
+			if (codes_reversed.ContainsKey(current_code))
+			{
+				text_decoded = text_decoded + codes_reversed[current_code];
+				current_code = "";
+			}
+			i++;
+		}
+		return text_decoded;
 	}
 }
