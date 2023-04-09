@@ -5,9 +5,14 @@ class Program
     {
         Algorithm algorithm = new Algorithm();
 
-        string text = "1e2r1e3t1r";
+        string text = "badcadbdd";
 
-        Console.WriteLine(algorithm.decode_RLE(text));
+        Console.WriteLine($"Text: {text}");
+        Console.WriteLine($"RLE encoded: {algorithm.EncodeRLE(text)}");
+        Console.WriteLine($"RLE encoded and decoded: {algorithm.DecodeRLE(algorithm.EncodeRLE(text))}");
+        Console.WriteLine($"Haffman encoded: {algorithm.EncodeHaffman(text, out Dictionary<char, string> codes)}");
+        foreach (var code in codes) Console.WriteLine($"    {code.Key}: {code.Value}");
+        // Console.WriteLine($"Haffman encoded and decoded: {algorithm.DecodeHaffman(algorithm.EncodeHaffman(text))}");
         Console.Read();
     }
 }
