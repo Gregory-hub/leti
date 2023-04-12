@@ -58,13 +58,11 @@ class Algorithm
 		int i = 0;
 		while (i < text.Length) 
 		{
-			// read number
 			while (Char.IsDigit(text[i]))
 			{
 				number = number + text[i];
 				i++;
 			}
-			// replace with symbol
 			for (int j = 0; j < Convert.ToInt32(number); j++) text_decoded = text_decoded + text[i];
 			number = "";
 			i++;
@@ -145,6 +143,86 @@ class Algorithm
 			}
 			i++;
 		}
+		return text_decoded;
+	}
+
+	struct LZ78DictEntry
+	{
+		public int Index;
+		public char Symbol;
+
+		public LZ78DictEntry(int index, char symbol)
+		{
+			Index = index;
+			Symbol = symbol;
+		}
+	}
+
+
+	public string EncodeLZ78(string text)
+	{
+		string text_encoded = "";
+		Dictionary<string, LZ78DictEntry> dict = new Dictionary<string, LZ78DictEntry>();
+		string buffer = "";
+		int index = 0;
+
+		for (int i = 0; i < text.Length; i++)
+		{
+			if (!dict.ContainsKey(buffer + text[i]))
+			{
+				index++;
+				dict[buffer + text[i]] = new LZ78DictEntry(index, text[i]);
+
+				if (dict.ContainsKey(buffer)) text_encoded = text_encoded + dict[buffer].Index + text[i];
+				else text_encoded = text_encoded + "0" + text[i];
+				buffer = "";
+			}
+			else
+			{
+				buffer = buffer + text[i];
+			}
+		}
+		if (buffer.Length != 0)
+		{
+			char symbol = buffer[buffer.Length - 1];
+			buffer = buffer.Substring(0, buffer.Length - 1);
+			if (dict.ContainsKey(buffer)) text_encoded = text_encoded + dict[buffer].Index + symbol;
+			else text_encoded = text_encoded + "0" + symbol;
+		}
+		return text_encoded;
+	}
+
+
+	public string DecodeLZ78(string text)
+	{
+		if (text.Length == 0) return text;
+
+		string text_decoded = "";
+		Dictionary<int, string> dict = new Dictionary<int, string>();
+		int index = 0;
+
+		string number = "";
+		for (int i = 0; i < text.Length; i++)
+		{
+			while (Char.IsDigit(text[i]))
+			{
+				number = number + text[i];
+				i++;
+			}
+			index++;
+			if (number == "0") {
+				text_decoded = text_decoded + text[i];
+				dict[index] = text[i].ToString();
+			}
+			else
+			{
+				text_decoded = text_decoded + dict[Convert.ToInt32(number)] + text[i];
+				dict[index] = dict[Convert.ToInt32(number)] + text[i].ToString();
+			}
+
+			number = "";
+		}
+
 		return text_decoded;
 	}
 }
