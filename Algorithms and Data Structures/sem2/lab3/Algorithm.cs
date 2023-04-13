@@ -225,4 +225,47 @@ class Algorithm
 
 		return text_decoded;
 	}
+
+
+	public string BWTTransform(string text)
+	{
+		text += '\0';
+		string text_transformed = "";
+		string[] substrings = new string[text.Length];
+		for (int i = 0; i < text.Length; i++)
+		{
+			substrings[i] = text.Substring(i, text.Length - i) + text.Substring(0, i);
+		}
+		Array.Sort(substrings, StringComparer.Ordinal);
+		for (int i = 0; i < substrings.Length; i++)
+		{
+			text_transformed += substrings[i][substrings.Length - 1];
+		}
+
+		return text_transformed;
+	}
+
+	public string BWTDetransform(string text)
+	{
+		string text_detransformed = "";
+		string[] substrings = new string[text.Length];
+		for (int i = 0; i < text.Length; i++)
+		{
+			for (int j = 0; j < text.Length; j++)
+			{
+				substrings[j] = text[j] + substrings[j];
+			}
+			Array.Sort(substrings, StringComparer.Ordinal);
+		}
+
+		for (int i = 0; i < substrings.Length; i++)
+		{
+			if (substrings[i][substrings.Length - 1] == '\0')
+			{
+				text_detransformed = substrings[i].Substring(0, substrings.Length - 1);
+				break;
+			}
+		}
+		return text_detransformed;
+	}
 }
