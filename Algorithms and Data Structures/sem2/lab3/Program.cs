@@ -5,7 +5,7 @@ class Program
     {
         Algorithm algorithm = new Algorithm();
 
-        string text = "hamud habibi hamud";
+        string text = "aboba habibi";
 
         Console.WriteLine($"Text: {text}");
         Console.WriteLine($"RLE encoded: {algorithm.EncodeRLE(text)}");
@@ -17,6 +17,8 @@ class Program
         Console.WriteLine($"LZ78 encoded and decoded: {algorithm.DecodeLZ78(algorithm.EncodeLZ78(text))}");
         Console.WriteLine($"BWT transformed: {algorithm.BWTTransform(text)}");
         Console.WriteLine($"BWT transformed and detransformed: {algorithm.BWTDetransform(algorithm.BWTTransform(text))}");
+        Console.WriteLine($"MTF transformed: {algorithm.MTFTransform(text)}");
+        Console.WriteLine($"MTF transformed and detransformed: {algorithm.MTFDetransform(algorithm.MTFTransform(text))}");
         Console.Read();
     }
 }

@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace lab3;
 
 
@@ -26,6 +28,13 @@ class BinTree
 
 class Algorithm
 {
+	private char[] letters_popular = new char[256];
+
+	public Algorithm()
+	{
+		InitializePopularLettersArray();
+	}
+
 	public string EncodeRLE(string text)
 	{
 		if (text.Length == 0) return text;
@@ -265,6 +274,74 @@ class Algorithm
 				text_detransformed = substrings[i].Substring(0, substrings.Length - 1);
 				break;
 			}
+		}
+		return text_detransformed;
+	}
+
+	
+	private void InitializePopularLettersArray()
+	{
+		string popular = "EARIOTNSLCUDPMHGBFYWKVXZJQ";
+		popular = popular.ToLower() + popular;
+
+		for (int i = 0; i < 52; i++) letters_popular[i] = popular.ToCharArray()[i];
+		for (int i = 32; i < 65; i++) letters_popular[52 + i - 32] = (char)i;
+		for (int i = 91; i < 97; i++) letters_popular[85 + i - 91] = (char)i;
+		for (int i = 123; i < 128; i++) letters_popular[91 + i - 123] = (char)i;
+		for (int i = 0; i < 32; i++) letters_popular[123 + i] = (char)i;
+		for (int i = 128; i < 256; i++) letters_popular[i] = (char)i;
+	}
+
+
+	public string MTFTransform(string text)
+	{
+		string text_transformed = "";
+		char[] letters = new char[256];
+		letters_popular.CopyTo(letters, 0);
+		char tmp;
+		char tmp_2;
+		for (int i = 0; i < text.Length; i++)
+		{
+			tmp = letters[0];
+			for (int j = 0; j < letters.Length; j++)
+			{
+				tmp_2 = letters[j];
+				letters[j] = tmp;
+				tmp = tmp_2;
+				if (tmp == text[i])
+				{
+					text_transformed += j.ToString() + ' ';
+					break;
+				}
+			}
+			letters[0] = text[i];
+		}
+		return text_transformed;
+	}
+
+	public string MTFDetransform(string text)
+	{
+		if (text == "") return text;
+		string text_detransformed = "";
+		char[] letters = new char[256];
+		letters_popular.CopyTo(letters, 0);
+		int[] nums = Array.ConvertAll(text.Trim().Split(' '), new Converter<string, int>((string s) => Int32.Parse(s)));
+
+		char tmp;
+		char tmp_2;
+		char current_char;
+		for (int i = 0; i < nums.Length; i++)
+		{
+			tmp = letters[0];
+			current_char = letters[nums[i]];
+			text_detransformed += letters[nums[i]];
+			for (int j = 0; j <= nums[i]; j++)
+			{
+				tmp_2 = letters[j];
+				letters[j] = tmp;
+				tmp = tmp_2;
+			}
+			letters[0] = current_char;
 		}
 		return text_detransformed;
 	}
