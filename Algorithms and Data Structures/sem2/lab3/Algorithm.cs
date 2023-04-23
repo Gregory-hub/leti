@@ -35,6 +35,18 @@ class Algorithm
 		InitializePopularLettersArray();
 	}
 
+	struct LZ78DictEntry
+	{
+		public int Index;
+		public char Symbol;
+
+		public LZ78DictEntry(int index, char symbol)
+		{
+			Index = index;
+			Symbol = symbol;
+		}
+	}
+
 	public string EncodeRLE(string text)
 	{
 		if (text.Length == 0) return text;
@@ -155,19 +167,6 @@ class Algorithm
 		return text_decoded;
 	}
 
-	struct LZ78DictEntry
-	{
-		public int Index;
-		public char Symbol;
-
-		public LZ78DictEntry(int index, char symbol)
-		{
-			Index = index;
-			Symbol = symbol;
-		}
-	}
-
-
 	public string EncodeLZ78(string text)
 	{
 		string text_encoded = "";
@@ -201,7 +200,6 @@ class Algorithm
 		return text_encoded;
 	}
 
-
 	public string DecodeLZ78(string text)
 	{
 		if (text.Length == 0) return text;
@@ -234,7 +232,6 @@ class Algorithm
 
 		return text_decoded;
 	}
-
 
 	public string BWTTransform(string text)
 	{
@@ -278,7 +275,6 @@ class Algorithm
 		return text_detransformed;
 	}
 
-	
 	private void InitializePopularLettersArray()
 	{
 		string popular = "EARIOTNSLCUDPMHGBFYWKVXZJQ";
@@ -344,5 +340,160 @@ class Algorithm
 			letters[0] = current_char;
 		}
 		return text_detransformed;
+	}
+
+	public string EncodeArithmetic(string text, out Dictionary<char, UInt128[]> frequency_distribution)
+	{
+		// init
+		text += '\0';
+		string text_encoded = "";
+
+		UInt128 ratio = UInt128.MaxValue / (UInt128)text.Length;
+		UInt128 whole = ratio * (UInt128)text.Length;	// almost UInt128.MaxValue
+		UInt128 half = whole / 2;
+		UInt128 quater = whole / 4;
+		UInt128 a = 0;
+		UInt128 b = whole;
+
+		// create frequency_distribution
+		frequency_distribution = new Dictionary<char, UInt128[]>();
+		for (int i = 0; i < text.Length; i++)
+		{
+			if (frequency_distribution.ContainsKey(text[i])) frequency_distribution[text[i]][0]++;
+			else 
+			{
+				frequency_distribution[text[i]] = new UInt128[2];
+				frequency_distribution[text[i]][0] = 1;
+			}
+		}
+
+		UInt128 prev = 0;
+		foreach (KeyValuePair<char, UInt128[]> pair in frequency_distribution)
+		{
+			frequency_distribution[pair.Key][1] = prev + pair.Value[0] * ratio;
+			frequency_distribution[pair.Key][0] = prev;
+			prev = frequency_distribution[pair.Key][1];
+		}
+
+		// algorithm
+		int s = 0;
+		UInt128 width;
+		UInt128 a_prev;
+		foreach (char sym in text)
+		{
+			a_prev = a;
+			width = b - a;
+			a = a_prev + (UInt128)((double)frequency_distribution[sym][0] / (double)whole * (double)width);
+			b = a_prev + (UInt128)((double)frequency_distribution[sym][1] / (double)whole * (double)width);
+
+			while (b < half || a > half)
+			{
+				if (b < half)
+				{
+					a = 2 * a;
+					b = 2 * b;
+					text_encoded += "0";
+					for (int i = 0; i < s; i++) text_encoded += "1";
+					s = 0;
+				}
+				else
+				{
+					a = 2 * (a - half);
+					b = 2 * (b - half);
+					text_encoded += "1";
+					for (int i = 0; i < s; i++) text_encoded += "0";
+					s = 0;
+				}
+			}
+			while (a > quater && b < 3 * quater)
+			{
+				s++;
+				a = 2 * (a - quater);
+				b = 2 * (b - quater);
+			}
+		}
+
+		s++;
+		if (a <= quater)
+		{
+			text_encoded += "0";
+			for (int i = 0; i < s; i++) text_encoded += "1";
+		}
+		else
+		{
+			text_encoded += "1";
+			for (int i = 0; i < s; i++) text_encoded += "0";
+		}
+
+		return text_encoded;
+	}
+
+	public string DecodeArithmetic(string text, Dictionary<char, UInt128[]> frequency_distribution)
+	{
+		string text_decoded = "";
+		int precision = 128;
+		UInt128 ratio = UInt128.MaxValue / (UInt128)text.Length;
+		UInt128 whole = ratio * (UInt128)text.Length;	// almost UInt128.MaxValue
+		UInt128 half = whole / 2;
+		UInt128 quater = whole / 4;
+		UInt128 a = 0;
+		UInt128 b = whole;
+		UInt128 approximated_number = 0;
+
+		int i = 0;
+		while (i < text.Length && i < precision)
+		{
+			if (text[i] == '1') approximated_number += (UInt128)Math.Pow(2, precision - i - 1);
+			i++;
+		}
+
+		UInt128 a_tmp = a;
+		UInt128 b_tmp = b;
+		UInt128 width;
+		while (true)
+		{
+			foreach (KeyValuePair<char, UInt128[]> pair in frequency_distribution)
+			{
+				width = b - a;
+				a_tmp = a + (UInt128)((double)width / (double)whole * (double)pair.Value[0]);
+				b_tmp = a + (UInt128)((double)width / (double)whole * (double)pair.Value[1]);
+
+				if (a_tmp <= approximated_number && approximated_number < b_tmp)
+				{
+					if (pair.Key == '\0') return text_decoded;
+					text_decoded += pair.Key;
+					a = a_tmp;
+					b = b_tmp;
+					break;
+				}
+			}
+
+			while (b < half || a > half)
+			{
+				if (b < half)
+				{
+					a = 2 * a;
+					b = 2 * b;
+					approximated_number = 2 * approximated_number;
+				}
+				else
+				{
+					a = 2 * (a - half);
+					b = 2 * (b - half);
+					approximated_number = 2 * (approximated_number - half);
+				}
+				if (i < text.Length && text[i] == '1') approximated_number++;
+				i++;
+			}
+
+			while (a > quater && b < 3 * quater)
+			{
+				a = 2 * (a - quater);
+				b = 2 * (b - quater);
+				approximated_number = 2 * (approximated_number - quater);
+				if (i < text.Length && text[i] == '1') approximated_number++;
+				i++;
+			}
+		}
 	}
 }

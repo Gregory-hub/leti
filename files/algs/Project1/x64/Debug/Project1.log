@@ -1,0 +1,20 @@
+﻿  Source.cpp
+F:\leti\files\algs\Project1\Source.cpp(49,15): warning C4305: 'initializing': truncation from 'int' to 'char'
+F:\leti\files\algs\Project1\Source.cpp(49,11): warning C4309: 'initializing': truncation of constant value
+F:\leti\files\algs\Project1\Source.cpp(129,14): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+F:\leti\files\algs\Project1\Source.cpp(138,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\leti\files\algs\Project1\Source.cpp(138,29): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+F:\leti\files\algs\Project1\Source.cpp(166,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\leti\files\algs\Project1\Source.cpp(260,49): warning C4305: 'argument': truncation from 'int' to 'char'
+F:\leti\files\algs\Project1\Source.cpp(260,34): warning C4309: 'argument': truncation of constant value
+F:\leti\files\algs\Project1\Source.cpp(289,17): warning C4305: 'initializing': truncation from 'int' to 'char'
+F:\leti\files\algs\Project1\Source.cpp(289,13): warning C4309: 'initializing': truncation of constant value
+F:\leti\files\algs\Project1\Source.cpp(290,31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\leti\files\algs\Project1\Source.cpp(301,7): warning C4101: 'is_search': unreferenced local variable
+F:\leti\files\algs\Project1\Source.cpp(369,24): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\leti\files\algs\Project1\Source.cpp(390,10): warning C4101: 'k': unreferenced local variable
+F:\leti\files\algs\Project1\Source.cpp(731,28): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+F:\leti\files\algs\Project1\Source.cpp(715): warning C4715: 'find_symbol': not all control paths return a value
+F:\leti\files\algs\Project1\Source.cpp(232): warning C4715: 'LZ78_node::find_child': not all control paths return a value
+F:\leti\files\algs\Project1\Source.cpp(221): warning C4715: 'LZ78_node::find_child': not all control paths return a value
+  Project1.vcxproj -> F:\leti\files\algs\Project1\x64\Debug\Project1.exe
