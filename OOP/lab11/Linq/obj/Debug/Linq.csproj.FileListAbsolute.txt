@@ -1,0 +1,11 @@
+F:\leti\OOP\lab11\Linq\bin\Debug\Linq.exe.config
+F:\leti\OOP\lab11\Linq\bin\Debug\Linq.exe
+F:\leti\OOP\lab11\Linq\bin\Debug\Linq.pdb
+F:\leti\OOP\lab11\Linq\obj\Debug\Linq.csproj.AssemblyReference.cache
+F:\leti\OOP\lab11\Linq\obj\Debug\Linq.csproj.SuggestedBindingRedirects.cache
+F:\leti\OOP\lab11\Linq\obj\Debug\Linq.Form1.resources
+F:\leti\OOP\lab11\Linq\obj\Debug\Linq.Properties.Resources.resources
+F:\leti\OOP\lab11\Linq\obj\Debug\Linq.csproj.GenerateResource.cache
+F:\leti\OOP\lab11\Linq\obj\Debug\Linq.csproj.CoreCompileInputs.cache
+F:\leti\OOP\lab11\Linq\obj\Debug\Linq.exe
+F:\leti\OOP\lab11\Linq\obj\Debug\Linq.pdb

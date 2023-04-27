@@ -1,0 +1,8 @@
+F:\leti\OOP\lab8\lab8\bin\Debug\lab8.exe.config
+F:\leti\OOP\lab8\lab8\bin\Debug\lab8.exe
+F:\leti\OOP\lab8\lab8\bin\Debug\lab8.pdb
+F:\leti\OOP\lab8\lab8\obj\Debug\lab8.csproj.AssemblyReference.cache
+F:\leti\OOP\lab8\lab8\obj\Debug\lab8.csproj.SuggestedBindingRedirects.cache
+F:\leti\OOP\lab8\lab8\obj\Debug\lab8.csproj.CoreCompileInputs.cache
+F:\leti\OOP\lab8\lab8\obj\Debug\lab8.exe
+F:\leti\OOP\lab8\lab8\obj\Debug\lab8.pdb
