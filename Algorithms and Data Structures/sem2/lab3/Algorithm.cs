@@ -342,49 +342,52 @@ class Algorithm
 		return text_detransformed;
 	}
 
-	public string EncodeArithmetic(string text, out Dictionary<char, UInt128[]> frequency_distribution)
+
+	public class ArithmeticEncoder
 	{
-		// init
-		text += '\0';
-		string text_encoded = "";
+		private UInt128 ratio, whole, half, quater, a, b;
+		private int s = 0;
+		private Dictionary<char, UInt128> Freqs = new Dictionary<char, UInt128>();	// counts
+		private Dictionary<char, UInt128[]> CumFreqs = new Dictionary<char, UInt128[]>();	// cumulative frequencies
 
-		UInt128 ratio = UInt128.MaxValue / (UInt128)text.Length;
-		UInt128 whole = ratio * (UInt128)text.Length;	// almost UInt128.MaxValue
-		UInt128 half = whole / 2;
-		UInt128 quater = whole / 4;
-		UInt128 a = 0;
-		UInt128 b = whole;
-
-		// create frequency_distribution
-		frequency_distribution = new Dictionary<char, UInt128[]>();
-		for (int i = 0; i < text.Length; i++)
+		private void InitializeConstants(string text)
 		{
-			if (frequency_distribution.ContainsKey(text[i])) frequency_distribution[text[i]][0]++;
-			else 
+			ratio = UInt128.MaxValue / (UInt128)text.Length;
+			whole = ratio * (UInt128)text.Length;	// almost UInt128.MaxValue
+			half = whole / 2;
+			quater = whole / 4;
+		}
+
+		private Dictionary<char, UInt128[]> CreateFrequencyDistribution(string text)
+		{
+			CumFreqs = new Dictionary<char, UInt128[]>();
+			for (int i = 0; i < text.Length; i++)
 			{
-				frequency_distribution[text[i]] = new UInt128[2];
-				frequency_distribution[text[i]][0] = 1;
+				if (CumFreqs.ContainsKey(text[i])) CumFreqs[text[i]][0]++;
+				else 
+				{
+					CumFreqs[text[i]] = new UInt128[2];
+					CumFreqs[text[i]][0] = 1;
+				}
 			}
+
+			UInt128 prev = 0;
+			foreach (KeyValuePair<char, UInt128[]> pair in CumFreqs)
+			{
+				CumFreqs[pair.Key][1] = prev + pair.Value[0] * ratio;
+				CumFreqs[pair.Key][0] = prev;
+				prev = CumFreqs[pair.Key][1];
+			}
+
+			return CumFreqs;
 		}
 
-		UInt128 prev = 0;
-		foreach (KeyValuePair<char, UInt128[]> pair in frequency_distribution)
+		private void Update(char sym, ref string text_encoded)
 		{
-			frequency_distribution[pair.Key][1] = prev + pair.Value[0] * ratio;
-			frequency_distribution[pair.Key][0] = prev;
-			prev = frequency_distribution[pair.Key][1];
-		}
-
-		// algorithm
-		int s = 0;
-		UInt128 width;
-		UInt128 a_prev;
-		foreach (char sym in text)
-		{
-			a_prev = a;
-			width = b - a;
-			a = a_prev + (UInt128)((double)frequency_distribution[sym][0] / (double)whole * (double)width);
-			b = a_prev + (UInt128)((double)frequency_distribution[sym][1] / (double)whole * (double)width);
+			UInt128 a_prev = a;
+			UInt128 width = b - a;
+			a = a_prev + (UInt128)((double)CumFreqs[sym][0] / (double)whole * (double)width);
+			b = a_prev + (UInt128)((double)CumFreqs[sym][1] / (double)whole * (double)width);
 
 			while (b < half || a > half)
 			{
@@ -413,87 +416,158 @@ class Algorithm
 			}
 		}
 
-		s++;
-		if (a <= quater)
+		private void Finish(ref string text_encoded)
 		{
-			text_encoded += "0";
-			for (int i = 0; i < s; i++) text_encoded += "1";
-		}
-		else
-		{
-			text_encoded += "1";
-			for (int i = 0; i < s; i++) text_encoded += "0";
+			s++;
+			if (a <= quater)
+			{
+				text_encoded += "0";
+				for (int i = 0; i < s; i++) text_encoded += "1";
+			}
+			else
+			{
+				text_encoded += "1";
+				for (int i = 0; i < s; i++) text_encoded += "0";
+			}
 		}
 
-		return text_encoded;
+		public string Encode(string text, out Dictionary<char, UInt128[]> out_CumFreqs)
+		{
+			// init
+			text += '\0';
+			string text_encoded = "";
+			InitializeConstants(text);
+
+			a = 0;
+			b = whole;
+
+			// create CumFreqs
+			CumFreqs = CreateFrequencyDistribution(text);
+
+			// algorithm
+			foreach (char sym in text)
+			{
+				Update(sym, ref text_encoded);
+			}
+			Finish(ref text_encoded);
+
+			out_CumFreqs = CumFreqs;
+			return text_encoded;
+		}
+
+		public string Decode(string text, Dictionary<char, UInt128[]> frequency_dist)
+		{
+			string text_decoded = "";
+			int precision = 128;
+			InitializeConstants(text);
+
+			a = 0;
+			b = whole;
+			UInt128 approximated_number = 0;
+
+			CumFreqs = frequency_dist;
+
+			int i = 0;
+			while (i < text.Length && i < precision)
+			{
+				if (text[i] == '1') approximated_number += (UInt128)Math.Pow(2, precision - i - 1);
+				i++;
+			}
+
+			UInt128 a_tmp = a;
+			UInt128 b_tmp = b;
+			UInt128 width;
+			while (true)
+			{
+				foreach (KeyValuePair<char, UInt128[]> pair in CumFreqs)
+				{
+					width = b - a;
+					a_tmp = a + (UInt128)((double)width / (double)whole * (double)pair.Value[0]);
+					b_tmp = a + (UInt128)((double)width / (double)whole * (double)pair.Value[1]);
+
+					if (a_tmp <= approximated_number && approximated_number < b_tmp)
+					{
+						if (pair.Key == '\0') return text_decoded;
+						text_decoded += pair.Key;
+						a = a_tmp;
+						b = b_tmp;
+						break;
+					}
+				}
+
+				while (b < half || a > half)
+				{
+					if (b < half)
+					{
+						a = 2 * a;
+						b = 2 * b;
+						approximated_number = 2 * approximated_number;
+					}
+					else
+					{
+						a = 2 * (a - half);
+						b = 2 * (b - half);
+						approximated_number = 2 * (approximated_number - half);
+					}
+					if (i < text.Length && text[i] == '1') approximated_number++;
+					i++;
+				}
+
+				while (a > quater && b < 3 * quater)
+				{
+					a = 2 * (a - quater);
+					b = 2 * (b - quater);
+					approximated_number = 2 * (approximated_number - quater);
+					if (i < text.Length && text[i] == '1') approximated_number++;
+					i++;
+				}
+			}
+		}
 	}
 
-	public string DecodeArithmetic(string text, Dictionary<char, UInt128[]> frequency_distribution)
+	public class PPMEncoder
 	{
-		string text_decoded = "";
-		int precision = 128;
-		UInt128 ratio = UInt128.MaxValue / (UInt128)text.Length;
-		UInt128 whole = ratio * (UInt128)text.Length;	// almost UInt128.MaxValue
-		UInt128 half = whole / 2;
-		UInt128 quater = whole / 4;
-		UInt128 a = 0;
-		UInt128 b = whole;
-		UInt128 approximated_number = 0;
-
-		int i = 0;
-		while (i < text.Length && i < precision)
+		class Model
 		{
-			if (text[i] == '1') approximated_number += (UInt128)Math.Pow(2, precision - i - 1);
-			i++;
+			private const int order = 3;
+			public static int Order
+			{
+				get { return order; }
+			}
+			private List<Context> contexts = new List<Context>();
+			public List<Context> Contexts
+			{
+				get { return contexts; }
+			}
+
+			private void AddContext(string str)
+			{
+				Context ctx = new Context(str);
+				Contexts.Add(ctx);
+			}
+
+			public class Context
+			{
+				private int order;
+				public string Str;
+				public Dictionary<char, int> Frequencies = new Dictionary<char, int>();
+
+				public Context(string str)
+				{
+					Str = str;
+					if (str.Length <= Model.Order) order = str.Length;
+					else throw new InvalidDataException($"Order must at most {Model.Order}");
+				}
+			}
 		}
 
-		UInt128 a_tmp = a;
-		UInt128 b_tmp = b;
-		UInt128 width;
-		while (true)
+		string Encode(string text, int model_order = 4)
 		{
-			foreach (KeyValuePair<char, UInt128[]> pair in frequency_distribution)
-			{
-				width = b - a;
-				a_tmp = a + (UInt128)((double)width / (double)whole * (double)pair.Value[0]);
-				b_tmp = a + (UInt128)((double)width / (double)whole * (double)pair.Value[1]);
-
-				if (a_tmp <= approximated_number && approximated_number < b_tmp)
-				{
-					if (pair.Key == '\0') return text_decoded;
-					text_decoded += pair.Key;
-					a = a_tmp;
-					b = b_tmp;
-					break;
-				}
-			}
-
-			while (b < half || a > half)
-			{
-				if (b < half)
-				{
-					a = 2 * a;
-					b = 2 * b;
-					approximated_number = 2 * approximated_number;
-				}
-				else
-				{
-					a = 2 * (a - half);
-					b = 2 * (b - half);
-					approximated_number = 2 * (approximated_number - half);
-				}
-				if (i < text.Length && text[i] == '1') approximated_number++;
-				i++;
-			}
-
-			while (a > quater && b < 3 * quater)
-			{
-				a = 2 * (a - quater);
-				b = 2 * (b - quater);
-				approximated_number = 2 * (approximated_number - quater);
-				if (i < text.Length && text[i] == '1') approximated_number++;
-				i++;
-			}
+			string text_encoded = "";
+			Algorithm.ArithmeticEncoder encoder = new Algorithm.ArithmeticEncoder();
+			Model model = new Model();
+			
+			return text_encoded;
 		}
 	}
 }

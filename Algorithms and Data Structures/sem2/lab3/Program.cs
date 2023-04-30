@@ -19,8 +19,10 @@ class Program
         Console.WriteLine($"Huffman encoded: {algorithm.EncodeHuffman(text, out Dictionary<char, string> codes)}");
         Console.WriteLine($"Huffman encoded and decoded: {algorithm.DecodeHuffman(algorithm.EncodeHuffman(text, out codes), codes)}");
         // foreach (var code in codes) Console.WriteLine($"    '{code.Key}': {code.Value}");
-        Console.WriteLine($"Arithmetic encoded: {algorithm.EncodeArithmetic(text, out Dictionary<char, UInt128[]> frequency_dist)}");
-        Console.WriteLine($"Arithmetic encoded and decoded: {algorithm.DecodeArithmetic(algorithm.EncodeArithmetic(text, out frequency_dist), frequency_dist)}");
+        Algorithm.ArithmeticEncoder arithmetic = new Algorithm.ArithmeticEncoder();
+        string encoded = arithmetic.Encode(text, out Dictionary<char, UInt128[]> frequency_distribution);
+        Console.WriteLine($"Arithmetic encoded: {encoded}");
+        Console.WriteLine($"Arithmetic encoded and decoded: {arithmetic.Decode(encoded, frequency_distribution)}");
         Console.Read();
     }
 }
