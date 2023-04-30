@@ -345,53 +345,54 @@ class Algorithm
 
 	public class ArithmeticEncoder
 	{
-		private UInt128 ratio, whole, half, quater, a, b;
+		private UInt128 whole, half, quater, a, b;
 		private int s = 0;
-		private Dictionary<char, UInt128> Freqs = new Dictionary<char, UInt128>();	// counts
-		private Dictionary<char, UInt128[]> CumFreqs = new Dictionary<char, UInt128[]>();	// cumulative frequencies
+		private int Count = 256;
+		public Dictionary<char, UInt128> Freqs = new Dictionary<char, UInt128>();	// counts
+
+		private void InitializeFreqs(string text)
+		{
+			foreach (char sym in text) Freqs[sym] = 1;
+			Count = Freqs.Count;
+		}
 
 		private void InitializeConstants(string text)
 		{
-			ratio = UInt128.MaxValue / (UInt128)text.Length;
+			UInt128 ratio = UInt128.MaxValue / (UInt128)text.Length;
 			whole = ratio * (UInt128)text.Length;	// almost UInt128.MaxValue
 			half = whole / 2;
 			quater = whole / 4;
 		}
 
-		private Dictionary<char, UInt128[]> CreateFrequencyDistribution(string text)
+		private Dictionary<char, UInt128[]> GetCumFreqs()
 		{
-			CumFreqs = new Dictionary<char, UInt128[]>();
-			for (int i = 0; i < text.Length; i++)
-			{
-				if (CumFreqs.ContainsKey(text[i])) CumFreqs[text[i]][0]++;
-				else 
-				{
-					CumFreqs[text[i]] = new UInt128[2];
-					CumFreqs[text[i]][0] = 1;
-				}
-			}
-
+			Dictionary<char, UInt128[]> CumFreqs = new Dictionary<char, UInt128[]>();
+			UInt128 ratio = UInt128.MaxValue / (UInt128)Count;
 			UInt128 prev = 0;
-			foreach (KeyValuePair<char, UInt128[]> pair in CumFreqs)
+			foreach (KeyValuePair<char, UInt128> pair in Freqs)
 			{
-				CumFreqs[pair.Key][1] = prev + pair.Value[0] * ratio;
+				CumFreqs[pair.Key] = new UInt128[2];
 				CumFreqs[pair.Key][0] = prev;
+				CumFreqs[pair.Key][1] = prev + (UInt128)((double)Freqs[pair.Key] * (double)ratio);
+				if (CumFreqs[pair.Key][1] < CumFreqs[pair.Key][0]) CumFreqs[pair.Key][1] = whole;
 				prev = CumFreqs[pair.Key][1];
 			}
 
 			return CumFreqs;
 		}
 
-		private void Update(char sym, ref string text_encoded)
+		private void UpdateEncode(char sym, ref string text_encoded)
 		{
+			Dictionary<char, UInt128[]> CumFreqs = GetCumFreqs();
+
 			UInt128 a_prev = a;
 			UInt128 width = b - a;
 			a = a_prev + (UInt128)((double)CumFreqs[sym][0] / (double)whole * (double)width);
 			b = a_prev + (UInt128)((double)CumFreqs[sym][1] / (double)whole * (double)width);
 
-			while (b < half || a > half)
+			while (b <= half || a > half)
 			{
-				if (b < half)
+				if (b <= half)
 				{
 					a = 2 * a;
 					b = 2 * b;
@@ -408,7 +409,8 @@ class Algorithm
 					s = 0;
 				}
 			}
-			while (a > quater && b < 3 * quater)
+
+			while (a > quater && b <= 3 * quater)
 			{
 				s++;
 				a = 2 * (a - quater);
@@ -431,41 +433,96 @@ class Algorithm
 			}
 		}
 
-		public string Encode(string text, out Dictionary<char, UInt128[]> out_CumFreqs)
+		public string Encode(string text, out string symbols)
 		{
 			// init
 			text += '\0';
 			string text_encoded = "";
 			InitializeConstants(text);
+			InitializeFreqs(text);
 
 			a = 0;
 			b = whole;
-
-			// create CumFreqs
-			CumFreqs = CreateFrequencyDistribution(text);
 
 			// algorithm
 			foreach (char sym in text)
 			{
-				Update(sym, ref text_encoded);
+				UpdateEncode(sym, ref text_encoded);
+				Freqs[sym]++;
+				Count++;
 			}
 			Finish(ref text_encoded);
 
-			out_CumFreqs = CumFreqs;
+			symbols = "";
+			foreach(char sym in Freqs.Keys) symbols += sym;
 			return text_encoded;
 		}
 
-		public string Decode(string text, Dictionary<char, UInt128[]> frequency_dist)
+		private void UpdateDecode(string text, ref UInt128 approximated_number, ref int i)
+		{
+			while (b <= half || a > half)
+			{
+				if (b <= half)
+				{
+					a = 2 * a;
+					b = 2 * b;
+					approximated_number = 2 * approximated_number;
+				}
+				else
+				{
+					a = 2 * (a - half);
+					b = 2 * (b - half);
+					approximated_number = 2 * (approximated_number - half);
+				}
+				if (i < text.Length && text[i] == '1') approximated_number++;
+				i++;
+			}
+
+			while (a > quater && b <= 3 * quater)
+			{
+				a = 2 * (a - quater);
+				b = 2 * (b - quater);
+				approximated_number = 2 * (approximated_number - quater);
+				if (i < text.Length && text[i] == '1') approximated_number++;
+				i++;
+			}
+		}
+
+		private char DecodeNextSymbol(string text, ref UInt128 a, ref UInt128 b, UInt128 approximated_number)
+		{
+			UInt128 a_tmp = a;
+			UInt128 b_tmp = b;
+			UInt128 width;
+
+			Dictionary<char, UInt128[]> CumFreqs = GetCumFreqs();
+
+			foreach (KeyValuePair<char, UInt128[]> pair in CumFreqs)
+			{
+				width = b - a;
+				a_tmp = a + (UInt128)((double)width / (double)whole * (double)pair.Value[0]);
+				b_tmp = a + (UInt128)((double)width / (double)whole * (double)pair.Value[1]);
+
+				if (a_tmp <= approximated_number && approximated_number < b_tmp)
+				{
+					a = a_tmp;
+					b = b_tmp;
+					return pair.Key;
+				}
+			}
+
+			throw new InvalidDataException("Cannot decode symbol");
+		}
+
+		public string Decode(string text, string symbols)
 		{
 			string text_decoded = "";
 			int precision = 128;
 			InitializeConstants(text);
+			InitializeFreqs(symbols);
 
 			a = 0;
 			b = whole;
 			UInt128 approximated_number = 0;
-
-			CumFreqs = frequency_dist;
 
 			int i = 0;
 			while (i < text.Length && i < precision)
@@ -474,53 +531,17 @@ class Algorithm
 				i++;
 			}
 
-			UInt128 a_tmp = a;
-			UInt128 b_tmp = b;
-			UInt128 width;
+			char sym = '\0';
 			while (true)
 			{
-				foreach (KeyValuePair<char, UInt128[]> pair in CumFreqs)
-				{
-					width = b - a;
-					a_tmp = a + (UInt128)((double)width / (double)whole * (double)pair.Value[0]);
-					b_tmp = a + (UInt128)((double)width / (double)whole * (double)pair.Value[1]);
+				sym = DecodeNextSymbol(text, ref a, ref b, approximated_number);
 
-					if (a_tmp <= approximated_number && approximated_number < b_tmp)
-					{
-						if (pair.Key == '\0') return text_decoded;
-						text_decoded += pair.Key;
-						a = a_tmp;
-						b = b_tmp;
-						break;
-					}
-				}
+				if (sym == '\0') return text_decoded;
+				text_decoded += sym;
 
-				while (b < half || a > half)
-				{
-					if (b < half)
-					{
-						a = 2 * a;
-						b = 2 * b;
-						approximated_number = 2 * approximated_number;
-					}
-					else
-					{
-						a = 2 * (a - half);
-						b = 2 * (b - half);
-						approximated_number = 2 * (approximated_number - half);
-					}
-					if (i < text.Length && text[i] == '1') approximated_number++;
-					i++;
-				}
-
-				while (a > quater && b < 3 * quater)
-				{
-					a = 2 * (a - quater);
-					b = 2 * (b - quater);
-					approximated_number = 2 * (approximated_number - quater);
-					if (i < text.Length && text[i] == '1') approximated_number++;
-					i++;
-				}
+				UpdateDecode(text, ref approximated_number, ref i);
+				Freqs[sym]++;
+				Count++;
 			}
 		}
 	}
