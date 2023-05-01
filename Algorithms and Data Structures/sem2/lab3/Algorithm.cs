@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace lab3;
 
 
@@ -347,29 +345,15 @@ class Algorithm
 	{
 		private UInt128 whole, half, quater, a, b;
 		private int s = 0;
-		private int Count = 256;
-		public Dictionary<char, UInt128> Freqs = new Dictionary<char, UInt128>();	// counts
+		public int Count;
+		public Dictionary<int, int> Freqs = new Dictionary<int, int>();	// counts, Freqs[(int)char_symbol] = frequency
 
-		private void InitializeFreqs(string text)
+		private Dictionary<int, UInt128[]> GetCumFreqs()
 		{
-			foreach (char sym in text) Freqs[sym] = 1;
-			Count = Freqs.Count;
-		}
-
-		private void InitializeConstants(string text)
-		{
-			UInt128 ratio = UInt128.MaxValue / (UInt128)text.Length;
-			whole = ratio * (UInt128)text.Length;	// almost UInt128.MaxValue
-			half = whole / 2;
-			quater = whole / 4;
-		}
-
-		private Dictionary<char, UInt128[]> GetCumFreqs()
-		{
-			Dictionary<char, UInt128[]> CumFreqs = new Dictionary<char, UInt128[]>();
+			Dictionary<int, UInt128[]> CumFreqs = new Dictionary<int, UInt128[]>();
 			UInt128 ratio = UInt128.MaxValue / (UInt128)Count;
 			UInt128 prev = 0;
-			foreach (KeyValuePair<char, UInt128> pair in Freqs)
+			foreach (KeyValuePair<int, int> pair in Freqs)
 			{
 				CumFreqs[pair.Key] = new UInt128[2];
 				CumFreqs[pair.Key][0] = prev;
@@ -381,9 +365,32 @@ class Algorithm
 			return CumFreqs;
 		}
 
-		private void UpdateEncode(char sym, ref string text_encoded)
+		public void InitializeFreqs(string text)
 		{
-			Dictionary<char, UInt128[]> CumFreqs = GetCumFreqs();
+			foreach (char sym in text) Freqs[sym] = 1;
+			Count = Freqs.Count;
+		}
+
+		private void InitializeConstants()
+		{
+			UInt128 ratio = UInt128.MaxValue / (UInt128)Count;
+			whole = ratio * (UInt128)Count;	// almost UInt128.MaxValue
+			half = whole / 2;
+			quater = whole / 4;
+		}
+
+		public void InitEncoder(ref string text) 
+		{
+			text += '\0';
+			InitializeFreqs(text);
+			InitializeConstants();
+			a = 0;
+			b = whole;
+		}
+
+		public void UpdateEncode(int sym, ref string text_encoded)
+		{
+			Dictionary<int, UInt128[]> CumFreqs = GetCumFreqs();
 
 			UInt128 a_prev = a;
 			UInt128 width = b - a;
@@ -396,6 +403,7 @@ class Algorithm
 				{
 					a = 2 * a;
 					b = 2 * b;
+					if (b < a) b = whole;
 					text_encoded += "0";
 					for (int i = 0; i < s; i++) text_encoded += "1";
 					s = 0;
@@ -404,6 +412,7 @@ class Algorithm
 				{
 					a = 2 * (a - half);
 					b = 2 * (b - half);
+					if (b < a) b = whole;
 					text_encoded += "1";
 					for (int i = 0; i < s; i++) text_encoded += "0";
 					s = 0;
@@ -418,7 +427,7 @@ class Algorithm
 			}
 		}
 
-		private void Finish(ref string text_encoded)
+		public void Finish(ref string text_encoded)
 		{
 			s++;
 			if (a <= quater)
@@ -436,13 +445,8 @@ class Algorithm
 		public string Encode(string text, out string symbols)
 		{
 			// init
-			text += '\0';
+			InitEncoder(ref text);
 			string text_encoded = "";
-			InitializeConstants(text);
-			InitializeFreqs(text);
-
-			a = 0;
-			b = whole;
 
 			// algorithm
 			foreach (char sym in text)
@@ -458,7 +462,25 @@ class Algorithm
 			return text_encoded;
 		}
 
-		private void UpdateDecode(string text, ref UInt128 approximated_number, ref int i)
+		public int InitDecoder(string text, string symbols, out int precision, out UInt128 approximated_number) 
+		{
+			precision = 128;
+			InitializeFreqs(symbols);
+			InitializeConstants();
+			a = 0;
+			b = whole;
+
+			approximated_number = 0;
+			int i = 0;
+			while (i < text.Length && i < precision)
+			{
+				if (text[i] == '1') approximated_number += (UInt128)Math.Pow(2, precision - i - 1);
+				i++;
+			}
+			return i;
+		}
+
+		public void UpdateDecode(string text, ref UInt128 approximated_number, ref int i)
 		{
 			while (b <= half || a > half)
 			{
@@ -472,6 +494,7 @@ class Algorithm
 				{
 					a = 2 * (a - half);
 					b = 2 * (b - half);
+					if (b < a) b = whole;
 					approximated_number = 2 * (approximated_number - half);
 				}
 				if (i < text.Length && text[i] == '1') approximated_number++;
@@ -482,31 +505,32 @@ class Algorithm
 			{
 				a = 2 * (a - quater);
 				b = 2 * (b - quater);
+				if (b < a) b = whole;
 				approximated_number = 2 * (approximated_number - quater);
 				if (i < text.Length && text[i] == '1') approximated_number++;
 				i++;
 			}
 		}
 
-		private char DecodeNextSymbol(string text, ref UInt128 a, ref UInt128 b, UInt128 approximated_number)
+		public char DecodeNextSymbol(string text, UInt128 approximated_number)
 		{
 			UInt128 a_tmp = a;
 			UInt128 b_tmp = b;
 			UInt128 width;
 
-			Dictionary<char, UInt128[]> CumFreqs = GetCumFreqs();
+			Dictionary<int, UInt128[]> CumFreqs = GetCumFreqs();
 
-			foreach (KeyValuePair<char, UInt128[]> pair in CumFreqs)
+			foreach (KeyValuePair<int, UInt128[]> pair in CumFreqs)
 			{
 				width = b - a;
 				a_tmp = a + (UInt128)((double)width / (double)whole * (double)pair.Value[0]);
 				b_tmp = a + (UInt128)((double)width / (double)whole * (double)pair.Value[1]);
 
-				if (a_tmp <= approximated_number && approximated_number < b_tmp)
+				if (a_tmp < approximated_number && approximated_number <= b_tmp)
 				{
 					a = a_tmp;
 					b = b_tmp;
-					return pair.Key;
+					return (char)pair.Key;
 				}
 			}
 
@@ -515,26 +539,13 @@ class Algorithm
 
 		public string Decode(string text, string symbols)
 		{
+			int i = InitDecoder(text, symbols, out int precision, out UInt128 approximated_number);		// i is index of next symbol in text
 			string text_decoded = "";
-			int precision = 128;
-			InitializeConstants(text);
-			InitializeFreqs(symbols);
 
-			a = 0;
-			b = whole;
-			UInt128 approximated_number = 0;
-
-			int i = 0;
-			while (i < text.Length && i < precision)
-			{
-				if (text[i] == '1') approximated_number += (UInt128)Math.Pow(2, precision - i - 1);
-				i++;
-			}
-
-			char sym = '\0';
+			char sym;
 			while (true)
 			{
-				sym = DecodeNextSymbol(text, ref a, ref b, approximated_number);
+				sym = DecodeNextSymbol(text, approximated_number);
 
 				if (sym == '\0') return text_decoded;
 				text_decoded += sym;
@@ -546,49 +557,195 @@ class Algorithm
 		}
 	}
 
+
 	public class PPMEncoder
+	// PPMc
 	{
+		public const int ESC = 257;
 		class Model
 		{
-			private const int order = 3;
-			public static int Order
-			{
-				get { return order; }
-			}
-			private List<Context> contexts = new List<Context>();
-			public List<Context> Contexts
-			{
-				get { return contexts; }
-			}
+			public int Order;
+			public Dictionary<string, Context>[] Contexts;
+			public Algorithm.ArithmeticEncoder Encoder;
 
-			private void AddContext(string str)
+			public Model(int order)
 			{
-				Context ctx = new Context(str);
-				Contexts.Add(ctx);
+				Order = order;
+				Contexts = new Dictionary<string, Context>[Order + 1];
+				for (int i = 0; i <= order; i++) Contexts[i] = new Dictionary<string, Context>();
+				Encoder = new Algorithm.ArithmeticEncoder();
 			}
 
 			public class Context
 			{
-				private int order;
-				public string Str;
-				public Dictionary<char, int> Frequencies = new Dictionary<char, int>();
+				public Dictionary<int, int> Frequences = new Dictionary<int, int>();	// [(int)char_symbol] = frequency
+			}
+		}
 
-				public Context(string str)
+		private void EncodeSymbol(ref Model model, Dictionary<int, int> frequencies, int sym, ref string text_encoded)
+		{
+			model.Encoder.Freqs = frequencies;
+			model.Encoder.Count = frequencies.Sum(freq => freq.Value);
+			model.Encoder.UpdateEncode(sym, ref text_encoded);
+		}
+
+		public string Encode(string text, int model_order, out string symbols)
+		{
+			string text_encoded = "";
+			Model model = new Model(model_order);
+			model.Encoder.InitEncoder(ref text);
+
+			Dictionary<int, int> minus_one_frequencies = new Dictionary<int, int>();
+			for (int i = 0; i < text.Length; i++){
+				minus_one_frequencies[text[i]] = 1;
+			}
+			minus_one_frequencies[ESC] = 1;
+
+			int order;
+			string context;
+			for (int i = 0; i < text.Length; i++)
+			{
+				for (order = Math.Min(model.Order, i); order >= 0; order--)
 				{
-					Str = str;
-					if (str.Length <= Model.Order) order = str.Length;
-					else throw new InvalidDataException($"Order must at most {Model.Order}");
+					context = text.Substring(i - order, order);
+					if (model.Contexts[order].ContainsKey(context))
+					{
+						if (model.Contexts[order][context].Frequences.ContainsKey(text[i]))
+						{
+							EncodeSymbol(ref model, model.Contexts[order][context].Frequences, text[i], ref text_encoded);
+							model.Contexts[order][context].Frequences[text[i]]++;
+							break;
+						}
+						else
+						{
+							EncodeSymbol(ref model, model.Contexts[order][context].Frequences, ESC, ref text_encoded);
+							model.Contexts[order][context].Frequences[text[i]] = 1;
+							model.Contexts[order][context].Frequences[ESC]++;
+						}
+					}
+					else
+					{
+						EncodeSymbol(ref model, minus_one_frequencies, ESC, ref text_encoded);
+						model.Contexts[order][context] = new Model.Context();
+						model.Contexts[order][context].Frequences[ESC] = 1;
+						model.Contexts[order][context].Frequences[text[i]] = 1;
+					}
+				}
+
+				if (order == -1)
+				{
+					EncodeSymbol(ref model, minus_one_frequencies, text[i], ref text_encoded);
+				}
+			}
+
+			model.Encoder.Finish(ref text_encoded);
+
+			symbols = "";
+			foreach(char sym in minus_one_frequencies.Keys) symbols += sym;
+			return text_encoded;
+		}
+
+		private void UpdateContexts(ref Model model, int order, string text, char sym)
+		{
+			if (order == -1) order = 0;
+			if (text.Length == 0) throw new InvalidDataException("Text cannot be empty");
+			text = text.Substring(0, text.Length - 1);
+			string context;
+			for (int i = order; i <= Math.Min(model.Order, text.Length); i++)
+			{
+				context = text.Substring(text.Length - i, i);
+				if (model.Contexts[i].ContainsKey(context))
+				{
+					if (model.Contexts[i][context].Frequences.ContainsKey(sym))
+					{
+						model.Contexts[i][context].Frequences[sym]++;
+					}
+					else 
+					{
+						model.Contexts[i][context].Frequences[sym] = 1;
+						model.Contexts[i][context].Frequences[ESC]++;
+					}
+				}
+				else
+				{
+					model.Contexts[i][context] = new Model.Context();
+					model.Contexts[i][context].Frequences[ESC] = 1;
+					model.Contexts[i][context].Frequences[sym] = 1;
 				}
 			}
 		}
 
-		string Encode(string text, int model_order = 4)
+		private int DecodeSymbol(ref Model model, Dictionary<int, int> frequencies, ref UInt128 approximated_number, ref int i, string text)
 		{
-			string text_encoded = "";
-			Algorithm.ArithmeticEncoder encoder = new Algorithm.ArithmeticEncoder();
-			Model model = new Model();
-			
-			return text_encoded;
+			model.Encoder.Freqs = frequencies;
+			model.Encoder.Count = frequencies.Sum(freq => freq.Value);
+			char sym = model.Encoder.DecodeNextSymbol(text, approximated_number);
+
+			if (sym == '\0') return sym;
+
+			model.Encoder.UpdateDecode(text, ref approximated_number, ref i);
+			return sym;
 		}
+
+		public string Decode(string text, int model_order, string symbols)
+		{
+			string text_decoded = "";
+			Model model = new Model(model_order);
+			int i = model.Encoder.InitDecoder(text, symbols, out int precision, out UInt128 approximated_number);
+
+			Dictionary<int, int> minus_one_frequencies = new Dictionary<int, int>();
+			for (int k = 0; k < symbols.Length; k++) {
+				minus_one_frequencies[symbols[k]] = 1;
+			}
+			minus_one_frequencies[ESC] = 1;
+
+			int order;
+			string context;
+			int sym = ESC;
+			while (sym != '\0')
+			{
+				order = Math.Min(model.Order, text_decoded.Length);
+				context = text_decoded.Substring(text_decoded.Length - order, order);
+				while (order >= 0)
+				{
+					if (model.Contexts[order].ContainsKey(context))
+					{
+						sym = DecodeSymbol(ref model, model.Contexts[order][context].Frequences, ref approximated_number, ref i, text);
+						if (sym == ESC)
+						{
+							order--;
+							if (order == -1) break;
+							context = context.Substring(1, order);
+						}
+						else
+						{
+							if (sym != '\0') text_decoded += (char)sym;
+							break;
+						}
+					}
+
+					else
+					{
+						sym = DecodeSymbol(ref model, minus_one_frequencies, ref approximated_number, ref i, text);
+						if (sym != ESC) throw new InvalidDataException("ESC symbol expected");
+						order--;
+						if (order == -1) break;
+						context = context.Substring(1, order);
+					}
+				}
+
+				if (order == -1)
+				{
+					sym = DecodeSymbol(ref model, minus_one_frequencies, ref approximated_number, ref i, text);
+					if (sym == ESC) throw new InvalidDataException("Order cannot be < -1");
+					if (sym != '\0') text_decoded += (char)sym;
+				}
+
+				UpdateContexts(ref model, order, text_decoded, (char)sym);
+			}
+
+			return text_decoded;
+		}
+
 	}
 }
