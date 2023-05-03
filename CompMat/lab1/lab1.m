@@ -3,7 +3,7 @@ clear, clc, clf
 % input
 a = -1;
 b = 7;
-number_of_nodes = 18;
+number_of_nodes = 9;
 
 dx = 9 / number_of_nodes;
 x = a : dx : b;
@@ -67,6 +67,6 @@ title(tit)
 
 
 function y = f(x)
-    % input functin
+    % input function
     y = 1000 / (x^2 - 5 * x + 72);
 end
