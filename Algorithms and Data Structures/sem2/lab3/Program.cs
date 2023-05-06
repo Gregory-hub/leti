@@ -8,9 +8,9 @@ class Program
         string path = Directory.GetCurrentDirectory() + "\\text.txt";
         StreamReader sr = new StreamReader(path);
         string text = sr.ReadToEnd();
-        // string text = "abobchikus habius Bibib";
+        // string text = "bafghdfghdsfhgjk";
 
-        Console.WriteLine($"Text: {text}");
+        // Console.WriteLine($"Text: {text}");
         Console.WriteLine($"Length(bits): {text.Length * 8}");
 
         // Console.WriteLine($"BWT transformed: {algorithm.BWTTransform(text)}");
@@ -30,11 +30,12 @@ class Program
         // // foreach (var code in codes) Console.WriteLine($"    '{code.Key}': {code.Value}");
 
         string encoded = algorithm.EncodeArithmetic(text, out string symbols);
-        Console.WriteLine($"Arithmetic encoded: {encoded}");
-        Console.WriteLine($"Length encoded: {encoded.Length + symbols.Length * 8}");
         string decoded = algorithm.DecodeArithmetic(encoded, symbols);
-        Console.WriteLine($"Arithmetic encoded and decoded: {decoded}");
-        Console.WriteLine(decoded == text);
+        Console.WriteLine($"Text decoded correctly: {decoded == text}");
+        // Console.WriteLine($"Arithmetic encoded: {encoded}");
+        // Console.WriteLine($"Arithmetic encoded and decoded: {decoded}");
+        Console.WriteLine($"Length encoded: {encoded.Length + (symbols.Length + 1) * 8}");
+        Console.WriteLine($"Comression ratio: {(double)text.Length * 8 / (double)(encoded.Length + (symbols.Length + 1) * 8)}");
 
         // Algorithm.PPMEncoder ppm = new Algorithm.PPMEncoder();
         // int order = 3;

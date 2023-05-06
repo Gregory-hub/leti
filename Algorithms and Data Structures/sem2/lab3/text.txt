@@ -1,139 +1,929 @@
-"A free TXT service to say Call Me". Archived from the original on 10 January 2015.
-"Smoking cessation using mobile phone text messaging is as effective in Māori as non-Māori". The New Zealand Medical Journal. 118 (1216). 3 June 2005. Archived from the original on 24 November 2009. "More than 85% of young New Zealand adults now have a mobile phone (statistics by ethnicity are not available), and text messaging among this age group has rapidly developed into a new communications medium."
-"Text Messaging will be Huge for Mobile Operators in Africa". thepinehillsnews.com. 17 March 2009. Archived from the original on 2 April 2012. Retrieved 29 March 2012.
-"Silence = Death. In South Africa, text messages can end the silence". Brian S Hall. 28 March 2011. Archived from the original on 12 August 2011. Retrieved 29 March 2012.
-"AFRICA: Text messages highlight drug stock-outs". PlusNews. 17 September 2009. Archived from the original on 27 September 2011. Retrieved 29 March 2012.
-Shoeb Adnan (14 March 2015). "5 Negative Effects of Mobile Phone In Our Social Life".
-"Instant Messaging: Friend or Foe of Student Writing?". Newhorizons.org. Archived from the original on 13 June 2010. Retrieved 29 March 2012.
-Boswell, Sean. "Lost in Translation: Texting Killing Human Communication Skills". The DePaulia. Archived from the original on 11 March 2014. Retrieved 18 October 2012.
-"Officials: Students can use 'text speak' on tests". USA Today. 13 November 2006. Retrieved 25 May 2010.
-Crace, John (16 September 2008). "Gr8 db8r takes on linguistic Luddites: Language guru David Crystal tells John Crace that txt spk is responsible for neither bad spelling nor moral decay". The Guardian. UK. Retrieved 29 March 2012.
-Crystal, David Txtng: the gr8 db8. New York: Oxford University Press, 2008. pp. 131–137 ISBN 0-19-162340-7
-The New Yorker "Thumbspeak" Menand, Louis. 20 October 2008.
-Crystal, David: the gr8 db8. New York: Oxford University Press, 2008. Print.
-Ling, Rich; Baron, Naomi S.; Lenhart, Amanda; Campbell, Scott W. (2 October 2014). ""Girls Text Really Weird": Gender, Texting and Identity Among Teens". Journal of Children and Media. 8 (4): 423–439. doi:10.1080/17482798.2014.931290. S2CID 143302111.
-Ling, Rich; Bertel, Troels Fibæk; Sundsøy, Pål Roe (2012). "The socio-demographics of texting". New Media & Society. 14 (2): 281–298. doi:10.1177/1461444811412711. S2CID 41608163.
-Rosen, L.D., Chang, J., Erwin, L., Carrier, L.M., & Cheever, N.A. (2010). "The Relationship Between "Textisms" and Formal and Informal Writing Among Young Adults". Communication Research. 37 (3): 420–440. doi:10.1177/0093650210362465. S2CID 46309911.
-Lee, Joan Hwechong (2011). What does txting do 2 language: The influences of exposure to messaging and print media on acceptability constraints (MA thesis). University of Calgary. Archived from the original on 20 February 2012. Retrieved 9 March 2012.
-Plester, B.; Wood, C.; Joshi, P. (2009). "Exploring the relationship between children's knowledge of text message abbreviations and school literacy outcomes". British Journal of Developmental Psychology. 27 (Pt 1): 145–61. doi:10.1348/026151008X320507. PMID 19972666.
-"Teens Admit Text Messaging Most Distracting While Driving". Liberty Mutual Group. 19 July 2007. Archived from the original on 19 November 2008. Retrieved 5 February 2010.
-Texting And Driving Worse Than Drinking and Driving, CNBC, 25 June 2009
-In Study, Texting Lifts Crash Risk by Large Margin, The New York Times, 27 July 2009
-"Rentrak executive bios" (PDF).
-Lamberg, E. M.; Muratori, L. M. (2012). "Cell phones change the way we walk". Gait & Posture. 35 (4): 688–90. doi:10.1016/j.gaitpost.2011.12.005. PMID 22226937.
-Sammy Licence; et al. (29 July 2015). "Gait Pattern Alterations during Walking, Texting and Walking and Texting during Cognitively Distractive Tasks while Negotiating Common Pedestrian Obstacles". PLOS One. 10 (7): e0133281. Bibcode:2015PLoSO..1033281L. doi:10.1371/journal.pone.0133281. PMC 4519241. PMID 26222430.
-Nasar, J; Hecht, P; Wener, R (2008). "Mobile telephones, distracted attention, and pedestrian safety". Accident Analysis & Prevention. 40 (1): 69–75. doi:10.1016/j.aap.2007.04.005. PMID 18215534.
-Lopresti-Goodman, S. M.; Rivera, A.; Dressel, C. (2012). "Practicing Safe Text: The Impact of Texting on Walking Behavior". Applied Cognitive Psychology. 26 (4): 644–648. doi:10.1002/acp.2846.
-Uchiyama, M; Demura, S.; Natsuhori, E. (2012). "Changes in gait properties during texting messages by a cell phone. Attention and gait control". Gazzetta Medica Italiana Archivio per le Scienze Mediche. 171 (3): 331–340.
-Schwebel, D. C.; Stavrinos, D; Byington, K. W.; Davis, T; O'Neal, E. E.; De Jong, D (2012). "Distraction and pedestrian safety: How talking on the phone, texting, and listening to music impact crossing the street". Accident Analysis & Prevention. 45 (2): 266–71. doi:10.1016/j.aap.2011.07.011. PMC 3266515. PMID 22269509.
-Stavrinos, D.; Byington, K. W.; Schwebel, D. C. (2011). "Distracted walking: Cell phones increase injury risk for college pedestrians". Journal of Safety Research. 42 (2): 101–107. doi:10.1016/j.jsr.2011.01.004. PMID 21569892.
-Hyman, S.M.; Boss, I.E.; Wise, B.M.; McKenzie, K.E.; Caggiano, J.M. (2010). "Did you see the unicycling clown? Inattentional blindness while walking and talking on a cell phone". Applied Cognitive Psychology. 29 (5): 597–607. doi:10.1002/acp.1638.
-Hincapié-Ramos, Juan David; Irani, Pourang (1 January 2013). CrashAlert: Enhancing Peripheral Alertness for Eyes-busy Mobile Interaction While Walking. SIGCHI Conference on Human Factors in Computing Systems. pp. 3385–3388. doi:10.1145/2470654.2466463. ISBN 9781450318990.
-"Samsung Releasing Smartphone-Paired Technologies for Blind People". medGadget. 17 March 2014. Retrieved 10 November 2016.
-Peng, En; Peursum, Patrick; Li, Ling; Venkatesh, Svetha (26 October 2010). "A Smartphone-Based Obstacle Sensor for the Visually Impaired". Ubiquitous Intelligence and Computing. International Conference on Ubiquitous Intelligence and Computing. Lecture Notes in Computer Science. Vol. 6406. pp. 590–604. doi:10.1007/978-3-642-16355-5_45. hdl:20.500.11937/14536. ISBN 978-3-642-16354-8.
-Foerster, Klaus-Tycho; Gross, Alex; Hail, Nino; Uitto, Jara; Wattenhofer, Roger (1 January 2014). SpareEye: Enhancing the Safety of Inattentionally Blind Smartphone Users. 13th International Conference on Mobile and Ubiquitous Multimedia. pp. 68–72. doi:10.1145/2677972.2677973. ISBN 9781450333047.
-Wang, Tianyu; Cardone, Giuseppe; Corradi, Antonio; Torresani, Lorenzo; Campbell, Andrew T. (1 January 2012). WalkSafe: A Pedestrian Safety App for Mobile Phone Users Who Walk and Talk While Crossing Roads. Twelfth Workshop on Mobile Computing Systems & Applications. pp. 5:1–5:6. doi:10.1145/2162081.2162089. ISBN 9781450312073.
-"Encyclopedia of Risks and Threats". MySecureCyberspace. Archived from the original on 22 September 2009. Retrieved 13 January 2009.
-Roberts, Yvonne (31 July 2005). "The One and Only". p. 22. "Following a string of extramarital affairs and several lurid "sexting" episodes, Warne has found himself home alone, with Simone Warne taking their three children and flying the conjugal coop."
-"Texting: From Faux Pas to Faux Sex". From the Mind of GrandDiva. 13 February 2007. Retrieved 13 January 2009.
-"Sexting with friends is the new High School "note"". XYHD.TV. Archived from the original on 6 July 2009. Retrieved 13 January 2009.
-"Sex and Tech Survey". Thenationalcampaign.org. Archived from the original on 26 March 2012. Retrieved 29 March 2012.
-Strassberg, Donald; McKinnon, Ryan K. (7 June 2012). "Sexting by High School Students: An Exploratory and Descriptive Study". Archives of Sexual Behavior. 42 (1): 15–21. doi:10.1007/s10508-012-9969-8. PMID 22674035. S2CID 7998778.
-Maffly, Brian. "'Sexting' prevalent among high-schoolers, study finds". Salt Lake Tribune. Retrieved 5 July 2012.
-Collins, Lois (16 June 2012). "As many as 20% of teens have 'sexted', according to new study". Deseret News. Retrieved 4 July 2012.
-"Sending Sexually Explicit Photos by Cell Phone Is Common Among Teens". Science Daily. Retrieved 5 July 2012.
-"U Study Finds 'Sexting' More Common Among Teens Than You Might Think". University of Utah. 14 June 2012.
-"'Sexting' Prevalent Among High-Schoolers, Study Finds". Centers for Disease Control and Prevention National Prevention Information Network. Archived from the original on 14 April 2013. Retrieved 5 July 2012.
-Nauert, Rick (14 June 2012). "1 in 5 Teens 'Sexting' – Many Without a Clue". PsychCentral. Archived from the original on 25 April 2013. Retrieved 4 July 2012.
-"U study: More teens 'sext' than previously thought". Fox 13 News. 15 June 2012. Retrieved 4 July 2012.
-"Most teens unaware about legal consequences of sexting: Study". Times of India. Archived from the original on 15 June 2012. Retrieved 5 July 2012.
-"Sexting is More Common Among Teens Than Previously Thought, Say Researchers". International Business Times. 16 June 2012. Retrieved 5 July 2012.
-"Why teens indulge in so much 'sexting'?". Hindustan Times. Archived from the original on 6 March 2014. Retrieved 5 July 2012.
-"Connie Schultz: Making kids to tell law's naked truth is the perfect sentence". The Plain Dealer. 13 December 2008. Archived from the original on 1 February 2009.
-"Maryland Newsline – Business & Tech Special Report: Teens and Technology". Newsline.umd.edu. 17 May 2006. Archived from the original on 23 March 2012. Retrieved 29 March 2012.
-Top News – Students dial up trouble in new twist to cheating Archived 5 July 2009 at the Wayback Machine
-Okada, T. (2005). Youth culture and shaping of Japanese mobile media: personalization and the keitainInternet as multimedia, in M. Ito, D. Okabe and M. Matsuda (eds), Personal, Portable, Pedestrian: Mobile Phones in Japanese Life, Cambridge, Massachusetts: MIT Press ISBN 0-262-09039-2
-"Exams ban for mobile phone users". BBC News. 15 April 2005. Retrieved 25 May 2010.
-Goggin, G (2006) Cell Phone Culture: Mobile technology in everyday life. New York: Routledge ISBN 0-415-36744-1
-Carrier, L. M.; Rosen, L. D.; Cheever, N. A.; Lim, A. (2015). "Causes, effects, and practicalities of everyday multitasking". Developmental Review. 35: 64–78. doi:10.1016/j.dr.2014.12.005. Special issue on Living in the "Net" Generation: Multitasking, Learning and Development.
-Rosen, L. D.; Lim, A. F.; Carrier, L. M.; Cheever, N. A. (2011). "An Empirical Examination of the Educational Impact of Text Message-Induced Task Switching in the Classroom: Educational Implications and Strategies to Enhance Learning". Psicología Educativa (Spain). 17 (2): 163–77. doi:10.5093/ed2011v17n2a4.
-Harding, S. & Rosenberg, D. (Ed). (2005). Histories of the Future. London: Duke University Press, p. 84 ISBN 0-8223-3473-9
-Lewandowski, Gary; Harrington, Samantha (2006). "The influence of phonetic abbreviations on evaluation of student performance" (PDF). Current Research in Social Psychology. 11 (15): 215–226. Archived from the original (PDF) on 5 January 2014.
-Grace, Abbie; Kemp, Nenagh; Martin, Frances H; Parrila, Rauno (May 2015). "Undergraduates' attitudes to text messaging language use and intrusions of textisms into formal writing". New Media & Society. 17 (5): 792–809. doi:10.1177/1461444813516832. ISSN 1461-4448. S2CID 424414.
-Fortress SMS technical report
-Robert Burnett; Ylva Hård af Segerstad (8 September 2005). "The SMS murder mystery" in Safety and Security in a Networked World. Balancing Cyber-Rights & Responsibilities, Oxford Internet Institute.
-"SMS Alert Service for Dutch Police". textually.org. 8 December 2005. Archived from the original on 22 March 2012. Retrieved 29 March 2012.
-CryptoSMS – Crypto for Criminals
-Weiss, Todd R. (18 June 2007). "Boston police turn to text messages to fight crime". Computerworld.com. Archived from the original on 9 January 2014. Retrieved 29 March 2012.
-"Malaysia permits text message divorce". 27 July 2003 – via news.bbc.co.uk.
-"A Warrant Is Needed To Obtain Text Messages, State High Court Rules". www.wbur.org.
-Goggin, Gerard (2006). "SMS Riot: Transmitting Race on a Sydney Beach, December 2005: The Politics of Transmission". M/C Journal. 9 (1). doi:10.5204/mcj.2582.
-"Text messages 'fuel trouble'". The Sydney Morning Herald. 11 December 2005.
-"Police consider SMS Cronulla messages 'a crime'". ABC News. 9 December 2005.
-Kennedy, Les (6 December 2006). "Man in court over Cronulla revenge SMS". The Sydney Morning Herald.
-Miletic, Daniella (13 January 2008). "Police probe how 500 teens got a party invite". The Age. Retrieved 8 March 2020.
-Nixon, Christine (15 January 2008). "We were all young once, but teens need limits". Herald Sun. Retrieved 5 April 2012.
-"The Social Impacts of Mobile Phones and Text Messaging". Dgp.toronto.edu. Archived from the original on 17 February 2008. Retrieved 29 March 2012.
-Arce, Alberto; Butler, Desmond; Gillum, Jack (3 April 2014). "U'S' secretly created 'Cuban Twitter' to stir unrest". Washington Post. Associated Press. Archived from the original on 3 April 2014. Retrieved 6 April 2014.
-Olson, Parmy (4 April 2014). "Why The U'S' Government's Fake 'Cuban Twitter' Service Failed". Forbes. Retrieved 6 April 2014.
-Nagourney, Adam (29 March 2009). "In politics, blogs and text messages are the new American way". International Herald Tribune. Archived from the original on 8 September 2006. Retrieved 29 March 2012.
-"Text Messaging in U.S. Politics". Newsweek. 1 August 2006. Retrieved 29 March 2012.
-"TxtMob". TxtMob. Retrieved 29 March 2012.
-Islam, Sheikh Mohammed Shariful; Niessen, Louis W.; Ferrari, Uta; Ali, Liaquat; Seissler, Jochen; Lechner, Andreas (1 August 2015). "Effects of Mobile Phone SMS to Improve Glycemic Control Among Patients With Type 2 Diabetes in Bangladesh: A Prospective, Parallel-Group, Randomized Controlled Trial". Diabetes Care. 38 (8): e112–e113. doi:10.2337/dc15-0505. ISSN 0149-5992. PMID 26207059.
-Shariful Islam, Sheikh Mohammed; Farmer, Andrew J; Bobrow, Kirsten; Maddison, Ralph; Whittaker, Robyn; Pfaeffli Dale, Leila Anne; Lechner, Andreas; Lear, Scott; Eapen, Zubin; Niessen, Louis Wilhelmus; Santo, Karla (October 2019). "Mobile phone text-messaging interventions aimed to prevent cardiovascular diseases (Text2PreventCVD): systematic review and individual patient data meta-analysis". Open Heart. 6 (2): e001017. doi:10.1136/openhrt-2019-001017. ISSN 2053-3624. PMC 6802999. PMID 31673381.
-Shariful Islam, Sheikh Mohammed; Lechner, Andreas; Ferrari, Uta; Seissler, Jochen; Holle, Rolf; Niessen, Louis W. (1 March 2016). "Mobile phone use and willingness to pay for SMS for diabetes in Bangladesh". Journal of Public Health. 38 (1): 163–169. doi:10.1093/pubmed/fdv009. ISSN 1741-3842. PMID 25687131.
-Patrick, K.; Griswold, W. G.; Raab, F; Intille, S. S. (2008). "Health and the mobile phone". American Journal of Preventive Medicine. 35 (2): 177–81. doi:10.1016/j.amepre.2008.05.001. PMC 2527290. PMID 18550322.
-Terry, Ken (31 October 2012). "Text Messaging Between Clinicians Increasing in Hospitals". InformationWeek. Retrieved 19 December 2013.
-"HIPAA compliant messaging for healthcare providers". OnPage. Retrieved 10 January 2018.
-"New Zealand woman diagnosed with text thumb". Brisbane Times. 24 December 2007. Retrieved 3 October 2022.
-Shuter, Robert; Chattopadhyay, Sumana (2010). "Emerging Interpersonal Norms of Text Messaging in India and the United States". Journal of Intercultural Communication Research. 29 (2): 123–147. doi:10.1080/17475759.2010.526319. S2CID 143705457.
-"Text Messaging". The Emily Post Institute. Archived from the original on 26 January 2008. Retrieved 29 March 2012.
-"How do we communicate in business today?". Plantronics. Archived from the original on 23 December 2010.
-Alison Diana (30 September 2010). "Executives Demand Communications Arsenal". InformationWeek. Archived from the original on 20 November 2010. Retrieved 11 October 2010.
-Gardiner, Michael E.; Haladyn, Julian Jason (4 October 2016). Boredom Studies Reader: Frameworks and Perspectives. Taylor & Francis. p. 147. ISBN 978-1-317-40361-6.
-SFGATE, Dianne de Guzman (20 November 2020). "The history behind text messaging's most dreadful feature". SFGATE. Retrieved 18 January 2023.
-"Accident Claim Text Scam". Kathirvel.com. 7 July 2010. Archived from the original on 5 May 2011. Retrieved 29 March 2012.
-"Sprint and Cingular Named in Complaints". The New York Times. 21 July 2005.
-"UCAN report on Sprint SPAM SMS settlement". Utility Consumers' Action Network. 5 October 2006. Archived from the original on 18 July 2007. Retrieved 29 March 2012.
-"Warning over 'scam' that charges users to receive texts". bbc.co.uk. 28 March 2012. Retrieved 29 September 2014.
-Biggs, John (1 July 2008). "AT&T's text messages cost $1,310 per megabyte". TechCrunch. Retrieved 3 October 2022.
-Jones, Ashley (28 July 2009). "Texting prices rise as carriers make profits". The Daily Universe. Archived from the original on 28 March 2010. Retrieved 9 April 2011.
-Crystal, David (2008). txting; the gr8 db8. New York: Oxford. pp. 4–5. ISBN 978-0-19-954490-5.
-Albanesius, Chloe (16 June 2009). "AT&T, Verizon Deny Text-Message Price-Fixing". PC Magazine.
-Reardon, Marguerite (16 June 2009). "AT&T and Verizon deny price-fixing accusations". CNET News. Retrieved 8 March 2022.
-The death of SMS has been greatly exaggerated. Phonearena.com. Retrieved on 8 June 2015.
-"Don't Use SMS for Confidential Communication". Gartner Group. 26 November 2002. Archived from the original on 14 December 2002. Retrieved 29 March 2012.
-"Sonja satte sms-verdensrekord | TV 2 Nyhetene". Tv2nyhetene.no. 14 November 2009. Retrieved 29 March 2012.
-"Fastest fingers top text record". BBC News. 22 March 2005. Retrieved 27 March 2010.
-"Fastest Text Messager". The book of alternative records. Retrieved 5 April 2012.
-"World's fastest texter in Dunedin". Tvnz.co.nz. TECHNOLOGY News. 17 November 2007. Archived from the original on 1 March 2013. Retrieved 5 April 2012.
-"Most Text Messages Sent or Received in a Single Month". The Universal Records Database. 14 September 2010. Archived from the original on 28 December 2010. Retrieved 15 November 2010.
-Sang-hun, Choe (27 January 2010). "Rule of Thumbs: Koreans Reign in Texting World". The New York Times. Seoul. Retrieved 10 February 2010.
-"World Record Texting Speed App – iTextFast". PR Mac. United States. 6 April 2011. Archived from the original on 25 July 2011. Retrieved 6 April 2011.
-"A race to the wire as old hand at Morse code beats txt msgrs". timesonline.co.uk. London: The Times Online. 16 April 2005.
-eeggs.com (21 November 2001). "Nokia Mobile Phones Easter Eggs". Eeggs.com. Retrieved 29 March 2012.
-Nokia app lets you key SMSes in Morse Code, 1 June 2005, Boing Boing.
-"Back to the Future – Morse Code and Cellular Phones". oreillynet.com. O'Reilly Network. 28 June 2005. Archived from the original on 3 July 2005.
-Nokia files patent for Morse Code-generating cellphone, 12 March 2005, Engadget.
-George, Justin (11 September 2008) "Bucs fans can tattle via text". tampabay.com.
 
-    "Schooling fans on good behavior". sportsbusinessdaily.com (21 November 2011).
+Main menu
 
-Look up text messaging in Wiktionary, the free dictionary.
-Wikimedia Commons has media related to Short message service.
+Wikipedia The Free Encyclopedia
+
+    Create account
+    Log in
+
+Personal tools
+
+Contents
+(Top)
+Lossless
+
+Lossy
+
+Theory
+
+    Machine learning
+    Data differencing
+
+Uses
+
+        Image
+        Audio
+            Lossy audio compression
+                Coding methods
+                Speech encoding
+            History
+        Video
+            Encoding theory
+                Inter-frame coding
+            Hybrid block-based transform formats
+            History
+        Genetics
+    Outlook and currently unused potential
+    See also
+    References
+    External links
+
+Data compression
+
+    Article
+    Talk
+
+    Read
+    Edit
+    View history
+
+Tools
+
+From Wikipedia, the free encyclopedia
+(Redirected from Video compression)
+"Source coding" redirects here. For the term in computer programming, see Source code.
+
+In information theory, data compression, source coding,[1] or bit-rate reduction is the process of encoding information using fewer bits than the original representation.[2] Any particular compression is either lossy or lossless. Lossless compression reduces bits by identifying and eliminating statistical redundancy. No information is lost in lossless compression. Lossy compression reduces bits by removing unnecessary or less important information.[3] Typically, a device that performs data compression is referred to as an encoder, and one that performs the reversal of the process (decompression) as a decoder.
+
+The process of reducing the size of a data file is often referred to as data compression. In the context of data transmission, it is called source coding: encoding done at the source of the data before it is stored or transmitted.[4] Source coding should not be confused with channel coding, for error detection and correction or line coding, the means for mapping data onto a signal.
+
+Compression is useful because it reduces the resources required to store and transmit data. Computational resources are consumed in the compression and decompression processes. Data compression is subject to a space–time complexity trade-off. For instance, a compression scheme for video may require expensive hardware for the video to be decompressed fast enough to be viewed as it is being decompressed, and the option to decompress the video in full before watching it may be inconvenient or require additional storage. The design of data compression schemes involves trade-offs among various factors, including the degree of compression, the amount of distortion introduced (when using lossy data compression), and the computational resources required to compress and decompress the data.[5]
+Lossless
+Main article: Lossless compression
+
+Lossless data compression algorithms usually exploit statistical redundancy to represent data without losing any information, so that the process is reversible. Lossless compression is possible because most real-world data exhibits statistical redundancy. For example, an image may have areas of color that do not change over several pixels; instead of coding "red pixel, red pixel, ..." the data may be encoded as "279 red pixels". This is a basic example of run-length encoding; there are many schemes to reduce file size by eliminating redundancy.
+
+The Lempel–Ziv (LZ) compression methods are among the most popular algorithms for lossless storage.[6] DEFLATE is a variation on LZ optimized for decompression speed and compression ratio, but compression can be slow. In the mid-1980s, following work by Terry Welch, the Lempel–Ziv–Welch (LZW) algorithm rapidly became the method of choice for most general-purpose compression systems. LZW is used in GIF images, programs such as PKZIP, and hardware devices such as modems.[7] LZ methods use a table-based compression model where table entries are substituted for repeated strings of data. For most LZ methods, this table is generated dynamically from earlier data in the input. The table itself is often Huffman encoded. Grammar-based codes like this can compress highly repetitive input extremely effectively, for instance, a biological data collection of the same or closely related species, a huge versioned document collection, internet archival, etc. The basic task of grammar-based codes is constructing a context-free grammar deriving a single string. Other practical grammar compression algorithms include Sequitur and Re-Pair.
+
+The strongest modern lossless compressors use probabilistic models, such as prediction by partial matching. The Burrows–Wheeler transform can also be viewed as an indirect form of statistical modelling.[8] In a further refinement of the direct use of probabilistic modelling, statistical estimates can be coupled to an algorithm called arithmetic coding. Arithmetic coding is a more modern coding technique that uses the mathematical calculations of a finite-state machine to produce a string of encoded bits from a series of input data symbols. It can achieve superior compression compared to other techniques such as the better-known Huffman algorithm. It uses an internal memory state to avoid the need to perform a one-to-one mapping of individual input symbols to distinct representations that use an integer number of bits, and it clears out the internal memory only after encoding the entire string of data symbols. Arithmetic coding applies especially well to adaptive data compression tasks where the statistics vary and are context-dependent, as it can be easily coupled with an adaptive model of the probability distribution of the input data. An early example of the use of arithmetic coding was in an optional (but not widely used) feature of the JPEG image coding standard.[9] It has since been applied in various other designs including H.263, H.264/MPEG-4 AVC and HEVC for video coding.[10]
+
+Archive software typically has the ability to adjust the "dictionary size", where a larger size demands more random access memory during compression and decompression, but compresses stronger, especially on repeating patterns in files' content.[11][12]
+Lossy
+Main article: Lossy compression
+MP3, an example of a lossy file format compared to WAV.
+
+In the late 1980s, digital images became more common, and standards for lossless image compression emerged. In the early 1990s, lossy compression methods began to be widely used.[13] In these schemes, some loss of information is accepted as dropping nonessential detail can save storage space. There is a corresponding trade-off between preserving information and reducing size. Lossy data compression schemes are designed by research on how people perceive the data in question. For example, the human eye is more sensitive to subtle variations in luminance than it is to the variations in color. JPEG image compression works in part by rounding off nonessential bits of information.[14] A number of popular compression formats exploit these perceptual differences, including psychoacoustics for sound, and psychovisuals for images and video.
+
+Most forms of lossy compression are based on transform coding, especially the discrete cosine transform (DCT). It was first proposed in 1972 by Nasir Ahmed, who then developed a working algorithm with T. Natarajan and K. R. Rao in 1973, before introducing it in January 1974.[15][16] DCT is the most widely used lossy compression method, and is used in multimedia formats for images (such as JPEG and HEIF),[17] video (such as MPEG, AVC and HEVC) and audio (such as MP3, AAC and Vorbis).
+
+Lossy image compression is used in digital cameras, to increase storage capacities. Similarly, DVDs, Blu-ray and streaming video use lossy video coding formats. Lossy compression is extensively used in video.
+
+In lossy audio compression, methods of psychoacoustics are used to remove non-audible (or less audible) components of the audio signal. Compression of human speech is often performed with even more specialized techniques; speech coding is distinguished as a separate discipline from general-purpose audio compression. Speech coding is used in internet telephony, for example, audio compression is used for CD ripping and is decoded by the audio players.[8]
+
+Lossy compression can cause generation loss.
+Theory
+
+The theoretical basis for compression is provided by information theory and, more specifically, Shannon's source coding theorem; domain-specific theories include algorithmic information theory for lossless compression and rate–distortion theory for lossy compression. These areas of study were essentially created by Claude Shannon, who published fundamental papers on the topic in the late 1940s and early 1950s. Other topics associated with compression include coding theory and statistical inference.[18]
+Machine learning
+
+There is a close connection between machine learning and compression. A system that predicts the posterior probabilities of a sequence given its entire history can be used for optimal data compression (by using arithmetic coding on the output distribution). Conversely, an optimal compressor can be used for prediction (by finding the symbol that compresses best, given the previous history). This equivalence has been used as a justification for using data compression as a benchmark for "general intelligence".[19][20][21]
+
+An alternative view can show compression algorithms implicitly map strings into implicit feature space vectors, and compression-based similarity measures compute similarity within these feature spaces. For each compressor C(.) we define an associated vector space ℵ, such that C(.) maps an input string x, corresponding to the vector norm ||~x||. An exhaustive examination of the feature spaces underlying all compression algorithms is precluded by space; instead, feature vectors chooses to examine three representative lossless compression methods, LZW, LZ77, and PPM.[22]
+
+According to AIXI theory, a connection more directly explained in Hutter Prize, the best possible compression of x is the smallest possible software that generates x. For example, in that model, a zip file's compressed size includes both the zip file and the unzipping software, since you can't unzip it without both, but there may be an even smaller combined form.
+
+Examples of AI-powered audio/video compression software include VP9, NVIDIA Maxine, AIVC, AccMPEG.[23] Examples of software that can perform AI-powered image compression include OpenCV, TensorFlow, MATLAB's Image Processing Toolbox (IPT) and High-Fidelity Generative Image Compression.[24]
+Data differencing
+Main article: Data differencing
+
+Data compression can be viewed as a special case of data differencing.[25][26] Data differencing consists of producing a difference given a source and a target, with patching reproducing the target given a source and a difference. Since there is no separate source and target in data compression, one can consider data compression as data differencing with empty source data, the compressed file corresponding to a difference from nothing. This is the same as considering absolute entropy (corresponding to data compression) as a special case of relative entropy (corresponding to data differencing) with no initial data.
+
+The term differential compression is used to emphasize the data differencing connection.
+Uses
+Image
+Main article: Image compression
+
+Entropy coding originated in the 1940s with the introduction of Shannon–Fano coding,[27] the basis for Huffman coding which was developed in 1950.[28] Transform coding dates back to the late 1960s, with the introduction of fast Fourier transform (FFT) coding in 1968 and the Hadamard transform in 1969.[29]
+
+An important image compression technique is the discrete cosine transform (DCT), a technique developed in the early 1970s.[15] DCT is the basis for JPEG, a lossy compression format which was introduced by the Joint Photographic Experts Group (JPEG) in 1992.[30] JPEG greatly reduces the amount of data required to represent an image at the cost of a relatively small reduction in image quality and has become the most widely used image file format.[31][32] Its highly efficient DCT-based compression algorithm was largely responsible for the wide proliferation of digital images and digital photos.[33]
+
+Lempel–Ziv–Welch (LZW) is a lossless compression algorithm developed in 1984. It is used in the GIF format, introduced in 1987.[34] DEFLATE, a lossless compression algorithm specified in 1996, is used in the Portable Network Graphics (PNG) format.[35]
+
+Wavelet compression, the use of wavelets in image compression, began after the development of DCT coding.[36] The JPEG 2000 standard was introduced in 2000.[37] In contrast to the DCT algorithm used by the original JPEG format, JPEG 2000 instead uses discrete wavelet transform (DWT) algorithms.[38][39][40] JPEG 2000 technology, which includes the Motion JPEG 2000 extension, was selected as the video coding standard for digital cinema in 2004.[41]
+Audio
+See also: Audio coding format and Audio codec
+
+Audio data compression, not to be confused with dynamic range compression, has the potential to reduce the transmission bandwidth and storage requirements of audio data. Audio compression algorithms are implemented in software as audio codecs. In both lossy and lossless compression, information redundancy is reduced, using methods such as coding, quantization, DCT and linear prediction to reduce the amount of information used to represent the uncompressed data.
+
+Lossy audio compression algorithms provide higher compression and are used in numerous audio applications including Vorbis and MP3. These algorithms almost all rely on psychoacoustics to eliminate or reduce fidelity of less audible sounds, thereby reducing the space required to store or transmit them.[2][42]
+
+The acceptable trade-off between loss of audio quality and transmission or storage size depends upon the application. For example, one 640 MB compact disc (CD) holds approximately one hour of uncompressed high fidelity music, less than 2 hours of music compressed losslessly, or 7 hours of music compressed in the MP3 format at a medium bit rate. A digital sound recorder can typically store around 200 hours of clearly intelligible speech in 640 MB.[43]
+
+Lossless audio compression produces a representation of digital data that can be decoded to an exact digital duplicate of the original. Compression ratios are around 50–60% of the original size,[44] which is similar to those for generic lossless data compression. Lossless codecs use curve fitting or linear prediction as a basis for estimating the signal. Parameters describing the estimation and the difference between the estimation and the actual signal are coded separately.[45]
+
+A number of lossless audio compression formats exist. See list of lossless codecs for a listing. Some formats are associated with a distinct system, such as Direct Stream Transfer, used in Super Audio CD and Meridian Lossless Packing, used in DVD-Audio, Dolby TrueHD, Blu-ray and HD DVD.
+
+Some audio file formats feature a combination of a lossy format and a lossless correction; this allows stripping the correction to easily obtain a lossy file. Such formats include MPEG-4 SLS (Scalable to Lossless), WavPack, and OptimFROG DualStream.
+
+When audio files are to be processed, either by further compression or for editing, it is desirable to work from an unchanged original (uncompressed or losslessly compressed). Processing of a lossily compressed file for some purpose usually produces a final result inferior to the creation of the same compressed file from an uncompressed original. In addition to sound editing or mixing, lossless audio compression is often used for archival storage, or as master copies.
+Lossy audio compression
+Comparison of spectrograms of audio in an uncompressed format and several lossy formats. The lossy spectrograms show bandlimiting of higher frequencies, a common technique associated with lossy audio compression.
+
+Lossy audio compression is used in a wide range of applications. In addition to standalone audio-only applications of file playback in MP3 players or computers, digitally compressed audio streams are used in most video DVDs, digital television, streaming media on the Internet, satellite and cable radio, and increasingly in terrestrial radio broadcasts. Lossy compression typically achieves far greater compression than lossless compression, by discarding less-critical data based on psychoacoustic optimizations.[46]
+
+Psychoacoustics recognizes that not all data in an audio stream can be perceived by the human auditory system. Most lossy compression reduces redundancy by first identifying perceptually irrelevant sounds, that is, sounds that are very hard to hear. Typical examples include high frequencies or sounds that occur at the same time as louder sounds. Those irrelevant sounds are coded with decreased accuracy or not at all.
+
+Due to the nature of lossy algorithms, audio quality suffers a digital generation loss when a file is decompressed and recompressed. This makes lossy compression unsuitable for storing the intermediate results in professional audio engineering applications, such as sound editing and multitrack recording. However, lossy formats such as MP3 are very popular with end-users as the file size is reduced to 5-20% of the original size and a megabyte can store about a minute's worth of music at adequate quality.
+Coding methods
+
+To determine what information in an audio signal is perceptually irrelevant, most lossy compression algorithms use transforms such as the modified discrete cosine transform (MDCT) to convert time domain sampled waveforms into a transform domain, typically the frequency domain. Once transformed, component frequencies can be prioritized according to how audible they are. Audibility of spectral components is assessed using the absolute threshold of hearing and the principles of simultaneous masking—the phenomenon wherein a signal is masked by another signal separated by frequency—and, in some cases, temporal masking—where a signal is masked by another signal separated by time. Equal-loudness contours may also be used to weigh the perceptual importance of components. Models of the human ear-brain combination incorporating such effects are often called psychoacoustic models.[47]
+
+Other types of lossy compressors, such as the linear predictive coding (LPC) used with speech, are source-based coders. LPC uses a model of the human vocal tract to analyze speech sounds and infer the parameters used by the model to produce them moment to moment. These changing parameters are transmitted or stored and used to drive another model in the decoder which reproduces the sound.
+
+Lossy formats are often used for the distribution of streaming audio or interactive communication (such as in cell phone networks). In such applications, the data must be decompressed as the data flows, rather than after the entire data stream has been transmitted. Not all audio codecs can be used for streaming applications.[46]
+
+Latency is introduced by the methods used to encode and decode the data. Some codecs will analyze a longer segment, called a frame, of the data to optimize efficiency, and then code it in a manner that requires a larger segment of data at one time to decode. The inherent latency of the coding algorithm can be critical; for example, when there is a two-way transmission of data, such as with a telephone conversation, significant delays may seriously degrade the perceived quality.
+
+In contrast to the speed of compression, which is proportional to the number of operations required by the algorithm, here latency refers to the number of samples that must be analyzed before a block of audio is processed. In the minimum case, latency is zero samples (e.g., if the coder/decoder simply reduces the number of bits used to quantize the signal). Time domain algorithms such as LPC also often have low latencies, hence their popularity in speech coding for telephony. In algorithms such as MP3, however, a large number of samples have to be analyzed to implement a psychoacoustic model in the frequency domain, and latency is on the order of 23 ms.
+Speech encoding
+
+Speech encoding is an important category of audio data compression. The perceptual models used to estimate what aspects of speech a human ear can hear are generally somewhat different from those used for music. The range of frequencies needed to convey the sounds of a human voice is normally far narrower than that needed for music, and the sound is normally less complex. As a result, speech can be encoded at high quality using a relatively low bit rate.
+
+This is accomplished, in general, by some combination of two approaches:
+
+    Only encoding sounds that could be made by a single human voice.
+    Throwing away more of the data in the signal—keeping just enough to reconstruct an "intelligible" voice rather than the full frequency range of human hearing.
+
+The earliest algorithms used in speech encoding (and audio data compression in general) were the A-law algorithm and the μ-law algorithm.
+History
+Solidyne 922: The world's first commercial audio bit compression sound card for PC, 1990
+
+Early audio research was conducted at Bell Labs. There, in 1950, C. Chapin Cutler filed the patent on differential pulse-code modulation (DPCM).[48] In 1973, Adaptive DPCM (ADPCM) was introduced by P. Cummiskey, Nikil S. Jayant and James L. Flanagan.[49][50]
+
+Perceptual coding was first used for speech coding compression, with linear predictive coding (LPC).[51] Initial concepts for LPC date back to the work of Fumitada Itakura (Nagoya University) and Shuzo Saito (Nippon Telegraph and Telephone) in 1966.[52] During the 1970s, Bishnu S. Atal and Manfred R. Schroeder at Bell Labs developed a form of LPC called adaptive predictive coding (APC), a perceptual coding algorithm that exploited the masking properties of the human ear, followed in the early 1980s with the code-excited linear prediction (CELP) algorithm which achieved a significant compression ratio for its time.[51] Perceptual coding is used by modern audio compression formats such as MP3[51] and AAC.
+
+Discrete cosine transform (DCT), developed by Nasir Ahmed, T. Natarajan and K. R. Rao in 1974,[16] provided the basis for the modified discrete cosine transform (MDCT) used by modern audio compression formats such as MP3,[53] Dolby Digital,[54][55] and AAC.[56] MDCT was proposed by J. P. Princen, A. W. Johnson and A. B. Bradley in 1987,[57] following earlier work by Princen and Bradley in 1986.[58]
+
+The world's first commercial broadcast automation audio compression system was developed by Oscar Bonello, an engineering professor at the University of Buenos Aires.[59][failed verification] In 1983, using the psychoacoustic principle of the masking of critical bands first published in 1967,[60] he started developing a practical application based on the recently developed IBM PC computer, and the broadcast automation system was launched in 1987 under the name Audicom. Twenty years later, almost all the radio stations in the world were using similar technology manufactured by a number of companies.
+
+A literature compendium for a large variety of audio coding systems was published in the IEEE's Journal on Selected Areas in Communications (JSAC), in February 1988. While there were some papers from before that time, this collection documented an entire variety of finished, working audio coders, nearly all of them using perceptual techniques and some kind of frequency analysis and back-end noiseless coding.[61]
+Video
+See also: Video coding format and Video codec
+
+Uncompressed video requires a very high data rate. Although lossless video compression codecs perform at a compression factor of 5 to 12, a typical H.264 lossy compression video has a compression factor between 20 and 200.[62]
+
+The two key video compression techniques used in video coding standards are the DCT and motion compensation (MC). Most video coding standards, such as the H.26x and MPEG formats, typically use motion-compensated DCT video coding (block motion compensation).[63][64]
+
+Most video codecs are used alongside audio compression techniques to store the separate but complementary data streams as one combined package using so-called container formats.[65]
+Encoding theory
+
+Video data may be represented as a series of still image frames. Such data usually contains abundant amounts of spatial and temporal redundancy. Video compression algorithms attempt to reduce redundancy and store information more compactly.
+
+Most video compression formats and codecs exploit both spatial and temporal redundancy (e.g. through difference coding with motion compensation). Similarities can be encoded by only storing differences between e.g. temporally adjacent frames (inter-frame coding) or spatially adjacent pixels (intra-frame coding). Inter-frame compression (a temporal delta encoding) (re)uses data from one or more earlier or later frames in a sequence to describe the current frame. Intra-frame coding, on the other hand, uses only data from within the current frame, effectively being still-image compression.[47]
+
+The intra-frame video coding formats used in camcorders and video editing employ simpler compression that uses only intra-frame prediction. This simplifies video editing software, as it prevents a situation in which a compressed frame refers to data that the editor has deleted.
+
+Usually, video compression additionally employs lossy compression techniques like quantization that reduce aspects of the source data that are (more or less) irrelevant to the human visual perception by exploiting perceptual features of human vision. For example, small differences in color are more difficult to perceive than are changes in brightness. Compression algorithms can average a color across these similar areas in a manner similar to those used in JPEG image compression.[9] As in all lossy compression, there is a trade-off between video quality and bit rate, cost of processing the compression and decompression, and system requirements. Highly compressed video may present visible or distracting artifacts.
+
+Other methods other than the prevalent DCT-based transform formats, such as fractal compression, matching pursuit and the use of a discrete wavelet transform (DWT), have been the subject of some research, but are typically not used in practical products. Wavelet compression is used in still-image coders and video coders without motion compensation. Interest in fractal compression seems to be waning, due to recent theoretical analysis showing a comparative lack of effectiveness of such methods.[47]
+Inter-frame coding
+Main article: Inter frame
+Further information: Motion compensation
+
+In inter-frame coding, individual frames of a video sequence are compared from one frame to the next, and the video compression codec records the differences to the reference frame. If the frame contains areas where nothing has moved, the system can simply issue a short command that copies that part of the previous frame into the next one. If sections of the frame move in a simple manner, the compressor can emit a (slightly longer) command that tells the decompressor to shift, rotate, lighten, or darken the copy. This longer command still remains much shorter than data generated by intra-frame compression. Usually, the encoder will also transmit a residue signal which describes the remaining more subtle differences to the reference imagery. Using entropy coding, these residue signals have a more compact representation than the full signal. In areas of video with more motion, the compression must encode more data to keep up with the larger number of pixels that are changing. Commonly during explosions, flames, flocks of animals, and in some panning shots, the high-frequency detail leads to quality decreases or to increases in the variable bitrate.
+Hybrid block-based transform formats
+Processing stages of a typical video encoder
+
+Today, nearly all commonly used video compression methods (e.g., those in standards approved by the ITU-T or ISO) share the same basic architecture that dates back to H.261 which was standardized in 1988 by the ITU-T. They mostly rely on the DCT, applied to rectangular blocks of neighboring pixels, and temporal prediction using motion vectors, as well as nowadays also an in-loop filtering step.
+
+In the prediction stage, various deduplication and difference-coding techniques are applied that help decorrelate data and describe new data based on already transmitted data.
+
+Then rectangular blocks of remaining pixel data are transformed to the frequency domain. In the main lossy processing stage, frequency domain data gets quantized in order to reduce information that is irrelevant to human visual perception.
+
+In the last stage statistical redundancy gets largely eliminated by an entropy coder which often applies some form of arithmetic coding.
+
+In an additional in-loop filtering stage various filters can be applied to the reconstructed image signal. By computing these filters also inside the encoding loop they can help compression because they can be applied to reference material before it gets used in the prediction process and they can be guided using the original signal. The most popular example are deblocking filters that blur out blocking artifacts from quantization discontinuities at transform block boundaries.
+History
+Main article: Video coding format § History
+
+In 1967, A.H. Robinson and C. Cherry proposed a run-length encoding bandwidth compression scheme for the transmission of analog television signals.[66] The DCT, which is fundamental to modern video compression,[67] was introduced by Nasir Ahmed, T. Natarajan and K. R. Rao in 1974.[16][68]
+
+H.261, which debuted in 1988, commercially introduced the prevalent basic architecture of video compression technology.[69] It was the first video coding format based on DCT compression.[67] H.261 was developed by a number of companies, including Hitachi, PictureTel, NTT, BT and Toshiba.[70]
+
+The most popular video coding standards used for codecs have been the MPEG standards. MPEG-1 was developed by the Motion Picture Experts Group (MPEG) in 1991, and it was designed to compress VHS-quality video. It was succeeded in 1994 by MPEG-2/H.262,[69] which was developed by a number of companies, primarily Sony, Thomson and Mitsubishi Electric.[71] MPEG-2 became the standard video format for DVD and SD digital television.[69] In 1999, it was followed by MPEG-4/H.263.[69] It was also developed by a number of companies, primarily Mitsubishi Electric, Hitachi and Panasonic.[72]
+
+H.264/MPEG-4 AVC was developed in 2003 by a number of organizations, primarily Panasonic, Godo Kaisha IP Bridge and LG Electronics.[73] AVC commercially introduced the modern context-adaptive binary arithmetic coding (CABAC) and context-adaptive variable-length coding (CAVLC) algorithms. AVC is the main video encoding standard for Blu-ray Discs, and is widely used by video sharing websites and streaming internet services such as YouTube, Netflix, Vimeo, and iTunes Store, web software such as Adobe Flash Player and Microsoft Silverlight, and various HDTV broadcasts over terrestrial and satellite television.
+Genetics
+
+Genetics compression algorithms are the latest generation of lossless algorithms that compress data (typically sequences of nucleotides) using both conventional compression algorithms and genetic algorithms adapted to the specific datatype. In 2012, a team of scientists from Johns Hopkins University published a genetic compression algorithm that does not use a reference genome for compression. HAPZIPPER was tailored for HapMap data and achieves over 20-fold compression (95% reduction in file size), providing 2- to 4-fold better compression and is less computationally intensive than the leading general-purpose compression utilities. For this, Chanda, Elhaik, and Bader introduced MAF-based encoding (MAFE), which reduces the heterogeneity of the dataset by sorting SNPs by their minor allele frequency, thus homogenizing the dataset.[74] Other algorithms developed in 2009 and 2013 (DNAZip and GenomeZip) have compression ratios of up to 1200-fold—allowing 6 billion basepair diploid human genomes to be stored in 2.5 megabytes (relative to a reference genome or averaged over many genomes).[75][76] For a benchmark in genetics/genomics data compressors, see [77]
+Outlook and currently unused potential
+
+It is estimated that the total amount of data that is stored on the world's storage devices could be further compressed with existing compression algorithms by a remaining average factor of 4.5:1.[78] It is estimated that the combined technological capacity of the world to store information provides 1,300 exabytes of hardware digits in 2007, but when the corresponding content is optimally compressed, this only represents 295 exabytes of Shannon information.[79]
+See also
+
+    HTTP compression
+    Kolmogorov complexity
+    Lhasa (computing)
+    Minimum description length
+    Modulo-N code
+    Motion coding
+    Range coding
+    Set redundancy compression
+    Sub-band coding
+    Universal code (data compression)
+    Vector quantization
+
+References
+
+Wade, Graham (1994). Signal coding and processing (2 ed.). Cambridge University Press. p. 34. ISBN 978-0-521-42336-6. Retrieved 2011-12-22. "The broad objective of source coding is to exploit or remove 'inefficient' redundancy in the PCM source and thereby achieve a reduction in the overall source rate R."
+Mahdi, O.A.; Mohammed, M.A.; Mohamed, A.J. (November 2012). "Implementing a Novel Approach an Convert Audio Compression to Text Coding via Hybrid Technique" (PDF). International Journal of Computer Science Issues. 9 (6, No. 3): 53–59. Archived (PDF) from the original on 2013-03-20. Retrieved 6 March 2013.
+Pujar, J.H.; Kadlaskar, L.M. (May 2010). "A New Lossless Method of Image Compression and Decompression Using Huffman Coding Techniques" (PDF). Journal of Theoretical and Applied Information Technology. 15 (1): 18–23. Archived (PDF) from the original on 2010-05-24.
+Salomon, David (2008). A Concise Introduction to Data Compression. Berlin: Springer. ISBN 9781848000728.
+Tank, M.K. (2011). "Implementation of Lempel-ZIV algorithm for lossless compression using VHDL". Implementation of Limpel-Ziv algorithm for lossless compression using VHDL. Thinkquest 2010: Proceedings of the First International Conference on Contours of Computing Technology. Berlin: Springer. pp. 275–283. doi:10.1007/978-81-8489-989-4_51. ISBN 978-81-8489-988-7.
+Navqi, Saud; Naqvi, R.; Riaz, R.A.; Siddiqui, F. (April 2011). "Optimized RTL design and implementation of LZW algorithm for high bandwidth applications" (PDF). Electrical Review. 2011 (4): 279–285. Archived (PDF) from the original on 2013-05-20.
+Stephen, Wolfram (2002). New Kind of Science. Champaign, IL. p. 1069. ISBN 1-57955-008-8.
+Mahmud, Salauddin (March 2012). "An Improved Data Compression Method for General Data" (PDF). International Journal of Scientific & Engineering Research. 3 (3): 2. Archived (PDF) from the original on 2013-11-02. Retrieved 6 March 2013.
+Lane, Tom. "JPEG Image Compression FAQ, Part 1". Internet FAQ Archives. Independent JPEG Group. Retrieved 6 March 2013.
+G. J. Sullivan; J.-R. Ohm; W.-J. Han; T. Wiegand (December 2012). "Overview of the High Efficiency Video Coding (HEVC) Standard". IEEE Transactions on Circuits and Systems for Video Technology. IEEE. 22 (12): 1649–1668. doi:10.1109/TCSVT.2012.2221191.
+"How to choose optimal archiving settings – WinRAR".
+"(Set compression Method) switch – 7zip".
+Wolfram, Stephen (2002). A New Kind of Science. Wolfram Media, Inc. p. 1069. ISBN 978-1-57955-008-0.
+Arcangel, Cory. "On Compression" (PDF). Archived (PDF) from the original on 2013-07-28. Retrieved 6 March 2013.
+Ahmed, Nasir (January 1991). "How I Came Up With the Discrete Cosine Transform". Digital Signal Processing. 1 (1): 4–5. doi:10.1016/1051-2004(91)90086-Z.
+Nasir Ahmed; T. Natarajan; Kamisetty Ramamohan Rao (January 1974). "Discrete Cosine Transform" (PDF). IEEE Transactions on Computers. C-23 (1): 90–93. doi:10.1109/T-C.1974.223784. S2CID 149806273. Archived (PDF) from the original on 2016-12-08.
+CCITT Study Group VIII und die Joint Photographic Experts Group (JPEG) von ISO/IEC Joint Technical Committee 1/Subcommittee 29/Working Group 10 (1993), "Annex D – Arithmetic coding", Recommendation T.81: Digital Compression and Coding of Continuous-tone Still images – Requirements and guidelines (PDF), pp. 54 ff, retrieved 2009-11-07
+Marak, Laszlo. "On image compression" (PDF). University of Marne la Vallee. Archived from the original (PDF) on 28 May 2015. Retrieved 6 March 2013.
+Mahoney, Matt. "Rationale for a Large Text Compression Benchmark". Florida Institute of Technology. Retrieved 5 March 2013.
+Shmilovici A.; Kahiri Y.; Ben-Gal I.; Hauser S. (2009). "Measuring the Efficiency of the Intraday Forex Market with a Universal Data Compression Algorithm" (PDF). Computational Economics. 33 (2): 131–154. CiteSeerX 10.1.1.627.3751. doi:10.1007/s10614-008-9153-3. S2CID 17234503. Archived (PDF) from the original on 2009-07-09.
+I. Ben-Gal (2008). "On the Use of Data Compression Measures to Analyze Robust Designs" (PDF). IEEE Transactions on Reliability. 54 (3): 381–388. doi:10.1109/TR.2005.853280. S2CID 9376086.
+D. Scully; Carla E. Brodley (2006). "Compression and machine learning: A new perspective on feature space vectors". Data Compression Conference, 2006: 332. doi:10.1109/DCC.2006.13. ISBN 0-7695-2545-8. S2CID 12311412.
+Gary Adcock (January 5, 2023). "What Is AI Video Compression?". massive.io. Retrieved 6 April 2023.
+Gilad David Maayan (Nov 24, 2021). "AI-Based Image Compression: The State of the Art". Towards Data Science. Retrieved 6 April 2023.
+Korn, D.; et al. "RFC 3284: The VCDIFF Generic Differencing and Compression Data Format". Internet Engineering Task Force. Retrieved 5 March 2013.
+Korn, D.G.; Vo, K.P. (1995). B. Krishnamurthy (ed.). Vdelta: Differencing and Compression. Practical Reusable Unix Software. New York: John Wiley & Sons, Inc.
+Claude Elwood Shannon (1948). Alcatel-Lucent (ed.). "A Mathematical Theory of Communication" (PDF). Bell System Technical Journal. 27 (3–4): 379–423, 623–656. doi:10.1002/j.1538-7305.1948.tb01338.x. hdl:11858/00-001M-0000-002C-4314-2. Archived (PDF) from the original on 2011-05-24. Retrieved 2019-04-21.
+David Albert Huffman (September 1952), "A method for the construction of minimum-redundancy codes" (PDF), Proceedings of the IRE, vol. 40, no. 9, pp. 1098–1101, doi:10.1109/JRPROC.1952.273898, archived (PDF) from the original on 2005-10-08
+Pratt, W.K.; Kane, J.; Andrews, H.C. (1969). "Hadamard transform image coding". Proceedings of the IEEE. 57: 58–68. doi:10.1109/PROC.1969.6869.
+"T.81 – DIGITAL COMPRESSION AND CODING OF CONTINUOUS-TONE STILL IMAGES – REQUIREMENTS AND GUIDELINES" (PDF). CCITT. September 1992. Retrieved 12 July 2019.
+"The JPEG image format explained". BT.com. BT Group. 31 May 2018. Archived from the original on 5 August 2019. Retrieved 5 August 2019.
+Baraniuk, Chris (15 October 2015). "Copy protections could come to JPEGs". BBC News. BBC. Retrieved 13 September 2019.
+"What Is a JPEG? The Invisible Object You See Every Day". The Atlantic. 24 September 2013. Retrieved 13 September 2019.
+"The GIF Controversy: A Software Developer's Perspective". Retrieved 26 May 2015.
+L. Peter Deutsch (May 1996). DEFLATE Compressed Data Format Specification version 1.3. IETF. p. 1. sec. Abstract. doi:10.17487/RFC1951. RFC 1951. Retrieved 2014-04-23.
+Hoffman, Roy (2012). Data Compression in Digital Systems. Springer Science & Business Media. p. 124. ISBN 9781461560319. "Basically, wavelet coding is a variant on DCT-based transform coding that reduces or eliminates some of its limitations. (...) Another advantage is that rather than working with 8 × 8 blocks of pixels, as do JPEG and other block-based DCT techniques, wavelet coding can simultaneously compress the entire image."
+Taubman, David; Marcellin, Michael (2012). JPEG2000 Image Compression Fundamentals, Standards and Practice: Image Compression Fundamentals, Standards and Practice. Springer Science & Business Media. ISBN 9781461507994.
+Unser, M.; Blu, T. (2003). "Mathematical properties of the JPEG2000 wavelet filters". IEEE Transactions on Image Processing. 12 (9): 1080–1090. Bibcode:2003ITIP...12.1080U. doi:10.1109/TIP.2003.812329. PMID 18237979. S2CID 2765169.
+Sullivan, Gary (8–12 December 2003). "General characteristics and design considerations for temporal subband video coding". ITU-T. Video Coding Experts Group. Retrieved 13 September 2019.
+Bovik, Alan C. (2009). The Essential Guide to Video Processing. Academic Press. p. 355. ISBN 9780080922508.
+Swartz, Charles S. (2005). Understanding Digital Cinema: A Professional Handbook. Taylor & Francis. p. 147. ISBN 9780240806174.
+Cunningham, Stuart; McGregor, Iain (2019). "Subjective Evaluation of Music Compressed with the ACER Codec Compared to AAC, MP3, and Uncompressed PCM". International Journal of Digital Multimedia Broadcasting. 2019: 1–16. doi:10.1155/2019/8265301.
+The Olympus WS-120 digital speech recorder, according to its manual, can store about 178 hours of speech-quality audio in .WMA format in 500 MB of flash memory.
+Coalson, Josh. "FLAC Comparison". Retrieved 2020-08-23.
+"Format overview". Retrieved 2020-08-23.
+Jaiswal, R.C. (2009). Audio-Video Engineering. Pune, Maharashtra: Nirali Prakashan. p. 3.41. ISBN 9788190639675.
+Faxin Yu; Hao Luo; Zheming Lu (2010). Three-Dimensional Model Analysis and Processing. Berlin: Springer. p. 47. ISBN 9783642126512.
+US patent 2605361, C. Chapin Cutler, "Differential Quantization of Communication Signals", issued 1952-07-29
+Cummiskey, P.; Jayant, N. S.; Flanagan, J. L. (1973). "Adaptive Quantization in Differential PCM Coding of Speech". Bell System Technical Journal. 52 (7): 1105–1118. doi:10.1002/j.1538-7305.1973.tb02007.x.
+Cummiskey, P.; Jayant, Nikil S.; Flanagan, J. L. (1973). "Adaptive quantization in differential PCM coding of speech". The Bell System Technical Journal. 52 (7): 1105–1118. doi:10.1002/j.1538-7305.1973.tb02007.x. ISSN 0005-8580.
+Schroeder, Manfred R. (2014). "Bell Laboratories". Acoustics, Information, and Communication: Memorial Volume in Honor of Manfred R. Schroeder. Springer. p. 388. ISBN 9783319056609.
+Gray, Robert M. (2010). "A History of Realtime Digital Speech on Packet Networks: Part II of Linear Predictive Coding and the Internet Protocol" (PDF). Found. Trends Signal Process. 3 (4): 203–303. doi:10.1561/2000000036. ISSN 1932-8346. Archived (PDF) from the original on 2010-07-04.
+Guckert, John (Spring 2012). "The Use of FFT and MDCT in MP3 Audio Compression" (PDF). University of Utah. Archived (PDF) from the original on 2014-01-24. Retrieved 14 July 2019.
+Luo, Fa-Long (2008). Mobile Multimedia Broadcasting Standards: Technology and Practice. Springer Science & Business Media. p. 590. ISBN 9780387782638.
+Britanak, V. (2011). "On Properties, Relations, and Simplified Implementation of Filter Banks in the Dolby Digital (Plus) AC-3 Audio Coding Standards". IEEE Transactions on Audio, Speech, and Language Processing. 19 (5): 1231–1241. doi:10.1109/TASL.2010.2087755. S2CID 897622.
+Brandenburg, Karlheinz (1999). "MP3 and AAC Explained" (PDF). Archived (PDF) from the original on 2017-02-13.
+Princen, J.; Johnson, A.; Bradley, A. (1987). "Subband/Transform coding using filter bank designs based on time domain aliasing cancellation". ICASSP '87. IEEE International Conference on Acoustics, Speech, and Signal Processing. Vol. 12. pp. 2161–2164. doi:10.1109/ICASSP.1987.1169405. S2CID 58446992.
+Princen, J.; Bradley, A. (1986). "Analysis/Synthesis filter bank design based on time domain aliasing cancellation". IEEE Transactions on Acoustics, Speech, and Signal Processing. 34 (5): 1153–1161. doi:10.1109/TASSP.1986.1164954.
+"Summary of some of Solidyne's contributions to Broadcast Engineering". Brief History of Solidyne. Buenos Aires: Solidyne. Archived from the original on 8 March 2013. Retrieved 6 March 2013.
+Zwicker, Eberhard; et al. (1967). The Ear As A Communication Receiver. Melville, NY: Acoustical Society of America. Archived from the original on 2000-09-14. Retrieved 2011-11-11.
+"File Compression Possibilities". A Brief guide to compress a file in 4 different ways. 17 February 2017.
+Dmitriy Vatolin; et al. (Graphics & Media Lab Video Group) (March 2007). Lossless Video Codecs Comparison '2007 (PDF) (Report). Moscow State University. Archived (PDF) from the original on 2008-05-15.
+Chen, Jie; Koc, Ut-Va; Liu, KJ Ray (2001). Design of Digital Video Coding Systems: A Complete Compressed Domain Approach. CRC Press. p. 71. ISBN 9780203904183.
+Li, Jian Ping (2006). Proceedings of the International Computer Conference 2006 on Wavelet Active Media Technology and Information Processing: Chongqing, China, 29-31 August 2006. World Scientific. p. 847. ISBN 9789812709998.
+"Video Coding". CSIP website. Center for Signal and Information Processing, Georgia Institute of Technology. Archived from the original on 23 May 2013. Retrieved 6 March 2013.
+Robinson, A. H.; Cherry, C. (1967). "Results of a prototype television bandwidth compression scheme". Proceedings of the IEEE. IEEE. 55 (3): 356–364. doi:10.1109/PROC.1967.5493.
+Ghanbari, Mohammed (2003). Standard Codecs: Image Compression to Advanced Video Coding. Institution of Engineering and Technology. pp. 1–2. ISBN 9780852967102.
+Reader, Cliff (2016-08-31). "Patent landscape for royalty-free video coding". In Tescher, Andrew G (ed.). Applications of Digital Image Processing XXXIX. Applications of Digital Image Processing XXXIX. Vol. 9971. San Diego, California: Society of Photo-Optical Instrumentation Engineers. pp. 99711B. Bibcode:2016SPIE.9971E..1BR. doi:10.1117/12.2239493. Archived from the original on 2016-12-08. Lecture recording, from 3:05:10.
+"The History of Video File Formats Infographic — RealPlayer". 22 April 2012.
+"Patent statement declaration registered as H261-07". ITU. Retrieved 11 July 2019.
+"MPEG-2 Patent List" (PDF). MPEG LA. Archived (PDF) from the original on 2019-05-29. Retrieved 7 July 2019.
+"MPEG-4 Visual - Patent List" (PDF). MPEG LA. Archived (PDF) from the original on 2019-07-06. Retrieved 6 July 2019.
+"AVC/H.264 – Patent List" (PDF). MPEG LA. Retrieved 6 July 2019.
+Chanda P, Bader JS, Elhaik E (27 Jul 2012). "HapZipper: sharing HapMap populations just got easier". Nucleic Acids Research. 40 (20): e159. doi:10.1093/nar/gks709. PMC 3488212. PMID 22844100.
+Christley S, Lu Y, Li C, Xie X (Jan 15, 2009). "Human genomes as email attachments". Bioinformatics. 25 (2): 274–5. doi:10.1093/bioinformatics/btn582. PMID 18996942.
+Pavlichin DS, Weissman T, Yona G (September 2013). "The human genome contracts again". Bioinformatics. 29 (17): 2199–202. doi:10.1093/bioinformatics/btt362. PMID 23793748.
+Hosseini, Morteza; Pratas, Diogo; Pinho, Armando (2016). "A Survey on Data Compression Methods for Biological Sequences". Information. 7 (4): 56. doi:10.3390/info7040056.
+"Data Compression via Logic Synthesis" (PDF).
+
+    Hilbert, Martin; López, Priscila (1 April 2011). "The World's Technological Capacity to Store, Communicate, and Compute Information". Science. 332 (6025): 60–65. Bibcode:2011Sci...332...60H. doi:10.1126/science.1200970. PMID 21310967. S2CID 206531385.
+
+External links
+
+    "Part 3: Video compression", Data Compression Basics
+    Pierre Larbier, Using 10-bit AVC/H.264 Encoding with 4:2:2 for Broadcast Contribution, Ateme, archived from the original on 2009-09-05
+    Why does 10-bit save bandwidth (even when content is 8-bit)? at the Wayback Machine (archived 2017-08-30)
+    Which compression technology should be used? at the Wayback Machine (archived 2017-08-30)
+    Introduction to Compression Theory (PDF), Wiley, archived (PDF) from the original on 2007-09-28
+    EBU subjective listening tests on low-bitrate audio codecs
+    Audio Archiving Guide: Music Formats (Guide for helping a user pick out the right codec)
+    MPEG 1&2 video compression intro (pdf format) at the Wayback Machine (archived September 28, 2007)
+    hydrogenaudio wiki comparison
+    Introduction to Data Compression by Guy E Blelloch from CMU
+    Explanation of lossless signal compression method used by most codecs
+    Videsignline – Intro to Video Compression at the Wayback Machine (archived 2010-03-15)
+    Data Footprint Reduction Technology at the Wayback Machine (archived 2013-05-27)
+    What is Run length Coding in video compression
 
     vte
 
-Mobile phones
+Data compression methods
 
     vte
 
-Telecommunications
+Multimedia compression and container formats
+
+    vte
+
+Data compression software
+
+    vte
+
+Data
+Authority control: National Edit this at Wikidata	
+
+    Israel United States Japan Czech Republic
+
 Categories:
 
-    2000s fads and trendsComputer-related introductions in 1985Online chatText messaging
+    Data compressionDigital audioDigital televisionFilm and video technologyVideo compressionVideotelephonyUtility software types
 
-    This page was last edited on 13 April 2023, at 22:35 (UTC).
+    This page was last edited on 22 April 2023, at 03:52 (UTC).
+    Text is available under the Creative Commons Attribution-ShareAlike License 3.0; additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+    Privacy policy
+    About Wikipedia
+    Disclaimers
+    Contact Wikipedia
+    Mobile view
+    Developers
+    Statistics
+    Cookie statement
+
+    Wikimedia Foundation
+    Powered by MediaWiki
+
+
+Main menu
+
+Wikipedia The Free Encyclopedia
+
+    Create account
+    Log in
+
+Personal tools
+
+Contents
+(Top)
+Signs and symptoms
+
+Causes
+
+Classification
+
+        Uncal herniation
+        Central herniation
+        Cingulate herniation
+        Transcalvarial herniation
+        Upward herniation
+        Tonsillar herniation
+    Treatment
+    See also
+    References
+    External links
+
+Brain herniation
+
+    Article
+    Talk
+
+    Read
+    Edit
+    View history
+
+Tools
+
+From Wikipedia, the free encyclopedia
+(Redirected from Brain compression)
+Cerebral herniation
+Brain herniation MRI.jpg
+MRI showing injury due to brain herniation
+Specialty	Neurology, neurosurgery 
+
+Brain herniation is a potentially deadly side effect of very high pressure within the skull that occurs when a part of the brain is squeezed across structures within the skull. The brain can shift across such structures as the falx cerebri, the tentorium cerebelli, and even through the foramen magnum (the hole in the base of the skull through which the spinal cord connects with the brain). Herniation can be caused by a number of factors that cause a mass effect and increase intracranial pressure (ICP): these include traumatic brain injury, intracranial hemorrhage, or brain tumor.[1]
+
+Herniation can also occur in the absence of high ICP when mass lesions such as hematomas occur at the borders of brain compartments. In such cases local pressure is increased at the place where the herniation occurs, but this pressure is not transmitted to the rest of the brain, and therefore does not register as an increase in ICP.[2]
+
+Because herniation puts extreme pressure on parts of the brain and thereby cuts off the blood supply to various parts of the brain, it is often fatal. Therefore, extreme measures are taken in hospital settings to prevent the condition by reducing intracranial pressure, or decompressing (draining) a hematoma which is putting local pressure on a part of the brain.
+Signs and symptoms
+Decorticate posturing, with elbows, wrists and fingers flexed, and legs extended and rotated inward
+
+Brain herniation frequently presents with abnormal posturing,[2] a characteristic positioning of the limbs indicative of severe brain damage. These patients have a lowered level of consciousness, with Glasgow Coma Scores of three to five.[2] One or both pupils may be dilated and fail to constrict in response to light.[2] Vomiting can also occur due to compression of the vomiting center in the medulla oblongata. Severe headaches and seizures as a result of increased intracranial pressure are not uncommon. Cardiovascular and pulmonary symptoms may also be present as the brain loses function, but might also be associated with bleeding. These symptoms are known as Cushing's Triad: hypertension (with widening pulse pressure), irregular respirations (commonly Cheyne-Stokes), bradycardia and in severe cases cardiac arrest.[3][4]
+Causes
+
+Causes of brain herniation include:[5]
+
+    Brain edema
+    Hematoma
+    Stroke
+    Tumour
+    Infection
+
+Classification
+Types of brain herniation.[6]
+
+The tentorium is an extension of the dura mater that separates the cerebellum from the cerebrum. There are two major classes of herniation: supratentorial and infratentorial. Supratentorial refers to herniation of structures normally found above the tentorial notch, and infratentorial refers to structures normally found below it.[7]
+
+    Supratentorial herniation
+
+1) Uncal (transtentorial)
+
+2) Central
+
+3) Cingulate (subfalcine or transfalcine)
+
+4) Transcalvarial
+
+5) Tectal (posterior)
+
+    Infratentorial herniation
+
+6) Upward (upward cerebellar or upward transtentorial)
+
+7) Tonsillar (downward cerebellar)
+Uncal herniation
+
+In uncal herniation, a common subtype of transtentorial herniation, the innermost part of the temporal lobe, the uncus, can be squeezed so much that it moves towards the tentorium and puts pressure on the brainstem, most notably the midbrain.[8] The tentorium is a structure within the skull formed by the dura mater of the meninges. Tissue may be stripped from the cerebral cortex in a process called decortication.[9]
+
+The uncus can squeeze the oculomotor nerve (a.k.a. CN III), which may affect the parasympathetic input to the eye on the side of the affected nerve, causing the pupil of the affected eye to dilate and fail to constrict in response to light as it should. Pupillary dilation often precedes the somatic motor effects of CN III compression called oculomotor nerve palsy or third nerve palsy. This palsy presents as deviation of the eye to a "down and out" position due to loss of innervation to all ocular motility muscles except for the lateral rectus (innervated by abducens nerve (a.k.a. CN VI) and the superior oblique (innervated by trochlear nerve a.k.a. CN IV). The symptoms occur in this order because the parasympathetic fibers surround the motor fibers of CN III and are hence compressed first.[citation needed]
+
+Compression of the ipsilateral posterior cerebral artery will result in ischemia of the ipsilateral primary visual cortex and contralateral visual field deficits in both eyes (contralateral homonymous hemianopsia).
+
+Another important finding is a false localizing sign, the so-called Kernohan's notch, which results from compression of the contralateral[10] cerebral crus containing descending corticospinal and some corticobulbar tract fibers. This leads to Ipsilateral hemiparesis in reference to the herniation and contralateral hemiparesis with reference to the cerebral crus.[citation needed]
+
+With increasing pressure and progression of the hernia there will be distortion of the brainstem leading to Duret hemorrhages (tearing of small vessels in the parenchyma) in the median and paramedian zones of the mesencephalon and pons. The rupture of these vessels leads to linear or flamed shaped hemorrhages. The disrupted brainstem can lead to decorticate posture, respiratory center depression and death. Other possibilities resulting from brain stem distortion include lethargy, slow heart rate, and pupil dilation.[9]
+
+Uncal herniation may advance to central herniation.[7] The sliding uncus syndrome represents uncal herniation without alteration in the level of consciousness and other sequelae mentioned above.
+Central herniation
+
+In central herniation, the diencephalon and parts of the temporal lobes of both of the cerebral hemispheres are squeezed through a notch in the tentorium cerebelli.[8][11] Transtentorial herniation can occur when the brain moves either up or down across the tentorium, called ascending and descending transtentorial herniation respectively; however descending herniation is much more common.[1] Downward herniation can stretch branches of the basilar artery (pontine arteries), causing them to tear and bleed, known as a Duret hemorrhage. The result is usually fatal.[11] Other symptoms of this type of herniation include small, fixed pupils with[12] paralysis of upward eye movement giving the characteristic appearance of "sunset eyes". Also found in these patients, often as a terminal complication is the development of diabetes insipidus due to the compression of the pituitary stalk. Radiographically, downward herniation is characterized by obliteration of the suprasellar cistern from temporal lobe herniation into the tentorial hiatus with associated compression on the cerebral peduncles. Upwards herniation, on the other hand, can be radiographically characterized by obliteration of the quadrigeminal cistern. Intracranial hypotension syndrome has been known to mimic downwards transtentorial herniation.
+Cingulate herniation
+Subfalcine herniation on CT
+
+In cingulate or subfalcine herniation, the most common type, the innermost part of the frontal lobe is scraped under part of the falx cerebri, the dura mater at the top of the head between the two hemispheres of the brain.[8][13] Cingulate herniation can be caused when one hemisphere swells and pushes the cingulate gyrus by the falx cerebri.[7] This does not put as much pressure on the brainstem as the other types of herniation, but it may interfere with blood vessels in the frontal lobes that are close to the site of injury (anterior cerebral artery), or it may progress to central herniation.[8] Interference with the blood supply can cause dangerous increases in ICP that can lead to more dangerous forms of herniation.[14] Symptoms for cingulate herniation are not well defined.[14] Usually occurring in addition to uncal herniation, cingulate herniation may present with abnormal posturing and coma.[7] Cingulate herniation is frequently believed to be a precursor to other types of herniation.[14]
+Transcalvarial herniation
+
+In transcalvarial herniation, the brain squeezes through a fracture or a surgical site in the skull.[7] Also called "external herniation", this type of herniation may occur during craniectomy, surgery in which a flap of skull is removed, the protruding brain region preventing the piece of skull from being replaced during the operation.[1]
+Upward herniation
+
+Increased pressure in the posterior fossa can cause the cerebellum to move up through the tentorial opening in upward, or cerebellar herniation.[8] The midbrain is pushed through the tentorial notch upward. This is also known as ascending transtentorial herniation since it occurs across the tentorium cerebelli.
+Tonsillar herniation
+
+In tonsillar herniation, also called downward cerebellar herniation,[7] transforaminal herniation, or "coning", the cerebellar tonsils move downward through the foramen magnum possibly causing compression of the lower brainstem and upper cervical spinal cord as they pass through the foramen magnum.[8] Increased pressure on the brainstem can result in dysfunction of the centers in the brain responsible for controlling respiratory and cardiac function. The most common signs are intractable headache, head tilt, and neck stiffness due to tonsillar impaction. The level of consciousness may decrease and also give rise to flaccid paralysis. Blood pressure instability is also evident in these patients.[12]
+
+Congenital tonsillar herniation of the cerebellum is also known as a Chiari malformation (CM), or previously an Arnold-Chiari malformation (ACM). There are four types of Chiari malformation, and they represent very different disease processes with different symptoms and prognosis. These conditions can be found in asymptomatic patients as an incidental finding, or can be so severe as to be life-threatening. This condition is now being diagnosed more frequently by radiologists, as more patients undergo MRI scans of their heads, especially upright MRI, which is more than twice as sensitive for detecting this condition.[15] Cerebellar tonsillar ectopia (CTE) is a term used by radiologists to describe cerebellar tonsils that are "low lying" but that do not meet the radiographic criteria for definition as a Chiari malformation. The currently accepted radiographic definition for a Chiari malformation is that cerebellar tonsils lie at least 5mm below the level of the foramen magnum. Some clinicians have reported that some patients appear to experience symptoms consistent with a Chiari malformation without radiographic evidence of tonsillar herniation. Sometimes these patients are described as having a 'Chiari [type] 0'.
+
+There are many suspected causes of tonsillar herniation including: decreased or malformed posterior fossa (the lower, back part of the skull) not providing enough room for the cerebellum; hydrocephalus or abnormal CSF volume pushing the tonsils out; or dural tension pulling the brain caudally. Connective tissue disorders, such as Ehlers Danlos syndrome, can be associated.
+
+For further evaluation of tonsillar herniation, CINE flow studies are used. This type of MRI examines flow of CSF at the cranio-cervical joint. For persons experiencing symptoms but without clear MRI evidence, especially if the symptoms are better in the supine position and worse upon standing/upright, an upright MRI may be useful.[2]
+Treatment
+MRI showing damage due to herniation. This patient was left with residual disabilities including those involving movement and speech.[16]
+
+Treatment involves removal of the etiologic mass and decompressive craniectomy. Brain herniation can cause severe disability or death. In fact, when herniation is visible on a CT scan, the prognosis for a meaningful recovery of neurological function is poor.[2] The patient may become paralyzed on the same side as the lesion causing the pressure, or damage to parts of the brain caused by herniation may cause paralysis on the side opposite the lesion.[11] Damage to the midbrain, which contains the reticular activating network which regulates consciousness, will result in coma.[11] Damage to the cardio-respiratory centers in the medulla oblongata will cause respiratory arrest and (secondarily) cardiac arrest.[11] Investigation is underway regarding the use of neuroprotective agents during the prolonged post-traumatic period of brain hypersensitivity associated with the syndrome.[17]
+See also
+
+    Second-impact syndrome
+
+References
+
+Barr RM, Gean AD, Le TH (2007). "Craniofacial trauma". In Brant WE, Helms CA (eds.). Fundamentals of Diagnostic Radiology. Philadelphia: Lippincott, Williams & Wilkins. p. 69. ISBN 978-0-7817-6135-2. Retrieved 2008-11-17.
+Gruen P (May 2002). "Surgical management of head trauma". Neuroimaging Clinics of North America. 12 (2): 339–43. doi:10.1016/S1052-5149(02)00013-8. PMID 12391640.
+Dinallo, Sean; Waseem, Muhammad (2022), "Cushing Reflex", StatPearls, Treasure Island (FL): StatPearls Publishing, PMID 31747208, retrieved 2023-02-19
+Eyster, J. A. (1906-10-12). "CLINICAL AND EXPERIMENTAL OBSERVATIONS UPON CHEYNE-STOKES RESPIRATION". The Journal of Experimental Medicine. 8 (5): 565–613. doi:10.1084/jem.8.5.565. ISSN 0022-1007. PMC 2124640. PMID 19867060.
+Halliday A. "Cerebral Herniation Syndromes" (PDF). Oregon Neurosurgery Specialists.
+Smith, Julian; Joe J. Tjandra; Gordon J. A. Clunie; Kaye, Andrew H. (2006). Textbook of Surgery. Wiley-Blackwell. p. 446. ISBN 1-4051-2627-2.
+Orlando Regional Healthcare, Education and Development. 2004. "Overview of Adult Traumatic Brain Injuries." Archived 2008-02-27 at the Wayback Machine Retrieved on January 16, 2008.
+Shepard S (20 August 2004). "Head trauma". Emedicine.com. Archived from the original on 8 February 2007. Retrieved 28 January 2007.
+McCaffrey P (2001). "The neuroscience on the web series: CMSD 336 neuropathologies of language and cognition". California State University, Chico. Archived from the original on 6 April 2007. Retrieved 7 August 2007.
+Robins Basic Pathology[full citation needed]
+Cornell (1998). Introduction to neuropathology. Reaction to injury: Brain histology (Report). Cornell University Medical College.
+Toronto Notes[full citation needed]
+Dawodu ST. 2007. Traumatic brain injury: Definition, epidemiology, pathophysiology. Emedicine.com. Retrieved on January 28, 2007.
+Hudson K (2006). "Brain Herniation Syndromes - 2 Nursing CEs". Dynamic Nursing Education. Archived from the original on 10 July 2011. Retrieved 6 September 2007.
+Freeman MD, Rosa S, Harshfield D, Smith F, Bennett R, Centeno CJ, Kornel E, Nystrom A, Heffez D, Kohles SS (2010). "A case-control study of cerebellar tonsillar ectopia (Chiari) and head/neck trauma (whiplash)". Brain Injury. 24 (7–8): 988–94. doi:10.3109/02699052.2010.490512. PMID 20545453. S2CID 9553904.
+Rehman T, Ali R, Tawil I, Yonas H (October 2008). "Rapid progression of traumatic bifrontal contusions to transtentorial herniation: A case report". Cases Journal. 1 (1): 203. doi:10.1186/1757-1626-1-203. PMC 2566562. PMID 18831756.
+
+    Stocchetti N, Taccone FS, Citerio G, Pepe PE, Le Roux PD, Oddo M, Polderman KH, Stevens RD, Barsan W, Maas AI, Meyfroidt G, Bell MJ, Silbergleit R, Vespa PM, Faden AI, Helbok R, Tisherman S, Zanier ER, Valenzuela T, Wendon J, Menon DK, Vincent JL (April 2015). "Neuroprotection in acute brain injury: an up-to-date review". Critical Care. 19 (1): 186. doi:10.1186/s13054-015-0887-8. PMC 4404577. PMID 25896893.
+
+External links
+Wikimedia Commons has media related to Brain herniation.
+Classification	
+D
+
+    ICD-10: G93.5ICD-9-CM: 348.4
+
+External resources	
+
+    MedlinePlus: 001421eMedicine: radio/98
+
+    vte
+
+Diseases of the nervous system, primarily CNS
+
+    vte
+
+Neurotrauma
+Categories:
+
+    HerniasNeurotrauma
+
+    This page was last edited on 19 February 2023, at 20:35 (UTC).
+    Text is available under the Creative Commons Attribution-ShareAlike License 3.0; additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+    Privacy policy
+    About Wikipedia
+    Disclaimers
+    Contact Wikipedia
+    Mobile view
+    Developers
+    Statistics
+    Cookie statement
+
+    Wikimedia Foundation
+    Powered by MediaWiki
+
+
+Main menu
+
+Wikipedia The Free Encyclopedia
+
+    Create account
+    Log in
+
+Personal tools
+
+Contents
+(Top)
+Images
+
+    Block boundary artifacts
+    Image artifact reduction
+
+Video
+
+        Motion compensation block boundary artifacts
+        Mosquito noise
+        Video artifact reduction
+    Audio
+    Artistic use
+    See also
+    References
+    External links
+
+Compression artifact
+
+    Article
+    Talk
+
+    Read
+    Edit
+    View history
+
+Tools
+
+From Wikipedia, the free encyclopedia
+	
+This article needs additional citations for verification. Please help improve this article by adding citations to reliable sources. Unsourced material may be challenged and removed.
+Find sources: "Compression artifact" – news · newspapers · books · scholar · JSTOR (September 2007) (Learn how and when to remove this template message)
+"Mosquito noise" redirects here. For the controversial anti-loitering technology, see The Mosquito. For other uses, see mosquito (disambiguation).
+Original image, with good text edges and color grade
+Loss of edge clarity and tone "fuzziness" in heavy JPEG compression
+
+A compression artifact (or artefact) is a noticeable distortion of media (including images, audio, and video) caused by the application of lossy compression. Lossy data compression involves discarding some of the media's data so that it becomes small enough to be stored within the desired disk space or transmitted (streamed) within the available bandwidth (known as the data rate or bit rate). If the compressor cannot store enough data in the compressed version, the result is a loss of quality, or introduction of artifacts. The compression algorithm may not be intelligent enough to discriminate between distortions of little subjective importance and those objectionable to the user.
+
+The most common digital compression artifacts are DCT blocks, caused by the discrete cosine transform (DCT) compression algorithm used in many digital media standards, such as JPEG, MP3, and MPEG video file formats.[1][2][3] These compression artifacts appear when heavy compression is applied,[1] and occur often in common digital media, such as DVDs, common computer file formats such as JPEG, MP3 and MPEG files, and some alternatives to the compact disc, such as Sony's MiniDisc format. Uncompressed media (such as on Laserdiscs, Audio CDs, and WAV files) or losslessly compressed media (such as FLAC or PNG) do not suffer from compression artifacts.
+
+The minimization of perceivable artifacts is a key goal in implementing a lossy compression algorithm. However, artifacts are occasionally intentionally produced for artistic purposes, a style known as glitch art[4] or datamoshing.[5]
+
+Technically speaking, a compression artifact is a particular class of data error that is usually the consequence of quantization in lossy data compression. Where transform coding is used, it typically assumes the form of one of the basis functions of the coder's transform space.
+Images
+Illustration of the effect of JPEG compression on a slightly noisy image with a mixture of text and whitespace. Text is a screen capture from a Wikipedia conversation with noise added (intensity 10 in Paint.NET). One frame of the animation was saved as a JPEG (quality 90) and reloaded. Both frames were then zoomed by a factor of 4 (nearest neighbor interpolation).
+
+When performing block-based discrete cosine transform (DCT)[1] coding for quantization, as in JPEG-compressed images, several types of artifacts can appear.
+
+    Ringing
+    Contouring[clarification needed]
+    Posterizing
+    Staircase noise (aliasing) along curving edges
+    Blockiness in "busy" regions (block boundary artifacts, sometimes called macroblocking, quilting, or checkerboarding)
+
+Other lossy algorithms, which use pattern matching to deduplicate similar symbols, are prone to introducing hard to detect errors in printed text. For example, the numbers "6" and "8" may get replaced. This has been observed to happen with JBIG2 in certain photocopier machines.[6][7]
+Block boundary artifacts
+Block coding artifacts in a JPEG image. Flat blocks are caused by coarse quantization. Discontinuities at transform block boundaries are visible.
+
+At low bit rates, any lossy block-based coding scheme introduces visible artifacts in pixel blocks and at block boundaries. These boundaries can transform block boundaries, prediction block boundaries, or both, and may coincide with macroblock boundaries. The term macroblocking is commonly used regardless of the artifact's cause. Other names include tiling,[8] mosaicing, pixelating, quilting, and checkerboarding.
+
+Block-artifacts are a result of the very principle of block transform coding. The transform (for example the discrete cosine transform) is applied to a block of pixels, and to achieve lossy compression, the transform coefficients of each block are quantized. The lower the bit rate, the more coarsely the coefficients are represented and the more coefficients are quantized to zero. Statistically, images have more low-frequency than high-frequency content, so it is the low-frequency content that remains after quantization, which results in blurry, low-resolution blocks. In the most extreme case only the DC-coefficient, that is the coefficient which represents the average color of a block, is retained, and the transform block is only a single color after reconstruction.
+
+Because this quantization process is applied individually in each block, neighboring blocks quantize coefficients differently. This leads to discontinuities at the block boundaries. These are most visible in flat areas, where there is little detail to mask the effect.
+Image artifact reduction
+Main article: Deblocking filter
+
+Various approaches have been proposed to reduce image compression effects, but to use standardized compression/decompression techniques and retain the benefits of compression (for instance, lower transmission and storage costs), many of these methods focus on "post-processing"—that is, processing images when received or viewed. No post-processing technique has been shown to improve image quality in all cases; consequently, none has garnered widespread acceptance, though some have been implemented and are in use in proprietary systems. Many photo editing programs, for instance, have proprietary JPEG artifact reduction algorithms built-in. Consumer equipment often calls this post-processing "MPEG Noise Reduction".[9]
+
+Boundary artifact in JPEG can be turned into more pleasing "grains" not unlike those in high ISO photographic films. Instead of just multiplying the quantized coefficients with the quantisation step Q pertaining to the 2D-frequency, intelligent noise in the form of a random number in the interval [-Q/2; Q/2] can be added to the dequantized coefficient. This method can be added as an integral part to JPEG decompressors working on the trillions of existing and future JPEG images. As such it is not a "post-processing" technique.[10]
+
+The ringing issue can be reduced at encode time by overshooting the DCT values, clamping the rings away.[11]
+
+Posterization generally only happens at low quality, when the DC values are given too little importance. Tuning the quantization table helps.[12]
+Video
+Example of image with artifacts due to a transmission error
+
+When motion prediction is used, as in MPEG-1, MPEG-2 or MPEG-4, compression artifacts tend to remain on several generations of decompressed frames, and move with the optic flow of the image, leading to a peculiar effect, part way between a painting effect and "grime" that moves with objects in the scene.
+
+Data errors in the compressed bit-stream, possibly due to transmission errors, can lead to errors similar to large quantization errors, or can disrupt the parsing of the data stream entirely for a short time, leading to "break-up" of the picture. Where gross errors have occurred in the bit-stream, decoders continue to apply updates to the damaged picture for a short interval, creating a "ghost image" effect, until receiving the next independently compressed frame. In MPEG picture coding, these are known as "I-frames", with the 'I' standing for "intra". Until the next I-frame arrives, the decoder can perform error concealment.
+Motion compensation block boundary artifacts
+
+Block boundary discontinuities can occur at edges of motion compensation prediction blocks. In motion compensated video compression, the current picture is predicted by shifting blocks (macroblocks, partitions, or prediction units) of pixels from previously decoded frames. If two neighboring blocks use different motion vectors, there will be a discontinuity at the edge between the blocks.
+Mosquito noise
+
+Video compression artifacts include cumulative results of compression of the comprising still images, for instance ringing or other edge busyness in successive still images appear in sequence as a shimmering blur of dots around edges, called mosquito noise, as they resemble mosquitoes swarming around the object.[13][14] The so-called "mosquito noise" is caused by the block-based discrete cosine transform (DCT) compression algorithm used in most video coding standards, such as the MPEG formats.[3]
+Video artifact reduction
+Main article: Deblocking filter
+
+The artifacts at block boundaries can be reduced by applying a deblocking filter. As in still image coding, it is possible to apply a deblocking filter to the decoder output as post-processing.
+
+In motion-predicted video coding with a closed prediction loop, the encoder uses the decoder output as the prediction reference from which future frames are predicted. To that end, the encoder conceptually integrates a decoder. If this "decoder" performs a deblocking, the deblocked picture is then used as a reference picture for motion compensation, which improves coding efficiency by preventing a propagation of block artifacts across frames. This is referred to as an in-loop deblocking filter. Standards which specify an in-loop deblocking filter include VC-1, H.263 Annex J, H.264/AVC, and H.265/HEVC.
+Audio
+
+Lossy audio compression typically works with a psychoacoustic model—a model of human hearing perception. Lossy audio formats typically involve the use of a time/frequency domain transform, such as a modified discrete cosine transform. With the psychoacoustic model, masking effects such as frequency masking and temporal masking are exploited, so that sounds that should be imperceptible are not recorded. For example, in general, human beings are unable to perceive a quiet tone played simultaneously with a similar but louder tone. A lossy compression technique might identify this quiet tone and attempt to remove it. Also, quantization noise can be "hidden" where they would be masked by more prominent sounds. With low compression, a conservative psy-model is used with small block sizes.
+
+When the psychoacoustic model is inaccurate, when the transform block size is restrained, or when aggressive compression is used, this may result in compression artifacts. Compression artifacts in compressed audio typically show up as ringing, pre-echo, "birdie artifacts", drop-outs, rattling, warbling, metallic ringing, an underwater feeling, hissing, or "graininess".
+
+An example of compression artifacts in audio is applause in a relatively highly compressed audio file (e.g. 96 kbit/sec MP3). In general, musical tones have repeating waveforms and more predictable variations in volume, whereas applause is essentially random, therefore hard to compress. A highly compressed track of applause may have "metallic ringing" and other compression artifacts.
+Artistic use
+Video glitch art
+Example of datamoshing
+
+Compression artifacts may intentionally be used as a visual style, sometimes known as glitch art. Rosa Menkman's glitch art makes use of compression artifacts,[15] particularly the discrete cosine transform blocks (DCT blocks) found in most digital media data compression formats such as JPEG digital images and MP3 digital audio.[2] In still images, an example is Jpegs by German photographer Thomas Ruff, which uses intentional JPEG artifacts as the basis of the picture's style.[16][17]
+
+In video art, one technique used is datamoshing, where two videos are interleaved so intermediate frames are interpolated from two separate sources. Another technique involves simply transcoding from one lossy video format to another, which exploits the difference in how the separate video codecs process motion and color information.[18] The technique was pioneered by artists Bertrand Planes in collaboration with Christian Jacquemin in 2006 with DivXPrime,[19] Sven König, Takeshi Murata, Jacques Perconte and Paul B. Davis in collaboration with Paperrad, and more recently used by David OReilly and within music videos for Chairlift and by Nabil Elderkin in the "Welcome to Heartbreak" music video for Kanye West.[20][21]
+
+There is also a genre of internet memes where often nonsensical images are purposefully heavily compressed sometimes multiple times for comedic effect. Images created using this technique are often referred to as "deep fried."[22]
+See also
+Wikimedia Commons has media related to Compression artifacts.
+
+    Artifact (error)
+    Databending
+    Digital artifact
+    Generation loss
+    JPEG
+    JPEG 2000
+    Lossy compression
+    Noise print
+    Ringing artifacts
+    Transparency (data compression)
+
+References
+
+Katsaggelos, Aggelos K.; Babacan, S. Derin; Chun-Jen, Tsai (2009). "Chapter 15 - Iterative Image Restoration". The Essential Guide to Image Processing. Academic Press. pp. 349–383. ISBN 9780123744579.
+Alikhani, Darya (1 April 2015). "Beyond resolution: Rosa Menkman's glitch art". POSTmatter. Retrieved 19 October 2019.
+"Mosquito noise". PC Magazine. Retrieved 19 October 2019.
+Geere, Duncan (13 December 2011). "Glitch art created by 'databending'". Wired. Retrieved 23 December 2011.
+Baker-Smith, Ben (28 April 2009). "Datamoshing – The Beauty of Glitch". Bitsynthesis.com. Archived from the original on 16 November 2010. Retrieved 28 April 2009.
+"Xerox scanners/photocopiers randomly alter numbers in scanned documents". 2 August 2013. Retrieved 4 August 2013.
+"Confused Xerox copiers rewrite documents, expert finds". BBC News. 6 August 2013. Retrieved 6 August 2013.
+Watkinson, John (2004). The MPEG handbook by John Watkinson. ISBN 9780240805788.
+"PC Magazine, Definition of blocking artifacts".
+Hudson, Graham; Léger, Alain; Niss, Birger; Sebestyén, István; Vaaben, Jørgen (31 August 2018). "JPEG.1 standard 25 years: past, present and future reasons for success". Journal of Electronic Imaging. 27 (4): 1. doi:10.1117/1.JEI.27.4.040901. S2CID 52164892.
+Richter, Thomas (September 2016). "JPEG on STEROIDS: Common optimization techniques for JPEG image compression". 2016 IEEE International Conference on Image Processing (ICIP): 61–65. doi:10.1109/ICIP.2016.7532319. ISBN 978-1-4673-9961-6. S2CID 14922251.
+"kornelski/jpeg-compressor". GitHub. 16 November 2020.
+Le Dinh, Phuc-Tue; Patry, Jacques. "Video compression artifacts and MPEG noise reduction". Embedded. Retrieved 19 February 2016.
+"3.9 mosquito noise: Form of edge busyness distortion sometimes associated with movement, characterized by moving artifacts and/or blotchy noise patterns superimposed over the objects (resembling a mosquito flying around a person's head and shoulders)." ITU-T Rec. P.930 (08/96) Principles of a reference impairment system for video
+Menkman, Rosa (October 2011). The Glitch Moment(um) (PDF). Institute of Network Cultures. ISBN 978-90-816021-6-7. Retrieved 19 October 2019.
+jpegs, Thomas Ruff, Aperture, May 31, 2009, 132 pp., ISBN 978-1-59711-093-8
+Review: jpegs by Thomas Ruff, by Jörg Colberg, April 17, 2009
+Anoniem zei (19 February 2009). "From compression artifact to filter". Rosa-menkman.blogspot.com. Retrieved 23 December 2011.
+Jacquemin, Christian (2008). "Le bug dans l'oeuvre DivXPrime de Bertrand Planes: Invention et mutation. In, Ivan Toulouse and Daniel Danétis, editors, Eurêka: Le moment de l'invention, un dialogue entre art et science, L'Harmattan, Paris" (PDF). pp. 245–256. Retrieved 5 November 2012.
+Pixel Bleed, by John Michael Boling. Rhizome. February 25, 2009.
+Rodriguez, Jayson (18 February 2009). "Kanye West Rushes New Video Onto His Web Site – MTV News". Mtv.com. Retrieved 23 December 2011.
+
+    Matsakis, Louise (30 August 2017). "How to Deep-Fry a Meme". Vice. Retrieved 27 July 2021.
+
+External links
+
+    DivXPrime First known experiments of datamoshing video software by Bertrand Planes & Christian Jacquemin (based on Xvid algorithm)
+    Teaser for "Sonic birth" a short movie directed by Jérome Blanquet, datamoshing effect by David Olivari, produced by [Metronomic]. Full movie: "Sonic birth"
+    datamosher A GPL video datamoshing software.
+    Example of heavy video compression artifacts.
+    JPEG Tutor, an interactive applet allowing you to investigate the effects of changing the quantization matrix.
+    JPEG deringing and deblocking: Matlab software and Photoshop plug-in
+
+    vte
+
+Data compression methods
+Lossless	
+Entropy type	
+
+    Arithmetic Asymmetric numeral systems Golomb Huffman
+        Adaptive Canonical Modified Range Shannon Shannon–Fano Shannon–Fano–Elias Tunstall Unary Universal
+        Exp-Golomb Fibonacci Gamma Levenshtein
+
+Dictionary type	
+
+    Byte pair encoding Lempel–Ziv
+        842 Brotli Deflate LZ4 LZFSE LZJB LZMA LZO LZRW LZS LZSS LZW LZWL LZX Snappy Zstandard
+
+Other types	
+
+    BWT CTW Delta
+        Incremental DMC DPCM LDCT MTF PAQ PPM RLE
+
+Lossy	
+Transform type	
+
+    Discrete cosine transform
+        DCT MDCT DST FFT Wavelet
+        Daubechies DWT SPIHT
+
+Predictive type	
+
+    DPCM
+        ADPCM LPC
+        ACELP CELP LAR LSP WLPC Motion
+        Compensation Estimation Vector Psychoacoustic
+
+Audio	
+Concepts	
+
+    Bit rate
+        ABR CBR VBR Companding Convolution Dynamic range Latency Nyquist–Shannon theorem Sampling Sound quality Speech coding Sub-band coding
+
+Codec parts	
+
+    A-law μ-law DPCM
+        ADPCM DM FT
+        FFT LPC
+        ACELP CELP LAR LSP WLPC MDCT Psychoacoustic model
+
+Image	
+Concepts	
+
+    Chroma subsampling Coding tree unit Color space Compression artifact Image resolution Macroblock Pixel PSNR Quantization Standard test image
+
+Methods	
+
+    Chain code DCT Deflate Fractal KLT LP RLE Wavelet
+        Daubechies DWT EZW SPIHT
+
+Video	
+Concepts	
+
+    Bit rate
+        ABR CBR VBR Display resolution Frame Frame rate Frame types Interlace Video characteristics Video quality
+
+Codec parts	
+
+    DCT DPCM Deblocking filter Lapped transform Motion
+        Compensation Estimation Vector Wavelet
+        Daubechies DWT
+
+Theory	
+
+    Entropy Grammar Information theory
+        Timeline Kolmogorov complexity Quantization Rate–distortion Redundancy
+
+    Compression formats Compression software (codecs)
+
+Categories:
+
+    Data compressionAudio engineeringComputer graphic artifacts
+
+    This page was last edited on 7 January 2023, at 17:22 (UTC).
+    Text is available under the Creative Commons Attribution-ShareAlike License 3.0; additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+    Privacy policy
+    About Wikipedia
+    Disclaimers
+    Contact Wikipedia
+    Mobile view
+    Developers
+    Statistics
+    Cookie statement
+
+    Wikimedia Foundation
+    Powered by MediaWiki
+
+
+Main menu
+
+Wikipedia The Free Encyclopedia
+
+    Create account
+    Log in
+
+Personal tools
+
+Contents
+
+    (Top)
+    Cold compression
+    Devices
+    Wraps
+    See also
+    References
+
+Cold compression therapy
+
+    Article
+    Talk
+
+    Read
+    Edit
+    View history
+
+Tools
+
+From Wikipedia, the free encyclopedia
+	
+This article includes a list of general references, but it lacks sufficient corresponding inline citations. Please help to improve this article by introducing more precise citations. (May 2009) (Learn how and when to remove this template message)
+Cold compression therapy
+Other names	Hilotherapy
+[edit on Wikidata]
+
+Cold compression therapy, also known as hilotherapy, combines two of the principles of rest, ice, compression, elevation to reduce pain and swelling from a sports or activity injury to soft tissues and is recommended by orthopedic surgeons following surgery. The therapy is especially useful for sprains, strains, pulled muscles and pulled ligaments.
+Cold compression
+
+Cold compression is a combination of cryotherapy and static compression, commonly used for the treatment of pain and inflammation after acute injury or surgical procedures.[citation needed] Cryotherapy, the use of ice or cold in a therapeutic setting, has become one of the most common treatments in orthopedic medicine. The primary reason for using cryotherapy in acute injury management is to lower the temperature of the injured tissue, which reduces the tissue's metabolic rate and helps the tissue to survive the period following the injury. It is well documented that metabolic rate decreases by application of cryotherapy.[1]
+
+A study done found that current literature on the use of cryotherapy on acute ankle sprains has insufficient evidence for the efficacy.[2]
+
+Static compression is often used in conjunction with cryotherapy for the care of acute injuries. To date, the primary reason for using compression is to increase external pressure on the tissue to prevent edema formation (swelling). This occurs by hindering fluid loss from the vessels in the injured area, making it more difficult for fluids to accumulate. Ice with compression is significantly colder than ice alone due to improved skin contact and increased tissue density caused by extended static compression.[1] Tissue reaches its lowest temperature faster and the tissue maintains its cool even after treatment ends.
+
+Compression therapy has been used in deep venous thrombosis prevention, wound care, as well as managing edema.[3] Literature suggests that compression therapy use for perioperative ankle fractures will be beneficial for edema reduction and therefore, will probably be beneficial for pain and ankle joint mobility as well.[4] Post operative arthroscopic surgeries also shows significant recovery with cold compression.[5]
+
+It has been studied following facial surgery where it has been found to decrease pain and swelling on day two or three.[6] In athletes, cryotherapy has its greatest effect on recovery by using it within the first 24 hours[7] of exercise or injury. Cryotherapy has also been shown that it can increase joint flexibility.[8] It is unclear if it affects the risk of bruising.[6]
+Devices
+
+Continuous cold therapy devices (also called ice machines) which circulate ice water through a pad are currently the subject of class action lawsuits for skin and tissue damage caused by excessive cooling or icing time and lack of temperature control. Reported injuries range from frostbite to severe tissue damage resulting in amputation.
+
+Studies have shown that the body activates the hunting reaction after only 10 minutes of cryotherapy, at temperatures less than 49 °F (9.5 °C). The hunting response is a cycle of vasoconstriction (decreased blood flow), then vasodilation (increased blood flow) that increases the delivery of oxygen and nutrient rich blood to the tissue.[9] Studies show a debate whether cold should be used or not for faster recovery.[9] Increased blood flow can slow cell death, limit tissue damage and aid in the removal of cellular debris and waste products. Under normal circumstances the hunting reaction would be essential to tissue health but only serves to increase pain, inflammation and cell death as excess blood is forced into the area.
+Wraps
+	
+This section does not cite any sources. Please help improve this section by adding citations to reliable sources. Unsourced material may be challenged and removed. (May 2018) (Learn how and when to remove this template message)
+
+Cold compression wraps using either re-freezable ice or gel are a much safer product, as such products do not exceed the cooling or icing time recommended by the established medical community.
+
+Many of the ice wraps available use adjustable elastic straps to aid in compression over the injured areas. More advanced single-use wraps have guidelines to indicate how the bandage should be applied in order to achieve optimum compression required for an acute injury.
+
+Most ice wraps that use ice, have a built-in protective layer, so ice is not applied directly to the skin, which can result in a burn to the area, sometimes known as a "cryoburn".
+See also
+
+    Achilles tendinitis
+    Dermatitis
+    Plantar fasciitis
+    Repetitive strain injury
+    Rotator cuff
+    Sprain
+    Strain (injury)
+    Tennis elbow
+    Torn rotator cuff
+
+References
+
+Kullenberg, Björn; Ylipää, Staffan; Söderlund, Kerstin; Resch, Sylvia (2006-12-01). "Postoperative Cryotherapy After Total Knee Arthroplasty: A Prospective Study of 86 Patients". The Journal of Arthroplasty. 21 (8): 1175–1179. doi:10.1016/j.arth.2006.02.159. ISSN 0883-5403. PMID 17162178.
+Miranda, Júlio Pascoal; Silva, Whesley Tanor; Silva, Hytalo Jesus; Mascarenhas, Rodrigo Oliveira; Oliveira, Vinícius Cunha (2021-05-01). "Effectiveness of cryotherapy on pain intensity, swelling, range of motion, function and recurrence in acute ankle sprain: A systematic review of randomized controlled trials". Physical Therapy in Sport. 49: 243–249. doi:10.1016/j.ptsp.2021.03.011. ISSN 1466-853X. PMID 33813154. S2CID 233026666.
+Winge, R.; Bayer, L.; Gottlieb, H.; Ryge, C. (2017-08-01). "Compression therapy after ankle fracture surgery: a systematic review". European Journal of Trauma and Emergency Surgery. 43 (4): 451–459. doi:10.1007/s00068-017-0801-y. ISSN 1863-9941. PMID 28624992. S2CID 873231.
+Winge, R.; Bayer, L.; Gottlieb, H.; Ryge, C. (2017-08-01). "Compression therapy after ankle fracture surgery: a systematic review". European Journal of Trauma and Emergency Surgery. 43 (4): 451–459. doi:10.1007/s00068-017-0801-y. ISSN 1863-9941. PMID 28624992. S2CID 873231.
+Gatewood, Corey T.; Tran, Andrew A.; Dragoo, Jason L. (2016-10-01). "The efficacy of post-operative devices following knee arthroscopic surgery: a systematic review". Knee Surgery, Sports Traumatology, Arthroscopy. 25 (2): 501–516. doi:10.1007/s00167-016-4326-4. ISSN 0942-2056. PMID 27695905. S2CID 5680815.
+Glass, GE; Waterhouse, N; Shakib, K (October 2016). "Hilotherapy for the management of perioperative pain and swelling in facial surgery: a systematic review and meta-analysis". The British Journal of Oral & Maxillofacial Surgery. 54 (8): 851–856. doi:10.1016/j.bjoms.2016.07.003. PMID 27516162.
+Jinnah, Alexander H; Luo, Tianyi David; Mendias, Christopher; Freehill, Michael (May 17, 2019). "Cryotherapy duration is critical in short-term recovery of athletes: a systematic review". Journal of ISAKOS. 4 (3): 131–136. doi:10.1136/jisakos-2018-000259. ISSN 2059-7754. S2CID 198304421.
+Kalli, Kallis; Fousekis, Konstantinos (April 17, 2020). "The effects of cryotherapy on athletes' muscle strength, flexibility, and neuromuscular control: A systematic review of the literature". Journal of Bodywork and Movement Therapies. 24 (2): 175–188. doi:10.1016/j.jbmt.2019.11.001. ISSN 1360-8592. PMID 32507142. S2CID 209274206 – via Science Direct.
+
+    Wang, Zi-Ru; Ni, Guo-Xin (2021-06-16). "Is it time to put traditional cold therapy in rehabilitation of soft-tissue injuries out to pasture?". World Journal of Clinical Cases. 9 (17): 4116–4122. doi:10.12998/wjcc.v9.i17.4116. ISSN 2307-8960. PMC 8173427. PMID 34141774.
+
+Works cited
+
+    Kullenberg B, Ylipää S, Söderlund K, Resch S (2006). "Postoperative cryotherapy after total knee arthroplasty: a prospective study of 86 patients". J Arthroplasty. 21 (8): 1175–9. doi:10.1016/j.arth.2006.02.159. PMID 17162178.
+    Webb JM, Williams D, Ivory JP, Day S, Williamson DM (1998). "The use of cold compression dressings after total knee replacement: a randomized controlled trial". Orthopedics. 21 (1): 59–61. doi:10.3928/0147-7447-19980101-14. PMID 9474633.
+    Levy AS, Marmar E (1993). "The role of cold compression dressings in the postoperative treatment of total knee arthroplasty". Clin. Orthop. Relat. Res. 297 (297): 174–8. doi:10.1097/00003086-199312000-00029. PMID 7902225.
+    Knobloch K, Grasemann R, Jagodzinski M, Richter M, Zeichen J, Krettek C (2006). "Changes of Achilles midportion tendon microcirculation after repetitive simultaneous cryotherapy and compression using a Cryo/Cuff". Am J Sports Med. 34 (12): 1953–9. doi:10.1177/0363546506293701. PMID 16998082. S2CID 26044792.
+    Ohkoshi Y, Ohkoshi M, Nagasaki S, Ono A, Hashimoto T, Yamane S (1999). "The effect of cryotherapy on intraarticular temperature and postoperative care after anterior cruciate ligament reconstruction". Am J Sports Med. 27 (3): 357–62. doi:10.1177/03635465990270031601. PMID 10352774. S2CID 2131347.
+    Martin SS, Spindler KP, Tarter JW, Detwiler K, Petersen HA (2001). "Cryotherapy: an effective modality for decreasing intraarticular temperature after knee arthroscopy". Am J Sports Med. 29 (3): 288–91. doi:10.1177/03635465010290030501. PMID 11394596. S2CID 39740857.
+
+Categories:
+
+    First aidOveruse injuriesInflammationsCryotherapy
+
+    This page was last edited on 20 February 2023, at 15:04 (UTC).
     Text is available under the Creative Commons Attribution-ShareAlike License 3.0; additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
 
     Privacy policy

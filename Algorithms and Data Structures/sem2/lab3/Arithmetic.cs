@@ -134,6 +134,11 @@ public class Arithmetic
 			b = Whole;
 			code = 0;
 			index = Math.Min(text.Length, precision);
+			if (text.Length < precision)
+			{
+				for (int i = index; i < precision; i++) text += '0';
+			}
+			index = precision;
 			code = Convert.ToUInt32(text.Substring(0, index), 2);
 		}
 
