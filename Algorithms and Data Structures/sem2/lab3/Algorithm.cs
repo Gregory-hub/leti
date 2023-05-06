@@ -341,13 +341,13 @@ class Algorithm
 
 	public string EncodeArithmetic(string text, out string symbols)
 	{
-		Arithmetic encoder = new Arithmetic();
+		Arithmetic.Encoder encoder = new Arithmetic.Encoder();
 		return encoder.Encode(text, out symbols);
 	}
 
 	public string DecodeArithmetic(string text, string symbols)
 	{
-		Arithmetic encoder = new Arithmetic();
+		Arithmetic.Decoder encoder = new Arithmetic.Decoder();
 		return encoder.Decode(text, symbols);
 	}
 

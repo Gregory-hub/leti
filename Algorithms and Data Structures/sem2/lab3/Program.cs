@@ -7,8 +7,8 @@ class Program
 
         string path = Directory.GetCurrentDirectory() + "\\text.txt";
         StreamReader sr = new StreamReader(path);
-        // string text = sr.ReadToEnd().Substring(0, 10);
-        string text = "boaoboabooboo";
+        string text = sr.ReadToEnd();
+        // string text = "abobchikus habius Bibib";
 
         Console.WriteLine($"Text: {text}");
         Console.WriteLine($"Length(bits): {text.Length * 8}");
@@ -31,8 +31,8 @@ class Program
 
         string encoded = algorithm.EncodeArithmetic(text, out string symbols);
         Console.WriteLine($"Arithmetic encoded: {encoded}");
-        Console.WriteLine($"Length: {encoded.Length + symbols.Length * 8}");
-        string decoded = algorithm.DecodeArithmetic(algorithm.EncodeArithmetic(text, out symbols), symbols);
+        Console.WriteLine($"Length encoded: {encoded.Length + symbols.Length * 8}");
+        string decoded = algorithm.DecodeArithmetic(encoded, symbols);
         Console.WriteLine($"Arithmetic encoded and decoded: {decoded}");
         Console.WriteLine(decoded == text);
 
