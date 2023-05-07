@@ -8,10 +8,13 @@ class Program
         string path = Directory.GetCurrentDirectory() + "\\text.txt";
         StreamReader sr = new StreamReader(path);
         string text = sr.ReadToEnd();
-        // string text = "bafghdfghdsfhgjk";
+        // string text = "ba";
 
+        string encoded;
+        string decoded;
+        string symbols;
         // Console.WriteLine($"Text: {text}");
-        Console.WriteLine($"Length(bits): {text.Length * 8}");
+        Console.WriteLine($"Length: {text.Length * 8} bits ({text.Length} bytes)");
 
         // Console.WriteLine($"BWT transformed: {algorithm.BWTTransform(text)}");
         // Console.WriteLine($"BWT transformed and detransformed: {algorithm.BWTDetransform(algorithm.BWTTransform(text))}");
@@ -29,19 +32,26 @@ class Program
         // Console.WriteLine($"Huffman encoded and decoded: {algorithm.DecodeHuffman(algorithm.EncodeHuffman(text, out codes), codes)}");
         // // foreach (var code in codes) Console.WriteLine($"    '{code.Key}': {code.Value}");
 
-        string encoded = algorithm.EncodeArithmetic(text, out string symbols);
-        string decoded = algorithm.DecodeArithmetic(encoded, symbols);
-        Console.WriteLine($"Text decoded correctly: {decoded == text}");
-        // Console.WriteLine($"Arithmetic encoded: {encoded}");
-        // Console.WriteLine($"Arithmetic encoded and decoded: {decoded}");
-        Console.WriteLine($"Length encoded: {encoded.Length + (symbols.Length + 1) * 8}");
-        Console.WriteLine($"Comression ratio: {(double)text.Length * 8 / (double)(encoded.Length + (symbols.Length + 1) * 8)}");
+        // encoded = algorithm.EncodeArithmetic(text, out symbols);
+        // decoded = algorithm.DecodeArithmetic(encoded, symbols);
 
-        // Algorithm.PPMEncoder ppm = new Algorithm.PPMEncoder();
-        // int order = 3;
-        // string encoded = ppm.Encode(text, order, out string symbols);
+        // Console.WriteLine($"Text decoded correctly: {decoded == text}");
+        // // Console.WriteLine($"Arithmetic encoded: {encoded}");
+        // // Console.WriteLine($"Arithmetic encoded and decoded: {decoded}");
+        // Console.WriteLine($"Length encoded: {encoded.Length + (symbols.Length) * 8}");
+        // Console.WriteLine($"Comression ratio: {(double)text.Length * 8 / (double)(encoded.Length + (symbols.Length) * 8)}");
+        // Console.WriteLine();
+
+        int order = 2;
+        encoded = algorithm.EncodePPM(text, out symbols, order);
+        decoded = algorithm.DecodePPM(encoded, symbols, order);
+
+        Console.WriteLine($"Text decoded correctly: {decoded == text}");
         // Console.WriteLine($"PPM encoded: {encoded}");
-        // Console.WriteLine($"PPM encoded and decoded: {ppm.Decode(encoded, order, symbols)}");
+        // Console.WriteLine($"PPM encoded and decoded: {decoded}");
+        Console.WriteLine($"Length encoded: {encoded.Length + (symbols.Length) * 8}");
+        Console.WriteLine($"Comression ratio: {(double)text.Length * 8 / (double)(encoded.Length + (symbols.Length) * 8)}");
+        Console.WriteLine();
 
         Console.Read();
     }

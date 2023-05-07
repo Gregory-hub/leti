@@ -16,7 +16,7 @@ public class Arithmetic
 		Quater = (Half >> 1);
 	}
 
-	private Dictionary<int, int[]> GetCumFreqs()
+	public Dictionary<int, int[]> GetCumFreqs()
 	{
 		Dictionary<int, int[]> CumFreqs = new Dictionary<int, int[]>();
 		int prev = 0;
@@ -41,6 +41,7 @@ public class Arithmetic
 	public class Encoder : Arithmetic
 	{
 		private int s;
+
 		public void InitEncoder(ref string text) 
 		{
 			text += '\0';
