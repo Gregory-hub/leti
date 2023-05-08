@@ -339,27 +339,27 @@ class Algorithm
 		return text_detransformed;
 	}
 
-	public string EncodeArithmetic(string text, out string symbols)
+	public string EncodeArithmetic(string text)
 	{
 		Arithmetic.Encoder encoder = new Arithmetic.Encoder();
-		return encoder.Encode(text, out symbols);
+		return encoder.Encode(text);
 	}
 
-	public string DecodeArithmetic(string text, string symbols)
+	public string DecodeArithmetic(string text)
 	{
 		Arithmetic.Decoder encoder = new Arithmetic.Decoder();
-		return encoder.Decode(text, symbols);
+		return encoder.Decode(text);
 	}
 
-	public string EncodePPM(string text, out string symbols, int order)
+	public string EncodePPM(string text, int order)
 	{
 		PPM.Encoder encoder = new PPM.Encoder();
-		return encoder.Encode(text, out symbols, order);
+		return encoder.Encode(text, order);
 	}
 
-	public string DecodePPM(string text, string symbols, int order)
+	public string DecodePPM(string text, int order)
 	{
 		PPM.Decoder encoder = new PPM.Decoder();
-		return encoder.Decode(text, symbols, order);
+		return encoder.Decode(text, order);
 	}
 }

@@ -33,7 +33,7 @@ public class Arithmetic
 
 	public void InitializeFreqs(string text)
 	{
-		foreach (char sym in text) Freqs[sym] = 1;
+		for (int i = 0; i < text.Length; i++) Freqs[text[i]] = 1;
 		Count = Freqs.Count;
 	}
 
@@ -42,13 +42,30 @@ public class Arithmetic
 	{
 		private int s;
 
-		public void InitEncoder(ref string text) 
+		public void InitEncoder(ref string text, out string text_encoded) 
 		{
 			text += '\0';
 			InitializeFreqs(text);
+			text_encoded = "";
+			EncodeAlphabet(ref text_encoded);
+
 			a = 0;
 			b = Whole;
 			s = 0;
+		}
+
+		public void EncodeAlphabet(ref string text_encoded)
+		{
+			// Freqs must be initialized
+			string symbols = "";
+			string bin_sym;
+			foreach(char sym in Freqs.Keys) symbols += sym;
+			foreach(char sym in symbols) 
+			{
+				bin_sym = Convert.ToString(sym, 2);
+				for (int i = bin_sym.Length; i < 16; i++) bin_sym = "0" + bin_sym;
+				text_encoded += bin_sym;
+			}
 		}
 
 		public void Update(int sym, ref string text_encoded)
@@ -101,11 +118,10 @@ public class Arithmetic
 			}
 		}
 
-		public string Encode(string text, out string symbols)
+		public string Encode(string text)
 		{
 			// init
-			InitEncoder(ref text);
-			string text_encoded = "";
+			InitEncoder(ref text, out string text_encoded);
 
 			// algorithm
 			foreach (char sym in text)
@@ -116,8 +132,6 @@ public class Arithmetic
 			}
 			Finish(ref text_encoded);
 
-			symbols = "";
-			foreach(char sym in Freqs.Keys) symbols += sym;
 			return text_encoded;
 		}
 	}
@@ -128,8 +142,23 @@ public class Arithmetic
 		private int index;
 		private uint code;
 
-		public void InitDecoder(string text, string symbols) 
+		public string InitDecoder(ref string text) 
 		{
+			string symbols = "";
+			int k = 0;
+			string bin_sym;
+			char sym;
+			while (k + 15 < text.Length) 
+			{
+				bin_sym = text.Substring(k, 16);
+				sym = (char)Convert.ToInt32(bin_sym, 2);
+
+				symbols += Convert.ToString(sym);
+				k += 16;
+				if (sym == 0) break;
+			}
+			text = text.Substring(k, text.Length - k);
+
 			InitializeFreqs(symbols);
 			a = 0;
 			b = Whole;
@@ -141,6 +170,8 @@ public class Arithmetic
 			}
 			index = precision;
 			code = Convert.ToUInt32(text.Substring(0, index), 2);
+
+			return symbols;
 		}
 
 		public void ReadNextBit(string text)
@@ -152,11 +183,11 @@ public class Arithmetic
 			}
 		}
 
-		public char DecodeSymbol(Dictionary<int, int[]> CumFreqs)
+		public int DecodeSymbol(Dictionary<int, int[]> CumFreqs)
 		{
 			long width = (long)b - a + 1;
 			int value = (int)(((code - a + 1) * (long)Count - 1) / width);
-			foreach (char sym in CumFreqs.Keys)
+			foreach (int sym in CumFreqs.Keys)
 			{
 				if (CumFreqs[sym][0] <= value && value < CumFreqs[sym][1]) return sym;
 			}
@@ -164,7 +195,7 @@ public class Arithmetic
 			throw new InvalidDataException("Cannot decode symbol");
 		}
 
-		public void Update(char sym, string text, Dictionary<int, int[]> CumFreqs)
+		public void Update(int sym, string text, Dictionary<int, int[]> CumFreqs)
 		{
 			uint a_prev = a;
 			long width = (long)b - a + 1;
@@ -196,17 +227,17 @@ public class Arithmetic
 			}
 		}
 
-		public string Decode(string text, string symbols)
+		public string Decode(string text)
 		{
 			string text_decoded = "";
-			InitDecoder(text, symbols);
+			InitDecoder(ref text);
 
 			Dictionary<int, int[]> CumFreqs = GetCumFreqs();
-			char sym = DecodeSymbol(CumFreqs);
+			int sym = DecodeSymbol(CumFreqs);
 
 			while (sym != '\0')
 			{
-				text_decoded += sym;
+				text_decoded += (char)sym;
 				Update(sym, text, CumFreqs);
 				Freqs[sym]++;
 				Count++;

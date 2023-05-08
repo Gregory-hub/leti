@@ -1,4 +1,5 @@
 ﻿namespace lab3;
+
 class Program
 {
     static void Main(string[] args)
@@ -8,13 +9,13 @@ class Program
         string path = Directory.GetCurrentDirectory() + "\\text.txt";
         StreamReader sr = new StreamReader(path);
         string text = sr.ReadToEnd();
-        // string text = "ba";
+        // string text = "A";
 
         string encoded;
         string decoded;
-        string symbols;
-        // Console.WriteLine($"Text: {text}");
+        Console.WriteLine($"Text: {text}");
         Console.WriteLine($"Length: {text.Length * 8} bits ({text.Length} bytes)");
+        Console.WriteLine();
 
         // Console.WriteLine($"BWT transformed: {algorithm.BWTTransform(text)}");
         // Console.WriteLine($"BWT transformed and detransformed: {algorithm.BWTDetransform(algorithm.BWTTransform(text))}");
@@ -28,29 +29,39 @@ class Program
         // Console.WriteLine($"LZ78 encoded: {algorithm.EncodeLZ78(text)}");
         // Console.WriteLine($"LZ78 encoded and decoded: {algorithm.DecodeLZ78(algorithm.EncodeLZ78(text))}");
 
-        // Console.WriteLine($"Huffman encoded: {algorithm.EncodeHuffman(text, out Dictionary<char, string> codes)}");
-        // Console.WriteLine($"Huffman encoded and decoded: {algorithm.DecodeHuffman(algorithm.EncodeHuffman(text, out codes), codes)}");
-        // // foreach (var code in codes) Console.WriteLine($"    '{code.Key}': {code.Value}");
+        encoded = algorithm.EncodeHuffman(text, out Dictionary<char, string> codes);
+        decoded = algorithm.DecodeHuffman(encoded, codes);
 
-        // encoded = algorithm.EncodeArithmetic(text, out symbols);
-        // decoded = algorithm.DecodeArithmetic(encoded, symbols);
+        Console.WriteLine("HUFFMAN");
+        Console.WriteLine($"Text decoded correctly: {decoded == text}");
+        // Console.WriteLine($"Huffman encoded: {encoded}");
+        // Console.WriteLine($"Huffman encoded and decoded: {decoded}");
+        Console.WriteLine($"Length encoded: {encoded.Length}");
+        Console.WriteLine($"Comression ratio: {(double)text.Length * 8 / (double)(encoded.Length)}");
+        Console.WriteLine();
+        // foreach (var code in codes) Console.WriteLine($"    '{code.Key}': {code.Value}");
 
-        // Console.WriteLine($"Text decoded correctly: {decoded == text}");
-        // // Console.WriteLine($"Arithmetic encoded: {encoded}");
-        // // Console.WriteLine($"Arithmetic encoded and decoded: {decoded}");
-        // Console.WriteLine($"Length encoded: {encoded.Length + (symbols.Length) * 8}");
-        // Console.WriteLine($"Comression ratio: {(double)text.Length * 8 / (double)(encoded.Length + (symbols.Length) * 8)}");
-        // Console.WriteLine();
+        encoded = algorithm.EncodeArithmetic(text);
+        decoded = algorithm.DecodeArithmetic(encoded);
+
+        Console.WriteLine("ARITHMETIC");
+        Console.WriteLine($"Text decoded correctly: {decoded == text}");
+        // Console.WriteLine($"Arithmetic encoded: {encoded}");
+        // Console.WriteLine($"Arithmetic encoded and decoded: {decoded}");
+        Console.WriteLine($"Length encoded: {encoded.Length}");
+        Console.WriteLine($"Comression ratio: {(double)text.Length * 8 / (double)(encoded.Length)}");
+        Console.WriteLine();
 
         int order = 2;
-        encoded = algorithm.EncodePPM(text, out symbols, order);
-        decoded = algorithm.DecodePPM(encoded, symbols, order);
+        encoded = algorithm.EncodePPM(text, order);
+        decoded = algorithm.DecodePPM(encoded, order);
 
+        Console.WriteLine("PPM");
         Console.WriteLine($"Text decoded correctly: {decoded == text}");
         // Console.WriteLine($"PPM encoded: {encoded}");
         // Console.WriteLine($"PPM encoded and decoded: {decoded}");
-        Console.WriteLine($"Length encoded: {encoded.Length + (symbols.Length) * 8}");
-        Console.WriteLine($"Comression ratio: {(double)text.Length * 8 / (double)(encoded.Length + (symbols.Length) * 8)}");
+        Console.WriteLine($"Length encoded: {encoded.Length}");
+        Console.WriteLine($"Comression ratio: {(double)text.Length * 8 / (double)(encoded.Length)}");
         Console.WriteLine();
 
         Console.Read();

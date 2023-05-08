@@ -4,7 +4,7 @@ namespace lab3;
 class PPM
 // PPMc
 {
-	public const int ESC = 257;
+	public const int ESC = (int)'\uffff';
 	
 
 	// model
@@ -21,9 +21,8 @@ class PPM
 			for (int i = 0; i <= order; i++) Contexts[i] = new Dictionary<string, Context>();
 
 			MinusOneFrequencies = new Dictionary<int, int>();
-			for (int i = 0; i < text.Length; i++){
-				MinusOneFrequencies[text[i]] = 1;
-			}
+		
+			for (int i = 0; i < text.Length; i++) MinusOneFrequencies[text[i]] = 1;
 			MinusOneFrequencies[ESC] = 1;
 		}
 
@@ -43,9 +42,9 @@ class PPM
 			encoder = new Arithmetic.Encoder();
 		}
 
-		public void InitEncoder(ref string text, int model_order, out Model model)
+		public void InitEncoder(ref string text, out string text_encoded, int model_order, out Model model)
 		{
-			encoder.InitEncoder(ref text);
+			encoder.InitEncoder(ref text, out text_encoded);
 			model = new Model(model_order, text);
 		}
 
@@ -93,20 +92,16 @@ class PPM
 			}
 		}
 
-		public string Encode(string text, out string symbols, int model_order)
+		public string Encode(string text, int model_order)
 		{
-			string text_encoded = "";
-			InitEncoder(ref text, model_order, out Model model);
+			InitEncoder(ref text, out string text_encoded, model_order, out Model model);
 
 			for (int i = 0; i < text.Length; i++)
 			{
 				Update(model, i, text, ref text_encoded);
 			}
-
 			encoder.Finish(ref text_encoded);
 
-			symbols = "";
-			foreach(char sym in model.MinusOneFrequencies.Keys) symbols += sym;
 			return text_encoded;
 		}
 	}
@@ -120,16 +115,17 @@ class PPM
 			decoder = new Arithmetic.Decoder();
 		}
 
-		public void InitDecoder(string text, string symbols, int model_order, out Model model)
+		public void InitDecoder(ref string text, int model_order, out Model model)
 		{
+			string symbols = decoder.InitDecoder(ref text);
 			model = new Model(model_order, symbols);
-			decoder.InitDecoder(text, symbols);
 		}
 
 		private void Update(ref Model model, int order, string text, char sym)
 		{
 			if (order == -1) order = 0;
-			if (text.Length == 0) throw new InvalidDataException("Text cannot be empty");
+			if (text.Length == 0) return;
+
 			text = text.Substring(0, text.Length - 1);
 			string context;
 
@@ -157,23 +153,23 @@ class PPM
 			}
 		}
 
-		private int DecodeSymbol(Dictionary<int, int> frequencies, string text)
+		private char DecodeSymbol(Dictionary<int, int> frequencies, string text)
 		{
 			decoder.Freqs = frequencies;
 			decoder.Count = frequencies.Sum(freq => freq.Value);
 			Dictionary<int, int[]> CumFreqs = decoder.GetCumFreqs();
 
-			char sym = decoder.DecodeSymbol(CumFreqs);
+			int sym = decoder.DecodeSymbol(CumFreqs);
 
-			if (sym != '\0') decoder.Update(sym, text, CumFreqs);
+			if (sym != 0) decoder.Update(sym, text, CumFreqs);
 
-			return sym;
+			return (char)sym;
 		}
 
-		public string Decode(string text, string symbols, int model_order)
+		public string Decode(string text, int model_order)
 		{
 			string text_decoded = "";
-			InitDecoder(text, symbols, model_order, out Model model);
+			InitDecoder(ref text, model_order, out Model model);
 
 			int order;
 			string context;
