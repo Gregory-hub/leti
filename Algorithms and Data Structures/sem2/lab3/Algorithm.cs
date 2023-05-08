@@ -26,7 +26,7 @@ class BinTree
 
 class Algorithm
 {
-	private char[] letters_popular = new char[256];
+	private char[] letters_popular = new char[(int)Math.Pow(2, 16)];
 
 	public Algorithm()
 	{
@@ -51,20 +51,28 @@ class Algorithm
 
 		string text_encoded = "";
 		char symbol = text[0];
-		int i = 1;
+		string bin_num;
+		string bin_sym;
 		int count = 1;
-		while (i < text.Length)
+		for (int i = 1; i <= text.Length; i++)
 		{
-			if (text[i] == symbol) count++;
+			if (i < text.Length && text[i] == symbol) count++;
 			else 
 			{
-				text_encoded = text_encoded + count + symbol;
-				symbol = text[i];
+				bin_num = Convert.ToString(count, 2);
+				for (int k = bin_num.Length; k < 16; k++) bin_num = "0" + bin_num;
+
+				bin_sym = Convert.ToString((int)symbol, 2);
+				for (int k = bin_sym.Length; k < 16; k++) bin_sym = "0" + bin_sym;
+
+				text_encoded += bin_num;
+				text_encoded += bin_sym;
+
 				count = 1;
+				if (i < text.Length) symbol = text[i];
 			}
-			i++;
 		}
-		text_encoded = text_encoded + count + symbol;
+
 		return text_encoded;
 	}
 
@@ -73,18 +81,18 @@ class Algorithm
 		if (text.Length == 0) return text;
 
 		string text_decoded = "";
-		string number = "";
+		int count;
+		char sym;
 		int i = 0;
-		while (i < text.Length) 
+		while (i < text.Length)
 		{
-			while (Char.IsDigit(text[i]))
-			{
-				number = number + text[i];
-				i++;
-			}
-			for (int j = 0; j < Convert.ToInt32(number); j++) text_decoded = text_decoded + text[i];
-			number = "";
-			i++;
+			count = Convert.ToInt32(text.Substring(i, 16), 2);
+			i += 16;
+
+			sym = (char)Convert.ToInt32(text.Substring(i, 16), 2);
+			i += 16;
+
+			for (int j = 0; j < count; j++) text_decoded = text_decoded + sym;
 		}
 
 		return text_decoded;
@@ -211,6 +219,8 @@ class Algorithm
 		Dictionary<string, LZ78DictEntry> dict = new Dictionary<string, LZ78DictEntry>();
 		string buffer = "";
 		int index = 0;
+		string bin_index;
+		string bin_sym;
 
 		for (int i = 0; i < text.Length; i++)
 		{
@@ -219,8 +229,17 @@ class Algorithm
 				index++;
 				dict[buffer + text[i]] = new LZ78DictEntry(index, text[i]);
 
-				if (dict.ContainsKey(buffer)) text_encoded = text_encoded + dict[buffer].Index + text[i];
-				else text_encoded = text_encoded + "0" + text[i];
+				bin_sym = Convert.ToString((int)text[i], 2);
+				for (int k = bin_sym.Length; k < 16; k++) bin_sym = "0" + bin_sym;
+
+				if (dict.ContainsKey(buffer)){
+					bin_index = Convert.ToString(dict[buffer].Index, 2);
+					for (int k = bin_index.Length; k < 16; k++) bin_index = "0" + bin_index;
+
+					text_encoded += bin_index;
+					text_encoded += bin_sym;
+				}
+				else text_encoded = text_encoded + "0000000000000000" + bin_sym;
 				buffer = "";
 			}
 			else
@@ -228,12 +247,23 @@ class Algorithm
 				buffer = buffer + text[i];
 			}
 		}
+
 		if (buffer.Length != 0)
 		{
 			char symbol = buffer[buffer.Length - 1];
 			buffer = buffer.Substring(0, buffer.Length - 1);
-			if (dict.ContainsKey(buffer)) text_encoded = text_encoded + dict[buffer].Index + symbol;
-			else text_encoded = text_encoded + "0" + symbol;
+
+			bin_sym = Convert.ToString((int)symbol, 2);
+			for (int k = bin_sym.Length; k < 16; k++) bin_sym = "0" + bin_sym;
+			if (dict.ContainsKey(buffer))
+			{
+				bin_index = Convert.ToString(dict[buffer].Index, 2);
+				for (int k = bin_index.Length; k < 16; k++) bin_index = "0" + bin_index;
+
+				text_encoded += bin_index;
+				text_encoded += bin_sym;
+			}
+			else text_encoded = text_encoded + "0000000000000000" + bin_sym;
 		}
 		return text_encoded;
 	}
@@ -246,26 +276,27 @@ class Algorithm
 		Dictionary<int, string> dict = new Dictionary<int, string>();
 		int index = 0;
 
-		string number = "";
-		for (int i = 0; i < text.Length; i++)
+		int number;
+		char sym;
+		int i = 0;
+		while (i < text.Length)
 		{
-			while (Char.IsDigit(text[i]))
-			{
-				number = number + text[i];
-				i++;
-			}
+			number = Convert.ToInt32(text.Substring(i, 16), 2);
+			i += 16;
+
+			sym = (char)Convert.ToInt32(text.Substring(i, 16), 2);
+			i += 16;
+
 			index++;
-			if (number == "0") {
-				text_decoded = text_decoded + text[i];
-				dict[index] = text[i].ToString();
+			if (number == 0) {
+				text_decoded = text_decoded + sym;
+				dict[index] = sym.ToString();
 			}
 			else
 			{
-				text_decoded = text_decoded + dict[Convert.ToInt32(number)] + text[i];
-				dict[index] = dict[Convert.ToInt32(number)] + text[i].ToString();
+				text_decoded = text_decoded + dict[number] + sym;
+				dict[index] = dict[number] + sym;
 			}
-
-			number = "";
 		}
 
 		return text_decoded;
@@ -319,20 +350,19 @@ class Algorithm
 		popular = popular.ToLower() + popular;
 
 		for (int i = 0; i < 52; i++) letters_popular[i] = popular.ToCharArray()[i];
-		for (int i = 32; i < 65; i++) letters_popular[52 + i - 32] = (char)i;
-		for (int i = 91; i < 97; i++) letters_popular[85 + i - 91] = (char)i;
-		for (int i = 123; i < 128; i++) letters_popular[91 + i - 123] = (char)i;
-		for (int i = 0; i < 32; i++) letters_popular[123 + i] = (char)i;
-		for (int i = 128; i < 256; i++) letters_popular[i] = (char)i;
+		for (int i = 0; i < 65; i++) letters_popular[52 + i] = (char)i;
+		for (int i = 91; i < 97; i++) letters_popular[117 + i - 91] = (char)i;
+		for (int i = 123; i < (int)Math.Pow(2, 16); i++) letters_popular[i] = (char)i;
 	}
 
 	public string MTFTransform(string text)
 	{
 		string text_transformed = "";
-		char[] letters = new char[256];
+		char[] letters = new char[(int)Math.Pow(2, 16)];
 		letters_popular.CopyTo(letters, 0);
 		char tmp;
 		char tmp_2;
+		string bin_num;
 		for (int i = 0; i < text.Length; i++)
 		{
 			tmp = letters[0];
@@ -343,7 +373,9 @@ class Algorithm
 				tmp = tmp_2;
 				if (tmp == text[i])
 				{
-					text_transformed += j.ToString() + ' ';
+					bin_num = Convert.ToString(j, 2);
+					for (int k = bin_num.Length; k < 16; k++) bin_num = "0" + bin_num;
+					text_transformed += bin_num;
 					break;
 				}
 			}
@@ -356,9 +388,11 @@ class Algorithm
 	{
 		if (text == "") return text;
 		string text_detransformed = "";
-		char[] letters = new char[256];
+		char[] letters = new char[(int)Math.Pow(2, 16)];
 		letters_popular.CopyTo(letters, 0);
-		int[] nums = Array.ConvertAll(text.Trim().Split(' '), new Converter<string, int>((string s) => Int32.Parse(s)));
+		int[] nums = new int[text.Length / 16];
+
+		for (int i = 0; i < text.Length; i += 16) nums[i / 16] = Convert.ToInt16(text.Substring(i, 16), 2);
 
 		char tmp;
 		char tmp_2;
