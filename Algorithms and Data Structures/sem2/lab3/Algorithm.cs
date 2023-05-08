@@ -90,9 +90,8 @@ class Algorithm
 		return text_decoded;
 	}
 
-	public string EncodeHuffman(string text, out Dictionary<char, string> codes)
+	public string EncodeHuffman(string text)
 	{
-		codes = new Dictionary<char, string>();
 		if (text.Length == 0) return "";
 
 		Dictionary<string, int> frequences_dict = new Dictionary<string, int>();
@@ -121,10 +120,27 @@ class Algorithm
 		}
 		tree.Root = queue.Dequeue();
 
-		codes = new Dictionary<char, string>();
+		string text_encoded = "";
+
+		Dictionary<char, string> codes = new Dictionary<char, string>();
 		GetHuffmanCodes(tree.Root, ref codes);
 
-		string text_encoded = "";
+		string bin_sym;
+		string len;
+		foreach(char sym in codes.Keys)
+		{
+			bin_sym = Convert.ToString(sym, 2);
+			for (int i = bin_sym.Length; i < 16; i++) bin_sym = "0" + bin_sym;
+
+			len = Convert.ToString(codes[sym].Length, 2);
+			for (int i = len.Length; i < 16; i++) len = "0" + len;
+
+			text_encoded += bin_sym;
+			text_encoded += len;
+			text_encoded += codes[sym];
+		}
+		text_encoded += "0000000000000000";
+
 		foreach(char sym in text) text_encoded = text_encoded + codes[sym];
 
 		return text_encoded;
@@ -145,10 +161,34 @@ class Algorithm
 		GetHuffmanCodes(root.Right, ref codes, code + "1");
 	}
 
-	public string DecodeHuffman(string text, Dictionary<char, string> codes)
+	public string DecodeHuffman(string text)
 	{
 		Dictionary<string, char> codes_reversed = new Dictionary<string, char>();
-		foreach (var code in codes) codes_reversed[code.Value] = code.Key;
+
+		int k = 0;
+		string bin_sym;
+		char sym;
+		int len;
+		string bin_code;
+		while (k + 15 < text.Length) 
+		{
+			bin_sym = text.Substring(k, 16);
+			sym = (char)Convert.ToInt32(bin_sym, 2);
+
+			k += 16;
+			if (sym == 0) break;
+			sym = (char)Convert.ToInt32(bin_sym, 2);
+
+			len = Convert.ToInt32(text.Substring(k, 16), 2);
+			k += 16;
+
+			bin_code = text.Substring(k, len);
+			k += len;
+
+			codes_reversed[bin_code] = sym;
+		}
+		text = text.Substring(k, text.Length - k);
+
 		string text_decoded = "";
 		int i = 0;
 		string current_code = "";
