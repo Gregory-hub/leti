@@ -9,7 +9,7 @@ class Program
         // Console.WriteLine($"{algorithm_name} encoded: {encoded}");
         // Console.WriteLine($"{algorithm_name} encoded and decoded: {decoded}");
         // Console.WriteLine($"Length encoded: {encoded.Length}");
-        // Console.WriteLine($"Comression ratio: {(double)text_size / (double)(encoded.Length)}");
+        Console.WriteLine($"Comression ratio: {(double)text_size / (double)(encoded.Length)}");
         Console.WriteLine();
     }
 
@@ -22,11 +22,13 @@ class Program
 
         long file_size = new System.IO.FileInfo(path).Length;
         // int text_size = (int)file_size / 100;
-        int len = 2500;
-        int text_size = len * 16;
 
+        int len = 5000;
+        int text_size = len * 16;
         string text = sr.ReadToEnd().Substring(0, len);
-        // string text = "Aboba\nBiba";
+
+        // string text = "AAboba Biba";
+        // text_size = text.Length * 16;
 
         string encoded;
         string decoded;
@@ -35,22 +37,6 @@ class Program
         Console.WriteLine($"Size: {text_size} bytes");
         Console.WriteLine();
 
-        encoded = algorithm.BWTTransform(text);
-        decoded = algorithm.BWTDetransform(encoded);
-        PrintInfo(text, text_size, encoded, decoded, "BWT");
-
-        encoded = algorithm.MTFTransform(text);
-        decoded = algorithm.MTFDetransform(encoded);
-        PrintInfo(text, text_size, encoded, decoded, "MTF");
-
-        encoded = algorithm.EncodeRLE(text);
-        decoded = algorithm.DecodeRLE(encoded);
-        PrintInfo(text, text_size, encoded, decoded, "RLE");
-
-        encoded = algorithm.EncodeLZ78(text);
-        decoded = algorithm.DecodeLZ78(encoded);
-        PrintInfo(text, text_size, encoded, decoded, "LZ78");
-
         encoded = algorithm.EncodeHuffman(text);
         decoded = algorithm.DecodeHuffman(encoded);
         PrintInfo(text, text_size, encoded, decoded, "Huffman");
@@ -58,6 +44,30 @@ class Program
         encoded = algorithm.EncodeArithmetic(text);
         decoded = algorithm.DecodeArithmetic(encoded);
         PrintInfo(text, text_size, encoded, decoded, "Arithmetic");
+
+        encoded = algorithm.EncodeLZ78(text);
+        decoded = algorithm.DecodeLZ78(encoded);
+        PrintInfo(text, text_size, encoded, decoded, "LZ78");
+
+		BWT_MTF_Huffman BMH = new BWT_MTF_Huffman();
+        encoded = BMH.Encode(text);
+        decoded = BMH.Decode(encoded);
+        PrintInfo(text, text_size, encoded, decoded, "BWT_MTF_Huffman");
+
+		BWT_MTF_Arithmetic BMA = new BWT_MTF_Arithmetic();
+        encoded = BMA.Encode(text);
+        decoded = BMA.Decode(encoded);
+        PrintInfo(text, text_size, encoded, decoded, "BWT_MTF_Arithmetic");
+
+		RLE_BWT_MTF_RLE_Huffman RBMRH = new RLE_BWT_MTF_RLE_Huffman();
+        encoded = RBMRH.Encode(text);
+        decoded = RBMRH.Decode(encoded);
+        PrintInfo(text, text_size, encoded, decoded, "RLE_BWT_MTF_RLE_Huffman");
+
+		RLE_BWT_MTF_RLE_Arithmetic RBMRA = new RLE_BWT_MTF_RLE_Arithmetic();
+        encoded = RBMRA.Encode(text);
+        decoded = RBMRA.Decode(encoded);
+        PrintInfo(text, text_size, encoded, decoded, "RLE_BWT_MTF_RLE_Arithmetic");
 
         int order = 2;
         encoded = algorithm.EncodePPM(text, order);

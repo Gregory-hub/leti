@@ -312,6 +312,7 @@ class Algorithm
 			substrings[i] = text.Substring(i, text.Length - i) + text.Substring(0, i);
 		}
 		Array.Sort(substrings, StringComparer.Ordinal);
+
 		for (int i = 0; i < substrings.Length; i++)
 		{
 			text_transformed += substrings[i][substrings.Length - 1];
@@ -324,6 +325,7 @@ class Algorithm
 	{
 		string text_detransformed = "";
 		string[] substrings = new string[text.Length];
+
 		for (int i = 0; i < text.Length; i++)
 		{
 			for (int j = 0; j < text.Length; j++)
@@ -362,7 +364,6 @@ class Algorithm
 		letters_popular.CopyTo(letters, 0);
 		char tmp;
 		char tmp_2;
-		string bin_num;
 		for (int i = 0; i < text.Length; i++)
 		{
 			tmp = letters[0];
@@ -373,9 +374,8 @@ class Algorithm
 				tmp = tmp_2;
 				if (tmp == text[i])
 				{
-					bin_num = Convert.ToString(j, 2);
-					for (int k = bin_num.Length; k < 16; k++) bin_num = "0" + bin_num;
-					text_transformed += bin_num;
+					if (j == '\uffff') throw new InvalidDataException("invalid text");
+					text_transformed += (char)(j + 1);
 					break;
 				}
 			}
@@ -390,9 +390,9 @@ class Algorithm
 		string text_detransformed = "";
 		char[] letters = new char[(int)Math.Pow(2, 16)];
 		letters_popular.CopyTo(letters, 0);
-		int[] nums = new int[text.Length / 16];
+		int[] nums = new int[text.Length];
 
-		for (int i = 0; i < text.Length; i += 16) nums[i / 16] = Convert.ToInt16(text.Substring(i, 16), 2);
+		for (int i = 0; i < text.Length; i++) nums[i] = (int)text[i] - 1;
 
 		char tmp;
 		char tmp_2;
