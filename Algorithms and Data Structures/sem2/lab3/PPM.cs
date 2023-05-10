@@ -1,7 +1,7 @@
 namespace lab3;
 
 
-class PPM
+public class PPM
 // PPMc
 {
 	public const int ESC = (int)'\uffff';

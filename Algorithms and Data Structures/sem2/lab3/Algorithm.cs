@@ -24,7 +24,7 @@ class BinTree
 }
 
 
-class Algorithm
+public class Algorithm
 {
 	private char[] letters_popular = new char[(int)Math.Pow(2, 16)];
 
@@ -304,7 +304,7 @@ class Algorithm
 
 	public string BWTTransform(string text)
 	{
-		text += '\0';
+		text += '\ufffe';
 		string text_transformed = "";
 		string[] substrings = new string[text.Length];
 		for (int i = 0; i < text.Length; i++)
@@ -328,7 +328,7 @@ class Algorithm
 
 		for (int i = 0; i < text.Length; i++)
 		{
-			for (int j = 0; j < text.Length; j++)
+			for (int j = 0; j < substrings.Length; j++)
 			{
 				substrings[j] = text[j] + substrings[j];
 			}
@@ -337,7 +337,7 @@ class Algorithm
 
 		for (int i = 0; i < substrings.Length; i++)
 		{
-			if (substrings[i][substrings.Length - 1] == '\0')
+			if (substrings[i][substrings.Length - 1] == '\ufffe')
 			{
 				text_detransformed = substrings[i].Substring(0, substrings.Length - 1);
 				break;

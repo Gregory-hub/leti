@@ -1,15 +1,27 @@
 ﻿namespace lab3;
 
+using System.Diagnostics;
+
+
 class Program
 {
-    static void PrintInfo(string text, int text_size, string encoded, string decoded, string algorithm_name)
+    static void AnalyseCompressor(Compressor compressor, string name, string text)
     {
-        Console.WriteLine(algorithm_name.ToUpper());
-        Console.WriteLine($"Text decoded correctly: {decoded == text}");
-        // Console.WriteLine($"{algorithm_name} encoded: {encoded}");
-        // Console.WriteLine($"{algorithm_name} encoded and decoded: {decoded}");
-        // Console.WriteLine($"Length encoded: {encoded.Length}");
-        Console.WriteLine($"Comression ratio: {(double)text_size / (double)(encoded.Length)}");
+        Console.WriteLine(name.ToUpper());
+		Stopwatch watch = new Stopwatch();
+
+        watch.Start();
+        string encoded = compressor.Encode(text);
+        watch.Stop();
+        Console.WriteLine($"Size encoded: {((double)encoded.Length / 1024 / 1024):N3}Mb");
+        Console.WriteLine($"Comression ratio: {((double)text.Length * 16 / (double)(encoded.Length)):N3}");
+        Console.WriteLine($"Compression time: {(double)watch.ElapsedMilliseconds / 1000}s");
+
+        // watch.Start();
+        // string decoded = compressor.Decode(encoded);
+        // watch.Stop();
+        // Console.WriteLine($"Decompression time: {(double)watch.ElapsedMilliseconds / 1000}s");
+        // if (decoded != text) Console.WriteLine("ERROR: decompressed incorrectly");
         Console.WriteLine();
     }
 
@@ -21,58 +33,28 @@ class Program
         StreamReader sr = new StreamReader(path);
 
         long file_size = new System.IO.FileInfo(path).Length;
-        // int text_size = (int)file_size / 100;
+        int text_size = (int)file_size / 10;
+        int len = text_size / 16;
 
-        int len = 5000;
-        int text_size = len * 16;
+        // int len = 10000;
+        // int text_size = len * 16;
         string text = sr.ReadToEnd().Substring(0, len);
 
-        // string text = "AAboba Biba";
-        // text_size = text.Length * 16;
+        Console.WriteLine($"Text size: {(double)text_size / 1024 / 1024:N3}Mb\n");
 
-        string encoded;
-        string decoded;
+        // AnalyseCompressor(new HuffmanCompressor(), "Huffman", text);
+        AnalyseCompressor(new ArithmeticCompressor(), "Arithmetic", text);
+        // AnalyseCompressor(new LZ78Compressor(), "LZ78", text);
+        // AnalyseCompressor(new BWT_MTF_Huffman(), "BWT_MTF_Huffman", text);
+        // AnalyseCompressor(new BWT_MTF_Arithmetic(), "BWT_MTF_Arithmetic", text);
+        // AnalyseCompressor(new RLE_BWT_MTF_RLE_Huffman(), "RLE_BWT_MTF_RLE_Huffman", text);
+        // AnalyseCompressor(new RLE_BWT_MTF_RLE_Arithmetic(), "RLE_BWT_MTF_RLE_Arithmetic", text);
 
-        // Console.WriteLine($"Text: {text}");
-        Console.WriteLine($"Size: {text_size} bytes");
-        Console.WriteLine();
-
-        encoded = algorithm.EncodeHuffman(text);
-        decoded = algorithm.DecodeHuffman(encoded);
-        PrintInfo(text, text_size, encoded, decoded, "Huffman");
-
-        encoded = algorithm.EncodeArithmetic(text);
-        decoded = algorithm.DecodeArithmetic(encoded);
-        PrintInfo(text, text_size, encoded, decoded, "Arithmetic");
-
-        encoded = algorithm.EncodeLZ78(text);
-        decoded = algorithm.DecodeLZ78(encoded);
-        PrintInfo(text, text_size, encoded, decoded, "LZ78");
-
-		BWT_MTF_Huffman BMH = new BWT_MTF_Huffman();
-        encoded = BMH.Encode(text);
-        decoded = BMH.Decode(encoded);
-        PrintInfo(text, text_size, encoded, decoded, "BWT_MTF_Huffman");
-
-		BWT_MTF_Arithmetic BMA = new BWT_MTF_Arithmetic();
-        encoded = BMA.Encode(text);
-        decoded = BMA.Decode(encoded);
-        PrintInfo(text, text_size, encoded, decoded, "BWT_MTF_Arithmetic");
-
-		RLE_BWT_MTF_RLE_Huffman RBMRH = new RLE_BWT_MTF_RLE_Huffman();
-        encoded = RBMRH.Encode(text);
-        decoded = RBMRH.Decode(encoded);
-        PrintInfo(text, text_size, encoded, decoded, "RLE_BWT_MTF_RLE_Huffman");
-
-		RLE_BWT_MTF_RLE_Arithmetic RBMRA = new RLE_BWT_MTF_RLE_Arithmetic();
-        encoded = RBMRA.Encode(text);
-        decoded = RBMRA.Decode(encoded);
-        PrintInfo(text, text_size, encoded, decoded, "RLE_BWT_MTF_RLE_Arithmetic");
-
-        int order = 2;
-        encoded = algorithm.EncodePPM(text, order);
-        decoded = algorithm.DecodePPM(encoded, order);
-        PrintInfo(text, text_size, encoded, decoded, "PPM");
+        for (int order = 1; order <= 7; order++)
+        {
+            PPMCompressor ppm = new PPMCompressor(order);
+            AnalyseCompressor(ppm, $"PPM order {order}", text);
+        }
 
         Console.Read();
     }

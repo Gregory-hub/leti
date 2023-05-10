@@ -1,8 +1,10 @@
 namespace lab3;
 
 
-class Compressor
+public abstract class Compressor
 {
+	protected Algorithm algorithm = new Algorithm();
+
 	public string BinToString(string bin_text)
 	{
 		string text = "";
@@ -27,14 +29,77 @@ class Compressor
 
 		return bin_text;
 	}
+
+	public abstract string Encode(string text);
+	public abstract string Decode(string text);
+}
+
+
+class HuffmanCompressor : Compressor
+{
+	public override string Encode(string text)
+	{
+		return algorithm.EncodeHuffman(text);
+	}
+
+	public override string Decode(string text)
+	{
+		return algorithm.DecodeHuffman(text);
+	}
+}
+
+
+class ArithmeticCompressor : Compressor
+{
+	public override string Encode(string text)
+	{
+		return algorithm.EncodeArithmetic(text);
+	}
+
+	public override string Decode(string text)
+	{
+		return algorithm.DecodeArithmetic(text);
+	}
+}
+
+
+class LZ78Compressor : Compressor
+{
+	public override string Encode(string text)
+	{
+		return algorithm.EncodeLZ78(text);
+	}
+
+	public override string Decode(string text)
+	{
+		return algorithm.DecodeLZ78(text);
+	}
+}
+
+
+class PPMCompressor : Compressor
+{
+	public int Order;
+	public PPMCompressor(int order) 
+	{
+		Order = order;
+	}
+
+	public override string Encode(string text)
+	{
+		return algorithm.EncodePPM(text, Order);
+	}
+
+	public override string Decode(string text)
+	{
+		return algorithm.DecodePPM(text, Order);
+	}
 }
 
 
 class BWT_MTF_Huffman : Compressor
 {
-	private Algorithm algorithm = new Algorithm();
-
-	public string Encode(string text)
+	public override string Encode(string text)
 	{
 		text = algorithm.BWTTransform(text);
 		text = algorithm.MTFTransform(text);
@@ -42,7 +107,7 @@ class BWT_MTF_Huffman : Compressor
 		return text;
 	}
 
-	public string Decode(string text)
+	public override string Decode(string text)
 	{
 		text = algorithm.DecodeHuffman(text);
 		text = algorithm.MTFDetransform(text);
@@ -54,9 +119,7 @@ class BWT_MTF_Huffman : Compressor
 
 class BWT_MTF_Arithmetic : Compressor
 {
-	private Algorithm algorithm = new Algorithm();
-
-	public string Encode(string text)
+	public override string Encode(string text)
 	{
 		text = algorithm.BWTTransform(text);
 		text = algorithm.MTFTransform(text);
@@ -64,7 +127,7 @@ class BWT_MTF_Arithmetic : Compressor
 		return text;
 	}
 
-	public string Decode(string text)
+	public override string Decode(string text)
 	{
 		text = algorithm.DecodeArithmetic(text);
 		text = algorithm.MTFDetransform(text);
@@ -76,9 +139,7 @@ class BWT_MTF_Arithmetic : Compressor
 
 class RLE_BWT_MTF_RLE_Huffman : Compressor
 {
-	private Algorithm algorithm = new Algorithm();
-
-	public string Encode(string text)
+	public override string Encode(string text)
 	{
 		text = algorithm.EncodeRLE(text);
 		text = BinToString(text);
@@ -90,7 +151,7 @@ class RLE_BWT_MTF_RLE_Huffman : Compressor
 		return text;
 	}
 
-	public string Decode(string text)
+	public override string Decode(string text)
 	{
 		text = algorithm.DecodeHuffman(text);
 		text = StringToBin(text);
@@ -106,9 +167,7 @@ class RLE_BWT_MTF_RLE_Huffman : Compressor
 
 class RLE_BWT_MTF_RLE_Arithmetic : Compressor
 {
-	private Algorithm algorithm = new Algorithm();
-
-	public string Encode(string text)
+	public override string Encode(string text)
 	{
 		text = algorithm.EncodeRLE(text);
 		text = BinToString(text);
@@ -120,7 +179,7 @@ class RLE_BWT_MTF_RLE_Arithmetic : Compressor
 		return text;
 	}
 
-	public string Decode(string text)
+	public override string Decode(string text)
 	{
 		text = algorithm.DecodeArithmetic(text);
 		text = StringToBin(text);
