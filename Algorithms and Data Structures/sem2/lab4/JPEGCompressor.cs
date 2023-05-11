@@ -4,6 +4,9 @@ using System;
 using System.Security.Policy;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Linq;
+using System.Windows.Forms;
+using System.Globalization;
 
 namespace lab4
 {
@@ -13,26 +16,34 @@ namespace lab4
 		private List<List<double>> Cb;
 		private List<List<double>> Cr;
 
+		protected struct Metadata
+		{
+			public int Width { get; set; }
+			public int Height { get; set; }
+			public int PixelsAddedBottom { get; set; }
+			public int PixelsAddedRight { get; set; }
+		}
+
 		public Bitmap BitmapFromYCbCr(int width, int height, string show_param = "all")
 		{
 			Bitmap bitmap = new Bitmap(width, height);
-			for (int x = 0; x < width; x++)
+			for (int y = 0; y < height; y++)
 			{
-				for (int y = 0; y < height; y++)
+				for (int x = 0; x < width; x++)
 				{
 					switch (show_param)
 					{
 						case "all":
-							bitmap.SetPixel(x, y, ColorFromYCbCr(Y[x][y], Cb[x][y], Cr[x][y]));
+							bitmap.SetPixel(y, x, ColorFromYCbCr(Y[y][x], Cb[y][x], Cr[y][x]));
 							break;
 						case "Y":
-							bitmap.SetPixel(x, y, Color.FromArgb((int)Y[x][y], (int)Y[x][y], (int)Y[x][y]));
+							bitmap.SetPixel(y, x, Color.FromArgb((int)Y[y][x], (int)Y[y][x], (int)Y[y][x]));
 							break;
 						case "Cb":
-								bitmap.SetPixel(x, y, Color.FromArgb(0, 0, (int)Cb[x][y]));
+							bitmap.SetPixel(y, x, Color.FromArgb(0, 0, (int)Cb[y][x]));
 							break;
 						case "Cr":
-								bitmap.SetPixel(x, y, Color.FromArgb((int)Cr[x][y], 0, 0));
+							bitmap.SetPixel(y, x, Color.FromArgb((int)Cr[y][x], 0, 0));
 							break;
 						default:
 							throw new InvalidDataException("Invalid param");
@@ -48,6 +59,14 @@ namespace lab4
 			int G = (int)(y - 0.34414 * (cb - 128) - 0.71414 * (cr - 128));
 			int B = (int)(y + 1.772 * (cb - 128));
 
+			R = (R < 256) ? R : 255;
+			G = (G < 256) ? G : 255;
+			B = (B < 256) ? B : 255;
+
+			R = (R > 0) ? R : 0;
+			G = (G > 0) ? G : 0;
+			B = (B > 0) ? B : 0;
+
 			return Color.FromArgb(R, G, B);
 		}
 
@@ -62,12 +81,36 @@ namespace lab4
 
 		public class Encoder : JPEGCompressor
 		{
+			private Metadata metadata = new Metadata();
+
 			public Bitmap Compress(Bitmap bitmap)
 			{
-				InitYCbCr(bitmap);
+				Init(bitmap);
+				if (metadata.Width == 0 || metadata.Height == 0) return bitmap;
 
-				Bitmap encoded = BitmapFromYCbCr(bitmap.Width, bitmap.Height, "Y");
+				DowngradeChroma();
+				ExtendToFitIntoBlocks(ref Y);
+				ExtendToFitIntoBlocks(ref Cb);
+				ExtendToFitIntoBlocks(ref Cr);
+
+				if (Y.Count > metadata.Height) metadata.PixelsAddedBottom = Y.Count - metadata.Height;
+				if (Y[0].Count > metadata.Width) metadata.PixelsAddedRight = Y[0].Count - metadata.Width;
+				metadata.Height = Y.Count;
+				metadata.Width = Y[0].Count;
+
+				PerformDCT(ref Y);
+				PerformDCT(ref Cb);
+				PerformDCT(ref Cr);
+
+				Bitmap encoded = BitmapFromYCbCr(metadata.Width / 2, metadata.Height / 2, "all");
 				return encoded;
+			}
+
+			public void Init(Bitmap bitmap)
+			{
+				metadata.Width = bitmap.Width;
+				metadata.Height = bitmap.Height;
+				InitYCbCr(bitmap);
 			}
 
 			private void InitYCbCr(Bitmap bitmap)
@@ -90,6 +133,96 @@ namespace lab4
 						Cr[x].Add(ycbcr[2]);
 					}
 				}
+			}
+
+			public void ExtendToFitIntoBlocks(ref List<List<double>> component)
+			{
+				while (component.Count % 8 != 0)
+				{
+					component.Add(new List<double>());
+					for (int x = 0; x < component[0].Count; x++)
+					{
+						component.Last().Add(component[component.Count - 2][x]);
+					}
+				}
+
+				while (component[0].Count % 8 != 0)
+				{
+					for (int y = 0; y < component.Count; y++)
+					{
+						component[y].Add(component[y].Last());
+					}
+				}
+			}
+
+			private void DowngradeChroma()
+			{
+				List<List<double>> NewCb = new List<List<double>>();
+				List<List<double>> NewCr = new List<List<double>>();
+
+				double[] current_pixels = new double[4];
+
+				for (int x = 0; x < metadata.Height; x += 2)
+				{
+					NewCb.Add(new List<double>());
+					NewCr.Add(new List<double>());
+
+					for (int y = 0; y < metadata.Width; y += 2)
+					{
+						current_pixels[0] = Cb[x][y];
+						current_pixels[1] = Cb[x][y + 1];
+						current_pixels[2] = Cb[x + 1][y];
+						current_pixels[3] = Cb[x + 1][y + 1];
+
+						NewCb[x / 2].Add(current_pixels.Average());
+
+						current_pixels[0] = Cr[x][y];
+						current_pixels[1] = Cr[x][y + 1];
+						current_pixels[2] = Cr[x + 1][y];
+						current_pixels[3] = Cr[x + 1][y + 1];
+
+						NewCr[x / 2].Add(current_pixels.Average());
+					}
+				}
+				Cb = NewCb;
+				Cr = NewCr;
+			}
+
+			private void PerformDCT(ref List<List<double>> component)
+			{
+				for (int y_start = 0; y_start < component.Count; y_start += 8)
+				{
+					for (int x_start = 0; x_start < component[y_start].Count; x_start += 8)
+					{
+						PerformBlockDCT(ref component, y_start, x_start);
+					}
+				}
+
+			}
+
+			private void PerformBlockDCT(ref List<List<double>> block, int y_start, int x_start)
+			{
+				for (int y = y_start; y < y_start + 8; y++)
+					for (int x = x_start; x < x_start + 8; x++) block[y][x] -= 128;
+
+				double[,] transformed = new double[8, 8];
+				for (int u = 0; u < 8; u++)
+				{
+					for (int v = 0; v < 8; v++)
+					{
+						transformed[u, v] = 0;
+						for (int y = y_start; y < y_start + 8; y++)
+						{
+							for (int x = x_start; x < x_start + 8; x++)
+								transformed[u, v] += block[y][x] * Math.Cos(((2 * x + 1) * u * Math.PI) / 16) * Math.Cos(((2 * y + 1) * v * Math.PI) / 16);
+						}
+						if (u == 0) transformed[u, v] *= 1 / Math.Sqrt(2);
+						if (v == 0) transformed[u, v] *= 1 / Math.Sqrt(2);
+						transformed[u, v] /= 4;
+					}
+				}
+				for (int y = y_start; y < y_start + 8; y++)
+					for (int x = x_start; x < x_start + 8; x++) block[y][x] = transformed[y - y_start, x - x_start];
 			}
 		}
 
