@@ -23,10 +23,10 @@ namespace lab4
 					switch (show_param)
 					{
 						case "all":
-								bitmap.SetPixel(x, y, ColorFromYCbCr(Y[x][y], Cb[x][y], Cr[x][y]));
+							bitmap.SetPixel(x, y, ColorFromYCbCr(Y[x][y], Cb[x][y], Cr[x][y]));
 							break;
 						case "Y":
-								bitmap.SetPixel(x, y, Color.FromArgb((int)Y[x][y], (int)Y[x][y], (int)Y[x][y]));
+							bitmap.SetPixel(x, y, Color.FromArgb((int)Y[x][y], (int)Y[x][y], (int)Y[x][y]));
 							break;
 						case "Cb":
 								bitmap.SetPixel(x, y, Color.FromArgb(0, 0, (int)Cb[x][y]));

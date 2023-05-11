@@ -302,47 +302,96 @@ public class Algorithm
 		return text_decoded;
 	}
 
+	private void SortBWTStrings(string text, ref int[] indices) 
+	{
+		// quicksort for text permutations
+		if (indices.Length == 0) return;
+		int pivot_i = indices[indices.Length - 1];
+		string pivot_str = text.Substring(pivot_i) + text.Substring(0, pivot_i);
+
+		int wall = 0;
+		int tmp;
+		string str;
+
+		for (int i = 0; i < indices.Length - 1; i++)
+		{
+			str = text.Substring(indices[i]) + text.Substring(0, indices[i]);
+			if (String.Compare(str, pivot_str, comparisonType: StringComparison.Ordinal) < 0) {
+				tmp = indices[i];
+				indices[i] = indices[wall];
+				indices[wall] = tmp;
+				wall++;
+			}
+		}
+
+		tmp = indices[indices.Length - 1];
+		indices[indices.Length - 1] = indices[wall];
+		indices[wall] = tmp;
+
+		int[] left = new int[wall];
+		for (int i = 0; i < left.Length; i++) left[i] = indices[i];
+
+		int[] right = new int[indices.Length - wall - 1];
+		for (int i = 0; i < right.Length; i++) right[i] = indices[wall + 1 + i];
+
+		SortBWTStrings(text, ref left);
+		SortBWTStrings(text, ref right);
+
+		for (int i = 0; i < left.Length; i++) indices[i] = left[i];
+		for (int i = 0; i < right.Length; i++) indices[wall + 1 + i] = right[i];
+	}
+
 	public string BWTTransform(string text)
 	{
-		text += '\ufffe';
+		if (text.Length == 0) return "";
+
 		string text_transformed = "";
-		string[] substrings = new string[text.Length];
-		for (int i = 0; i < text.Length; i++)
-		{
-			substrings[i] = text.Substring(i, text.Length - i) + text.Substring(0, i);
-		}
-		Array.Sort(substrings, StringComparer.Ordinal);
+		int[] indices = new int[text.Length];
+		for (int i = 0; i < text.Length; i++) indices[i] = i;
 
-		for (int i = 0; i < substrings.Length; i++)
+		SortBWTStrings(text, ref indices);
+
+		int first_i = -1;
+		int index;
+		for (int i = 0; i < indices.Length; i++) 
 		{
-			text_transformed += substrings[i][substrings.Length - 1];
+			if (indices[i] > 0) index = indices[i] - 1;
+			else index = indices.Length - 1;
+
+			text_transformed += text[index];
+
+			if (indices[i] == 0) first_i = i;
 		}
 
-		return text_transformed;
+		if (first_i == -1) throw new Exception("BWTTransform did not as intended");
+		return (char)first_i + text_transformed;
 	}
 
 	public string BWTDetransform(string text)
 	{
+		if (text.Length == 0) return "";
+
 		string text_detransformed = "";
-		string[] substrings = new string[text.Length];
 
-		for (int i = 0; i < text.Length; i++)
+		int index = (int)text[0];
+		text = text.Substring(1);
+
+		List<KeyValuePair<int, char>> last_col = new List<KeyValuePair<int, char>>();
+		for (int i = 0; i < text.Length; i++) last_col.Add(new KeyValuePair<int, char>(i, text[i]));
+
+		List<KeyValuePair<int, char>> first_col = new List<KeyValuePair<int, char>>();
+		for (int i = 0; i < text.Length; i++) first_col.Add(last_col[i]);
+
+		first_col = first_col.OrderBy(p => p.Value).ToList();
+
+		KeyValuePair<int, char> symbol = first_col[index];
+		text_detransformed += symbol.Value;
+		for (int i = 0; i < first_col.Count - 1; i++)
 		{
-			for (int j = 0; j < substrings.Length; j++)
-			{
-				substrings[j] = text[j] + substrings[j];
-			}
-			Array.Sort(substrings, StringComparer.Ordinal);
+			symbol = first_col[last_col.FindIndex(p => p.Key == symbol.Key)];
+			text_detransformed += symbol.Value;
 		}
 
-		for (int i = 0; i < substrings.Length; i++)
-		{
-			if (substrings[i][substrings.Length - 1] == '\ufffe')
-			{
-				text_detransformed = substrings[i].Substring(0, substrings.Length - 1);
-				break;
-			}
-		}
 		return text_detransformed;
 	}
 
