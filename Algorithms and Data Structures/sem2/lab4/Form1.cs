@@ -23,8 +23,10 @@ namespace lab4
 
 			Bitmap img = new Bitmap(path);
 
+			const int Quality = 50;
+
 			JPEGCompressor.Encoder encoder = new JPEGCompressor.Encoder();
-			Bitmap encoded_img = encoder.Compress(img);
+			Bitmap encoded_img = encoder.Compress(img, Quality);
 
 			pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 			pictureBox1.BorderStyle = BorderStyle.FixedSingle;

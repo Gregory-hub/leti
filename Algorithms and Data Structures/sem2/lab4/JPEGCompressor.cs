@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Linq;
 using System.Windows.Forms;
 using System.Globalization;
+using System.Runtime.InteropServices;
 
 namespace lab4
 {
@@ -15,6 +16,17 @@ namespace lab4
 		private List<List<double>> Y;
 		private List<List<double>> Cb;
 		private List<List<double>> Cr;
+
+		protected int[,] BaseQuantizationMatrix = {
+			{ 16,  11,  10,  16,  24,  40,  51,  61  },
+			{ 12,  12,  14,  19,  26,  58,  60,  55  },
+			{ 14,  13,  16,  24,  40,  57,  69,  56  },
+			{ 14,  17,  22,  29,  51,  87,  80,  62  },
+			{ 18,  22,  37,  56,  68,  109, 103, 77  },
+			{ 24,  35,  55,  64,  81,  104, 113, 92  },
+			{ 49,  64,  78,  87,  103, 121, 120, 101 },
+			{ 72,  92,  95,  98,  112, 100, 103, 99  }
+		};
 
 		protected struct Metadata
 		{
@@ -83,7 +95,7 @@ namespace lab4
 		{
 			private Metadata metadata = new Metadata();
 
-			public Bitmap Compress(Bitmap bitmap)
+			public Bitmap Compress(Bitmap bitmap, int quality = 50)
 			{
 				Init(bitmap);
 				if (metadata.Width == 0 || metadata.Height == 0) return bitmap;
@@ -101,6 +113,11 @@ namespace lab4
 				PerformDCT(ref Y);
 				PerformDCT(ref Cb);
 				PerformDCT(ref Cr);
+
+				quality = 80;
+				Quantize(ref Y, quality);
+				Quantize(ref Cb, quality);
+				Quantize(ref Cr, quality);
 
 				Bitmap encoded = BitmapFromYCbCr(metadata.Width / 2, metadata.Height / 2, "all");
 				return encoded;
@@ -155,7 +172,7 @@ namespace lab4
 				}
 			}
 
-			private void DowngradeChroma()
+			public void DowngradeChroma()
 			{
 				List<List<double>> NewCb = new List<List<double>>();
 				List<List<double>> NewCr = new List<List<double>>();
@@ -188,7 +205,7 @@ namespace lab4
 				Cr = NewCr;
 			}
 
-			private void PerformDCT(ref List<List<double>> component)
+			public void PerformDCT(ref List<List<double>> component)
 			{
 				for (int y_start = 0; y_start < component.Count; y_start += 8)
 				{
@@ -197,13 +214,12 @@ namespace lab4
 						PerformBlockDCT(ref component, y_start, x_start);
 					}
 				}
-
 			}
 
-			private void PerformBlockDCT(ref List<List<double>> block, int y_start, int x_start)
+			private void PerformBlockDCT(ref List<List<double>> component, int y_start, int x_start)
 			{
 				for (int y = y_start; y < y_start + 8; y++)
-					for (int x = x_start; x < x_start + 8; x++) block[y][x] -= 128;
+					for (int x = x_start; x < x_start + 8; x++) component[y][x] -= 128;
 
 				double[,] transformed = new double[8, 8];
 				for (int u = 0; u < 8; u++)
@@ -214,7 +230,7 @@ namespace lab4
 						for (int y = y_start; y < y_start + 8; y++)
 						{
 							for (int x = x_start; x < x_start + 8; x++)
-								transformed[u, v] += block[y][x] * Math.Cos(((2 * x + 1) * u * Math.PI) / 16) * Math.Cos(((2 * y + 1) * v * Math.PI) / 16);
+								transformed[u, v] += component[y][x] * Math.Cos(((2 * x + 1) * u * Math.PI) / 16) * Math.Cos(((2 * y + 1) * v * Math.PI) / 16);
 						}
 						if (u == 0) transformed[u, v] *= 1 / Math.Sqrt(2);
 						if (v == 0) transformed[u, v] *= 1 / Math.Sqrt(2);
@@ -222,7 +238,45 @@ namespace lab4
 					}
 				}
 				for (int y = y_start; y < y_start + 8; y++)
-					for (int x = x_start; x < x_start + 8; x++) block[y][x] = transformed[y - y_start, x - x_start];
+					for (int x = x_start; x < x_start + 8; x++) component[y][x] = transformed[y - y_start, x - x_start];
+			}
+
+			public void Quantize(ref List<List<double>> component, int quality)
+			{
+				if (quality <= 0 || quality > 100) throw new InvalidDataException("Quality must be a number from 1 to 100");
+				int[,] q_matrix = BaseQuantizationMatrix;
+
+				int s;
+				if (quality < 50) s = 5000 / quality;
+				else s = 200 - quality * 2;
+
+				for (int y = 0; y < 8; y++)
+				{
+					for (int x = 0; x < 8; x++)
+					{
+						q_matrix[y,x] = (q_matrix[y,x] * s + 50) / 100;
+						if (q_matrix[y, x] == 0) q_matrix[y, x] = 1;
+					}
+				}
+
+				for (int y_start = 0; y_start < component.Count; y_start += 8)
+				{
+					for (int x_start = 0; x_start < component[y_start].Count; x_start += 8)
+					{
+						QuantizeBlock(ref component, y_start, x_start, q_matrix);
+					}
+				}
+			}
+
+			private void QuantizeBlock(ref List<List<double>> component, int y_start, int x_start, int[,] q_matrix)
+			{
+				for (int y = y_start; y < y_start + 8; y++)
+				{
+					for (int x = x_start; x < x_start + 8; x++)
+					{
+						component[y][x] /= q_matrix[y - y_start, x - x_start];
+					}
+				}
 			}
 		}
 
