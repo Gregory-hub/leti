@@ -36,6 +36,23 @@ namespace lab4
 			public int PixelsAddedRight { get; set; }
 		}
 
+		protected class BinTreeNode
+		{
+			public BinTreeNode Parent = null;
+			public BinTreeNode Left = null;
+			public BinTreeNode Right = null;
+
+			public string Value;
+			public int Frequency;
+
+			public BinTreeNode(string value, int frequency)
+			{
+				Value = value;
+				Frequency = frequency;
+			}
+		}
+
+
 		public Bitmap BitmapFromYCbCr(int width, int height, string show_param = "all")
 		{
 			Bitmap bitmap = new Bitmap(width, height);
@@ -95,10 +112,10 @@ namespace lab4
 		{
 			private Metadata metadata = new Metadata();
 
-			public Bitmap Compress(Bitmap bitmap, int quality = 50)
+			public void Compress(Bitmap bitmap, string out_filename, int quality = 50)
 			{
 				Init(bitmap);
-				if (metadata.Width == 0 || metadata.Height == 0) return bitmap;
+				if (metadata.Width == 0 || metadata.Height == 0) return;
 
 				DowngradeChroma();
 				ExtendToFitIntoBlocks(ref Y);
@@ -110,6 +127,8 @@ namespace lab4
 				metadata.Height = Y.Count;
 				metadata.Width = Y[0].Count;
 
+				Bitmap encoded = BitmapFromYCbCr(metadata.Width / 2, metadata.Height / 2, "Y");
+
 				PerformDCT(ref Y);
 				PerformDCT(ref Cb);
 				PerformDCT(ref Cr);
@@ -119,8 +138,7 @@ namespace lab4
 				Quantize(ref Cb, quality);
 				Quantize(ref Cr, quality);
 
-				Bitmap encoded = BitmapFromYCbCr(metadata.Width / 2, metadata.Height / 2, "all");
-				return encoded;
+				string text_encoded = Encode();
 			}
 
 			public void Init(Bitmap bitmap)
@@ -275,8 +293,98 @@ namespace lab4
 					for (int x = x_start; x < x_start + 8; x++)
 					{
 						component[y][x] /= q_matrix[y - y_start, x - x_start];
+						component[y][x] = (int)component[y][x];
 					}
 				}
+			}
+
+			public string Encode()
+			{
+				List<int[]> coefficients = GetZigzagedCoefficients(Y);
+				coefficients.AddRange(GetZigzagedCoefficients(Cb));
+				coefficients.AddRange(GetZigzagedCoefficients(Cr));
+
+				Arithmetic.Encoder arithmetic = new Arithmetic.Encoder();
+
+				string text_encoded = EncodeRLE(coefficients);
+
+				text_encoded = (char)metadata.Width + text_encoded;
+				text_encoded = (char)metadata.Height + text_encoded;
+				text_encoded = (char)metadata.PixelsAddedRight + text_encoded;
+				text_encoded = (char)metadata.PixelsAddedBottom + text_encoded;
+
+				text_encoded = arithmetic.Encode(text_encoded);
+
+				return text_encoded;
+			}
+
+			private List<int[]> GetZigzagedCoefficients(List<List<double>> component)
+			{
+				List<int[]> coefficients = new List<int[]>();
+
+				for (int y_start = 0; y_start < component.Count; y_start += 8)
+				{
+					for (int x_start = 0; x_start < component[y_start].Count; x_start += 8)
+					{
+						coefficients.Add(GetZigzagedBlockCoefficients(component, y_start, x_start));
+					}
+				}
+				return coefficients;
+			}
+			
+			private int[] GetZigzagedBlockCoefficients(List<List<double>> component, int y_start, int x_start)
+			{
+				int[] coefficients = new int[64];
+				int x = 0, y = 0;
+				int x_up = 0, y_up = 0;
+				int current_index = 0;
+
+				while (!(x_up >= 7 && y_up >= 7))
+				{
+					x = x_up;
+					y = y_up;
+					while (x >= 0 && y < 8)
+					{
+						coefficients[current_index] = (int)component[y_start + y][x_start + x];
+						x--;
+						y++;
+						current_index++;
+					}
+
+					if (x_up < 7) x_up += 1;
+					else y_up += 1;
+				}
+
+				return coefficients;
+			}
+
+			private string EncodeRLE(List<int[]> data)
+			{
+				if (data.Count == 0) return "";
+
+				string text_encoded = "";
+				int number = data[0][0];
+				int count = 0;
+
+				for (int i = 0; i < data.Count; i++)
+				{
+					for (int j = 0; j < data[i].Length; j++)
+					{
+						if (data[i][j] == number || count < Int16.MaxValue - 1) count++;
+						else
+						{
+							text_encoded += (char)count;
+							text_encoded += (char)number;
+
+							count = 1;
+							number = data[i][j];
+						}
+					}
+				}
+				text_encoded += (char)count;
+				text_encoded += (char)number;
+
+				return text_encoded;
 			}
 		}
 

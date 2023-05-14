@@ -26,15 +26,15 @@ namespace lab4
 			const int Quality = 50;
 
 			JPEGCompressor.Encoder encoder = new JPEGCompressor.Encoder();
-			Bitmap encoded_img = encoder.Compress(img, Quality);
+			encoder.Compress(img, "Compressed.txt", Quality);
 
 			pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 			pictureBox1.BorderStyle = BorderStyle.FixedSingle;
 			pictureBox1.Image = img;
 
-			pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-			pictureBox2.BorderStyle = BorderStyle.FixedSingle;
-			pictureBox2.Image = encoded_img;
+			//pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+			//pictureBox2.BorderStyle = BorderStyle.FixedSingle;
+			//pictureBox2.Image = encoded_img;
 		}
 	}
 }
