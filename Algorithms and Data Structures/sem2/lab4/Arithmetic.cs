@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using System;
 using System.IO;
-using System.Collections.Generic;
 
 
 namespace lab4
@@ -8,6 +8,7 @@ namespace lab4
 	public class Arithmetic
 	{
 		public const int precision = 32;
+		public const char EOF = '\uffff';
 		public uint Whole, Half, Quater;
 		private uint a, b;
 		public int Count;
@@ -48,7 +49,7 @@ namespace lab4
 
 			public void InitEncoder(ref string text, out string text_encoded)
 			{
-				text += '\0';
+				text += EOF;
 				InitializeFreqs(text);
 				text_encoded = "";
 				EncodeAlphabet(ref text_encoded);
@@ -159,7 +160,7 @@ namespace lab4
 
 					symbols += Convert.ToString(sym);
 					k += 16;
-					if (sym == 0) break;
+					if (sym == EOF) break;
 				}
 				text = text.Substring(k, text.Length - k);
 
@@ -239,7 +240,7 @@ namespace lab4
 				Dictionary<int, int[]> CumFreqs = GetCumFreqs();
 				int sym = DecodeSymbol(CumFreqs);
 
-				while (sym != '\0')
+				while (sym != EOF)
 				{
 					text_decoded += (char)sym;
 					Update(sym, text, CumFreqs);
@@ -255,3 +256,4 @@ namespace lab4
 		}
 	}
 }
+

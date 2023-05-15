@@ -19,23 +19,26 @@ namespace lab4
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			string path = Environment.CurrentDirectory + "//img.jpg";
+			string img_name = "img";
+			string path = Environment.CurrentDirectory + "//" + img_name + ".jpg";
 
 			Bitmap img = new Bitmap(path);
 
 			const int Quality = 50;
-
 			JPEGCompressor.Encoder encoder = new JPEGCompressor.Encoder();
-			encoder.Compress(img, "Compressed.txt", Quality);
+			encoder.Compress(img, img_name + "_compressed.bin", Quality);
 
 			pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 			pictureBox1.BorderStyle = BorderStyle.FixedSingle;
 			pictureBox1.Image = img;
 
-			//pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-			//pictureBox2.BorderStyle = BorderStyle.FixedSingle;
-			//pictureBox2.Image = encoded_img;
+			path = Environment.CurrentDirectory + "//" + img_name + "_compressed.bin";
+			JPEGCompressor.Decoder decoder = new JPEGCompressor.Decoder();
+			Bitmap img_decoded = decoder.Decompress(path);
+			pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+			pictureBox2.BorderStyle = BorderStyle.FixedSingle;
+			pictureBox2.Image = img_decoded;
 		}
 	}
 }
-
+ 
