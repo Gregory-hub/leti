@@ -36,9 +36,9 @@ namespace lab4
 			return CumFreqs;
 		}
 
-		public void InitializeFreqs(string text)
+		public void InitializeFreqs(List<char> text)
 		{
-			for (int i = 0; i < text.Length; i++) Freqs[text[i]] = 1;
+			for (int i = 0; i < text.Count; i++) Freqs[text[i]] = 1;
 			Count = Freqs.Count;
 		}
 
@@ -47,11 +47,11 @@ namespace lab4
 		{
 			private int s;
 
-			public void InitEncoder(ref string text, out string text_encoded)
+			public void InitEncoder(ref List<char> text, out List<char> text_encoded)
 			{
-				text += EOF;
+				text.Add(EOF);
 				InitializeFreqs(text);
-				text_encoded = "";
+				text_encoded = new List<char>();
 				EncodeAlphabet(ref text_encoded);
 
 				a = 0;
@@ -59,21 +59,21 @@ namespace lab4
 				s = 0;
 			}
 
-			public void EncodeAlphabet(ref string text_encoded)
+			public void EncodeAlphabet(ref List<char> text_encoded)
 			{
 				// Freqs must be initialized
-				string symbols = "";
+				List<char> symbols = new List<char>();
 				string bin_sym;
-				foreach (char sym in Freqs.Keys) symbols += sym;
+				foreach (char sym in Freqs.Keys) symbols.Add(sym);
 				foreach (char sym in symbols)
 				{
 					bin_sym = Convert.ToString(sym, 2);
 					for (int i = bin_sym.Length; i < 16; i++) bin_sym = "0" + bin_sym;
-					text_encoded += bin_sym;
+					text_encoded.AddRange(bin_sym);
 				}
 			}
 
-			public void Update(int sym, ref string text_encoded)
+			public void Update(int sym, ref List<char> text_encoded)
 			{
 				Dictionary<int, int[]> CumFreqs = GetCumFreqs();
 
@@ -92,8 +92,8 @@ namespace lab4
 						a = (a & ~Half) << 1;
 						b = ((b & ~Half) << 1) | 1;
 
-						text_encoded += bit;
-						for (; s > 0; s--) text_encoded += (bit == 0) ? '1' : '0';
+						text_encoded.Add((bit == 0) ? '0' : '1');
+						for (; s > 0; s--) text_encoded.Add((bit == 0) ? '1' : '0');
 					}
 
 					if (a >= Quater && b < 3 * Quater)
@@ -108,25 +108,25 @@ namespace lab4
 				}
 			}
 
-			public void Finish(ref string text_encoded)
+			public void Finish(ref List<char> text_encoded)
 			{
 				s++;
 				if (a <= Quater)
 				{
-					text_encoded += "0";
-					for (int i = 0; i < s; i++) text_encoded += "1";
+					text_encoded.Add('0');
+					for (int i = 0; i < s; i++) text_encoded.Add('1');
 				}
 				else
 				{
-					text_encoded += "1";
-					for (int i = 0; i < s; i++) text_encoded += "0";
+					text_encoded.Add('1');
+					for (int i = 0; i < s; i++) text_encoded.Add('0');
 				}
 			}
 
-			public string Encode(string text)
+			public List<char> Encode(List<char> text)
 			{
 				// init
-				InitEncoder(ref text, out string text_encoded);
+				InitEncoder(ref text, out List<char> text_encoded);
 
 				// algorithm
 				foreach (char sym in text)
@@ -147,9 +147,9 @@ namespace lab4
 			private int index;
 			private uint code;
 
-			public string InitDecoder(ref string text)
+			public List<char> InitDecoder(ref string text)
 			{
-				string symbols = "";
+				List<char> symbols = new List<char>();
 				int k = 0;
 				string bin_sym;
 				char sym;
@@ -158,11 +158,11 @@ namespace lab4
 					bin_sym = text.Substring(k, 16);
 					sym = (char)Convert.ToInt32(bin_sym, 2);
 
-					symbols += Convert.ToString(sym);
+					symbols.Add(sym);
 					k += 16;
 					if (sym == EOF) break;
 				}
-				text = text.Substring(k, text.Length - k);
+				text = text.Substring(k);
 
 				InitializeFreqs(symbols);
 				a = 0;
@@ -232,9 +232,9 @@ namespace lab4
 				}
 			}
 
-			public string Decode(string text)
+			public List<char> Decode(string text)
 			{
-				string text_decoded = "";
+				List<char> text_decoded = new List<char>();
 				InitDecoder(ref text);
 
 				Dictionary<int, int[]> CumFreqs = GetCumFreqs();
@@ -242,7 +242,7 @@ namespace lab4
 
 				while (sym != EOF)
 				{
-					text_decoded += (char)sym;
+					text_decoded.Add((char)sym);
 					Update(sym, text, CumFreqs);
 					Freqs[sym]++;
 					Count++;

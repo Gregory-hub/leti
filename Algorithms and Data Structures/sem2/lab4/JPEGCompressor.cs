@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using System.Diagnostics;
+using System.Text;
 
 namespace lab4
 {
@@ -114,14 +116,18 @@ namespace lab4
 		{
 			private Metadata metadata = new Metadata();
 
-			public void Compress(Bitmap bitmap, string out_filename, int quality = 50)
+			public void Compress(Bitmap bitmap, string out_path, int quality = 50)
 			{
 				Init(bitmap, quality);
-				if (metadata.Width == 0 || metadata.Height == 0) WriteToFile("", out_filename);
+				if (metadata.Width == 0 || metadata.Height == 0)
+				{
+					WriteToFile(new List<char>(), out_path);
+					return;
+				}
 
 				ExtendToFitIntoBlocks();
 
-				//DowngradeChroma();
+				DowngradeChroma();
 
 				PerformDCT(ref Y);
 				PerformDCT(ref Cb);
@@ -131,8 +137,8 @@ namespace lab4
 				Quantize(ref Cb, quality, BaseChromaQuantizationMatrix);
 				Quantize(ref Cr, quality, BaseChromaQuantizationMatrix);
 
-				string text_encoded = Encode();
-				WriteToFile(text_encoded, out_filename);
+				List<char> text_encoded = Encode();
+				WriteToFile(text_encoded, out_path);
 			}
 
 			public void Init(Bitmap bitmap, int quality)
@@ -167,7 +173,7 @@ namespace lab4
 
 			public void ExtendToFitIntoBlocks()
 			{
-				if (Y.Count != Cb.Count && Y.Count != Cr.Count) throw new InvalidDataException("Components must be of one size");
+				if (Y.Count != Cb.Count && Y.Count != Cr.Count) throw new InvalidDataException("Components are not of one size");
 				while (Y.Count % 16 != 0)	// 16 because chroma components width and height will be divided by 2
 				{
 					Y.Add(new List<double>());
@@ -247,21 +253,32 @@ namespace lab4
 					for (int x = x_start; x < x_start + 8; x++) component[y][x] -= 128;
 
 				double[,] transformed = new double[8, 8];
-				for (int u = 0; u < 8; u++)
+
+				double sum;
+				double cos1;
+				double cos2;
+				for (int i = 0; i < 8; i++)
 				{
-					for (int v = 0; v < 8; v++)
+					for (int j = 0; j < 8; j++)
 					{
-						transformed[u, v] = 0;
-						for (int y = y_start; y < y_start + 8; y++)
+						transformed[i, j] = 0.25;
+						if (i == 0) transformed[i, j] /= Math.Sqrt(2);
+						if (j == 0) transformed[i, j] /= Math.Sqrt(2);
+
+						sum = 0;
+						for (int y = 0; y < 8; y++)
 						{
-							for (int x = x_start; x < x_start + 8; x++)
-								transformed[u, v] += component[y][x] * Math.Cos(((2 * x + 1) * u * Math.PI) / 16) * Math.Cos(((2 * y + 1) * v * Math.PI) / 16);
+							for (int x = 0; x < 8; x++)
+							{
+								cos1 = Math.Cos((2 * x + 1) * j * Math.PI / 16);
+								cos2 = Math.Cos((2 * y + 1) * i * Math.PI / 16);
+								sum += component[y_start + y][x_start + x] * cos1 * cos2;
+							}
 						}
-						if (u == 0) transformed[u, v] *= 1 / Math.Sqrt(2);
-						if (v == 0) transformed[u, v] *= 1 / Math.Sqrt(2);
-						transformed[u, v] /= 4;
+						transformed[i, j] *= sum;
 					}
 				}
+
 				for (int y = y_start; y < y_start + 8; y++)
 					for (int x = x_start; x < x_start + 8; x++) component[y][x] = transformed[y - y_start, x - x_start];
 			}
@@ -305,18 +322,24 @@ namespace lab4
 				}
 			}
 
-			public string Encode()
+			public List<char> Encode()
 			{
 				List<int[]> coefficients = GetZigzagedCoefficients(Y);
 				coefficients.AddRange(GetZigzagedCoefficients(Cb));
 				coefficients.AddRange(GetZigzagedCoefficients(Cr));
 
-				Arithmetic.Encoder arithmetic = new Arithmetic.Encoder();
+				List<char> text_encoded = new List<char>()
+				{
+					(char)metadata.Width,
+					(char)metadata.Height,
+					(char)metadata.Quality,
+					(char)metadata.PixelsAddedRight,
+					(char)metadata.PixelsAddedBottom
+				};
+				text_encoded.AddRange(EncodeRLE(coefficients));
 
-				string text_encoded = "" + (char)metadata.Width + (char)metadata.Height + (char)metadata.Quality + (char)metadata.PixelsAddedRight + (char)metadata.PixelsAddedBottom;
-				text_encoded += EncodeRLE(coefficients);
-
-				text_encoded = arithmetic.Encode(text_encoded);
+				Arithmetic.Encoder encoder = new Arithmetic.Encoder();
+				text_encoded = encoder.Encode(text_encoded);
 
 				return text_encoded;
 			}
@@ -334,7 +357,7 @@ namespace lab4
 				}
 				return coefficients;
 			}
-			
+
 			private int[] GetZigzagedBlockCoefficients(List<List<double>> component, int y_start, int x_start)
 			{
 				int[] coefficients = new int[64];
@@ -342,7 +365,7 @@ namespace lab4
 				int x_up = 0, y_up = 0;
 				int current_index = 0;
 
-				while (!(x_up >= 7 && y_up >= 7))
+				while (x_up < 8 && y_up < 8)
 				{
 					x = x_up;
 					y = y_up;
@@ -361,11 +384,11 @@ namespace lab4
 				return coefficients;
 			}
 
-			private string EncodeRLE(List<int[]> data)
+			private List<char> EncodeRLE(List<int[]> data)
 			{
-				if (data.Count == 0) return "";
+				List<char> text_encoded = new List<char>();
+				if (data.Count == 0) return text_encoded;
 
-				string text_encoded = "";
 				int number = data[0][0];
 				int count = 0;
 
@@ -377,32 +400,34 @@ namespace lab4
 						else
 						{
 							if (number + 1024 < 0) throw new InvalidDataException("damn, it was too low");
-							text_encoded += (char)count;
-							text_encoded += (char)(number + 1024);
+							text_encoded.Add((char)count);
+							text_encoded.Add((char)(number + 1024));
 
 							count = 1;
 							number = data[i][j];
 						}
 					}
 				}
-				text_encoded += (char)count;
-				text_encoded += (char)(number + 1024);
+				text_encoded.Add((char)count);
+				text_encoded.Add((char)(number + 1024));
 
 				return text_encoded;
 			}
 
-			public void WriteToFile(string text, string filename)
+			public void WriteToFile(List<char> text, string path)
 			{
-				string path = System.Environment.CurrentDirectory + "\\" + filename;
 				using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Create)))
 				{
-					writer.Write(text.Length);
-					while (text.Length % 8 != 0) text += '0';
-					byte b;
-					for (int i = 0; i < text.Length; i += 8)
+					writer.Write((uint)text.Count);
+					byte code;
+					for (int i = 0; i < text.Count; i += 8)
 					{
-						b = Convert.ToByte(text.Substring(i, 8), 2);
-						writer.Write(b);
+						code = 0;
+						for (int j = 0; j < 8; j++)
+						{
+							if (i + j < text.Count && text[i + j] == '1') code += (byte)Math.Pow(2, 7 - j);	// construct char from binary 0 and 1 using integer
+						}
+						writer.Write(code);
 					}
 				}
 			}
@@ -428,57 +453,52 @@ namespace lab4
 				UnperformDCT(ref Cb);
 				UnperformDCT(ref Cr);
 
-				ClipY();
+				CropY();
 
-				bitmap = BitmapFromYCbCr(metadata.Width, metadata.Height, "All");
-				//bitmap = BitmapFromYCbCr(metadata.Width, metadata.Height, "Y");
+				bitmap = BitmapFromYCbCr(metadata.Width, metadata.Height, "all");
 				return bitmap;
 			}
 
 			public string ReadFromfile(string path)
 			{
-				string text = "";
+				StringBuilder sb = new StringBuilder();
 				int len;
-				string sym;
-				using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
+				using (BinaryReader reader = new BinaryReader(File.Open(path, FileMode.Open)))
 				{
 					len = reader.ReadInt32();
-					while (reader.BaseStream.Position < reader.BaseStream.Length)
-					{
-						sym = Convert.ToString(reader.ReadByte(), 2);
-						while (sym.Length < 8) sym = '0' + sym;
-						text += sym;
-					}
+					byte[] bytes = reader.ReadBytes((int)reader.BaseStream.Length);
+					foreach (byte b in bytes) sb.Append(Convert.ToString(b, 2).PadLeft(8, '0'));
 				}
-				return text.Substring(0, len);
+
+				return sb.ToString().Substring(0, len);
 			}
 
-			public void Decode(string text_encoded)
+			public void Decode(string text)
 			{
 				Arithmetic.Decoder decoder = new Arithmetic.Decoder();
-				text_encoded = decoder.Decode(text_encoded);
+				List<char> text_encoded = decoder.Decode(text);
 
 				metadata.Width = (int)text_encoded[0];
 				metadata.Height = (int)text_encoded[1];
 				metadata.Quality = (int)text_encoded[2];
 				metadata.PixelsAddedRight = (int)text_encoded[3];
 				metadata.PixelsAddedBottom = (int)text_encoded[4];
-				text_encoded = text_encoded.Substring(5);
+				text_encoded = text_encoded.GetRange(5, text_encoded.Count - 5);
 
 				List<int[]> coefficients = DecodeRLE(text_encoded);
 				CoefficientsToYCbCr(coefficients);
 			}
 
-			private List<int[]> DecodeRLE(string text)
+			private List<int[]> DecodeRLE(List<char> text)
 			{
 				List<int[]> coefficients = new List<int[]>();
-				if (text.Length == 0) return coefficients;
+				if (text.Count == 0) return coefficients;
 
-				int count;
+				int count = 0;
 				int number;
 				int[] block = new int[64];
 				int block_index = 0;
-				for (int i = 0; i < text.Length; i += 2)
+				for (int i = 0; i < text.Count; i += 2)
 				{
 					count = (int)text[i];
 					number = (int)text[i + 1] - 1024;
@@ -501,6 +521,8 @@ namespace lab4
 
 			private void CoefficientsToYCbCr(List<int[]> coefficients)
 			{
+				const int chroma_downgrade_coef = 2;
+
 				Y = new List<List<double>>();
 				Cb = new List<List<double>>();
 				Cr = new List<List<double>>();
@@ -510,36 +532,35 @@ namespace lab4
 					Y.Add(new List<double>());
 					for (int x = 0; x < metadata.Width; x++) Y[y].Add(0);
 				}
-				for (int y = 0; y < metadata.Height / 2; y++)
+
+				for (int y = 0; y < metadata.Height / chroma_downgrade_coef; y++)
 				{
 					Cb.Add(new List<double>());
-					for (int x = 0; x < metadata.Width / 2; x++) Cb[y].Add(0);
-				}
-				for (int y = 0; y < metadata.Height / 2; y++)
-				{
 					Cr.Add(new List<double>());
-					for (int x = 0; x < metadata.Width / 2; x++) Cr[y].Add(0);
+					for (int x = 0; x < metadata.Width / chroma_downgrade_coef; x++)
+					{
+						Cb[y].Add(0);
+						Cr[y].Add(0);
+					}
 				}
 
 				for (int y_start = 0; y_start < Y.Count; y_start += 8)
 				{
 					for (int x_start = 0; x_start < Y[y_start].Count; x_start += 8)
 					{
-						UnzigzagBlock(coefficients[(y_start * Y.Count / 8 + x_start) / 8], y_start, x_start, ref Y);
+						UnzigzagBlock(coefficients[(y_start * Y[y_start].Count / 8 + x_start) / 8], y_start, x_start, ref Y);
 					}
 				}
+
+				int cb_offset = metadata.Width * metadata.Height / 64;
+				int cr_offset = cb_offset + metadata.Width * metadata.Height / 64 / chroma_downgrade_coef / chroma_downgrade_coef;
+
 				for (int y_start = 0; y_start < Cb.Count; y_start += 8)
 				{
 					for (int x_start = 0; x_start < Cb[y_start].Count; x_start += 8)
 					{
-						UnzigzagBlock(coefficients[(y_start * Cb.Count / 8 + x_start) / 8], y_start, x_start, ref Cb);
-					}
-				}
-				for (int y_start = 0; y_start < Cr.Count; y_start += 8)
-				{
-					for (int x_start = 0; x_start < Cr[y_start].Count; x_start += 8)
-					{
-						UnzigzagBlock(coefficients[(y_start * Cr.Count / 8 + x_start) / 8], y_start, x_start, ref Cr);
+						UnzigzagBlock(coefficients[cb_offset + (y_start * Cb[y_start].Count / 8 + x_start) / 8], y_start, x_start, ref Cb);
+						UnzigzagBlock(coefficients[cr_offset + (y_start * Cr[y_start].Count / 8 + x_start) / 8], y_start, x_start, ref Cr);
 					}
 				}
 			}
@@ -551,7 +572,7 @@ namespace lab4
 				int x_up = 0, y_up = 0;
 				int current_index = 0;
 
-				while (!(x_up >= 7 && y_up >= 7))
+				while (x_up < 8 && y_up < 8)
 				{
 					x = x_up;
 					y = y_up;
@@ -584,6 +605,7 @@ namespace lab4
 					for (int x = 0; x < 8; x++)
 					{
 						q_matrix[y,x] = (q_matrix[y,x] * s + 50) / 100;
+						if (q_matrix[y,x] == 0) q_matrix[y,x] = 1;
 					}
 				}
 
@@ -621,23 +643,31 @@ namespace lab4
 			private void UnperformBlockDCT(ref List<List<double>> component, int y_start, int x_start)
 			{
 				double[,] detransformed = new double[8, 8];
+
+				double sum;
 				double value;
+				double cos1;
+				double cos2;
 				for (int y = 0; y < 8; y++)
 				{
 					for (int x = 0; x < 8; x++)
 					{
-						detransformed[y, x] = 0;
-						for (int u = 0; u < 8; u++)
+						detransformed[y, x] = 0.25;
+						sum = 0;
+						for (int i = 0; i < 8; i++)
 						{
-							for (int v =  0; v < 8; v++)
+							for (int j = 0; j < 8; j++)
 							{
-								value = component[y_start + u][x_start + v] * Math.Cos(((2 * x + 1) * u * Math.PI) / 16) * Math.Cos(((2 * y + 1) * v * Math.PI) / 16);
-								if (u == 0) value *= 1 / Math.Sqrt(2);
-								if (v == 0) value *= 1 / Math.Sqrt(2);
-								detransformed[y, x] += value;
+								cos1 = Math.Cos((2 * x + 1) * j * Math.PI / 16);
+								cos2 = Math.Cos((2 * y + 1) * i * Math.PI / 16);
+								value = component[y_start + i][x_start + j] * cos1 * cos2;
+								if (i == 0) value /= Math.Sqrt(2);
+								if (j == 0) value /= Math.Sqrt(2);
+
+								sum += value;
 							}
 						}
-						detransformed[y, x] /= 4;
+						detransformed[y, x] *= sum;
 					}
 				}
 
@@ -650,7 +680,7 @@ namespace lab4
 					}
 			}
 
-			public void ClipY()
+			public void CropY()
 			{
 				while (Y.Count > metadata.Height - metadata.PixelsAddedBottom) Y.RemoveAt(Y.Count - 1);
 

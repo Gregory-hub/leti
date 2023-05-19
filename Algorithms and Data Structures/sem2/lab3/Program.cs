@@ -43,6 +43,7 @@ class Program
         int text_size = len * 16;
 
         string text = sr.ReadToEnd().Substring(0, len);
+        Console.WriteLine(text);
 
         Console.WriteLine($"Text size: {(double)text_size / 1024 / 1024:N3}Mb\n");
 

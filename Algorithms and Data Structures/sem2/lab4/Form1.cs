@@ -19,22 +19,28 @@ namespace lab4
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			string img_name = "img";
-			string path = Environment.CurrentDirectory + "//" + img_name + ".jpg";
+			string img_name = "us";
+			const int Quality = 100;
+
+			string compressed_name = img_name + "_compressed.bin";
+			string path = Environment.CurrentDirectory + "\\images\\" + img_name + ".jpg";
+			string path_compressed = Environment.CurrentDirectory + "\\images\\" + compressed_name;
 
 			Bitmap img = new Bitmap(path);
 
-			const int Quality = 50;
 			JPEGCompressor.Encoder encoder = new JPEGCompressor.Encoder();
-			encoder.Compress(img, img_name + "_compressed.bin", Quality);
+			JPEGCompressor.Decoder decoder = new JPEGCompressor.Decoder();
+
+			encoder.Compress(img, path_compressed, Quality);
+			Bitmap img_decoded = decoder.Decompress(path_compressed);
+
+			//encoder.Compress(img_decoded, compressed_name, Quality);
+			//img_decoded = decoder.Decompress(path_compressed);
 
 			pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 			pictureBox1.BorderStyle = BorderStyle.FixedSingle;
 			pictureBox1.Image = img;
 
-			path = Environment.CurrentDirectory + "//" + img_name + "_compressed.bin";
-			JPEGCompressor.Decoder decoder = new JPEGCompressor.Decoder();
-			Bitmap img_decoded = decoder.Decompress(path);
 			pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
 			pictureBox2.BorderStyle = BorderStyle.FixedSingle;
 			pictureBox2.Image = img_decoded;
