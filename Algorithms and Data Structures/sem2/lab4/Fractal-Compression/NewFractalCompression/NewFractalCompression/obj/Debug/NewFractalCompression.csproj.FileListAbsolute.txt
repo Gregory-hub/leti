@@ -1,0 +1,107 @@
+c:\users\dima bogdanov\documents\visual studio 2017\Projects\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe.config
+c:\users\dima bogdanov\documents\visual studio 2017\Projects\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe
+c:\users\dima bogdanov\documents\visual studio 2017\Projects\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.pdb
+c:\users\dima bogdanov\documents\visual studio 2017\Projects\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csprojResolveAssemblyReference.cache
+c:\users\dima bogdanov\documents\visual studio 2017\Projects\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.exe
+c:\users\dima bogdanov\documents\visual studio 2017\Projects\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.pdb
+C:\Users\Dima\Documents\Fractal-Compression-master\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe.config
+C:\Users\Dima\Documents\Fractal-Compression-master\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe
+C:\Users\Dima\Documents\Fractal-Compression-master\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.pdb
+C:\Users\Dima\Documents\Fractal-Compression-master\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csprojResolveAssemblyReference.cache
+C:\Users\Dima\Documents\Fractal-Compression-master\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.CoreCompileInputs.cache
+C:\Users\Dima\Documents\Fractal-Compression-master\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.exe
+C:\Users\Dima\Documents\Fractal-Compression-master\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.pdb
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe.config
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.pdb
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csprojResolveAssemblyReference.cache
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.CoreCompileInputs.cache
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.exe
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.pdb
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\bin\Debug\Cloo.dll
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.dll
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\bin\Debug\Cloo.xml
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.xml
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\bin\Debug\OpenCLTemplate.dll
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.GLControl.dll
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\bin\Debug\OpenCLTemplate.xml
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal-Compression-OPENCL\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.GLControl.xml
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csprojResolveAssemblyReference.cache
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.CoreCompileInputs.cache
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.exe
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.pdb
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe.config
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.pdb
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\bin\Debug\Cloo.dll
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\bin\Debug\OpenCLTemplate.dll
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.dll
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.GLControl.dll
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\bin\Debug\Cloo.xml
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\bin\Debug\OpenCLTemplate.xml
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.xml
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.GLControl.xml
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.Properties.Resources.resources
+C:\Users\Dima\Documents\Фрактальное сжатие\Fractal\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.GenerateResource.Cache
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csprojAssemblyReference.cache
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.Properties.Resources.resources
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.GenerateResource.cache
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.CoreCompileInputs.cache
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.exe
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.pdb
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe.config
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.pdb
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.GLControl.dll
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\Cloo.xml
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenCLTemplate.xml
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.xml
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.GLControl.xml
+C:\Users\dbogdano\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.CopyComplete
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe.config
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.pdb
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.GLControl.dll
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\Cloo.xml
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenCLTemplate.xml
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.xml
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.GLControl.xml
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csprojAssemblyReference.cache
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.Properties.Resources.resources
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.GenerateResource.cache
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.CopyComplete
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.exe
+C:\Users\Admin\Documents\GitHub\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.pdb
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe.config
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.pdb
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.GLControl.dll
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\Cloo.xml
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenCLTemplate.xml
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.xml
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.GLControl.xml
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.AssemblyReference.cache
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.SuggestedBindingRedirects.cache
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.Properties.Resources.resources
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.GenerateResource.cache
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.CoreCompileInputs.cache
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.CopyComplete
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.exe
+F:\leti\Algorithms and Data Structures\sem2\lab4 stolen\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.pdb
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe.config
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.exe
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\NewFractalCompression.pdb
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.GLControl.dll
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\Cloo.xml
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenCLTemplate.xml
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.xml
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\bin\Debug\OpenTK.GLControl.xml
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.AssemblyReference.cache
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.SuggestedBindingRedirects.cache
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.Properties.Resources.resources
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.GenerateResource.cache
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.CoreCompileInputs.cache
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.csproj.CopyComplete
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.exe
+F:\leti\Algorithms and Data Structures\sem2\lab4\Fractal-Compression\NewFractalCompression\NewFractalCompression\obj\Debug\NewFractalCompression.pdb
