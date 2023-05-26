@@ -9,19 +9,23 @@ namespace NewFractalCompression.Code
     {
         static void Main(string[] args)
         {
-            //System.Diagnostics.Stopwatch comSw = new Stopwatch();
-            //System.Diagnostics.Stopwatch decSw = new Stopwatch();
+            System.Diagnostics.Stopwatch watch = new Stopwatch();
 
-            int block_size = 80;
+            int block_size = 16;
             System.Console.WriteLine("Compression...");
-            BlockCompression.Compress("waltuh.jpg", block_size);
+
+            // watch.Start();
+            BlockCompression.Compress("dock.jpg", block_size);
+            // watch.Stop();
 
             System.Console.WriteLine("Decompression...");
             BlockCompression.Decompress();
 
             System.Console.WriteLine("Done");
+            //System.Console.WriteLine(watch.Elapsed);
 
-            Console.ReadKey();
+            Console.ReadLine();
+            Console.ReadLine();
         }
     }
 }

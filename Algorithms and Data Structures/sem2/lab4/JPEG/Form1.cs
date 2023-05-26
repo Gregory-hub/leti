@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace lab4
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			string img_name = "waltuh";
+			string img_name = "dock";
 			const int Quality = 15;
 
 			string compressed_name = img_name + "_compressed.bin";
@@ -28,10 +29,17 @@ namespace lab4
 
 			Bitmap img = new Bitmap(path);
 
-			JPEGCompressor.Encoder encoder = new JPEGCompressor.Encoder();
+            JPEGCompressor.Encoder encoder = new JPEGCompressor.Encoder();
 			JPEGCompressor.Decoder decoder = new JPEGCompressor.Decoder();
 
+            //System.Diagnostics.Stopwatch watch = new Stopwatch();
+
+			//watch.Start();
 			encoder.Compress(img, path_compressed, Quality);
+			//watch.Stop();
+
+			//System.IO.File.WriteAllText(Environment.CurrentDirectory + "\\images\\data.txt", watch.Elapsed.ToString());
+
 			Bitmap img_decoded = decoder.Decompress(path_compressed);
 
 			//encoder.Compress(img_decoded, compressed_name, Quality);
@@ -47,3 +55,4 @@ namespace lab4
 		}
 	}
 }
+
