@@ -1,3 +1,7 @@
+using System.Text;
+using System.Numerics;
+
+
 namespace cursed;
 
 
@@ -10,23 +14,40 @@ class Message
 		Text = text;
 	}
 
-	public string Encode()
+	public BigInteger[] Encode(User.PublicKey public_key)
 	{
-		string encoded = "";
-
-		PrimeFinder prime_finder = new PrimeFinder();
-        ulong[] primes = prime_finder.FindRSAPrimes(100000000, 1000000);
-
-		UInt128 m = primes[0] * primes[1];
-		UInt128 fi = (primes[0] - 1) * (primes[1] - 1);		// Fi(m) - Euler function
+		BigInteger[] encoded = new BigInteger[Text.Length];
+		for (int i = 0; i < Text.Length; i++)
+		{
+			encoded[i] = ModulusPow(Text[i], public_key.E, public_key.M);
+		}
 
 		return encoded;
 	}
-	
-	public string Decode()
-	{
-		string decoded = "";
 
-		return decoded;
+	public static Message FromEncoded(BigInteger[] encoded, User.PrivateKey private_key)
+	{
+		StringBuilder decoded = new StringBuilder();
+
+		for (int i = 0; i < encoded.Length; i++)
+		{
+			decoded.Append((char)ModulusPow(encoded[i], private_key.D, private_key.M));
+		}
+
+		return new Message(decoded.ToString());
+	}
+
+	public static BigInteger ModulusPow(BigInteger num, long pow, long modulus)
+	{
+		BigInteger result = 1;
+		// for (int n = 1; n <= pow; n++)
+		while (pow > 0)
+		{
+			if (pow % 2 == 1) result = (result * num) % modulus;
+			num = num * num % modulus;
+			pow /= 2;
+		}
+
+		return result;
 	}
 }
