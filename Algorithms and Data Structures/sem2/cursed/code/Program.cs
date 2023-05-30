@@ -2,13 +2,12 @@
 
 
 namespace cursed;
-
 class Program
 {
     static void Main(string[] args)
     {
-        User user1 = new User("Sussy Baka");
-        User user2 = new User("Creper2021");
+        User user1 = new User("Mike");
+        User user2 = new User("Waltuh");
 
         string? message;
         BigInteger[] encoded;

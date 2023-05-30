@@ -1,5 +1,7 @@
-namespace cursed;
+using System.Numerics;
 
+
+namespace cursed;
 public class PrimeFinder
 {
 	private int Seed 
@@ -7,101 +9,142 @@ public class PrimeFinder
 		get { return DateTime.Now.Microsecond; }
 	}
 
-	public long[] FindRSAPrimes(long limit, long lower_limit)
+	public BigInteger GetRandomBigInt(short bit_number, bool odd = false)
 	{
-		// sieve of Atkin
-		if (limit < lower_limit) throw new InvalidDataException("limit cannot be smaller than lower_limit");
+		if (bit_number < 2) throw new InvalidDataException("Bit number cannot be less than 2");
 
-		long[] s = { 1, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 49, 53, 59 };
-		bool[] is_prime = new bool[limit + 1];
+		Random rand = new Random(Seed);
+		BigInteger big_int = 1;
+		short len = (short)(bit_number - 1);
+		while (len > 30)
+		{
+			big_int = (big_int << 30) + rand.Next((int)Math.Pow(2, 30));
+			len -= 30;
+		}
+		big_int = (big_int << len) + rand.Next((int)Math.Pow(2, len));
+		return big_int | ((odd) ? 1 : 0);
+	}
 
-		var sqrt = Math.Sqrt(limit);
-		for (long x = 1; x <= sqrt; x++)
-			for (long y = 1; y <= sqrt; y++)
-			{
-				var n = 4 * x * x + y * y;
-				if (n <= limit && (n % 12 == 1 || n % 12 == 5))
-					is_prime[n] ^= true;
-
-				n = 3 * x * x + y * y;
-				if (n <= limit && n % 12 == 7)
-					is_prime[n] ^= true;
-
-				n = 3 * x * x - y * y;
-				if (x > y && n <= limit && n % 12 == 11)
-					is_prime[n] ^= true;
-			}
-
-		for (long n = 5; n <= sqrt; n++)
-			if (is_prime[n])
-			{
-				var j = n * n;
-				for (long k = j; k <= limit; k += j)
-					is_prime[k] = false;
-			}
-
-		List<long> primes = new List<long>();
-		primes.Add(2);
-		primes.Add(3);
-		for (long n = lower_limit + lower_limit % 2 + 1; n <= limit; n += 2)
-			if (is_prime[n])
-				primes.Add(n);
-
-		long[] result_primes = new long[2];
+	public BigInteger[] FindRSAPrimes(short bit_number)
+	{
+		BigInteger[] result_primes = new BigInteger[2] { 0, 0 };
 		Random rand = new Random(Seed);
 
-		result_primes[0] = primes[rand.Next(primes.Count)];
-		result_primes[1] = primes[rand.Next(primes.Count)];
+		do
+		{
+			result_primes[0] = GetRandomBigInt(bit_number, odd: true);
+		}
+		while(!IsPrime(result_primes[0], 10));
+
+		do
+		{
+			result_primes[1] = GetRandomBigInt(bit_number, odd: true);
+		}
+		while(!IsPrime(result_primes[1], 10));
 
 		return result_primes;
 	}
 
-	public long FindCoprime(long num, int limit, int lower_limit)
+	public bool IsPrime(BigInteger num, int number_of_checks)
+	{
+		// Miller-Rabin
+
+		if (num == 2 || num == 3) return true;
+		if (num % 2 == 0 || num < 2) return false;
+
+		BigInteger s = 0;
+		BigInteger d = num - 1;
+		while ((d & 1) == 0)
+		{
+			s += 1;
+			d /= 2;
+		}
+
+		Random rand = new Random(Seed);
+
+		Byte[] bytes = new Byte[num.ToByteArray().LongLength];
+		BigInteger a;
+
+		for (int i = 0; i < number_of_checks; i++) {
+			do {
+				rand.NextBytes(bytes);
+				a = new BigInteger(bytes);
+			}
+			while (a < 2 || a >= num - 2);
+
+			BigInteger x = ModulusPow(a, d, num);
+			if (x == 1 || x == num - 1) continue;
+
+			for (int j = 1; j < s; j++) {
+				x = BigInteger.ModPow(x, 2, num);
+
+				if (x == 1)
+					return false;
+				if (x == num - 1)
+					break;
+			}
+
+			if (x != num - 1) return false;
+		}
+
+		return true;
+	}
+
+	public static BigInteger ModulusPow(BigInteger num, BigInteger pow, BigInteger modulus)
+	{
+		BigInteger result = 1;
+		while (pow > 0)
+		{
+			if (pow % 2 == 1) result = (result * num) % modulus;
+			num = num * num % modulus;
+			pow /= 2;
+		}
+
+		return result;
+	}
+
+	public BigInteger FindCoprime(BigInteger num, short bit_number)
 	{
 		Random rand = new Random(Seed);
-		long candidate = rand.Next(lower_limit, limit);
-		while (FindGCD(num, (long)candidate) != 1)
-		{
-			candidate++;
-			if (candidate > limit) candidate = lower_limit;
-		}
+		BigInteger candidate = GetRandomBigInt(bit_number);
+		while (FindGCD(num, (BigInteger)candidate) != 1) candidate++;
 		return candidate;
 	}
 
-	public long FindPrivateKey(long e, long fi)
+	public BigInteger FindPrivateKey(BigInteger e, BigInteger fi)
 	{
-		long x_dio = SolveDiophantineEquation(e, -fi, 1)[0];
+		BigInteger x_dio = SolveDiophantineEquation(e, -fi, 1)[0];
 		return x_dio + fi;
 	}
 
-	public long[] SolveDiophantineEquation(long a, long b, long c)
+	public BigInteger[] SolveDiophantineEquation(BigInteger a, BigInteger b, BigInteger c)
 	{
 		// ax + by = c
 		// finds particular solution
 
-		long[] euclidus = Euclidus((long)Math.Abs((decimal)a), (long)Math.Abs((decimal)b));
-		long d = euclidus[0];
-		long[] result = new long[2];
+		BigInteger[] euclidus = Euclidus(BigInteger.Abs(a), BigInteger.Abs(b));
+		BigInteger d = euclidus[0];
+		BigInteger[] result = new BigInteger[2];
 		if (c % d == 0)
 		{
-			result[0] = (c / d) * euclidus[1] * Math.Sign(a);
-			result[1] = (c / d) * euclidus[2] * Math.Sign(b);
+			result[0] = (c / d) * euclidus[1] * a.Sign;
+			result[1] = (c / d) * euclidus[2] * b.Sign;
 		}
 		else throw new InvalidOperationException("Equation cannot be solved");
 
 		return result;
 	}
 
-	private long FindGCD(long a, long b)
+	private BigInteger FindGCD(BigInteger a, BigInteger b)
 	{
 		return Euclidus(a, b)[0];
 	}
 
-	private long[] Euclidus(long a, long b)
+	private BigInteger[] Euclidus(BigInteger a, BigInteger b)
 	{
-		// returns 3 values: D(a, b) and Bezu coefficients
-		if (b == 0) return new long[] { a, 1, 0 };
-		long[] euclidus = Euclidus(b, a % b);
-		return new long[] { euclidus[0], euclidus[2], euclidus[1] - (a / b) * euclidus[2] };
+		// returns 3 nums: D(a, b) and Bezu coefficients
+		if (b == 0) return new BigInteger[] { a, 1, 0 };
+		BigInteger[] euclidus = Euclidus(b, a % b);
+		return new BigInteger[] { euclidus[0], euclidus[2], euclidus[1] - (a / b) * euclidus[2] };
 	}
 }
