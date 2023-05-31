@@ -4,7 +4,7 @@ using System.Numerics;
 namespace cursed;
 public static class AES
 {
-	public static byte[,] sbox = new byte[16, 16]
+	public static byte[,] Sbox = new byte[16, 16]
 	{
 		{ 0x63, 0x7c, 0x77, 0x7b, 0xf2, 0x6b, 0x6f, 0xc5, 0x30, 0x01, 0x67, 0x2b, 0xfe, 0xd7, 0xab, 0x76 },
 		{ 0xca, 0x82, 0xc9, 0x7d, 0xfa, 0x59, 0x47, 0xf0, 0xad, 0xd4, 0xa2, 0xaf, 0x9c, 0xa4, 0x72, 0xc0 },
@@ -23,7 +23,7 @@ public static class AES
 		{ 0xe1, 0xf8, 0x98, 0x11, 0x69, 0xd9, 0x8e, 0x94, 0x9b, 0x1e, 0x87, 0xe9, 0xce, 0x55, 0x28, 0xdf },
 		{ 0x8c, 0xa1, 0x89, 0x0d, 0xbf, 0xe6, 0x42, 0x68, 0x41, 0x99, 0x2d, 0x0f, 0xb0, 0x54, 0xbb, 0x16 }
 	};
-	public static byte[,] reverse_sbox = new byte[16, 16]
+	public static byte[,] InverseSbox = new byte[16, 16]
 	{
 		{ 0x52, 0x09, 0x6a, 0xd5, 0x30, 0x36, 0xa5, 0x38, 0xbf, 0x40, 0xa3, 0x9e, 0x81, 0xf3, 0xd7, 0xfb },
 		{ 0x7c, 0xe3, 0x39, 0x82, 0x9b, 0x2f, 0xff, 0x87, 0x34, 0x8e, 0x43, 0x44, 0xc4, 0xde, 0xe9, 0xcb },
@@ -42,68 +42,98 @@ public static class AES
 		{ 0xa0, 0xe0, 0x3b, 0x4d, 0xae, 0x2a, 0xf5, 0xb0, 0xc8, 0xeb, 0xbb, 0x3c, 0x83, 0x53, 0x99, 0x61 },
 		{ 0x17, 0x2b, 0x04, 0x7e, 0xba, 0x77, 0xd6, 0x26, 0xe1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0c, 0x7d }
 	};
+	public static byte[,] HillCipher = new byte[4, 4]
+	{
+		{ 2, 3, 1, 1 },
+		{ 1, 2, 3, 1 },
+		{ 1, 1, 2, 3 },
+		{ 3, 1, 1, 2 }
+	};
+	public static byte[,] InverseHillCipher = new byte[4, 4]
+	{
+		{ 14, 11, 13, 9 },
+		{ 9, 14, 11, 13 },
+		{ 13, 9, 14, 11 },
+		{ 11, 13, 9, 14 }
+	};
 	public static byte[] RCon = { 0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36 };
 	public const short KeyBitNumber = 128;		// available: 128
+	public const short Rounds = 10;
 
-	public static byte[,] Encode(BigInteger[] data, int bit_number)
+	public static BigInteger GenerateKey()
 	{
 		PrimeFinder prime_finder = new PrimeFinder();
-		BigInteger key = prime_finder.GetRandomBigInt(KeyBitNumber);
-		int rounds = 10;
-		BigInteger[] keys = GenerateKeys(key, rounds);
+		return prime_finder.GetRandomBigInt(KeyBitNumber);
+	}
+
+	public static byte[,] Encode(BigInteger[] data, short bit_number, BigInteger key)
+	{
+		BigInteger[] keys = GenerateKeys(key);
 
 		byte[] block = new byte[16];
 		byte[] number_in_bytes;
 
-		byte[,] encoded = new byte[data.Count() * bit_number / 8 / 16, 16];
+		byte[,] encoded = new byte[data.Count() * bit_number / 128, 16];
 
+		int index = 0;
 		for (int i = 0; i < data.Count(); i++)
 		{
 			number_in_bytes = data[i].ToByteArray();
 			for (int k = 0; k < bit_number / 8; k += 16)
 			{
 				for (int j = 0; j < 16; j++)
-				{
 					block[j] = (k + j < number_in_bytes.Count()) ? number_in_bytes[k + j] : (byte)0;
-				}
 
-				block = EncodeBlock(block, keys);
-				for (int j = 0; j < 16; j++)
-				{
-					encoded[i * bit_number / 8 / 16 + k / 16, j] = block[j];
-				}
+				EncodeBlock(ref block, keys);
+
+				for (int j = 0; j < 16; j++) encoded[index, j] = block[j];
+				index++;
 			}
 		}
 
 		return encoded;
 	}
 
-	private static byte[] EncodeBlock(byte[] block_data, BigInteger[] key)
+	private static void EncodeBlock(ref byte[] block_data, BigInteger[] keys)
 	{
 		if (KeyBitNumber != 128) throw new InvalidDataException("Invalid BitNumber");
 
-		byte[,] block = new byte[4,4];
+		byte[,] block = new byte[4, 4];
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++) block[i, j] = block_data[i * 4 + j];
 
-		byte[] encoded = new byte[16];
-		return encoded;
+		AddRoundKey(ref block, keys[0]);
+		for (int i = 1; i < Rounds; i++)
+		{
+			SubBytes(ref block);
+			ShiftRows(ref block);
+			MixColumns(ref block);
+			AddRoundKey(ref block, keys[i]);
+		}
+		SubBytes(ref block);
+		ShiftRows(ref block);
+		AddRoundKey(ref block, keys[10]);
+
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++) block_data[i * 4 + j] = block[i, j];
 	}
 
-	private static BigInteger[] GenerateKeys(BigInteger original_key, int rounds)
+	private static BigInteger[] GenerateKeys(BigInteger original_key)
 	{
-		uint[] words = new uint[(rounds + 1) * 4];
+		uint[] words = new uint[(Rounds + 1) * 4];
 
 		for (int i = 0; i < 4; i++)
 		{
 			words[i] = BitConverter.ToUInt32(original_key.ToByteArray(), i * 4);
 		}
 
-		for (int i = 4; i < (rounds + 1) * 4; i++)
+		for (int i = 4; i < (Rounds + 1) * 4; i++)
 		{
 			if (i % 4 == 0) words[i] = words[i - 4] ^ Transform(words[i - 1], i);
 			else words[i] = words[i - 4] ^ words[i - 1];
 		}
 
-		BigInteger[] keys = new BigInteger[rounds + 1];
+		BigInteger[] keys = new BigInteger[Rounds + 1];
 		for (int i = 0; i < words.Count(); i += 4)
 		{
 			keys[i / 4]  = (BigInteger)words[i + 0] << 96;
@@ -118,26 +148,179 @@ public static class AES
 	private static uint Transform(uint word, int index)
 	{
 		byte[] byte_word = BitConverter.GetBytes(word);
-		byte_word = RotateWord(byte_word);
-		byte_word = SubWord(byte_word);
-		
+		RotateWord(ref byte_word);
+		SubWord(ref byte_word);
+
 		word = BitConverter.ToUInt32(byte_word);
-		return word ^ RCon[index / 4];
+		return word ^ ((uint)RCon[index / 4] << 24);
 	}
 
-	private static byte[] RotateWord(byte[] byte_word)
+	private static void RotateWord(ref byte[] byte_word)
 	{
-		return new byte[] { byte_word[1], byte_word[2], byte_word[3], byte_word[0] };
+		byte_word = new byte[] { byte_word[1], byte_word[2], byte_word[3], byte_word[0] };
 	}
 
-	private static byte[] SubWord(byte[] byte_word)
+	private static void SubWord(ref byte[] byte_word)
 	{
-		for (int i = 0; i < 4; i++) byte_word[i] = sbox[((byte_word[i] & (15 << 4)) >> 4), (byte_word[i] & 15)];
-		return byte_word;
+		for (int i = 0; i < 4; i++) byte_word[i] = Sbox[((byte_word[i] & 0xf0) >> 4), (byte_word[i] & 0x0f)];
 	}
 
-	public static BigInteger[] Decode(byte[,] encoded)
+	private static void AddRoundKey(ref byte[,] block, BigInteger key)
 	{
-		return new BigInteger[1];
+		byte[] key_bytes = key.ToByteArray();	// 128 bit => 16 bytes
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++) block[i, j] ^= key_bytes[i + j * 4];
+	}
+
+	private static void SubBytes(ref byte[,] block)
+	{
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++)
+				block[i, j] = Sbox[((block[i, j] & (15 << 4)) >> 4), (block[i, j] & 15)];
+	}
+
+	private static void ShiftRows(ref byte[,] block)
+	{
+		byte[,] block_tmp = new byte[4, 4];
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++)
+				block_tmp[i, j] = block[i, j];
+
+		for (int i = 1; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				block[i, j] = block_tmp[i, (j + i) % 4];
+			}
+		}
+	}
+
+	private static void MixColumns(ref byte[,] block)
+	{
+		for (int col_i = 0; col_i < 4; col_i++)
+		{
+			byte[,] col = new byte[4, 1];
+			for (int i = 0; i < 4; i++) col[i, 0] = block[i, col_i];
+
+			byte[,] res = new byte[4, 1];
+			for (int i = 0; i < 4; i++) {
+				res[i, 0] = 0;
+				for (int j = 0; j < 4; j++) {
+					res[i, 0] ^= MultiplyGF(HillCipher[i, j], col[j, 0]);
+				}
+			}
+			for (int i = 0; i < 4; i++) block[i, col_i] = res[i, 0];
+		}
+	}
+
+	private static byte MultiplyGF(byte a, byte b)
+	{
+		// Galois Field (2^8) Multiplication of two Bytes
+		byte p = 0;
+
+		for (int i = 0; i < 8; i++) {
+			if ((b & 1) != 0) {
+				p ^= a;
+			}
+
+			bool hi_bit_set = (a & 0x80) != 0;
+			a <<= 1;
+			if (hi_bit_set) {
+				a ^= 0x1B;		// x^8 + x^4 + x^3 + x + 1
+			}
+			b >>= 1;
+		}
+
+		return p;
+	}
+
+	public static BigInteger[] Decode(byte[,] encoded, short bit_number, BigInteger key)
+	{
+		BigInteger[] keys = GenerateKeys(key);
+
+		byte[] block = new byte[16];
+		byte[] decoded_bytes = new byte[encoded.Length];
+
+		for (int i = 0; i < encoded.GetLength(0); i++)
+		{
+			for (int j = 0; j < 16; j++) block[j] = encoded[i, j];
+
+			DecodeBlock(ref block, keys);
+
+			for (int j = 0; j < 16; j++) decoded_bytes[i * 16 + j] = block[j];
+		}
+
+		BigInteger[] decoded = new BigInteger[encoded.GetLength(0) * 128 / bit_number];
+		byte[] bytes = new byte[bit_number / 8 + 1];
+		for (int i = 0; i < decoded.Length; i++)
+		{
+			for (int j = 0; j < bytes.Length - 1; j++) bytes[j] = decoded_bytes[i * bit_number / 8 + j];
+			decoded[i] = new BigInteger(bytes);
+		}
+
+		return decoded;
+	}
+
+	private static void DecodeBlock(ref byte[] block_data, BigInteger[] keys)
+	{
+		byte[,] block = new byte[4, 4];
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++) block[i, j] = block_data[i * 4 + j];
+
+		AddRoundKey(ref block, keys[10]);
+		for (int i = Rounds - 1; i > 0; i--)
+		{
+			InverseShiftRows(ref block);
+			InverseSubBytes(ref block);
+			AddRoundKey(ref block, keys[i]);
+			InverseMixColumns(ref block);
+		}
+			InverseShiftRows(ref block);
+			InverseSubBytes(ref block);
+			AddRoundKey(ref block, keys[0]);
+
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++) block_data[i * 4 + j] = block[i, j];
+	}
+
+	private static void InverseShiftRows(ref byte[,] block)
+	{
+		byte[,] block_tmp = new byte[4, 4];
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++)
+				block_tmp[i, j] = block[i, j];
+
+		for (int i = 1; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				block[i, j] = block_tmp[i, (j - i + 4) % 4];
+			}
+		}
+	}
+
+	private static void InverseSubBytes(ref byte[,] block)
+	{
+		for (int i = 0; i < 4; i++)
+			for (int j = 0; j < 4; j++)
+				block[i, j] = InverseSbox[((block[i, j] & 0xf0) >> 4), (block[i, j] & 0x0f)];
+	}
+
+	private static void InverseMixColumns(ref byte[,] block)
+	{
+		for (int col_i = 0; col_i < 4; col_i++)
+		{
+			byte[,] col = new byte[4, 1];
+			for (int i = 0; i < 4; i++) col[i, 0] = block[i, col_i];
+
+			byte[,] res = new byte[4, 1];
+			for (int i = 0; i < 4; i++) {
+				res[i, 0] = 0;
+				for (int j = 0; j < 4; j++) {
+					res[i, 0] ^= MultiplyGF(InverseHillCipher[i, j], col[j, 0]);
+				}
+			}
+			for (int i = 0; i < 4; i++) block[i, col_i] = res[i, 0];
+		}
 	}
 }

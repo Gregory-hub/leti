@@ -4,12 +4,21 @@
 namespace cursed;
 class Program
 {
+    static void ExchangeAESKeys(ref User user1, ref User user2)
+    {
+        user1.ReceiveAESKey(user2.AESEncryptKey);
+        user2.ReceiveAESKey(user1.AESEncryptKey);
+    }
+
     static bool OK(User user1, User user2)
     {
         try
         {
-            byte[,] encoded = user1.SendMessage("test", user2.publicKey);
+            // byte[,] encoded = user1.SendMessage("Test", user2.publicKey);
+            byte[,] encoded = user1.SendMessage("t", user2.publicKey);
             string decoded = user2.RecieveMessage(encoded);
+            encoded = user2.SendMessage("t", user1.publicKey);
+            decoded = user1.RecieveMessage(encoded);
         }
         catch (System.OverflowException)    // means that generated primes are not prime
         {
@@ -56,10 +65,12 @@ class Program
 
         User user1 = new User(name1, key_length);
         User user2 = new User(name2, key_length);
+        ExchangeAESKeys(ref user1, ref user2);
         while (!OK(user1, user2))
         {
             user1 = new User(name1, key_length);
             user2 = new User(name2, key_length);
+            ExchangeAESKeys(ref user1, ref user2);
         }
 
         StartMessenger(user1, user2);

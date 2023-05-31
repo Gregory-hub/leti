@@ -19,29 +19,32 @@ public class User
 	public string Name;
 	private PrivateKey privateKey;
 	public PublicKey publicKey;
+	public BigInteger AESEncryptKey;
+	private BigInteger AESDecryptKey;
 	public short BitNumber;
 
 	public User(string name, short bit_number = 1024)
 	{
 		Name = name;
 		BitNumber = bit_number;
-		InitRSA();
+		RSA.InitRSA(ref publicKey, ref privateKey, BitNumber);
+		AESEncryptKey = AES.GenerateKey();
 	}
 
-	public void InitRSA()
+	public void ReceiveAESKey(BigInteger key)
 	{
-		RSA.InitRSA(ref publicKey, ref privateKey, BitNumber);
+		AESDecryptKey = key;
 	}
 
 	public byte[,] SendMessage(string text, PublicKey public_key)
 	{
 		Message message = new Message(text);
-		return message.Encode(public_key, BitNumber);
+		return message.Encode(public_key, BitNumber, AESEncryptKey);
 	}
 
 	public string RecieveMessage(byte[,] encoded)
 	{
-		Message message = Message.FromEncoded(encoded, privateKey);
+		Message message = Message.FromEncoded(encoded, privateKey, BitNumber, AESDecryptKey);
 		return message.Text;
 	}
 }
