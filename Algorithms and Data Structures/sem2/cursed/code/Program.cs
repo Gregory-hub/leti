@@ -8,7 +8,7 @@ class Program
     {
         try
         {
-            BigInteger[] encoded = user1.SendMessage("test", user2.publicKey);
+            byte[,] encoded = user1.SendMessage("test", user2.publicKey);
             string decoded = user2.RecieveMessage(encoded);
         }
         catch (System.OverflowException)    // means that generated primes are not prime
@@ -21,7 +21,7 @@ class Program
     static void StartMessenger(User user1, User user2)
     {
         string? message;
-        BigInteger[] encoded;
+        byte[,] encoded;
         string decoded;
 
         Console.WriteLine("Messenger is ready to work. Type messages now\n");

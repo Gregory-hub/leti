@@ -19,7 +19,7 @@ public class User
 	public string Name;
 	private PrivateKey privateKey;
 	public PublicKey publicKey;
-	private short BitNumber;
+	public short BitNumber;
 
 	public User(string name, short bit_number = 1024)
 	{
@@ -33,13 +33,13 @@ public class User
 		RSA.InitRSA(ref publicKey, ref privateKey, BitNumber);
 	}
 
-	public BigInteger[] SendMessage(string text, PublicKey public_key)
+	public byte[,] SendMessage(string text, PublicKey public_key)
 	{
 		Message message = new Message(text);
-		return message.Encode(public_key);
+		return message.Encode(public_key, BitNumber);
 	}
 
-	public string RecieveMessage(BigInteger[] encoded)
+	public string RecieveMessage(byte[,] encoded)
 	{
 		Message message = Message.FromEncoded(encoded, privateKey);
 		return message.Text;
