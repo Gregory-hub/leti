@@ -22,9 +22,8 @@ public static class RSA
 
 		for (int i = 0; i < encoded.Length; i++)
 		{
-			// BigInteger mod = PrimeFinder.ModulusPow(encoded[i], private_key.D, private_key.M);
-			// decoded.Append((char)mod);
-			decoded.Append((char)PrimeFinder.ModulusPow(encoded[i], private_key.D, private_key.M));
+			BigInteger value = PrimeFinder.ModulusPow(encoded[i], private_key.D, private_key.M);
+			decoded.Append((char)value);
 		}
 
 		return decoded.ToString();

@@ -30,7 +30,7 @@ public class PrimeFinder
 		BigInteger[] result_primes = new BigInteger[2] { 0, 0 };
 		Random rand = new Random(Seed);
 
-		int number_of_checks = 5;
+		int number_of_checks = 1;
 
 		do
 		{
@@ -78,7 +78,7 @@ public class PrimeFinder
 			if (x == 1 || x == num - 1) continue;
 
 			for (int j = 1; j < s; j++) {
-				x = BigInteger.ModPow(x, 2, num);
+				x = ModulusPow(x, 2, num);
 
 				if (x == 1)
 					return false;

@@ -4,12 +4,22 @@
 namespace cursed;
 class Program
 {
-    static void Main(string[] args)
+    static bool OK(User user1, User user2)
     {
-        short key_lenght = 512;
-        User user1 = new User("Mike", key_lenght);
-        User user2 = new User("Waltuh", key_lenght);
+        try
+        {
+            BigInteger[] encoded = user1.SendMessage("test", user2.publicKey);
+            string decoded = user2.RecieveMessage(encoded);
+        }
+        catch (System.OverflowException)    // means that generated primes are not prime
+        {
+            return false;
+        }
+        return true;
+    }
 
+    static void StartMessenger(User user1, User user2)
+    {
         string? message;
         BigInteger[] encoded;
         string decoded;
@@ -35,6 +45,23 @@ class Program
                 Console.WriteLine($"\n{user1.Name} received: {decoded}");
             }
         }
+    }
 
+    static void Main(string[] args)
+    {
+        short key_length = 1024;
+
+        string name1 = "Mike";
+        string name2 = "Waltuh";
+
+        User user1 = new User(name1, key_length);
+        User user2 = new User(name2, key_length);
+        while (!OK(user1, user2))
+        {
+            user1 = new User(name1, key_length);
+            user2 = new User(name2, key_length);
+        }
+
+        StartMessenger(user1, user2);
     }
 }
