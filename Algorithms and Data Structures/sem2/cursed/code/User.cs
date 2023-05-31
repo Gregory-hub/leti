@@ -19,17 +19,18 @@ public class User
 	public string Name;
 	private PrivateKey privateKey;
 	public PublicKey publicKey;
-	short bit_number = 1024;
+	private short BitNumber;
 
-	public User(string name)
+	public User(string name, short bit_number = 1024)
 	{
 		Name = name;
+		BitNumber = bit_number;
 		InitRSA();
 	}
 
 	public void InitRSA()
 	{
-		RSA.InitRSA(ref publicKey, ref privateKey, bit_number);
+		RSA.InitRSA(ref publicKey, ref privateKey, BitNumber);
 	}
 
 	public BigInteger[] SendMessage(string text, PublicKey public_key)

@@ -30,17 +30,19 @@ public class PrimeFinder
 		BigInteger[] result_primes = new BigInteger[2] { 0, 0 };
 		Random rand = new Random(Seed);
 
+		int number_of_checks = 5;
+
 		do
 		{
 			result_primes[0] = GetRandomBigInt(bit_number, odd: true);
 		}
-		while(!IsPrime(result_primes[0], 10));
+		while(!IsPrime(result_primes[0], number_of_checks));
 
 		do
 		{
 			result_primes[1] = GetRandomBigInt(bit_number, odd: true);
 		}
-		while(!IsPrime(result_primes[1], 10));
+		while(!IsPrime(result_primes[1], number_of_checks));
 
 		return result_primes;
 	}

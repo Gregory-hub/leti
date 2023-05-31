@@ -6,8 +6,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        User user1 = new User("Mike");
-        User user2 = new User("Waltuh");
+        short key_lenght = 512;
+        User user1 = new User("Mike", key_lenght);
+        User user2 = new User("Waltuh", key_lenght);
 
         string? message;
         BigInteger[] encoded;
