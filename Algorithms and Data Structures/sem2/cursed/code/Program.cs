@@ -5,25 +5,22 @@ using System.Numerics;
 namespace cursed;
 class Program
 {
-    static void ExchangeAESKeys(ref User user1, ref User user2)
+    static bool TryExchangeAESKeys(ref User user1, ref User user2)
     {
-        user1.ReceiveAESKey(user2.AESEncryptKey);
-        user2.ReceiveAESKey(user1.AESEncryptKey);
-    }
-
-    static bool OK(User user1, User user2)
-    {
+        BigInteger key_encrypted;
         try
         {
-            byte[,] encoded = user1.SendMessage("test", user2.publicKey);
-            string decoded = user2.RecieveMessage(encoded);
-            encoded = user2.SendMessage("test", user1.publicKey);
-            decoded = user1.RecieveMessage(encoded);
+            key_encrypted = user1.SendAESKey(user2.publicKey);
+            user2.ReceiveAESKey(key_encrypted);
+
+            key_encrypted = user2.SendAESKey(user1.publicKey);
+            user1.ReceiveAESKey(key_encrypted);
         }
         catch (System.OverflowException)    // means that generated primes are not prime
         {
             return false;
         }
+
         return true;
     }
 
@@ -41,7 +38,7 @@ class Program
             message = Console.ReadLine();
             if (message != "" && message is not null) 
             {
-                encoded = user1.SendMessage(message, user2.publicKey);
+                encoded = user1.SendMessage(message);
                 decoded = user2.RecieveMessage(encoded);
                 Console.WriteLine($"\n{user2.Name} received: {decoded}");
             }
@@ -49,7 +46,7 @@ class Program
             message = Console.ReadLine();
             if (message != "" && message is not null) 
             {
-                encoded = user2.SendMessage(message, user1.publicKey);
+                encoded = user2.SendMessage(message);
                 decoded = user1.RecieveMessage(encoded);
                 Console.WriteLine($"\n{user1.Name} received: {decoded}");
             }
@@ -61,30 +58,30 @@ class Program
         string name1 = "Mike";
         string name2 = "Waltuh";
 
-        User user1 = new User(name1, key_length);
-        User user2 = new User(name2, key_length);
-        ExchangeAESKeys(ref user1, ref user2);
-        while (!OK(user1, user2))
-        {
-            user1 = new User(name1, key_length);
-            user2 = new User(name2, key_length);
-            ExchangeAESKeys(ref user1, ref user2);
-        }
+        // User user1 = new User(name1, key_length);
+        // User user2 = new User(name2, key_length);
+        // ExchangeAESKeys(ref user1, ref user2);
+        // while (!OK(user1, user2))
+        // {
+        //     user1 = new User(name1, key_length);
+        //     user2 = new User(name2, key_length);
+        //     ExchangeAESKeys(ref user1, ref user2);
+        // }
 
-        string? message = "test";
-        // BigInteger[] encoded;
-        byte[,] encoded;
-        // string decoded;
+        // string? message = "test";
+        // // BigInteger[] encoded;
+        // byte[,] encoded;
+        // // string decoded;
         int count = 5;
         long sum = 0;
 
-        for (int i = 0; i < count; i++)
+        // for (int i = 0; i < count; i++)
         {
-            BigInteger[] rsa_encoded = RSA.Encode(message, user2.publicKey);
+            // BigInteger[] rsa_encoded = RSA.Encode(message, user2.publicKey);
 
-            Stopwatch watch = Stopwatch.StartNew();
-            encoded = AES.Encode(rsa_encoded, key_length, user2.AESEncryptKey);
-            AES.Decode(encoded, key_length, user2.AESDecryptKey);
+            // Stopwatch watch = Stopwatch.StartNew();
+            // encoded = AES.Encode(rsa_encoded, key_length, user2.AESEncryptKey);
+            // AES.Decode(encoded, key_length, user2.AESDecryptKey);
 
             // encoded = RSA.Encode(message, user2.publicKey);
             // decoded = RSA.Decode(encoded, user2.privateKey);
@@ -92,8 +89,8 @@ class Program
             // encoded = user1.SendMessage(message, user2.publicKey);
             // decoded = user2.RecieveMessage(encoded);
 
-            watch.Stop();
-            sum += watch.ElapsedMilliseconds;
+            // watch.Stop();
+            // sum += watch.ElapsedMilliseconds;
         }
         return (int)(sum / count);
     }
@@ -128,12 +125,12 @@ class Program
 
         User user1 = new User(name1, key_length);
         User user2 = new User(name2, key_length);
-        ExchangeAESKeys(ref user1, ref user2);
-        while (!OK(user1, user2))
+        bool ok = TryExchangeAESKeys(ref user1, ref user2);
+        while (!ok)
         {
             user1 = new User(name1, key_length);
             user2 = new User(name2, key_length);
-            ExchangeAESKeys(ref user1, ref user2);
+            ok = TryExchangeAESKeys(ref user1, ref user2);
         }
 
         StartMessenger(user1, user2);

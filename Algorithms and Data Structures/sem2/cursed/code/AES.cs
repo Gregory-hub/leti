@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Text;
 
 
 namespace cursed;
@@ -66,35 +67,42 @@ public static class AES
 		return prime_finder.GetRandomBigInt(KeyBitNumber);
 	}
 
-	public static byte[,] Encode(BigInteger[] data, short bit_number, BigInteger key)
+	public static byte[,] Encrypt(string text, short bit_number, BigInteger key)
 	{
 		BigInteger[] keys = GenerateKeys(key);
 
 		byte[] block = new byte[16];
-		byte[] number_in_bytes;
+		byte[] bytes = new byte[2];
 
-		byte[,] encoded = new byte[data.Count() * bit_number / 128, 16];
-
-		int index = 0;
-		for (int i = 0; i < data.Count(); i++)
+		if (text.Length % 8 != 0) 
 		{
-			number_in_bytes = data[i].ToByteArray();
-			for (int k = 0; k < bit_number / 8; k += 16)
-			{
-				for (int j = 0; j < 16; j++)
-					block[j] = (k + j < number_in_bytes.Count()) ? number_in_bytes[k + j] : (byte)0;
-
-				EncodeBlock(ref block, keys);
-
-				for (int j = 0; j < 16; j++) encoded[index, j] = block[j];
-				index++;
-			}
+			string tmp = "";
+			for (int i = text.Length; i % 8 != 0; i++) tmp += "\uffff";
+			text += tmp;
 		}
 
-		return encoded;
+		byte[,] encrypted = new byte[text.Length / 8, 16];	// text length in bytes is 2 * text.Length
+
+		int index = 0;
+		for (int i = 0; i < text.Length; i += 8)
+		{
+			for (int j = 0; j < 16; j += 2)
+			{
+				bytes = BitConverter.GetBytes(text[i + j / 2]);
+				block[j] = bytes[0];
+				block[j + 1] = bytes[1];
+			}
+
+			EncryptBlock(ref block, keys);
+
+			for (int j = 0; j < 16; j++) encrypted[index, j] = block[j];
+			index++;
+		}
+
+		return encrypted;
 	}
 
-	private static void EncodeBlock(ref byte[] block_data, BigInteger[] keys)
+	private static void EncryptBlock(ref byte[] block_data, BigInteger[] keys)
 	{
 		if (KeyBitNumber != 128) throw new InvalidDataException("Invalid BitNumber");
 
@@ -167,9 +175,13 @@ public static class AES
 
 	private static void AddRoundKey(ref byte[,] block, BigInteger key)
 	{
-		byte[] key_bytes = key.ToByteArray();	// 128 bit => 16 bytes
+		byte[] key_bytes = new byte[KeyBitNumber / 8];
+		byte[] bytes = key.ToByteArray();
+
+		for (int i = 0; i < key_bytes.Length; i++) key_bytes[i] = (i < bytes.Length) ? bytes[i] : (byte)0;
+
 		for (int i = 0; i < 4; i++)
-			for (int j = 0; j < 4; j++) block[i, j] ^= key_bytes[i + j * 4];
+			for (int j = 0; j < 4; j++) block[i, j] ^= key_bytes[i * 4 + j];
 	}
 
 	private static void SubBytes(ref byte[,] block)
@@ -234,34 +246,39 @@ public static class AES
 		return p;
 	}
 
-	public static BigInteger[] Decode(byte[,] encoded, short bit_number, BigInteger key)
+	public static string Decrypt(byte[,] encrypted, short bit_number, BigInteger key)
 	{
 		BigInteger[] keys = GenerateKeys(key);
 
 		byte[] block = new byte[16];
-		byte[] decoded_bytes = new byte[encoded.Length];
+		byte[] decrypted_bytes = new byte[encrypted.Length];
 
-		for (int i = 0; i < encoded.GetLength(0); i++)
+		for (int i = 0; i < encrypted.GetLength(0); i++)
 		{
-			for (int j = 0; j < 16; j++) block[j] = encoded[i, j];
+			for (int j = 0; j < 16; j++) block[j] = encrypted[i, j];
 
-			DecodeBlock(ref block, keys);
+			DecryptBlock(ref block, keys);
 
-			for (int j = 0; j < 16; j++) decoded_bytes[i * 16 + j] = block[j];
+			for (int j = 0; j < 16; j++) decrypted_bytes[i * 16 + j] = block[j];
 		}
 
-		BigInteger[] decoded = new BigInteger[encoded.GetLength(0) * 128 / bit_number];
-		byte[] bytes = new byte[bit_number / 8 + 1];
-		for (int i = 0; i < decoded.Length; i++)
+		StringBuilder decrypted = new StringBuilder(decrypted_bytes.Count() / 2);
+		byte[] bytes = new byte[2];
+		char symbol;
+		for (int i = 0; i < decrypted_bytes.Length; i += 2)
 		{
-			for (int j = 0; j < bytes.Length - 1; j++) bytes[j] = decoded_bytes[i * bit_number / 8 + j];
-			decoded[i] = new BigInteger(bytes);
+			bytes[0] = decrypted_bytes[i];
+			bytes[1] = decrypted_bytes[i + 1];
+
+			symbol = BitConverter.ToChar(bytes);
+			if (symbol == '\uffff') break;
+			else decrypted.Append(symbol);
 		}
 
-		return decoded;
+		return decrypted.ToString();
 	}
 
-	private static void DecodeBlock(ref byte[] block_data, BigInteger[] keys)
+	private static void DecryptBlock(ref byte[] block_data, BigInteger[] keys)
 	{
 		byte[,] block = new byte[4, 4];
 		for (int i = 0; i < 4; i++)

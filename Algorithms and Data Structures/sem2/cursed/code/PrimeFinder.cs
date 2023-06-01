@@ -42,7 +42,7 @@ public class PrimeFinder
 		{
 			result_primes[1] = GetRandomBigInt(bit_number, odd: true);
 		}
-		while(!IsPrime(result_primes[1], number_of_checks));
+		while(!IsPrime(result_primes[1], number_of_checks) || result_primes[1] == result_primes[0]);
 
 		return result_primes;
 	}
@@ -94,6 +94,7 @@ public class PrimeFinder
 
 	public static BigInteger ModulusPow(BigInteger num, BigInteger pow, BigInteger modulus)
 	{
+		// ~O(log(num)log(pow))
 		BigInteger result = 1;
 		while (pow > 0)
 		{

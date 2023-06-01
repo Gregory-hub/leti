@@ -11,15 +11,13 @@ public class Message
 		Text = text;
 	}
 
-	public byte[,] Encode(User.PublicKey public_key, short bit_number, BigInteger aes_key)
+	public byte[,] Encrypt(short bit_number, BigInteger aes_key)
 	{
-		BigInteger[] rsa_encoded = RSA.Encode(Text, public_key);
-		return AES.Encode(rsa_encoded, bit_number, aes_key);
+		return AES.Encrypt(Text, bit_number, aes_key);
 	}
 
-	public static Message FromEncoded(byte[,] encoded, User.PrivateKey private_key, short bit_number, BigInteger aes_key)
+	public static Message FromEncrypted(byte[,] encoded, short bit_number, BigInteger aes_key)
 	{
-		BigInteger[] aes_decoded = AES.Decode(encoded, bit_number, aes_key);
-		return new Message(RSA.Decode(aes_decoded, private_key));
+		return new Message(AES.Decrypt(encoded, bit_number, aes_key));
 	}
 }
