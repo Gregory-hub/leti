@@ -17,10 +17,10 @@ public class User
 	}
 
 	public string Name;
-	private PrivateKey privateKey;
+	public PrivateKey privateKey;
 	public PublicKey publicKey;
 	public BigInteger AESEncryptKey;
-	private BigInteger AESDecryptKey;
+	public BigInteger AESDecryptKey;
 	public short BitNumber;
 
 	public User(string name, short bit_number = 1024)

@@ -27,8 +27,9 @@ namespace PlotDrawer
 			cartesianChart1.LegendLocation = LegendLocation.Top;
 			cartesianChart1.AxisX.Add(new Axis
 			{
-				Title = "Number of nodes",
-			});
+				Title = "Key size",
+                Labels = new[] { "128", "256", "512", "1024", "2048" }
+            });
 			cartesianChart1.AxisY.Add(new Axis
 			{
 				Title = "Time",
@@ -38,8 +39,8 @@ namespace PlotDrawer
 					Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Brushes.Gray.Color),
 					StrokeThickness = .5,
 					StrokeDashArray = new DoubleCollection { 5 },
-					//Step = 10,
-				}
+                    //Step = 10,
+                }
 			});
 
 			DataInitializer initializer = new DataInitializer();
@@ -61,10 +62,8 @@ namespace PlotDrawer
 				});
 			}
 
-
 			Bitmap bmp = new Bitmap(cartesianChart1.Width, cartesianChart1.Height);
 			cartesianChart1.DrawToBitmap(bmp, cartesianChart1.RectangleToScreen(new Rectangle(0, 0, cartesianChart1.Width, cartesianChart1.Height)));
-			bmp.Save("chart.png");
 		}
 	}
 }
