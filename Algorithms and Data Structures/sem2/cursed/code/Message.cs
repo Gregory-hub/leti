@@ -11,13 +11,13 @@ public class Message
 		Text = text;
 	}
 
-	public byte[,] Encrypt(short bit_number, BigInteger aes_key)
+	public byte[,] Encrypt(BigInteger aes_key)
 	{
-		return AES.Encrypt(Text, bit_number, aes_key);
+		return AES.Encrypt(Text, aes_key);
 	}
 
-	public static Message FromEncrypted(byte[,] encoded, short bit_number, BigInteger aes_key)
+	public static Message FromEncrypted(byte[,] encoded, BigInteger aes_key)
 	{
-		return new Message(AES.Decrypt(encoded, bit_number, aes_key));
+		return new Message(AES.Decrypt(encoded, aes_key));
 	}
 }

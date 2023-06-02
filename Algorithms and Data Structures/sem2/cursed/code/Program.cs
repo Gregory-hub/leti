@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Numerics;
+using System.Text;
 
 
 namespace cursed;
@@ -53,66 +54,85 @@ class Program
         }
     }
 
-    static int TestPerfomance(short key_length)
+    static long TestRSAPerfomance(short key_length)
     {
-        string name1 = "Mike";
-        string name2 = "Waltuh";
+        PrimeFinder pm = new PrimeFinder();
+        BigInteger data128bit = pm.GetRandomBigInt(128);
 
-        // User user1 = new User(name1, key_length);
-        // User user2 = new User(name2, key_length);
-        // ExchangeAESKeys(ref user1, ref user2);
-        // while (!OK(user1, user2))
-        // {
-        //     user1 = new User(name1, key_length);
-        //     user2 = new User(name2, key_length);
-        //     ExchangeAESKeys(ref user1, ref user2);
-        // }
+        BigInteger encoded;
+        User.PublicKey public_key = new User.PublicKey();
+        User.PrivateKey private_key = new User.PrivateKey();
+        RSA.InitRSA(ref public_key, ref private_key, key_length);
 
-        // string? message = "test";
-        // // BigInteger[] encoded;
-        // byte[,] encoded;
-        // // string decoded;
         int count = 5;
         long sum = 0;
 
-        // for (int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++)
         {
-            // BigInteger[] rsa_encoded = RSA.Encode(message, user2.publicKey);
+            Stopwatch watch = Stopwatch.StartNew();
 
-            // Stopwatch watch = Stopwatch.StartNew();
-            // encoded = AES.Encode(rsa_encoded, key_length, user2.AESEncryptKey);
-            // AES.Decode(encoded, key_length, user2.AESDecryptKey);
+            encoded = RSA.Encrypt(data128bit, public_key);
+            RSA.Decrypt(encoded, private_key);
 
-            // encoded = RSA.Encode(message, user2.publicKey);
-            // decoded = RSA.Decode(encoded, user2.privateKey);
-
-            // encoded = user1.SendMessage(message, user2.publicKey);
-            // decoded = user2.RecieveMessage(encoded);
-
-            // watch.Stop();
-            // sum += watch.ElapsedMilliseconds;
+            watch.Stop();
+            sum += watch.ElapsedMilliseconds;
         }
-        return (int)(sum / count);
+        return sum / count;
+    }
+
+    static long TestAESPerfomance(int text_len)
+    {
+        Random rand = new Random();
+
+        byte[,] encoded;
+        BigInteger key = AES.GenerateKey();
+        StringBuilder text = new StringBuilder(text_len);
+        for (int i = 0; i < text_len; i++) text.Append((char)rand.NextInt64((int)Math.Pow(2, 16) - 2));
+
+        Stopwatch watch = Stopwatch.StartNew();
+
+        encoded = AES.Encrypt(text.ToString(), key);
+        AES.Decrypt(encoded, key);
+
+        watch.Stop();
+        return watch.ElapsedMilliseconds;
     }
 
     static void RunTests()
     {
-    	string path = Environment.CurrentDirectory + "\\data.txt";
+    	string path = Environment.CurrentDirectory + "\\rsa.txt";
         using (StreamWriter sw = File.CreateText(path))
         {
-            sw.Write("AES:");
-        }	
+            sw.Write("RSA:");
+        }
 
-        int time;
+        long time;
         using (StreamWriter sw = File.AppendText(path))
         {
             for (short key = 128; key <= 2048; key *= 2)
             {
-                time = TestPerfomance(key);
+                time = TestRSAPerfomance(key);
                 Console.WriteLine($"Average time for key_length = {key}: {time} ms");
                 sw.Write($" {time}");
             }
-        }	
+        }
+
+    	path = Environment.CurrentDirectory + "\\aes.txt";
+        using (StreamWriter sw = File.CreateText(path))
+        {
+            sw.Write("AES:");
+        }
+
+        using (StreamWriter sw = File.AppendText(path))
+        {
+            for (short len = 0; len <= 10000; len++)
+            {
+                time = TestAESPerfomance(len);
+                Console.WriteLine($"Average time for text len = {len}: {time} ms");
+                sw.Write($" {time}");
+            }
+        }
+
         Console.ReadLine();
     }
 
@@ -133,6 +153,7 @@ class Program
             ok = TryExchangeAESKeys(ref user1, ref user2);
         }
 
-        StartMessenger(user1, user2);
+        // StartMessenger(user1, user2);
+        RunTests();
     }
 }

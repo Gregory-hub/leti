@@ -44,12 +44,12 @@ public class User
 	public byte[,] SendMessage(string text)
 	{
 		Message message = new Message(text);
-		return message.Encrypt(BitNumber, AESKey);
+		return message.Encrypt(AESKey);
 	}
 
 	public string RecieveMessage(byte[,] encrypted)
 	{
-		Message message = Message.FromEncrypted(encrypted, BitNumber, AESOtherSideKey);
+		Message message = Message.FromEncrypted(encrypted, AESOtherSideKey);
 		return message.Text;
 	}
 }

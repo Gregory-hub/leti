@@ -27,9 +27,10 @@ namespace PlotDrawer
 			cartesianChart1.LegendLocation = LegendLocation.Top;
 			cartesianChart1.AxisX.Add(new Axis
 			{
-				Title = "Key size",
-                Labels = new[] { "128", "256", "512", "1024", "2048" }
-            });
+				Title = "Text length",
+				//Labels = new[] { "128", "256", "512", "1024", "2048" }
+			});
+
 			cartesianChart1.AxisY.Add(new Axis
 			{
 				Title = "Time",
@@ -39,8 +40,8 @@ namespace PlotDrawer
 					Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Brushes.Gray.Color),
 					StrokeThickness = .5,
 					StrokeDashArray = new DoubleCollection { 5 },
-                    //Step = 10,
-                }
+					//Step = 10,
+				}
 			});
 
 			DataInitializer initializer = new DataInitializer();
@@ -49,7 +50,7 @@ namespace PlotDrawer
 			foreach (DataInitializer.Plot plot in initializer.Plots)
 			{
 				ChartValues<ObservableValue> values = new ChartValues<ObservableValue>();
-				for (int i = 0; i < plot.Data.Length; i++)
+				for (int i = 0; i < plot.Data.Length; i += 50)
 				{
 					values.Add(new ObservableValue(plot.Data[i]));
 				}

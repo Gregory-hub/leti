@@ -67,7 +67,7 @@ public static class AES
 		return prime_finder.GetRandomBigInt(KeyBitNumber);
 	}
 
-	public static byte[,] Encrypt(string text, short bit_number, BigInteger key)
+	public static byte[,] Encrypt(string text, BigInteger key)
 	{
 		BigInteger[] keys = GenerateKeys(key);
 
@@ -246,7 +246,7 @@ public static class AES
 		return p;
 	}
 
-	public static string Decrypt(byte[,] encrypted, short bit_number, BigInteger key)
+	public static string Decrypt(byte[,] encrypted, BigInteger key)
 	{
 		BigInteger[] keys = GenerateKeys(key);
 
