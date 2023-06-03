@@ -1,6 +1,6 @@
 ﻿using System;
 
-public abstract class Drug : IOrderable
+public abstract class Drug
 {
     public int Price;
     public int Quantity;
@@ -17,20 +17,6 @@ public abstract class Drug : IOrderable
         Name = name;
         Price = price;
         Quantity = quantity;
-    }
-
-    bool IOrderable.Available(int number)
-    {
-        return Quantity >= number; 
-    }
-
-    void IOrderable.AddToOrder(Order order, int number)
-    {
-        if (number > Quantity)
-        {
-            for (int i = 0; i < number; i++) order.Add(this);
-        }
-        else throw new ArgumentOutOfRangeException("trying to add more than Quantity");
     }
 
 

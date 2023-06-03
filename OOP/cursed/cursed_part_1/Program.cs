@@ -57,22 +57,22 @@
         {
             Console.WriteLine();
             Console.WriteLine("Remove drugs:");
-            if (order.Goods.Count == 0)
+            if (order.Drugs.Count == 0)
             {
                 Console.WriteLine("Cannot remove drugs. Order is empty");
                 return;
             }
 
-            for (int i = 0; i < order.Goods.Count; i++) Console.WriteLine($"{i + 1}. {order.Goods[i].Type}: {order.Goods[i].Name} ({order.Goods[i].Price}$, {order.Goods[i].Quantity} units)");
+            for (int i = 0; i < order.Drugs.Count; i++) Console.WriteLine($"{i + 1}. {order.Drugs[i].Type}: {order.Drugs[i].Name} ({order.Drugs[i].Price}$, {order.Drugs[i].Quantity} units)");
 
             int input = ParseInt("Enter your choice: ") - 1;
-            if (input < 0 || input >= order.Goods.Count)
+            if (input < 0 || input >= order.Drugs.Count)
             {
                 Console.WriteLine("\nInvalid choice. Try again");
                 RemoveDrug(ref drugStorage, ref order);
                 return;
             }
-            Drug drug = order.Goods[input];
+            Drug drug = order.Drugs[input];
 
             int quantity = ParseInt("Enter quantity: ");
             if (quantity <= 0 || quantity > drug.Quantity) 
@@ -81,9 +81,12 @@
                 RemoveDrug(ref drugStorage, ref order);
                 return;
             }
-            order.Remove(drug.Name, quantity);
-            drug.Quantity = quantity;
-            drugStorage.Add(drug);
+
+            Drug? drug_copy = Activator.CreateInstance(drug.GetType(), new object[] { drug.Name, drug.Price, quantity }) as Drug;
+            if (drug_copy is null) throw new InvalidDataException();
+
+            order.Remove(drug_copy);
+            drugStorage.Add(drug_copy);
         }
 
         static void Main(string[] args)
@@ -115,9 +118,9 @@
             {
                 Console.WriteLine();
                 Console.WriteLine("Your order:");
-                for (int i = 0; i < order.Goods.Count; i++)
+                for (int i = 0; i < order.Drugs.Count; i++)
                 {
-                    drug = order.Goods[i];
+                    drug = order.Drugs[i];
                     Console.WriteLine($"{drug.Type}: {drug.Name}, {drug.Quantity} units");
                 }
                 Console.WriteLine($"Total price: {order.TotalPrice}$");
@@ -142,9 +145,10 @@
                             int total_price = order.TotalPrice;
                             order.Send(balance);
                             balance -= total_price;
+                            Console.WriteLine($"Your balance: {balance}$");
                             Environment.Exit(0);
                         }
-                        else Console.WriteLine("\nCannot send order. Balance is too low");
+                        else Console.WriteLine($"\nCannot send order. Balance is too low\nYour balance: {balance}$");
                         break;
                     default:
                         Console.WriteLine("Invalid choice. Try again");
