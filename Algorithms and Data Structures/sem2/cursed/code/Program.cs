@@ -153,7 +153,7 @@ class Program
             ok = TryExchangeAESKeys(ref user1, ref user2);
         }
 
-        // StartMessenger(user1, user2);
-        RunTests();
+        StartMessenger(user1, user2);
+        // RunTests();
     }
 }
