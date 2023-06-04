@@ -1,0 +1,15 @@
+F:\leti\OOP\cursed\part_2\bin\Debug\net6.0\part_2.exe
+F:\leti\OOP\cursed\part_2\bin\Debug\net6.0\part_2.deps.json
+F:\leti\OOP\cursed\part_2\bin\Debug\net6.0\part_2.runtimeconfig.json
+F:\leti\OOP\cursed\part_2\bin\Debug\net6.0\part_2.dll
+F:\leti\OOP\cursed\part_2\bin\Debug\net6.0\part_2.pdb
+F:\leti\OOP\cursed\part_2\obj\Debug\net6.0\part_2.csproj.AssemblyReference.cache
+F:\leti\OOP\cursed\part_2\obj\Debug\net6.0\part_2.GeneratedMSBuildEditorConfig.editorconfig
+F:\leti\OOP\cursed\part_2\obj\Debug\net6.0\part_2.AssemblyInfoInputs.cache
+F:\leti\OOP\cursed\part_2\obj\Debug\net6.0\part_2.AssemblyInfo.cs
+F:\leti\OOP\cursed\part_2\obj\Debug\net6.0\part_2.csproj.CoreCompileInputs.cache
+F:\leti\OOP\cursed\part_2\obj\Debug\net6.0\part_2.dll
+F:\leti\OOP\cursed\part_2\obj\Debug\net6.0\refint\part_2.dll
+F:\leti\OOP\cursed\part_2\obj\Debug\net6.0\part_2.pdb
+F:\leti\OOP\cursed\part_2\obj\Debug\net6.0\part_2.genruntimeconfig.cache
+F:\leti\OOP\cursed\part_2\obj\Debug\net6.0\ref\part_2.dll
