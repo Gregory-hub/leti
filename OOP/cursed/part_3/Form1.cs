@@ -16,6 +16,8 @@ namespace part_3
         private Piece pieceSelected = null;
         private int[] pieceSelectedCoords = new int[2];
         private Bot bot = new Bot();
+        private bool gameStarted = false;
+        private bool gameEnded = false;
 
         public Form1()
         {
@@ -26,6 +28,7 @@ namespace part_3
         private void Form1_Load(object sender, EventArgs e)
         {
             chessBoard.Initialize(Checkers.Color.White);
+            chessBoard.InitLogger();
             for (int x = 0; x < boardLayoutPanel.ColumnCount; x++)
             {
                 for (int y = 0; y < boardLayoutPanel.RowCount; y++)
@@ -41,14 +44,14 @@ namespace part_3
                     button.Click += Click_Board;
                 }
             }
-            DrawPieces(chessBoard);
+            DrawPieces();
         }
 
-        private void DrawPieces(ChessBoard board)
+        private void DrawPieces()
         {
-            for (int i = 0; i < board.GetLength(0); i++)
+            for (int i = 0; i < chessBoard.GetLength(0); i++)
             {
-                for (int j = 0; j < board.GetLength(1); j++)
+                for (int j = 0; j < chessBoard.GetLength(1); j++)
                 {
                     int x;
                     int y;
@@ -65,9 +68,9 @@ namespace part_3
 
                     Button button = (Button)boardLayoutPanel.GetControlFromPosition(x, y);
                     button.FlatStyle = FlatStyle.Flat;
-                    if (board[y, x] != null)
+                    if (chessBoard[i, j] != null)
                     {
-                        Piece checker = board[y, x];
+                        Piece checker = chessBoard[i, j];
                         button.Tag = checker;
 
                         Size size = button.Size;
@@ -108,12 +111,19 @@ namespace part_3
                 }
         }
 
-        private async void Click_Board(object s, EventArgs e)
+        private void Click_Board(object s, EventArgs e)
         {
+            if (!gameStarted || gameEnded) return;
+
             ResetBoardButtons(chessBoard);
             if (!(s is Button)) return;
             Button button = (Button)s;
             TableLayoutPanelCellPosition pos = boardLayoutPanel.GetPositionFromControl((Control)s);
+            if (chessBoard.Orientation == Checkers.Color.Black)
+            {
+                pos.Row = 7 - pos.Row;
+                pos.Column = 7 - pos.Column;
+            }
 
             if (!(button.Tag is Piece)) // empty square
             {
@@ -128,40 +138,34 @@ namespace part_3
                         List<int[]> captures_available = pieceSelected.AvailableCaptures(chessBoard, target);
                         if (chessBoard.LastMoveTakes && captures_available.Any())
                         {
-                            DrawPieces(chessBoard);
+                            DrawPieces();
                             pieceSelected = chessBoard[target[0], target[1]];
                             pieceSelectedCoords = target;
                             button.FlatStyle = FlatStyle.Standard;
-                            foreach (int[] capture in captures_available)
-                            {
-                                Button actionButton = (Button)boardLayoutPanel.GetControlFromPosition(capture[1], capture[0]);
-                                actionButton.FlatStyle = FlatStyle.Standard;
-                            }
+
+                            foreach (int[] capture in captures_available) HighlightSquare(capture);
                             return;
                         }
 
                         chessBoard.FlipCurrentMoveColor();
-                        DrawPieces(chessBoard);
-
-                        // bot move
-                        Move move = bot.GenerateMove(chessBoard);
-                        chessBoard.Move(move.Source, move.Target);
-                        await Task.Delay(1000);
-                        DrawPieces(chessBoard);
-
-                        // capture chain
-                        captures_available = chessBoard[move.Target[0], move.Target[1]].AvailableCaptures(chessBoard, move.Target);
-                        while (chessBoard.LastMoveTakes && captures_available.Any())
+                        List<Move> moves = chessBoard.AvailableMoves();
+                        if (moves.Count == 0)
                         {
-                            move = bot.GenerateMove(chessBoard);
-                            chessBoard.Move(move.Source, move.Target);
-                            await Task.Delay(500);
-                            DrawPieces(chessBoard);
-                            captures_available = chessBoard[move.Target[0], move.Target[1]].AvailableCaptures(chessBoard, move.Target);
+                            WinGame();
+                            return;
                         }
+                        DrawPieces();
+
+                        MakeBotMove();
                         chessBoard.FlipCurrentMoveColor();
+                        moves = chessBoard.AvailableMoves();
+                        if (moves.Count == 0)
+                        {
+                            LoseGame();
+                            return;
+                        }
                     }
-                    DrawPieces(chessBoard);
+                    DrawPieces();
                     pieceSelected = null;
                 }
                 return;
@@ -184,14 +188,122 @@ namespace part_3
                     .ToList<Move>();
 
                 if (moves.Any()) button.FlatStyle = FlatStyle.Standard;
-                foreach (Move move in moves)
-                {
-                    Button actionButton = (Button)boardLayoutPanel.GetControlFromPosition(move.Target[1], move.Target[0]);
-                    actionButton.FlatStyle = FlatStyle.Standard;
-                }
+                foreach (Move move in moves) HighlightSquare(move.Target);
             }
         }
 
+        private void HighlightSquare(int[] sq)
+        {
+            int y = (chessBoard.Orientation == Checkers.Color.White) ? sq[0] : 7 - sq[0];
+            int x = (chessBoard.Orientation == Checkers.Color.White) ? sq[1] : 7 - sq[1];
+            Button actionButton = (Button)boardLayoutPanel.GetControlFromPosition(x, y);
+            actionButton.FlatStyle = FlatStyle.Standard;
+        }
+
+        public void MakeBotMove(bool wait = true)
+        {
+            // bot move
+            Move move = bot.GenerateMove(chessBoard);
+            chessBoard.Move(move.Source, move.Target);
+            if (wait) Wait(1000);
+            DrawPieces();
+
+            // capture chain
+            List<int[]> captures_available = chessBoard[move.Target[0], move.Target[1]].AvailableCaptures(chessBoard, move.Target);
+            while (chessBoard.LastMoveTakes && captures_available.Any())
+            {
+                move = bot.GenerateMove(chessBoard);
+                chessBoard.Move(move.Source, move.Target);
+                Wait(500);
+                DrawPieces();
+                captures_available = chessBoard[move.Target[0], move.Target[1]].AvailableCaptures(chessBoard, move.Target);
+            }
+        }
+
+        private void WinGame()
+        {
+            gameEnded = true;
+            label1.Text = "YOU WIN!";
+            DrawPieces();
+            chessBoard.LogGameResults("win");
+        }
+
+        private void LoseGame()
+        {
+            gameEnded = true;
+            label1.Text = "YOU LOSE!";
+            DrawPieces();
+            chessBoard.LogGameResults("lose");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // change your color
+            if (gameStarted) return;
+            Checkers.Color orientation = (chessBoard.Orientation == Checkers.Color.White) ? Checkers.Color.Black : Checkers.Color.White;
+            chessBoard.Initialize(orientation);
+            DrawPieces();
+
+            button1.Text = "Play as ";
+            button1.Text += (chessBoard.Orientation == Checkers.Color.Black) ? "white" : "black";
+
+            label1.Text = "You play ";
+            label1.Text += (chessBoard.Orientation == Checkers.Color.Black) ? "black" : "white";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // start game
+            if (gameStarted) return;
+            gameStarted = true;
+            label1.Text = "Game started";
+            chessBoard.LogInitGame();
+            if (chessBoard.Orientation == Checkers.Color.Black)
+            {
+                MakeBotMove(false);
+                chessBoard.FlipCurrentMoveColor();
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // reset
+            chessBoard = new ChessBoard();
+            chessBoard.Initialize(Checkers.Color.White);
+            gameStarted = false;
+            gameEnded = false;
+            pieceSelected = null;
+            DrawPieces();
+            ResetFormControls();
+            label1.Text = "Game reset";
+        }
+
+        private void ResetFormControls()
+        {
+            button1.Text = "Play as black";
+            label1.Text = "";
+        }
+
+        public void Wait(int milliseconds)
+        {
+            var timer = new System.Windows.Forms.Timer();
+            if (milliseconds == 0 || milliseconds < 0) return;
+
+            timer.Interval = milliseconds;
+            timer.Enabled = true;
+            timer.Start();
+
+            timer.Tick += (s, e) =>
+            {
+                timer.Enabled = false;
+                timer.Stop();
+            };
+
+            while (timer.Enabled)
+            {
+                Application.DoEvents();
+            }
+        }
     }
 }
 

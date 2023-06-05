@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-
+using System.IO;
 
 public struct Move
 {
@@ -12,10 +12,16 @@ public struct Move
 
 public class ChessBoard
 {
+    public string Path;
     private Piece[,] boardArray = new Piece[8, 8];
     public Checkers.Color Orientation;
     public Checkers.Color CurrentMoveColor;
     public bool LastMoveTakes = false;
+
+    public ChessBoard()
+    {
+        Path = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\protocol.txt";
+    }
 
     public void Initialize(Checkers.Color orientation)
     {
@@ -26,9 +32,8 @@ public class ChessBoard
             {
                 if ((x + y) % 2 == 1 && y != 3 && y != 4)
                 {
-                    Checkers.Color opponent_color = (CurrentMoveColor == Checkers.Color.White) ? Checkers.Color.Black : Checkers.Color.White;
-                    Checkers.Color color = CurrentMoveColor;
-                    if (y < 3) color = opponent_color;
+                    Checkers.Color color = Checkers.Color.White;
+                    if (y < 3) color = Checkers.Color.Black;
                     boardArray[y, x] = new Checker(color);
                 }
                 else boardArray[y, x] = null;
@@ -126,7 +131,6 @@ public class ChessBoard
         {
             boardArray[y0 + i * y_sign, x0 + i * x_sign] = null;
         }
-        LastMoveTakes = true;
     }
 
     public bool Move(int[] source, int[] target)
@@ -135,12 +139,18 @@ public class ChessBoard
         if (CanMove(piece, source, target))
         {
             LastMoveTakes = false;
-            if (CanTake(piece, source, target)) Take(source, target);
+            if (CanTake(piece, source, target))
+            {
+                Take(source, target);
+                LastMoveTakes = true;
+            }
             boardArray[source[0], source[1]] = null;
             boardArray[target[0], target[1]] = piece;
 
             if (target[0] == 0 && CurrentMoveColor == Checkers.Color.White) boardArray[target[0], target[1]] = new King(Checkers.Color.White);
             else if (target[0] == 7 && CurrentMoveColor == Checkers.Color.Black) boardArray[target[0], target[1]] = new King(Checkers.Color.Black);
+
+            LogMove(source, target);
 
             return true;
         }
@@ -153,5 +163,59 @@ public class ChessBoard
         if (CurrentMoveColor == Checkers.Color.White) CurrentMoveColor = Checkers.Color.Black;
         else CurrentMoveColor = Checkers.Color.White;
     }
+
+    public void InitLogger()
+    {
+        using (StreamWriter sw = new StreamWriter(Path, append: false))
+        {
+            sw.Write("Starting logger <");
+            sw.WriteLine($"{DateTime.Now}>");
+            sw.WriteLine();
+        }
+    }
+
+    public void LogInitGame()
+    {
+        using (StreamWriter sw = new StreamWriter(Path, append: true))
+        {
+            sw.Write("\nNew game <");
+            sw.WriteLine($"{DateTime.Now}>");
+            sw.WriteLine("Human plays {0}", (Orientation == Checkers.Color.White) ? "white" : "black");
+            sw.WriteLine("Bot plays {0}", (Orientation == Checkers.Color.Black) ? "white" : "black");
+        }
+    }
+
+    private void LogMove(int[] source, int[] target)
+    {
+        using (StreamWriter sw = new StreamWriter(Path, append: true))
+        {
+            sw.Write("\nplayer: {0}, move: ", (CurrentMoveColor == Checkers.Color.White) ? "white" : "black");
+            sw.Write("{0}{1}", "abcdefgh"[source[1]], 8 - source[0]);
+            if (LastMoveTakes) sw.Write(':'); 
+            else sw.Write('-');
+            sw.Write("{0}{1}", "abcdefgh"[target[1]], 8 - target[0]);
+        }
+    }
+
+    public void LogGameResults(string result)
+    {
+        using (StreamWriter sw = new StreamWriter(Path, append: true))
+        {
+            sw.WriteLine();
+            switch (result.ToLower())
+            {
+                case "win":
+                    sw.Write("Human wins");
+                    break;
+                case "lose":
+                    sw.Write("Bot wins");
+                    break;
+                default:
+                    throw new InvalidDataException();
+            }
+            sw.WriteLine();
+        }
+    }
+
 }
 
