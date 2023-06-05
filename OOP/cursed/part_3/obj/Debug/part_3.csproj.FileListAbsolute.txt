@@ -1,0 +1,11 @@
+F:\leti\OOP\cursed\part_3\obj\Debug\part_3.csproj.AssemblyReference.cache
+F:\leti\OOP\cursed\part_3\obj\Debug\part_3.csproj.SuggestedBindingRedirects.cache
+F:\leti\OOP\cursed\part_3\obj\Debug\part_3.Form1.resources
+F:\leti\OOP\cursed\part_3\obj\Debug\part_3.Properties.Resources.resources
+F:\leti\OOP\cursed\part_3\obj\Debug\part_3.csproj.GenerateResource.cache
+F:\leti\OOP\cursed\part_3\obj\Debug\part_3.csproj.CoreCompileInputs.cache
+F:\leti\OOP\cursed\part_3\bin\Debug\part_3.exe.config
+F:\leti\OOP\cursed\part_3\bin\Debug\part_3.exe
+F:\leti\OOP\cursed\part_3\bin\Debug\part_3.pdb
+F:\leti\OOP\cursed\part_3\obj\Debug\part_3.exe
+F:\leti\OOP\cursed\part_3\obj\Debug\part_3.pdb
