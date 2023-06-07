@@ -45,21 +45,16 @@ public class ChessBoard
         get { return boardArray[x, y]; }
     }
 
-    public int GetLength(int l)
-    {
-        return boardArray.GetLength(l);
-    }
-
-    public List<Move> AvailableMoves()
+     public List<Move> AvailableMoves()
     {
         List<Move> moves = AvailableCaptures();
         if (moves.Count > 0) return moves;
 
         Move move;
         moves = new List<Move>();
-        for (int y = 0; y < GetLength(0); y++)
+        for (int y = 0; y < 8; y++)
         {
-            for (int x = 0; x < GetLength(1); x++)
+            for (int x = 0; x < 8; x++)
             {
                 if (boardArray[y, x] != null && boardArray[y, x].Color == CurrentMoveColor)
                 {
@@ -80,9 +75,9 @@ public class ChessBoard
     {
         Move move;
         List<Move> moves = new List<Move>();
-        for (int y = 0; y < GetLength(0); y++)
+        for (int y = 0; y < 8; y++)
         {
-            for (int x = 0; x < GetLength(1); x++)
+            for (int x = 0; x < 8; x++)
             {
                 if (boardArray[y, x] != null && boardArray[y, x].Color == CurrentMoveColor)
                 {
@@ -121,7 +116,7 @@ public class ChessBoard
         else return false;
     }
 
-    private void Take(int[] source, in int[] target)
+    private void Take(int[] source, int[] target)
     {
         int y0 = target[0];
         int x0 = target[1];

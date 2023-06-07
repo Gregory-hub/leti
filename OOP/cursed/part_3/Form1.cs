@@ -49,9 +49,9 @@ namespace part_3
 
         private void DrawPieces()
         {
-            for (int i = 0; i < chessBoard.GetLength(0); i++)
+            for (int i = 0; i < 8; i++)
             {
-                for (int j = 0; j < chessBoard.GetLength(1); j++)
+                for (int j = 0; j < 8; j++)
                 {
                     int x;
                     int y;
@@ -88,10 +88,10 @@ namespace part_3
             }
         }
 
-        private void ResetBoardButtons(ChessBoard board)
+        private void ResetBoardButtons()
         {
-            for (int i = 0; i < board.GetLength(0); i++)
-                for (int j = 0; j < board.GetLength(1); j++)
+            for (int i = 0; i < 8; i++)
+                for (int j = 0; j < 8; j++)
                 {
                     int x;
                     int y;
@@ -115,7 +115,7 @@ namespace part_3
         {
             if (!gameStarted || gameEnded) return;
 
-            ResetBoardButtons(chessBoard);
+            ResetBoardButtons();
             if (!(s is Button)) return;
             Button button = (Button)s;
             TableLayoutPanelCellPosition pos = boardLayoutPanel.GetPositionFromControl((Control)s);
@@ -205,7 +205,7 @@ namespace part_3
             // bot move
             Move move = bot.GenerateMove(chessBoard);
             chessBoard.Move(move.Source, move.Target);
-            if (wait) Wait(1000);
+            if (wait) Wait(500);
             DrawPieces();
 
             // capture chain
@@ -214,7 +214,7 @@ namespace part_3
             {
                 move = bot.GenerateMove(chessBoard);
                 chessBoard.Move(move.Source, move.Target);
-                Wait(500);
+                Wait(300);
                 DrawPieces();
                 captures_available = chessBoard[move.Target[0], move.Target[1]].AvailableCaptures(chessBoard, move.Target);
             }
