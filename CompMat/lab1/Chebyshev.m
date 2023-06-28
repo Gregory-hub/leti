@@ -1,37 +1,29 @@
-clear; clc
-clf;
-n = 7;
-a = -2;
-b = 7;
-x = a : 0.01 : b;
-Nodes = zeros();
-for k = 1 : n
-    Nodes(k) = 0.5 * (a + b) + 0.5 * (a - b)*cos((2 * k - 1) / (2 * n) * pi);
+disp('Chebyshev');
+
+a = -1; b = 7;
+secs = 1;
+t = a : (b - a) / 1000 : b;
+
+err2 = [];
+format long g
+for n = 1 : 5   % степень полинома = кол-во точек - 1
+    k = 0 : n;
+    z = cos((pi + 2 * pi * k)/(2 * n + 2));
+    x = (a + b) / 2 - z * (b - a) / 2;
+    p = polyfit(x, f(x), n);
+    disp(['Коэффициенты полинома L', num2str(n), ': ', num2str(p)]);
+    y = polyval(p, t);
+    err2 = [err2, max(abs(f(t) - y))];
+    % голубой - функция, красный - интерполяционный многочлен
+    plot(t, f(t), 'b', t, y, 'r', x, f(x), 'ko')
+    title(['Chebychev L', num2str(n)])
+    grid on
+    pause(secs);
+    plot(t, f(t) - y, 'b', x, x * 0, 'ko')
+    title(['Err1: n = ', num2str(n)])
+    grid on
+    pause(secs);
 end
-labels = F(Nodes);
-F = F(x);
-poly_lagrange = get_poly_lagrange(Nodes, labels, x);
-poly_newton = get_poly_newton(Nodes, labels, x);
-error_pract = F - poly_newton;
-plot(x, F, "red", x, poly_lagrange, "blue");
-xlabel $x$;
-ylabel $y$;
-title (["Lagrange interpolation by " num2str(n) "Chebyshev nodes "]);
-grid on;
-figure
-plot(x, F, "red", x, poly_newton, "yellow");
-xlabel $x$;
-ylabel $y$;
-title (["Newton interpolation by " num2str(n) "Chebyshev nodes "]);
-grid on;
-figure
-plot (x, error_pract, "green");
-xlabel $x$;
-ylabel $y$;
-title (["interpolation error on " num2str(n) "Chebyshev nodes"]);
-grid on;
-error_pract_n = max(abs(error_pract));
-error_theor = error_theor(n, x, Nodes);
-error_theor_n = max(abs(error_theor));
-disp(error_pract_n);
-disp(error_theor_n);
+
+format short g
+disp(['Погрешность: ', num2str(err2)]);

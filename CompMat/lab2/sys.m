@@ -1,18 +1,20 @@
-function [pol, sigma_alignment_level] = sys(quasialternance_p, f_values)
+function [p, sigma] = sys(t, y)
+% выравнивает квазиальтернанс
+% p - коэффициенты многочлена, sigma - значение уровня выравнивания
 
-m = length(quasialternance_p);  % m=n+2
-matrix = zeros(m); 
+m = length(t);
+a = zeros(m);
 
-for i = 1:m
-    for k = 0:m - 2
-        matrix(i, k + 1) = quasialternance_p (i) ^ (m - 2 - k);
+for i = 1 : m
+    for k = 0 : m - 2
+        a(i, k + 1) = t(i)^(m - 2 - k);
     end
-    matrix(i, m) = (-1) ^ i;
+    a(i, m) = (-1)^i;
 end
 
-[i, k] = size(f_values);
-if i < k, f_values = f_values'; end
-pol = matrix \ f_values; 
-sigma_alignment_level = pol(m); 
-pol(m) = []; 
-pol = pol';
+[i, k] = size(y);
+if i < k, y = y'; end
+p = a \ y;
+sigma = p(m);
+p(m) = [];
+p = p';

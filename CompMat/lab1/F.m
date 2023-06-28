@@ -1,6 +1,3 @@
-function [y] = F(x)
-
-    y = 2000 ./ (x .* x - 4 .* x + 72);
-    
+function [y] = f(x)
+    y = 1000 ./ (x .* x - 5 .* x + 72);
 end
-    

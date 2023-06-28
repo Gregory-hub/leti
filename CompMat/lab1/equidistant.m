@@ -1,36 +1,27 @@
-clear; clc
-clf;
-n = 6;
-a = -2;
-b = 7;
-x = a : 0.01 : b;
-h = (b - a)/(n - 1);
-Nodes = a : h : b;
-labels = F(Nodes);
-F = F(x);
-poly_lagrange = get_poly_lagrange(Nodes, labels, x);
-poly_newton = get_poly_newton_r(Nodes, labels, x, h);
-error_pract = F - poly_lagrange;
-plot(x, F, "red", x, poly_lagrange, "blue");
-xlabel $x$;
-ylabel $y$;
-title (["Lagrange interpolation by " num2str(n) " equidistant nodes "]);
-grid on;
-figure
-plot(x, F, "red", x, poly_newton, "yellow");
-xlabel $x$;
-ylabel $y$;
-title (["Newton interpolation by " num2str(n) "equidistant nodes "]);
-grid on;
-figure
-plot (x, error_pract, "green");
-xlabel $x$;
-ylabel $y$;
-title ([" interpolation error on" num2str(n) " equidistan nodes"]);
-grid on;
-error_pract_n = max(abs(error_pract));
-disp("Pract: ")
-disp(error_pract_n);
-error_theor_n = error_theor(n, x, Nodes);
-disp("Theor: ")
-disp(error_theor_n);
+disp('Equidistant')
+
+a = -1; b = 7;
+secs = 2;
+t = a : (b - a) / 1000 : b;
+
+err1 = [];
+format long g
+for n = 1 : 5   % степень полинома = кол-во точек - 1
+    x = a : (b - a) / n : b;
+    p = polyfit(x, f(x), n);
+    disp(['Коэффициенты полинома L', num2str(n), ': ', num2str(p)]);
+    y = polyval(p, t);
+    err1 = [err1, max(abs(f(t) - y))];
+    % голубой - функция, красный - интерполяционный многочлен
+    plot(t, f(t), 'b', t, y, 'r', x, f(x), 'ko')
+    title(['Equidistant L', num2str(n)])
+    grid on
+    pause(secs);
+    plot(t, f(t) - y, 'b', x, x * 0, 'ko')
+    title(['Err1: n = ', num2str(n)])
+    grid on
+    pause(secs);
+end
+
+format short g
+disp(['Погрешность: ', num2str(err1)]);
