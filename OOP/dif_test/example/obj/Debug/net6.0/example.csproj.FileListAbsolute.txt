@@ -1,0 +1,15 @@
+F:\leti\OOP\dif_test\example\bin\Debug\net6.0\example.exe
+F:\leti\OOP\dif_test\example\bin\Debug\net6.0\example.deps.json
+F:\leti\OOP\dif_test\example\bin\Debug\net6.0\example.runtimeconfig.json
+F:\leti\OOP\dif_test\example\bin\Debug\net6.0\example.dll
+F:\leti\OOP\dif_test\example\bin\Debug\net6.0\example.pdb
+F:\leti\OOP\dif_test\example\obj\Debug\net6.0\example.csproj.AssemblyReference.cache
+F:\leti\OOP\dif_test\example\obj\Debug\net6.0\example.GeneratedMSBuildEditorConfig.editorconfig
+F:\leti\OOP\dif_test\example\obj\Debug\net6.0\example.AssemblyInfoInputs.cache
+F:\leti\OOP\dif_test\example\obj\Debug\net6.0\example.AssemblyInfo.cs
+F:\leti\OOP\dif_test\example\obj\Debug\net6.0\example.csproj.CoreCompileInputs.cache
+F:\leti\OOP\dif_test\example\obj\Debug\net6.0\example.dll
+F:\leti\OOP\dif_test\example\obj\Debug\net6.0\refint\example.dll
+F:\leti\OOP\dif_test\example\obj\Debug\net6.0\example.pdb
+F:\leti\OOP\dif_test\example\obj\Debug\net6.0\example.genruntimeconfig.cache
+F:\leti\OOP\dif_test\example\obj\Debug\net6.0\ref\example.dll

@@ -1,13 +1,105 @@
-Starting logger <07.06.2023 0:29:58>
+Starting logger <07.06.2023 22:22:17>
 
 
-New game <07.06.2023 0:30:03>
-Human plays white
-Bot plays black
+New game <07.06.2023 22:22:41>
+Human plays black
+Bot plays white
+
+player: white, move: g3-h4
+player: black, move: b6-a5
+player: white, move: e3-f4
+player: black, move: c7-b6
+player: white, move: h2-g3
+player: black, move: b8-c7
+player: white, move: g1-h2
+player: black, move: d6-c5
+player: white, move: d2-e3
+player: black, move: e7-d6
+player: white, move: c3-b4
+player: black, move: a5:c3
+player: white, move: b2:d4
+player: black, move: d8-e7
+player: white, move: c1-b2
+player: black, move: b6-a5
+player: white, move: d4:b6
+player: white, move: b6:d8
+player: black, move: d6-e5
+player: white, move: f4:d6
+player: black, move: e7:c5
+player: white, move: d8:g5
+player: black, move: h6:f4
+player: black, move: f4:d2
+player: white, move: e1:c3
+player: black, move: g7-f6
+player: white, move: h4-g5
+player: black, move: f6:h4
+player: white, move: f2-e3
+player: black, move: h4:f2
+player: black, move: f2:d4
+player: white, move: c3:e5
+player: black, move: h8-g7
+player: white, move: a3-b4
+player: black, move: c5:a3
+player: black, move: a3:c1
+player: white, move: e5-f6
+player: black, move: g7:e5
+player: white, move: a1-b2
+player: black, move: c1:a3
+player: white, move: h2-g3
+player: black, move: a3-c1
+player: white, move: g3-f4
+player: black, move: c1:h6
+Human wins
+
+New game <07.06.2023 22:25:27>
+Human plays black
+Bot plays white
 
 player: white, move: g3-f4
-player: black, move: f6-e5
-player: white, move: f4-g5
-player: black, move: h6:f4
+player: black, move: f6-g5
+player: white, move: f4-e5
+player: black, move: d6:f4
+player: white, move: a3-b4
+player: black, move: g5-h4
 player: white, move: e3:g5
-player: black, move: g7-f6
+player: black, move: h4:f6
+player: white, move: f2-g3
+player: black, move: f6-e5
+player: white, move: g1-f2
+player: black, move: c7-d6
+player: white, move: d2-e3
+player: black, move: b6-a5
+player: white, move: e3-d4
+player: black, move: e7-f6
+player: white, move: d4-c5
+player: black, move: f8-e7
+player: white, move: g3-h4
+player: black, move: b8-c7
+player: white, move: c3-d4
+player: black, move: e5:c3
+player: white, move: b2:d4
+player: black, move: a5:c3
+player: black, move: c3:e5
+player: white, move: f2-e3
+player: black, move: d6:b4
+player: white, move: a1-b2
+player: black, move: c7-d6
+player: white, move: e3-d4
+player: black, move: e5:c3
+player: black, move: c3:a1
+player: white, move: e1-f2
+player: black, move: b4-a3
+player: white, move: h4-g5
+player: black, move: h6:f4
+player: white, move: f2-g3
+player: black, move: f4-e3
+player: white, move: g3-f4
+player: black, move: e3:g5
+player: white, move: c1-b2
+player: black, move: a3:c1
+player: white, move: h2-g3
+player: black, move: c1-f4
+player: white, move: g3:e5
+player: white, move: e5:c7
+player: black, move: d8:b6
+Human wins
