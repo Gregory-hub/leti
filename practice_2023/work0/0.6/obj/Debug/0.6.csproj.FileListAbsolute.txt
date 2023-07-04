@@ -1,0 +1,11 @@
+C:\GREGUS\leti\practice_2023\work0\0.6\bin\Debug\0.6.exe.config
+C:\GREGUS\leti\practice_2023\work0\0.6\bin\Debug\0.6.exe
+C:\GREGUS\leti\practice_2023\work0\0.6\bin\Debug\0.6.pdb
+C:\GREGUS\leti\practice_2023\work0\0.6\obj\Debug\0.6.csproj.AssemblyReference.cache
+C:\GREGUS\leti\practice_2023\work0\0.6\obj\Debug\0.6.csproj.SuggestedBindingRedirects.cache
+C:\GREGUS\leti\practice_2023\work0\0.6\obj\Debug\_0._6.Form1.resources
+C:\GREGUS\leti\practice_2023\work0\0.6\obj\Debug\_0._6.Properties.Resources.resources
+C:\GREGUS\leti\practice_2023\work0\0.6\obj\Debug\0.6.csproj.GenerateResource.cache
+C:\GREGUS\leti\practice_2023\work0\0.6\obj\Debug\0.6.csproj.CoreCompileInputs.cache
+C:\GREGUS\leti\practice_2023\work0\0.6\obj\Debug\0.6.exe
+C:\GREGUS\leti\practice_2023\work0\0.6\obj\Debug\0.6.pdb
