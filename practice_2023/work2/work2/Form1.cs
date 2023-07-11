@@ -38,7 +38,7 @@ namespace work2
         private void DrawFractal()
         {
             Graphics gr = pictureBoxFractal.CreateGraphics();
-            Brush brush = new SolidBrush(Color.Black);
+            Brush brush = new SolidBrush(GetLevelColor(Level));
             gr.Clear(pictureBoxFractal.BackColor);
 
             List<Node> nodes = new List<Node>();
